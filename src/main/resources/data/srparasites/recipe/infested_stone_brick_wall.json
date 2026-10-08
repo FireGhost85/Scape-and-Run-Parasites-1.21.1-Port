@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:infested_stone_bricks"
+    }
+  },
+  "result": {
+    "id": "srparasites:infested_stone_brick_wall",
+    "count": 6
+  }
+}

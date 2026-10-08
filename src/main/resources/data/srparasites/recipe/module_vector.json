@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYX",
+    "YMY",
+    "GLG"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:lurecomponent3"
+    },
+    "Y": {
+      "item": "srparasites:dispatcher_drop"
+    },
+    "M": {
+      "item": "srparasites:module_base"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "srparasites:node_redstone_lamp"
+    }
+  },
+  "result": {
+    "id": "srparasites:module_vectors"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "srp_pots",
+  "pattern": [
+    "WSW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "srparasites:consumed_planks"
+    },
+    "S": {
+      "item": "srparasites:infestedsand"
+    }
+  },
+  "result": {
+    "id": "srparasites:consumed_pot"
+  }
+}

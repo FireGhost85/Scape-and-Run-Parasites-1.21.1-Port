@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "CA ",
+    "C  "
+  ],
+  "key": {
+    "A": {
+      "item": "srparasites:bone"
+    },
+    "C": {
+      "item": "srparasites:assimilated_flesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:dried_tendons"
+  }
+}

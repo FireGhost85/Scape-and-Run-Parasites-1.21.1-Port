@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasiterubbledense_wall"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubbledense_wallstairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:consumed_planks"
+    }
+  ],
+  "result": {
+    "id": "srparasites:consumed_button"
+  }
+}

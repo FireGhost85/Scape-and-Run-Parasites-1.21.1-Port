@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:infested_planks"
+    }
+  },
+  "result": {
+    "id": "srparasites:infested_planks_stairs",
+    "count": 4
+  }
+}

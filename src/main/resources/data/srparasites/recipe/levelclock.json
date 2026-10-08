@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "ZSZ",
+    "YZY"
+  ],
+  "key": {
+    "Y": {
+      "item": "srparasites:residue_plants"
+    },
+    "Z": {
+      "item": "srparasites:semiorganic_ingot"
+    },
+    "S": {
+      "item": "minecraft:clock"
+    }
+  },
+  "result": {
+    "id": "srparasites:levelclock"
+  }
+}

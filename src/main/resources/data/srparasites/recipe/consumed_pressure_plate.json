@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:consumed_planks"
+    }
+  },
+  "result": {
+    "id": "srparasites:consumed_pressure_plate"
+  }
+}

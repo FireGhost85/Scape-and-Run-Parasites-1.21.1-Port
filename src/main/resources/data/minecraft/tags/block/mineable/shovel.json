@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "srparasites:goreada",
+    "srparasites:gorefer",
+    "srparasites:goremar",
+    "srparasites:gorepri",
+    "srparasites:gorepur",
+    "srparasites:goresim",
+    "srparasites:infested_cobblestone",
+    "srparasites:infested_dirt_slab",
+    "srparasites:infestedsand",
+    "srparasites:infestedstain",
+    "srparasites:infestremain",
+    "srparasites:parasitestain",
+    "srparasites:parasitestainslabhalf"
+  ]
+}

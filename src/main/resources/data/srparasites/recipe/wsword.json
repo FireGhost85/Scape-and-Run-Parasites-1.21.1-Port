@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " BB",
+    "DCB",
+    "ED "
+  ],
+  "key": {
+    "B": {
+      "item": "srparasites:infectious_blade_fragment"
+    },
+    "C": {
+      "item": "srparasites:living_core"
+    },
+    "D": {
+      "item": "srparasites:vile_shell"
+    },
+    "E": {
+      "item": "srparasites:hardened_bone_handle"
+    }
+  },
+  "result": {
+    "id": "srparasites:weapon_sword"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "srp_potted_assimilated",
+  "ingredients": [
+    {
+      "item": "srparasites:infested_pot"
+    },
+    {
+      "item": "srparasites:assimilated_blossom"
+    }
+  ],
+  "result": {
+    "id": "srparasites:potted_assimilated_blossom"
+  }
+}

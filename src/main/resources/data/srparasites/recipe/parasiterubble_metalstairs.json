@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasiterubble_metal"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubble_metalstairs",
+    "count": 4
+  }
+}

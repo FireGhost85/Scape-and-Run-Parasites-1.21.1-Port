@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "srparasites:bruisewood_plank_slab",
+    "srparasites:consumed_plank_slab",
+    "srparasites:cooked_flesh_slab",
+    "srparasites:dead_head_plank_slab",
+    "srparasites:flesh_slab",
+    "srparasites:goth_plank_slab",
+    "srparasites:harleskinn_slab",
+    "srparasites:infested_cactus",
+    "srparasites:infested_plank_slab",
+    "srparasites:infestedtrunk",
+    "srparasites:locs_block_slab",
+    "srparasites:parasiteplank",
+    "srparasites:parasitethin",
+    "srparasites:parasitetrunk",
+    "srparasites:poland_skin_slab",
+    "srparasites:sac_of_flesh_slab"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "srparasites:parasitestain_flesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasitestain_flesh_wall",
+    "count": 6
+  }
+}

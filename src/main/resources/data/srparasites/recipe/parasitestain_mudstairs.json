@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasitestain_mud"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasitestain_mudstairs",
+    "count": 4
+  }
+}

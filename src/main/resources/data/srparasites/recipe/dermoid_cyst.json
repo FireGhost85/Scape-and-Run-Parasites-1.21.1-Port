@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYX",
+    "YZY",
+    "XYX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:assimilated_flesh"
+    },
+    "Y": {
+      "item": "srparasites:parasitestain_flesh"
+    },
+    "Z": {
+      "item": "srparasites:parasitecanister_cyst"
+    }
+  },
+  "result": {
+    "id": "srparasites:dermoid_cyst"
+  }
+}

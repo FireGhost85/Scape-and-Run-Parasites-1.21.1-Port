@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:parasiterubble_wood"
+    }
+  ],
+  "result": {
+    "id": "srparasites:consumed_planks",
+    "count": 4
+  }
+}

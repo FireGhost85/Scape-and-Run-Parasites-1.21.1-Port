@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "RPR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "srparasites:dispatcher_drop"
+    },
+    "P": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "id": "srparasites:node_redstone_lamp"
+  }
+}

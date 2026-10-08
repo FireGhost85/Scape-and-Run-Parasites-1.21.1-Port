@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:parasitetrunk_plant"
+    }
+  ],
+  "result": {
+    "id": "srparasites:parasitestain_flesh",
+    "count": 4
+  }
+}

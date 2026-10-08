@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:parasiterubble_weathb"
+    }
+  },
+  "result": {
+    "id": "srparasites:weathered_bricks_slab",
+    "count": 6
+  }
+}

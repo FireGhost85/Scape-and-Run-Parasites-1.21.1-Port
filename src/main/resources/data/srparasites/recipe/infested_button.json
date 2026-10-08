@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:infested_planks"
+    }
+  ],
+  "result": {
+    "id": "srparasites:infested_button"
+  }
+}

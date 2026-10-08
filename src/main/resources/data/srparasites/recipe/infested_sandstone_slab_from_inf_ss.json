@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:inf_ss"
+    }
+  },
+  "result": {
+    "id": "srparasites:infested_sandstone_slab",
+    "count": 6
+  }
+}

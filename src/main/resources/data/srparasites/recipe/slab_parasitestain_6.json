@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:parasitestain_sackflesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasitestainslabhalf_sackflesh",
+    "count": 6
+  }
+}

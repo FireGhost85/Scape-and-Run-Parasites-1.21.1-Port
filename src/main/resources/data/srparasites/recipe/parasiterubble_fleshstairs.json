@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:parasiterubble_flesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubble_fleshstairs",
+    "count": 4
+  }
+}

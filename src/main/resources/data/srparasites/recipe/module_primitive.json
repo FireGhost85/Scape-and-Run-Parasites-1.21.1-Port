@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XMX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:lurecomponent3"
+    },
+    "M": {
+      "item": "srparasites:module_base"
+    }
+  },
+  "result": {
+    "id": "srparasites:module_primitive"
+  }
+}

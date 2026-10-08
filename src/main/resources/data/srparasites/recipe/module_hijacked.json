@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "YMY",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:hijacked_drop"
+    },
+    "Y": {
+      "item": "srparasites:bloody_iron_ingot"
+    },
+    "M": {
+      "item": "srparasites:module_base"
+    }
+  },
+  "result": {
+    "id": "srparasites:module_hijacked"
+  }
+}

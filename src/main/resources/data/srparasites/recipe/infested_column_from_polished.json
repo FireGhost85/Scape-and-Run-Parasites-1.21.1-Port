@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:infested_stone_polished"
+    }
+  },
+  "result": {
+    "id": "srparasites:infested_column",
+    "count": 2
+  }
+}

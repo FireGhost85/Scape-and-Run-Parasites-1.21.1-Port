@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:brusewood_planks"
+    }
+  },
+  "result": {
+    "id": "srparasites:bruisewood_plank_wall",
+    "count": 6
+  }
+}

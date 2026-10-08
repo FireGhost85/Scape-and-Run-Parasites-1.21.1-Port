@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYX",
+    "YZY",
+    "WLW"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:stone_bricks"
+    },
+    "Z": {
+      "item": "minecraft:iron_bars"
+    },
+    "W": {
+      "item": "minecraft:coal_block"
+    },
+    "L": {
+      "item": "srparasites:tissue_spike"
+    }
+  },
+  "result": {
+    "id": "srparasites:infuser_furnace"
+  }
+}

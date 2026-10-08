@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "srparasites:parasiterubble_bricks"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubble_bricks_wall",
+    "count": 6
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "srparasites:assimilated_flesh"
+    }
+  ],
+  "result": {
+    "id": "srparasites:srp_field_guide"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CA ",
+    "CA ",
+    "CA "
+  ],
+  "key": {
+    "A": {
+      "item": "srparasites:ada_yelloweye_drop"
+    },
+    "C": {
+      "item": "srparasites:assimilated_flesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:hardened_bone_handle"
+  }
+}

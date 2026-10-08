@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:alveoli"
+    },
+    {
+      "item": "srparasites:alveoli"
+    }
+  ],
+  "result": {
+    "id": "srparasites:solid_alveoli_block"
+  }
+}

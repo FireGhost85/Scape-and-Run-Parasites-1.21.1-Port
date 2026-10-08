@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "srparasites:parasiterubbledense_colony"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubbledense_colony_wall",
+    "count": 6
+  }
+}

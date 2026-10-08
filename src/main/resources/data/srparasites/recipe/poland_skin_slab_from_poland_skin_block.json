@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:poland_skin_block"
+    }
+  },
+  "result": {
+    "id": "srparasites:poland_skin_slab",
+    "count": 6
+  }
+}

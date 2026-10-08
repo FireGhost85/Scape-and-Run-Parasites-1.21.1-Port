@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:flesh_planks"
+    }
+  },
+  "result": {
+    "id": "srparasites:flesh_ladder",
+    "count": 3
+  }
+}

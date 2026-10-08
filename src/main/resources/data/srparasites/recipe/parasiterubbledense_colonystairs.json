@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasiterubbledense_colony"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubbledense_colonystairs",
+    "count": 4
+  }
+}

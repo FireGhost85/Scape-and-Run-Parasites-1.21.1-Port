@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:assimilated_reed"
+    },
+    {
+      "item": "srparasites:assimilated_reed"
+    }
+  ],
+  "result": {
+    "id": "minecraft:sugar"
+  }
+}

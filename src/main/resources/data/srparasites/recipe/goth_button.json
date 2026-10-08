@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:goth_planks"
+    }
+  ],
+  "result": {
+    "id": "srparasites:goth_button"
+  }
+}

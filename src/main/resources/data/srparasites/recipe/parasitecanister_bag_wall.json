@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "srparasites:parasitecanister_bag"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasitecanister_bag_wall",
+    "count": 6
+  }
+}

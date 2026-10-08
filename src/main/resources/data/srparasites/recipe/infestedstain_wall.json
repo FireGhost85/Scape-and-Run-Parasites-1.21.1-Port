@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "srparasites:infestedstain"
+    }
+  },
+  "result": {
+    "id": "srparasites:infestedstain_wall",
+    "count": 6
+  }
+}

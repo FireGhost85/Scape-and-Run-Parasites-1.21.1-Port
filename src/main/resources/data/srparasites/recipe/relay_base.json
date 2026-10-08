@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XRX",
+    "ZLZ",
+    "YZY"
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:semiorganic_ingot"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "Y": {
+      "item": "srparasites:semiorganic_block"
+    },
+    "L": {
+      "item": "srparasites:node_redstone_lamp"
+    },
+    "Z": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "id": "srparasites:relay_base"
+  }
+}

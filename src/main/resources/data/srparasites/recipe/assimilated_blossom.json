@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "srp_assimilated_blossom",
+  "ingredients": [
+    {
+      "item": "srparasites:infestedbush_flower1"
+    },
+    {
+      "item": "srparasites:infestedbush_spine"
+    }
+  ],
+  "result": {
+    "id": "srparasites:assimilated_blossom"
+  }
+}

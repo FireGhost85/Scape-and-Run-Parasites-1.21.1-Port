@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "FSF",
+    " H "
+  ],
+  "key": {
+    "F": {
+      "item": "srparasites:assimilated_flesh"
+    },
+    "H": [
+      {
+        "item": "minecraft:cod"
+      },
+      {
+        "item": "minecraft:salmon"
+      },
+      {
+        "item": "minecraft:tropical_fish"
+      },
+      {
+        "item": "minecraft:pufferfish"
+      }
+    ],
+    "S": {
+      "item": "minecraft:sea_lantern"
+    }
+  },
+  "result": {
+    "id": "srparasites:esca_bulb",
+    "count": 4
+  }
+}

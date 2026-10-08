@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasiterubble_wood"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasiterubble_woodstairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "srparasites:brusewood_planks",
+    "srparasites:consumed_planks",
+    "srparasites:cooked_flesh_planks",
+    "srparasites:flesh_planks",
+    "srparasites:goth_planks",
+    "srparasites:infested_planks",
+    "srparasites:parasiteplank_deadhead",
+    "srparasites:parasiteplank_deadheads"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "srparasites:parasitetrunk_deadhead"
+    }
+  ],
+  "result": {
+    "id": "srparasites:parasiteplank_deadhead",
+    "count": 4
+  }
+}

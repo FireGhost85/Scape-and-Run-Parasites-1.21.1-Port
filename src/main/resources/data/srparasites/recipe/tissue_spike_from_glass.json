@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XAX",
+    "YIY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:glass"
+    },
+    "A": {
+      "item": "srparasites:assimilated_flesh"
+    },
+    "Y": {
+      "item": "minecraft:gold_nugget"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "srparasites:tissue_spike"
+  }
+}

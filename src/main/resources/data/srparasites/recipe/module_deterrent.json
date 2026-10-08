@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "YMY",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "srparasites:parasitestain_dirt"
+    },
+    "Y": {
+      "item": "srparasites:lurecomponent2"
+    },
+    "M": {
+      "item": "srparasites:module_base"
+    }
+  },
+  "result": {
+    "id": "srparasites:module_deterrent"
+  }
+}

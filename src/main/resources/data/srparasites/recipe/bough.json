@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "Y",
+    "Z"
+  ],
+  "key": {
+    "X": {
+      "tag": "minecraft:saplings"
+    },
+    "Y": {
+      "item": "srparasites:assimilated_flesh"
+    },
+    "Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "srparasites:bough"
+  }
+}

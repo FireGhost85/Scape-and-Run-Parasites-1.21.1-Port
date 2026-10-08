@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "srparasites:parasitestain_flesh"
+    }
+  },
+  "result": {
+    "id": "srparasites:parasitestain_fleshstairs",
+    "count": 4
+  }
+}
