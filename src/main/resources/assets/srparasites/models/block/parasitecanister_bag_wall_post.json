@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_wall_post",
+  "textures": {
+    "wall": "srparasites:block/parasitecanister_bag_up"
+  }
+}

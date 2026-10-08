@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "srparasites:block/hivesteel",
+    "bottom": "srparasites:block/hivesteel",
+    "top": "srparasites:block/hivesteel",
+    "side": "srparasites:block/hivesteel"
+  }
+}

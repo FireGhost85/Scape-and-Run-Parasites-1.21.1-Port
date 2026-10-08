@@ -1,0 +1,6 @@
+{
+  "parent": "block/ladder",
+  "textures": {
+    "texture": "srparasites:block/cooked_flesh_ladder"
+  }
+}

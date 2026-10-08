@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "srparasites:block/parasitebush_grass1_node"
+  }
+}

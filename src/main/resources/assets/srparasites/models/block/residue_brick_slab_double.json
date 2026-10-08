@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/residue_bricks",
+    "all": "srparasites:block/residue_bricks"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "srparasites:block/parasiterubble_bone",
+    "top": "srparasites:block/parasiterubble_bone",
+    "side": "srparasites:block/parasiterubble_bone"
+  }
+}

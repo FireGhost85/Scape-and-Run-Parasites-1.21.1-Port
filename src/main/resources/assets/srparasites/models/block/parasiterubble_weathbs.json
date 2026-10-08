@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/parasiterubble_weathb_snow",
+    "down": "srparasites:block/parasiterubble_weathb",
+    "up": "srparasites:block/parasite_snow",
+    "east": "srparasites:block/parasiterubble_weathb_snow",
+    "west": "srparasites:block/parasiterubble_weathb_snow",
+    "north": "srparasites:block/parasiterubble_weathb_snow",
+    "south": "srparasites:block/parasiterubble_weathb_snow"
+  }
+}

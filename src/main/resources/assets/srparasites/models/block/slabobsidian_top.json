@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "srparasites:block/bleeding_obsidian",
+    "bottom": "srparasites:block/bleeding_obsidian",
+    "top": "srparasites:block/bleeding_obsidian",
+    "side": "srparasites:block/bleeding_obsidian"
+  }
+}

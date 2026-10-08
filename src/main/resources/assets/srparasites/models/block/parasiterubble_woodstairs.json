@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "srparasites:block/consumed_wood",
+    "top": "srparasites:block/consumed_wood",
+    "side": "srparasites:block/consumed_wood_side"
+  }
+}

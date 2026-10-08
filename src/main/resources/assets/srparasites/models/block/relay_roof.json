@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "srparasites:block/relay_top_top",
+    "bottom": "srparasites:block/relay_top_bottom",
+    "side": "srparasites:block/relay_top_side"
+  }
+}

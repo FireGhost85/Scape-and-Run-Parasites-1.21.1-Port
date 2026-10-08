@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "srparasites:block/hair_block",
+    "side": "srparasites:block/hair_block_snowy"
+  }
+}

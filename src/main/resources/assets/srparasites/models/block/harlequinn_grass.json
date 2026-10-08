@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "srparasites:block/hairy_skin_block",
+    "side": "srparasites:block/hairy_skin_block_side",
+    "bottom": "srparasites:block/skin_block"
+  }
+}

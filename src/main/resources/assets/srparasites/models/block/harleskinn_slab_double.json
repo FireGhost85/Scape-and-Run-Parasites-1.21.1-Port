@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/harleskinn_block",
+    "all": "srparasites:block/harleskinn_block"
+  }
+}

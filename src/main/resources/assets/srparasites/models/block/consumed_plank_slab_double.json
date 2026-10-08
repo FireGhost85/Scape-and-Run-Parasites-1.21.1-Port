@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/consumed_planks",
+    "all": "srparasites:block/consumed_planks"
+  }
+}

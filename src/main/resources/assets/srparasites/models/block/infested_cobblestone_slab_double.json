@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/infested_cobblestone",
+    "all": "srparasites:block/infested_cobblestone"
+  }
+}

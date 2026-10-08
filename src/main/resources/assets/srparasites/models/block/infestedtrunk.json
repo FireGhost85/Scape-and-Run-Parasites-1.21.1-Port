@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "particle": "srparasites:block/infestedtrunk",
+    "end": "srparasites:block/infestedtrunk",
+    "side": "srparasites:block/infestedtrunk_side"
+  }
+}

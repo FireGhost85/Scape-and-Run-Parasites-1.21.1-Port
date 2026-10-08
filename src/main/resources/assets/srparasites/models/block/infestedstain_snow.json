@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "srparasites:block/infestedstain",
+    "top": "srparasites:block/infestedstain",
+    "bottom": "srparasites:block/infestedstain",
+    "side": "srparasites:block/infestedstain_snow"
+  }
+}

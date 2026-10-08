@@ -1,0 +1,6 @@
+{
+  "parent": "srparasites:item/weapon_bow",
+  "textures": {
+    "layer0": "srparasites:item/weapon_bow_pulling_2"
+  }
+}

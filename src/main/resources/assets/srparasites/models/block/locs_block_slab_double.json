@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/hair_block",
+    "all": "srparasites:block/hair_block"
+  }
+}

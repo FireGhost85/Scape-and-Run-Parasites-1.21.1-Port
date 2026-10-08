@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_glass_pane_noside",
+  "textures": {
+    "pane": "srparasites:block/harlequinn_glass",
+    "edge": "srparasites:block/harlequinn_glass_pane",
+    "particle": "srparasites:block/harlequinn_glass"
+  }
+}

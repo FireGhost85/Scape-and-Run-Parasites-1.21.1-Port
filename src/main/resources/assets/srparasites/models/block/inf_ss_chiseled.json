@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "srparasites:block/inf_ss_top",
+    "bottom": "srparasites:block/inf_ss_down",
+    "side": "srparasites:block/inf_ss_chiseled"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "srparasites:block/goth_planks",
+    "top": "srparasites:block/goth_planks",
+    "side": "srparasites:block/goth_planks"
+  }
+}

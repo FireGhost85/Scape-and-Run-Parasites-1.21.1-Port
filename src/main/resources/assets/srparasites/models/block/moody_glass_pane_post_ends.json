@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_glass_pane_post",
+  "textures": {
+    "pane": "srparasites:block/moody_glass",
+    "edge": "srparasites:block/moody_glass_pane",
+    "particle": "srparasites:block/moody_glass"
+  }
+}

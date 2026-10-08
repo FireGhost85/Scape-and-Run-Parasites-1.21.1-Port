@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "srparasites:block/bleeding_obsidian",
+    "top": "srparasites:block/bleeding_obsidian",
+    "side": "srparasites:block/bleeding_obsidian"
+  }
+}

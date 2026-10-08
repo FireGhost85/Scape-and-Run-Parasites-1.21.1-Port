@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "srparasites:block/parasiteplank_deadhead",
+    "side": "srparasites:block/deadhead_bookshelf"
+  }
+}

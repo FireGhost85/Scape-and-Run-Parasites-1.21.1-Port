@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/parasiteplank_deadhead_snow",
+    "down": "srparasites:block/parasiteplank_deadhead",
+    "up": "srparasites:block/parasite_snow",
+    "east": "srparasites:block/parasiteplank_deadhead_snow",
+    "west": "srparasites:block/parasiteplank_deadhead_snow",
+    "north": "srparasites:block/parasiteplank_deadhead_snow",
+    "south": "srparasites:block/parasiteplank_deadhead_snow"
+  }
+}

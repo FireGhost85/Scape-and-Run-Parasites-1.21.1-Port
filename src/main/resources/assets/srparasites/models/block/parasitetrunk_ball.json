@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "particle": "srparasites:block/parasitetrunk_ball",
+    "end": "srparasites:block/parasitetrunk_ball",
+    "side": "srparasites:block/parasitetrunk_ball_side"
+  }
+}

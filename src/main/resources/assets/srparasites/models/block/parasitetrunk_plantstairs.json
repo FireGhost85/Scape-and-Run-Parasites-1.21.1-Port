@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "srparasites:block/parasitetrunk_plant",
+    "top": "srparasites:block/parasitetrunk_plant",
+    "side": "srparasites:block/parasitetrunk_plant_side"
+  }
+}

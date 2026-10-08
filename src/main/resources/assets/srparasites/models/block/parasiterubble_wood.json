@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "particle": "srparasites:block/consumed_wood",
+    "end": "srparasites:block/consumed_wood",
+    "side": "srparasites:block/consumed_wood_side"
+  }
+}

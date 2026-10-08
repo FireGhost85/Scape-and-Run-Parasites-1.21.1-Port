@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "srparasites:block/infestedtrunk_up",
+    "top": "srparasites:block/infestedtrunk_up",
+    "side": "srparasites:block/infestedtrunk_side"
+  }
+}

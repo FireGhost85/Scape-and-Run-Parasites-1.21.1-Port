@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "srparasites:block/bricks",
+    "bottom": "srparasites:block/bricks",
+    "top": "srparasites:block/bricks",
+    "side": "srparasites:block/bricks"
+  }
+}

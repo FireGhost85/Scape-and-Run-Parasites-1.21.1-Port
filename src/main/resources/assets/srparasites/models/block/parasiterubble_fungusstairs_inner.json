@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "srparasites:block/assimilated_fungus",
+    "top": "srparasites:block/assimilated_fungus",
+    "side": "srparasites:block/assimilated_fungus"
+  }
+}

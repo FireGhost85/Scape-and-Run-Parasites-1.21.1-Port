@@ -1,0 +1,7 @@
+{
+  "parent": "block/flower_pot",
+  "textures": {
+    "flowerpot": "srparasites:block/assimilated_flower_pot",
+    "dirt": "srparasites:block/infestedsand"
+  }
+}

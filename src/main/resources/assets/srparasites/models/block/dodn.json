@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/dodn_down",
+    "down": "srparasites:block/dodn_down",
+    "up": "srparasites:block/dodn_up",
+    "east": "srparasites:block/dodn_side",
+    "west": "srparasites:block/dodn_side",
+    "north": "srparasites:block/dodn_side",
+    "south": "srparasites:block/dodn_side"
+  }
+}

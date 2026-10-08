@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "srparasites:block/consumed_crafting_table_side",
+    "down": "srparasites:block/consumed_planks",
+    "up": "srparasites:block/consumed_crafting_table_top",
+    "north": "srparasites:block/consumed_crafting_table_front",
+    "south": "srparasites:block/consumed_crafting_table_front",
+    "west": "srparasites:block/consumed_crafting_table_side",
+    "east": "srparasites:block/consumed_crafting_table_side"
+  }
+}

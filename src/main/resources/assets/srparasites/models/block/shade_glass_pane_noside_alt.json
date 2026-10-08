@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_glass_pane_noside_alt",
+  "textures": {
+    "pane": "srparasites:block/shade_glass",
+    "edge": "srparasites:block/shade_glass_pane",
+    "particle": "srparasites:block/shade_glass"
+  }
+}

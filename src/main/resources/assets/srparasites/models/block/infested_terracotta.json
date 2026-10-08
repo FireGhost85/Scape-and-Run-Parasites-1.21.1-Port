@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "srparasites:block/infested_terracotta"
+  }
+}

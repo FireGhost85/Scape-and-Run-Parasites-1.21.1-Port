@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "srparasites:block/flesh_planks",
+    "top": "srparasites:block/flesh_planks",
+    "side": "srparasites:block/flesh_planks"
+  }
+}

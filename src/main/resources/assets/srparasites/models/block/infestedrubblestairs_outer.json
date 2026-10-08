@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "srparasites:block/infestedrubble",
+    "top": "srparasites:block/infestedrubble",
+    "side": "srparasites:block/infestedrubble"
+  }
+}

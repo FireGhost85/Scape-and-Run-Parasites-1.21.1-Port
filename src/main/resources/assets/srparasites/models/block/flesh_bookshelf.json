@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "srparasites:block/flesh_planks",
+    "side": "srparasites:block/flesh_bookshelf"
+  }
+}

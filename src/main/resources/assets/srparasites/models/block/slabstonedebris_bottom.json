@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "srparasites:block/hivestone_debris_side",
+    "bottom": "srparasites:block/hivestone_debris",
+    "top": "srparasites:block/hivestone_debris",
+    "side": "srparasites:block/hivestone_debris_side"
+  }
+}

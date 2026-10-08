@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "srparasites:block/infested_furnace_top",
+    "front": "srparasites:block/infested_furnace_front_lit",
+    "side": "srparasites:block/infested_furnace_side"
+  }
+}

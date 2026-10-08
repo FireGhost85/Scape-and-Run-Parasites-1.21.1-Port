@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "srparasites:block/consumed_wood",
+    "bottom": "srparasites:block/consumed_wood",
+    "top": "srparasites:block/consumed_wood",
+    "side": "srparasites:block/consumed_wood_side"
+  }
+}

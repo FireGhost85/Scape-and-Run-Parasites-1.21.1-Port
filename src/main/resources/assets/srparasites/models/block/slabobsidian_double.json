@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/bleeding_obsidian",
+    "all": "srparasites:block/bleeding_obsidian"
+  }
+}

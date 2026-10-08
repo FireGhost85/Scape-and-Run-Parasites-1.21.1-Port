@@ -1,0 +1,1007 @@
+{
+ "EntityAboBodies": {
+  "size": [
+   "1.95154f",
+   "2.95f"
+  ]
+ },
+ "EntityAboHead": {
+  "size": [
+   "1.954f",
+   "2.73f"
+  ]
+ },
+ "EntityAlafha": {
+  "size": [
+   "1.9f",
+   "2.6f"
+  ]
+ },
+ "EntityAnged": {
+  "size": [
+   "1.6f",
+   "3.1f"
+  ]
+ },
+ "EntityAta": {
+  "size": [
+   "0.85f",
+   "1.0f"
+  ]
+ },
+ "EntityBano": {
+  "size": [
+   "0.9f",
+   "2.9f"
+  ]
+ },
+ "EntityBanoAdapted": {
+  "size": [
+   "1.3f",
+   "3.8f"
+  ]
+ },
+ "EntityBanoFocused": {
+  "size": [
+   "1.3f",
+   "3.8f"
+  ]
+ },
+ "EntityBiomass": {
+  "size": [
+   "0.98f",
+   "0.98f"
+  ]
+ },
+ "EntityBody": {
+  "size": [
+   "width",
+   "height"
+  ]
+ },
+ "EntityBomb": {
+  "fireImmune": true,
+  "size": [
+   "0.68f",
+   "0.68f"
+  ]
+ },
+ "EntityButhol": {
+  "size": [
+   "1.4f",
+   "2.4f"
+  ]
+ },
+ "EntityCanra": {
+  "size": [
+   "1.2f",
+   "1.8f"
+  ]
+ },
+ "EntityCanraAdapted": {
+  "size": [
+   "1.3f",
+   "3.3f"
+  ]
+ },
+ "EntityCruxA": {
+  "size": [
+   "1.13333f",
+   "3.3f"
+  ]
+ },
+ "EntityCruxB": {
+  "size": [
+   "1.31f",
+   "1.1f"
+  ]
+ },
+ "EntityDamage": {
+  "size": [
+   "1.2f",
+   "0.9f"
+  ]
+ },
+ "EntityDharma": {
+  "size": [
+   "2.4f",
+   "2.9f"
+  ]
+ },
+ "EntityDod": {
+  "size": [
+   "2.7f",
+   "2.5f"
+  ]
+ },
+ "EntityDodSII": {
+  "size": [
+   "3.2f",
+   "3.6f"
+  ]
+ },
+ "EntityDodSIII": {
+  "size": [
+   "3.9f",
+   "4.8f"
+  ]
+ },
+ "EntityDodSIV": {
+  "size": [
+   "4.7f",
+   "5.5f"
+  ]
+ },
+ "EntityDodT": {
+  "size": [
+   "0.7f",
+   "2.5f"
+  ]
+ },
+ "EntityDone": {
+  "size": [
+   "0.8f",
+   "3.4f"
+  ]
+ },
+ "EntityDorpa": {
+  "size": [
+   "1.9f",
+   "2.1f"
+  ]
+ },
+ "EntityDropPod": {
+  "size": [
+   "1.0f",
+   "2.0f"
+  ]
+ },
+ "EntityElvia": {
+  "size": [
+   "4.0f",
+   "4.0f"
+  ]
+ },
+ "EntityEmana": {
+  "size": [
+   "0.4f",
+   "1.5f"
+  ]
+ },
+ "EntityEmanaAdapted": {
+  "size": [
+   "1.3f",
+   "2.9f"
+  ]
+ },
+ "EntityEsor": {
+  "size": [
+   "0.901f",
+   "4.2f"
+  ]
+ },
+ "EntityFerBear": {
+  "size": [
+   "1.3f",
+   "1.4f"
+  ]
+ },
+ "EntityFerCow": {
+  "size": [
+   "0.9f",
+   "1.4f"
+  ]
+ },
+ "EntityFerEnderman": {
+  "size": [
+   "0.6f",
+   "2.9f"
+  ]
+ },
+ "EntityFerHorse": {
+  "size": [
+   "1.3964844f",
+   "1.75f"
+  ]
+ },
+ "EntityFerHuman": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityFerPig": {
+  "size": [
+   "0.9f",
+   "0.9f"
+  ]
+ },
+ "EntityFerSheep": {
+  "size": [
+   "0.9f",
+   "1.3f"
+  ]
+ },
+ "EntityFerVillager": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityFerWolf": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityFlam": {
+  "size": [
+   "1.2f",
+   "1.2f"
+  ]
+ },
+ "EntityFlog": {
+  "size": [
+   "0.7666f",
+   "1.95f"
+  ]
+ },
+ "EntityGanro": {
+  "size": [
+   "0.901f",
+   "4.2f"
+  ]
+ },
+ "EntityGim": {
+  "size": [
+   "1.211f",
+   "2.351f"
+  ]
+ },
+ "EntityGimAdapted": {
+  "size": [
+   "1.511f",
+   "3.655f"
+  ]
+ },
+ "EntityGore": {
+  "fireImmune": true,
+  "size": [
+   "0.4f",
+   "0.4f"
+  ]
+ },
+ "EntityGothol": {
+  "size": [
+   "0.85f",
+   "2.3f"
+  ]
+ },
+ "EntityHeblu": {
+  "size": [
+   "2.4f",
+   "3.8f"
+  ]
+ },
+ "EntityHeed": {
+  "size": [
+   "0.9f",
+   "1.9f"
+  ]
+ },
+ "EntityHiBlaze": {
+  "size": [
+   "0.6f",
+   "0.95f"
+  ]
+ },
+ "EntityHiGolem": {
+  "size": [
+   "1.1f",
+   "2.7f"
+  ]
+ },
+ "EntityHiSkeleton": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityHitbox": {
+  "size": [
+   "this.getBbWidth() * scale",
+   "this.getBbHeight() * scale"
+  ]
+ },
+ "EntityHost": {
+  "size": [
+   "0.9f",
+   "0.25f"
+  ]
+ },
+ "EntityHostII": {
+  "size": [
+   "1.5f",
+   "0.25f"
+  ]
+ },
+ "EntityHull": {
+  "size": [
+   "1.3f",
+   "1.7f"
+  ]
+ },
+ "EntityHullAdapted": {
+  "size": [
+   "1.4f",
+   "2.7f"
+  ]
+ },
+ "EntityIki": {
+  "size": [
+   "1.1f",
+   "1.4f"
+  ]
+ },
+ "EntityIkiAdapted": {
+  "size": [
+   "1.1f",
+   "1.4f"
+  ]
+ },
+ "EntityInfBear": {
+  "size": [
+   "1.3f",
+   "1.4f"
+  ]
+ },
+ "EntityInfCow": {
+  "size": [
+   "0.9f",
+   "1.4f"
+  ]
+ },
+ "EntityInfCowHead": {
+  "size": [
+   "0.7f",
+   "0.9f"
+  ]
+ },
+ "EntityInfDragonE": {
+  "size": [
+   "1.9f",
+   "3.8f"
+  ]
+ },
+ "EntityInfDragonEHead": {
+  "size": [
+   "1.75f",
+   "1.95f"
+  ]
+ },
+ "EntityInfEnderman": {
+  "size": [
+   "0.6f",
+   "2.3f"
+  ]
+ },
+ "EntityInfEndermanHead": {
+  "size": [
+   "0.7f",
+   "0.9f"
+  ]
+ },
+ "EntityInfHorse": {
+  "size": [
+   "1.3964844f",
+   "1.6f"
+  ]
+ },
+ "EntityInfHorseHead": {
+  "size": [
+   "0.7f",
+   "0.9f"
+  ]
+ },
+ "EntityInfHuman": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityInfHumanHead": {
+  "size": [
+   "0.7f",
+   "0.8f"
+  ]
+ },
+ "EntityInfPig": {
+  "size": [
+   "0.9f",
+   "0.9f"
+  ]
+ },
+ "EntityInfPigHead": {
+  "size": [
+   "0.7f",
+   "0.9f"
+  ]
+ },
+ "EntityInfPlayer": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityInfPlayerHead": {
+  "size": [
+   "0.7f",
+   "0.9f"
+  ]
+ },
+ "EntityInfSheep": {
+  "size": [
+   "0.9f",
+   "1.3f"
+  ]
+ },
+ "EntityInfSheepHead": {
+  "size": [
+   "0.7f",
+   "0.7f"
+  ]
+ },
+ "EntityInfSquid": {
+  "size": [
+   "0.9f",
+   "0.9f"
+  ]
+ },
+ "EntityInfVillager": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityInfVillagerHead": {
+  "size": [
+   "0.7f",
+   "0.8f"
+  ]
+ },
+ "EntityInfWolf": {
+  "size": [
+   "0.6f",
+   "0.85f"
+  ]
+ },
+ "EntityInfWolfHead": {
+  "size": [
+   "0.7f",
+   "0.6f"
+  ]
+ },
+ "EntityInhooM": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntityInhooS": {
+  "size": [
+   "0.6f",
+   "0.85f"
+  ]
+ },
+ "EntityJinjo": {
+  "size": [
+   "3.7f",
+   "4.4f"
+  ]
+ },
+ "EntityKirin": {
+  "size": [
+   "2.1271334f",
+   "8.85f"
+  ]
+ },
+ "EntityKol": {
+  "size": [
+   "0.65f",
+   "0.65f"
+  ]
+ },
+ "EntityLeem": {
+  "size": [
+   "1.2f",
+   "2.8f"
+  ]
+ },
+ "EntityLeemB": {
+  "size": [
+   "1.4f",
+   "1.4f"
+  ]
+ },
+ "EntityLeemSII": {
+  "size": [
+   "1.2f",
+   "5.2f"
+  ]
+ },
+ "EntityLeemSIII": {
+  "size": [
+   "1.5f",
+   "5.2f"
+  ]
+ },
+ "EntityLeemSIV": {
+  "size": [
+   "1.7f",
+   "5.4f"
+  ]
+ },
+ "EntityLeer": {
+  "size": [
+   "2.1f",
+   "7.1f"
+  ]
+ },
+ "EntityLencia": {
+  "size": [
+   "4.0f",
+   "4.0f"
+  ]
+ },
+ "EntityLesh": {
+  "size": [
+   "0.7f",
+   "0.5f"
+  ]
+ },
+ "EntityLodo": {
+  "size": [
+   "0.5f",
+   "0.3f"
+  ]
+ },
+ "EntityLum": {
+  "size": [
+   "1.3f",
+   "1.8f"
+  ]
+ },
+ "EntityLumAdapted": {
+  "size": [
+   "0.901f",
+   "3.5f"
+  ]
+ },
+ "EntityMes": {
+  "size": [
+   "0.8f",
+   "3.05f"
+  ]
+ },
+ "EntityMeteor": {
+  "size": [
+   "4.5f",
+   "4.5f"
+  ]
+ },
+ "EntityMor": {
+  "size": [
+   "0.85f",
+   "1.0f"
+  ]
+ },
+ "EntityMudo": {
+  "size": [
+   "0.85f",
+   "1.0f"
+  ]
+ },
+ "EntityNade": {
+  "fireImmune": true,
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntityNak": {
+  "size": [
+   "0.7f",
+   "2.5f"
+  ]
+ },
+ "EntityNogla": {
+  "size": [
+   "0.9f",
+   "2.6f"
+  ]
+ },
+ "EntityNoglaAdapted": {
+  "size": [
+   "1.3f",
+   "3.3f"
+  ]
+ },
+ "EntityNuuh": {
+  "size": [
+   "1.0f",
+   "1.0f"
+  ]
+ },
+ "EntityOmboo": {
+  "size": [
+   "1.7f",
+   "2.4f"
+  ]
+ },
+ "EntityOrbBoom": {
+  "fireImmune": true,
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntityOrbScary": {
+  "fireImmune": true,
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntityOrbVoid": {
+  "fireImmune": true,
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntityOrch": {
+  "size": [
+   "1.901f",
+   "4.1f"
+  ]
+ },
+ "EntityOronco": {
+  "size": [
+   "4.0f",
+   "4.0f"
+  ]
+ },
+ "EntityOroncoAW": {
+  "size": [
+   "4.0f",
+   "4.0f"
+  ]
+ },
+ "EntityOroncoTen": {
+  "size": [
+   "1.0f",
+   "0.7f"
+  ]
+ },
+ "EntityPheon": {
+  "size": [
+   "2.0f",
+   "3.6f"
+  ]
+ },
+ "EntityProjectileAlafhaBall": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileAncientball": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileAngedball": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileBiomass": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileDragonE": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileEffects": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileElviaBall": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileHebluLight": {
+  "size": [
+   "0.65f",
+   "0.65f"
+  ]
+ },
+ "EntityProjectileHomming": {
+  "size": [
+   "0.3125f",
+   "0.3125f"
+  ]
+ },
+ "EntityProjectileKirinSlash": {
+  "size": [
+   "0.25f",
+   "0.25f"
+  ]
+ },
+ "EntityProjectileLenciaBall": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileNade": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectilePullball": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileSpineball": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityProjectileWebball": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityQuac": {
+  "size": [
+   "1.321f",
+   "1.2f"
+  ]
+ },
+ "EntityRanrac": {
+  "size": [
+   "0.9f",
+   "2.7f"
+  ]
+ },
+ "EntityRanracAdapted": {
+  "size": [
+   "1.901f",
+   "2.85f"
+  ]
+ },
+ "EntityRathol": {
+  "size": [
+   "1.3f",
+   "3.1f"
+  ]
+ },
+ "EntityRemain": {
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntityRof": {
+  "size": [
+   "1.5f",
+   "4.6f"
+  ]
+ },
+ "EntityRond": {
+  "size": [
+   "1.7f",
+   "2.4f"
+  ]
+ },
+ "EntitySRPProjectile": {
+  "size": [
+   "0.3f",
+   "0.3f"
+  ]
+ },
+ "EntityShyco": {
+  "size": [
+   "0.6f",
+   "3.2f"
+  ]
+ },
+ "EntityShycoAdapted": {
+  "size": [
+   "0.901f",
+   "3.5f"
+  ]
+ },
+ "EntityShycoFocused": {
+  "size": [
+   "0.901f",
+   "3.5f"
+  ]
+ },
+ "EntitySoo": {
+  "size": [
+   "1.9f",
+   "2.6f"
+  ]
+ },
+ "EntitySource": {
+  "size": [
+   "0.5f",
+   "0.5f"
+  ]
+ },
+ "EntitySpeBear": {
+  "size": [
+   "1.3f",
+   "1.4f"
+  ]
+ },
+ "EntitySpeCow": {
+  "size": [
+   "0.9f",
+   "1.4f"
+  ]
+ },
+ "EntitySpeEnderman": {
+  "size": [
+   "0.6f",
+   "2.9f"
+  ]
+ },
+ "EntitySpeHuman": {
+  "size": [
+   "0.6f",
+   "1.95f"
+  ]
+ },
+ "EntitySpeSheep": {
+  "size": [
+   "0.7566f",
+   "2.85f"
+  ]
+ },
+ "EntitySpeVillager": {
+  "size": [
+   "0.6f",
+   "2.75f"
+  ]
+ },
+ "EntityTendril": {
+  "size": [
+   "1.0f",
+   "1.0f"
+  ]
+ },
+ "EntityTenn": {
+  "size": [
+   "1.9f",
+   "2.6f"
+  ]
+ },
+ "EntityTerla": {
+  "size": [
+   "2.4f",
+   "2.9f"
+  ]
+ },
+ "EntityTonro": {
+  "size": [
+   "0.7f",
+   "4.5f"
+  ]
+ },
+ "EntityToxicCloud": {
+  "fireImmune": true
+ },
+ "EntityUnvo": {
+  "size": [
+   "0.7f",
+   "4.1f"
+  ]
+ },
+ "EntityVenkrol": {
+  "size": [
+   "0.5f",
+   "1.5f"
+  ]
+ },
+ "EntityVenkrolSII": {
+  "size": [
+   "0.6f",
+   "2.8f"
+  ]
+ },
+ "EntityVenkrolSIII": {
+  "size": [
+   "0.7f",
+   "5.1f"
+  ]
+ },
+ "EntityVenkrolSIV": {
+  "size": [
+   "0.8f",
+   "6.9f"
+  ]
+ },
+ "EntityVenkrolSV": {
+  "size": [
+   "1.0f",
+   "10.8f"
+  ]
+ },
+ "EntityVesta": {
+  "size": [
+   "1.75f",
+   "3.6f"
+  ]
+ },
+ "EntityViin": {
+  "size": [
+   "0.85f",
+   "1.0f"
+  ]
+ },
+ "EntityWave": {
+  "size": [
+   "1.5f",
+   "0.2f"
+  ]
+ },
+ "EntityWaveShock": {
+  "size": [
+   "3.1f",
+   "0.2f"
+  ]
+ },
+ "EntityWymo": {
+  "size": [
+   "0.978f",
+   "1.2f"
+  ]
+ },
+ "EntityWymoAdapted": {
+  "size": [
+   "1.321f",
+   "1.2f"
+  ]
+ },
+ "EntityZaa": {
+  "size": [
+   "1.0f",
+   "0.25f"
+  ]
+ },
+ "EntityZaaAdapted": {
+  "size": [
+   "1.321f",
+   "1.2f"
+  ]
+ }
+}

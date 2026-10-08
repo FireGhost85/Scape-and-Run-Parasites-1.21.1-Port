@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "srparasites:block/parasiterubbledense_biome",
+    "top": "srparasites:block/parasiterubbledense_biome",
+    "side": "srparasites:block/parasiterubbledense_biome"
+  }
+}

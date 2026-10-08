@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "srparasites:block/parasitecanister_bag_down",
+    "down": "srparasites:block/parasitecanister_bag_down",
+    "up": "srparasites:block/parasitecanister_bag_up",
+    "east": "srparasites:block/parasitecanister_bag_side",
+    "west": "srparasites:block/parasitecanister_bag_side",
+    "north": "srparasites:block/parasitecanister_bag_side",
+    "south": "srparasites:block/parasitecanister_bag_side"
+  }
+}

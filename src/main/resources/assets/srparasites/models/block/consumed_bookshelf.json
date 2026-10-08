@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "srparasites:block/consumed_planks",
+    "side": "srparasites:block/consumed_bookshelf"
+  }
+}

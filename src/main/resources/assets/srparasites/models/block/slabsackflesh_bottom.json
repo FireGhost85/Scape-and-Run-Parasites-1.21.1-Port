@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "srparasites:block/parasitecanister_sac",
+    "bottom": "srparasites:block/parasitecanister_sac",
+    "top": "srparasites:block/parasitecanister_sac",
+    "side": "srparasites:block/parasitecanister_sac"
+  }
+}
