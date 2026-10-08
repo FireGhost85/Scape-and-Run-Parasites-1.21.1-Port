@@ -45,3 +45,15 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] Not ported: `BlockColonyOutpost` and `BlockGlassBase` (dead classes in the jar).
 - [FLAG] SRG sound fields without a name in `srg_names.csv`: `field_187577_bU` (gothshroom grouping, ported as `GRASS_PLACE`), `field_187715_dR` and `field_187635_cQ` (fog nullifier clear and break, ported as `FIRE_EXTINGUISH` and `ITEM_BREAK`). Context shows `dS..dX` are the player attack sounds and `dZ` the burp, so `dR` is probably not an extinguish sound. Needs the MCP name list (mcp_stable 39) to be exact.
 - [FLAG] The handoff statement "BlocksPayloads defines its own ParticleBurst/PureBurst" was stale; the file only has the flash payload. `SRPPotions`, `SRPParticles`, `SRPFluids`, `SRPBlocks`, `SRPBlockEntities`, `SRPMenus` are registered in the main constructor and `EffectsPayloads` / `BlocksPayloads` in `SRPNetwork`.
+
+## Session 2026-10-08 (entities)
+- [CHG] EntityHitbox and EntityBody are `PartEntity`s registered through `EntityParasiteBase.registerPart` (creation order = NeoForge part id order). The HitboxHit / EntityBodyHit packets are removed (NeoForge routes part attacks). `EntityBody.getId()` is now `getPartId()`.
+- [CHG] `EntityDamage` was never registered in 1.12; it now has the type `srparasites:damage` (1.21 needs a type).
+- [CHG] Custom DamageSource subclasses (HebluLight, HebluLightNeutral, KirinSlash) became damage types (`SRPDamageTypes.source`); the 1.12 magic flag is approximated with the `witch_resistant_to` tag.
+- [CHG] Fireball based projectiles use the 1.21 acceleration model (`accelerationPower` 0.1 along the direction); Pullball scales the power once instead of X/Z only. DragonE/Meteor ticks rely on the vanilla fireball tick / `getHitResultOnMoveVector`; ProjectileImpactEvent is not posted for EntityMeteor.
+- [CHG] Enderman family: the copied `attemptTeleport` override removed (vanilla `randomTeleport`); EnderTeleportEvent -> `EntityTeleportEvent.EnderEntity`; AttackingSpeedBoost uses a transient modifier.
+- [CHG] `canBreatheUnderwater` of Lum, LumAdapted, InfSquid -> entity type tag `can_breathe_under_water`.
+- [CHG] `ForgeHooks.getPlayerVisibilityDistance` dropped (no NeoForge equivalent). Dead-code `attackEntityFromPart` kept in RanracAdapted.
+- [CHG] Biome constants of 1.12 mapped by hand (VenkrolSIV: windswept hills, nether wastes, snowy plains/slopes, frozen peaks, stony shore, void; SpeCow: desert).
+- [CHG] Access transformer: `BeaconBlockEntity.levels` (AIDisableBeaconIki).
+- [FLAG] Unvo riding offset on Esor ported as `getVehicleAttachmentPoint` (-1.0 y); verify in game. Wymo/Zaa/Quac `onSpawn` calls `finalizeSpawn(..., MobSpawnType.NATURAL, ...)`. Unregistered 1.12 classes (Dharma, OroncoAW, VenkrolSV, Mor, Rond, Focused) got `(EntityType, Level)` constructors but have no registry entry (dormant, as in the jar).

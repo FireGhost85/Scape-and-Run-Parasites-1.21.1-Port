@@ -23,9 +23,9 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.block.state.properties.Half;
 
 /**
  * Block strings of the config files. The 1.12 format {@code namespace:name:meta} (the defaults of the original) and the 1.21
@@ -68,6 +68,34 @@ public final class BlockIds {
             return fallback;
         }
         return state;
+    }
+
+    /**
+     * The 1.21 replacement of the 1.12 "name;meta" strings the parasites collect for their cysts: the registry name, followed
+     * by the non-default properties in vanilla notation ({@code srparasites:infestedbush[variant=a]}). {@link #tryParse} reads it back.
+     */
+    public static String stateString(BlockState state) {
+        StringBuilder sb = new StringBuilder(BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString());
+        BlockState def = state.getBlock().defaultBlockState();
+        StringBuilder props = new StringBuilder();
+        for (Property<?> p : state.getProperties()) {
+            if (state.getValue(p).equals(def.getValue(p))) {
+                continue;
+            }
+            if (props.length() > 0) {
+                props.append(',');
+            }
+            props.append(p.getName()).append('=').append(valueName(state, p));
+        }
+        if (props.length() > 0) {
+            sb.append('[').append(props).append(']');
+        }
+        return sb.toString();
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static String valueName(BlockState state, Property p) {
+        return p.getName(state.getValue(p));
     }
 
     /** The state of the string; air (with a warning) when it cannot be resolved. */

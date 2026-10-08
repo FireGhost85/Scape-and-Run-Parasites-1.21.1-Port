@@ -82,8 +82,8 @@ public enum SRPEnumParticle {
     }
 
     static {
-        PARTICLES = Maps.newHashMap();
-        BY_NAME = Maps.newHashMap();
+        PARTICLES = new HashMap<>();
+        BY_NAME = new HashMap<>();
         for (SRPEnumParticle enumparticletypes : SRPEnumParticle.values()) {
             PARTICLES.put(enumparticletypes.getParticleID(), enumparticletypes);
             BY_NAME.put(enumparticletypes.getParticleName(), enumparticletypes);

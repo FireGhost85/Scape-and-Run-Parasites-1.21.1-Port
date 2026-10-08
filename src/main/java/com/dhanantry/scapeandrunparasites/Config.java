@@ -4,6 +4,7 @@ import com.dhanantry.scapeandrunparasites.config.SRPConfig;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
+import com.dhanantry.scapeandrunparasites.util.SRPAttributes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -26,6 +27,9 @@ public class Config {
         else if (spec == SRPConfigMobs.SPEC) SRPConfigMobs.bake();
         else if (spec == SRPConfigSystems.SPEC) SRPConfigSystems.bake();
         else if (spec == SRPConfigWorld.SPEC) SRPConfigWorld.bake();
+        else return;
+        // the 1.12 CommonProxy.init() derived SRPAttributes from the configs after they were loaded
+        SRPAttributes.init();
     }
 
     @SubscribeEvent

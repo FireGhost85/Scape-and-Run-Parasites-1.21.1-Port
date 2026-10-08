@@ -1,10 +1,10 @@
 package com.dhanantry.scapeandrunparasites.client.fx;
 
+import com.dhanantry.scapeandrunparasites.client.particle.ParticleSprites;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.RandomSource;
-import com.dhanantry.scapeandrunparasites.client.particle.ParticleSprites;
 
 /** Per-tick budget of the directly created fx particles and their shared sprites. Only used on the logical client. */
 public final class ClientSRPParticles {

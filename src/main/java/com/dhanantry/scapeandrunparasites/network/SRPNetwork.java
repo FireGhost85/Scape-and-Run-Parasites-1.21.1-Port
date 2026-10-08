@@ -4,6 +4,7 @@ import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.client.ClientPayloadHandlers;
 import com.dhanantry.scapeandrunparasites.network.registration.BlocksPayloads;
 import com.dhanantry.scapeandrunparasites.network.registration.EffectsPayloads;
+import com.dhanantry.scapeandrunparasites.network.registration.EntityPayloads;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -24,5 +25,6 @@ public final class SRPNetwork {
         registrar.playToClient(UpdateEvoPhasePayload.TYPE, UpdateEvoPhasePayload.CODEC, ClientPayloadHandlers::updateEvoPhase);
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
+        EntityPayloads.register(registrar);
     }
 }

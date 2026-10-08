@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util;
 
+
 /** Colored roman numerals of the strength levels 1 to 5 (node lamp, field guide). */
 public final class LangHelper {
     private LangHelper() {

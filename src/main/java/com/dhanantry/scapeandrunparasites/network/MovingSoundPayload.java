@@ -15,6 +15,11 @@ public record MovingSoundPayload(int evPhase, float volume) implements CustomPac
             ByteBufCodecs.FLOAT, MovingSoundPayload::volume,
             MovingSoundPayload::new);
 
+    /** SRPPacketMovingSound(int): full volume. */
+    public MovingSoundPayload(int evPhase) {
+        this(evPhase, 1.0f);
+    }
+
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
