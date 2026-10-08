@@ -1,0 +1,2662 @@
+[
+ {
+  "name": "infestedstain",
+  "field": "InfestedStain",
+  "registrar": "reg",
+  "class": "BlockInfestedStain",
+  "variants": null,
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "infestremain",
+  "field": "InfestRemain",
+  "registrar": "reg",
+  "class": "BlockInfestedRemain",
+  "variants": null,
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "infestedtrunk",
+  "field": "InfestedTrunk",
+  "registrar": "reg",
+  "class": "BlockInfestedTrunk",
+  "variants": null,
+  "tool": "axe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "infestedrubble",
+  "field": "InfestedRubble",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infestedbush",
+  "field": "InfestedBush",
+  "registrar": "regVariants",
+  "class": "BlockInfestedBush",
+  "variants": "BlockInfestedBush.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_grass_short",
+  "field": "DeadheadGrassShort",
+  "registrar": "reg",
+  "class": "BlockDeadheadGrassShort",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_grass_tall",
+  "field": "DeadheadGrassTall",
+  "registrar": "reg",
+  "class": "BlockDeadheadGrassTall",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bloodyice",
+  "field": "BloodyIce",
+  "registrar": "reg",
+  "class": "BlockBloodyIce",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "gothshroom",
+  "field": "gothShroom",
+  "registrar": "reg",
+  "class": "BlockGothshroom",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "relaycontroller",
+  "field": "RELAY_CONTROLLER",
+  "registrar": "reg",
+  "class": "BlockRelayController",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasite_barrier",
+  "field": "PARASITE_BARRIER",
+  "registrar": "reg",
+  "class": "BlockParasiteBarrier",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "biomeheart",
+  "field": "BiomeHeart",
+  "registrar": "reg",
+  "class": "BlockBiomeCore",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "colonyheart",
+  "field": "ColonyHeart",
+  "registrar": "reg",
+  "class": "BlockColonyCore",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "colonyoutpost",
+  "field": "ColonyOutpost",
+  "registrar": "reg",
+  "class": "BlockColonyCore",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "biomepurifier",
+  "field": "BiomePurifier",
+  "registrar": "reg",
+  "class": "BlockBiomePurifier",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "dermoid_cyst",
+  "field": "DermoidCyst",
+  "registrar": "reg",
+  "class": "BlockDermoidCyst",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "node_redstone_lamp",
+  "field": "NODE_LAMP",
+  "registrar": "reg",
+  "class": "BlockNodeLamp",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "biomass_block",
+  "field": "BiomassBlock",
+  "registrar": "reg",
+  "class": "BlockBiomassBlock",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "residue_block",
+  "field": "ResidueBlock",
+  "registrar": "reg",
+  "class": "BlockResidue",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "noderelay",
+  "field": "NODE_RELAY",
+  "registrar": "regNoItem",
+  "class": "BlockNodeRelay",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": false
+ },
+ {
+  "name": "relay_base",
+  "field": "RelayBase",
+  "registrar": "reg",
+  "class": "BlockRelay",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "relay_middle",
+  "field": "RelayMiddle",
+  "registrar": "reg",
+  "class": "BlockRelay",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "relay_roof",
+  "field": "RelayRoof",
+  "registrar": "reg",
+  "class": "BlockRelay",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "fog_nullifier",
+  "field": "FogNullifier",
+  "registrar": "reg",
+  "class": "BlockFogNullifier",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "residue_plants",
+  "field": "ResiduePlants",
+  "registrar": "reg",
+  "class": "BlockResiduePlants",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infuser_furnace",
+  "field": "InfuserFurnace",
+  "registrar": "reg",
+  "class": "BlockInfuserFurnace",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "relay_controller_dummy",
+  "field": "relaycontroller_dummy",
+  "registrar": "regNoItem",
+  "class": "BlockRelay",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": false
+ },
+ {
+  "name": "snow_tall_grass",
+  "field": "SnowTallGrass",
+  "registrar": "reg",
+  "class": "BlockSnowGrass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "snow_short_grass",
+  "field": "SnowShortGrass",
+  "registrar": "reg",
+  "class": "BlockSnowGrass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "snow_covered_grass",
+  "field": "SnowCoveredGrass",
+  "registrar": "regNoItem",
+  "class": "BlockSnowCoveredGrass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": false
+ },
+ {
+  "name": "trophy_void_orb",
+  "field": "TrophyVoidOrb",
+  "registrar": "reg",
+  "class": "BlockEntityTrophy",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "trophy_boom_orb",
+  "field": "TrophyBoomOrb",
+  "registrar": "reg",
+  "class": "BlockEntityTrophy",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "assimilated_blossom",
+  "field": "ASSIMILATED_BLOSSOM",
+  "registrar": "reg",
+  "class": "BlockSRPFlower",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "potted_assimilated_blossom",
+  "field": "POTTED_ASSIMILATED_BLOSSOM",
+  "registrar": "reg",
+  "class": "BlockPottedSRPFlower",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "potted_consumed_assimilated_blossom",
+  "field": "POTTED_CONSUMED_ASSIMILATED_BLOSSOM",
+  "registrar": "reg",
+  "class": "BlockPottedSRPFlower",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_furnace",
+  "field": "INFESTED_FURNACE",
+  "registrar": "reg",
+  "class": "BlockInfestedFurnace",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_pot",
+  "field": "INFESTED_POT",
+  "registrar": "reg",
+  "class": "BlockPottedSRPFlower",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_pot",
+  "field": "CONSUMED_POT",
+  "registrar": "reg",
+  "class": "BlockPottedSRPFlower",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "alveoli",
+  "field": "Alveoli",
+  "registrar": "reg",
+  "class": "BlockAlveoli",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "sick_alveoli",
+  "field": "SickAlveoli",
+  "registrar": "reg",
+  "class": "BlockSickAlveoli",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "alveoli_growth",
+  "field": "AlveoliGrowth",
+  "registrar": "reg",
+  "class": "BlockAlveoliGrowth",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "solid_alveoli_block",
+  "field": "SolidAlveoliBlock",
+  "registrar": "reg",
+  "class": "BlockSolidAlveoli",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_cobblestone",
+  "field": "InfestedCobblestone",
+  "registrar": "reg",
+  "class": "BlockInfestedStain",
+  "variants": null,
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "infestation_purifier",
+  "field": "InfestPurify",
+  "registrar": "reg",
+  "class": "BlockInfestationPurifier",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_white",
+  "field": "EscaBulbWhite",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_orange",
+  "field": "EscaBulbOrange",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_magenta",
+  "field": "EscaBulbMagenta",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_light_blue",
+  "field": "EscaBulbLightBlue",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_yellow",
+  "field": "EscaBulbYellow",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_lime",
+  "field": "EscaBulbLime",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_pink",
+  "field": "EscaBulbPink",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_gray",
+  "field": "EscaBulbGray",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_light_gray",
+  "field": "EscaBulbLightGray",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_cyan",
+  "field": "EscaBulbCyan",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_purple",
+  "field": "EscaBulbPurple",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_blue",
+  "field": "EscaBulbBlue",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_brown",
+  "field": "EscaBulbBrown",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_green",
+  "field": "EscaBulbGreen",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_red",
+  "field": "EscaBulbRed",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb_black",
+  "field": "EscaBulbBlack",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "esca_bulb",
+  "field": "EscaBulb",
+  "registrar": "reg",
+  "class": "BlockEscaBulb",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitebush",
+  "field": "ParasiteBush",
+  "registrar": "regVariants",
+  "class": "BlockParasiteBush",
+  "variants": "BlockParasiteBush.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitecanister",
+  "field": "ParasiteCanister",
+  "registrar": "regVariants",
+  "class": "BlockParasiteCanister",
+  "variants": "BlockParasiteCanister.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitetrunk",
+  "field": "ParasiteTrunk",
+  "registrar": "regVariants",
+  "class": "BlockParasiteTrunk",
+  "variants": "BlockParasiteTrunk.EnumType",
+  "tool": "axe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "parasiteplank",
+  "field": "ParasitePlank",
+  "registrar": "regVariants",
+  "class": "BlockParasitePlank",
+  "variants": "BlockParasitePlank.EnumType",
+  "tool": "axe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "parasiteloot",
+  "field": "ParasiteLoot",
+  "registrar": "regVariants",
+  "class": "BlockParasiteLoot",
+  "variants": "BlockParasiteLoot.EnumType",
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitestain",
+  "field": "ParasiteStain",
+  "registrar": "regVariants",
+  "class": "BlockParasiteStain",
+  "variants": "BlockParasiteStain.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "parasiterubble",
+  "field": "ParasiteRubble",
+  "registrar": "regVariants",
+  "class": "BlockParasiteRubble",
+  "variants": "BlockParasiteRubble.EnumType",
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitestructure",
+  "field": "ParasiteStructure",
+  "registrar": "reg",
+  "class": "BlockColonyStructure",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitethin",
+  "field": "ParasiteThin",
+  "registrar": "reg",
+  "class": "BlockParasiteThin",
+  "variants": null,
+  "tool": "axe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "parasitesapling",
+  "field": "ParasiteSapling",
+  "registrar": "regVariants",
+  "class": "BlockParasiteSapling",
+  "variants": "BlockParasiteSapling.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitemouth",
+  "field": "ParasiteMouth",
+  "registrar": "reg",
+  "class": "BlockParasiteMouth",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense",
+  "field": "ParasiteRubbleDense",
+  "registrar": "regVariants",
+  "class": "BlockParasiteRubbleDense",
+  "variants": "BlockParasiteRubbleDense.EnumType",
+  "tool": "pickaxe",
+  "level": 3,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_flesh_wall",
+  "field": "ParasiteRubbleFleshWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_planks",
+  "field": "InfestedPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_stone_bricks",
+  "field": "InfestedStoneBricks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_terracotta",
+  "field": "InfestedTerracotta",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_stone_polished",
+  "field": "PolishedInfestedStone",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "residue_bricks",
+  "field": "ResidueBricks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_column",
+  "field": "InfestedColumn",
+  "registrar": "reg",
+  "class": "BlockInfestedColumn",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "inf_ss",
+  "field": "InfestedSandstone",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "inf_ss_chiseled",
+  "field": "InfestedSandstoneChiseled",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "inf_ss_cut",
+  "field": "InfestedSandstoneCut",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "ashen_glass",
+  "field": "AshenGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "shrouded_glass",
+  "field": "ShroudedGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "harlequinn_glass",
+  "field": "HarlequinnGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bloody_glass",
+  "field": "BloodyGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_glass",
+  "field": "InfestedGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "shade_glass",
+  "field": "ShadeGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "sepia_glass",
+  "field": "SepiaGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "moody_glass",
+  "field": "MoodyGlass",
+  "registrar": "reg",
+  "class": "BlockAshenGlass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "ashen_glass_pane",
+  "field": "ASHEN_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_glass_pane",
+  "field": "INFESTED_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bloody_glass_pane",
+  "field": "BLOODY_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "harlequinn_glass_pane",
+  "field": "HARLEQUINN_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "shrouded_glass_pane",
+  "field": "SHROUDED_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "shade_glass_pane",
+  "field": "SHADE_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "sepia_glass_pane",
+  "field": "SEPIA_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "moody_glass_pane",
+  "field": "MOODY_GLASS_PANE",
+  "registrar": "reg",
+  "class": "SRPGlassPane",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "epitome_infestation_warp_diffuser",
+  "field": "EpitomeInfestationWarpDiffuser",
+  "registrar": "reg",
+  "class": "BlockEpitomeInfestationWarpDiffuser",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_stem",
+  "field": "GothStem",
+  "registrar": "reg",
+  "class": "BlockInfestedColumn",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "assimilated_pumpkin",
+  "field": "AssimilatedPumpkin",
+  "registrar": "reg",
+  "class": "BlockAssimilatedPumpkin",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "assimilated_jack_o_lantern",
+  "field": "AssimilatedJackOLantern",
+  "registrar": "reg",
+  "class": "BlockAssimilatedPumpkin",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "assimilated_reed",
+  "field": "AssimilatedSugarCane",
+  "registrar": "reg",
+  "class": "BlockAssimilatedReed",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh",
+  "field": "CookedFlesh",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_planks",
+  "field": "CookedFleshPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "flesh_planks",
+  "field": "FleshPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "goth_planks",
+  "field": "GothPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "brusewood_planks",
+  "field": "BrusewoodPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "consumed_planks",
+  "field": "ConsumedPlanks",
+  "registrar": "reg",
+  "class": "BlockInfestedRubble",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "semiorganic_block",
+  "field": "SemiorganicBlock",
+  "registrar": "reg",
+  "class": "BlockBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_button",
+  "field": "InfestedButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_button",
+  "field": "CookedFleshButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_button",
+  "field": "FleshButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_button",
+  "field": "GothButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "brucewood_button",
+  "field": "BrucewoodButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_button",
+  "field": "ConsumedButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_button",
+  "field": "DeadheadButton",
+  "registrar": "reg",
+  "class": "BlockSRPButton",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_ladder",
+  "field": "GothLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_ladder",
+  "field": "FleshLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bruisewood_ladder",
+  "field": "BruisewoodLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_ladder",
+  "field": "InfestedLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_ladder",
+  "field": "DeadheadLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_ladder",
+  "field": "CookedFleshLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_ladder",
+  "field": "ConsumedLadder",
+  "registrar": "reg",
+  "class": "BlockSRPLadder",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_bookshelf",
+  "field": "DeadheadBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_bookshelf",
+  "field": "CookedFleshBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_bookshelf",
+  "field": "ConsumedBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_bookshelf",
+  "field": "InfestedBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bruisewood_bookshelf",
+  "field": "BruisewoodBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_bookshelf",
+  "field": "FleshBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_bookshelf",
+  "field": "GothBookshelf",
+  "registrar": "reg",
+  "class": "BlockSRPBookshelf",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_pressure_plate",
+  "field": "DeadheadPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_pressure_plate",
+  "field": "InfestedPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_pressure_plate",
+  "field": "CookedFleshPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_pressure_plate",
+  "field": "FleshPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_pressure_plate",
+  "field": "GothPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "brusewood_pressure_plate",
+  "field": "BrusewoodPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_pressure_plate",
+  "field": "ConsumedPressurePlate",
+  "registrar": "reg",
+  "class": "BlockSRPPressurePlate",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "harlequinn_grass",
+  "field": "HarlequinnGrass",
+  "registrar": "reg",
+  "class": "BlockParasiteSpreading",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "harleskinn_block",
+  "field": "HarleskinnBlock",
+  "registrar": "reg",
+  "class": "BlockParasiteSpreading",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "poland_skin_block",
+  "field": "PolandSkinBlock",
+  "registrar": "reg",
+  "class": "BlockParasiteSpreading",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "hair_follicle_block",
+  "field": "HairFollicleBlock",
+  "registrar": "reg",
+  "class": "BlockHairFolliclePillar",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "locs_block",
+  "field": "LocsBlock",
+  "registrar": "reg",
+  "class": "BlockLocs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_leaves",
+  "field": "InfestedLeaves",
+  "registrar": "reg",
+  "class": "BlockLeafLike",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_leaves_fast",
+  "field": "InfestedLeavesFast",
+  "registrar": "reg",
+  "class": "BlockLeafLike",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_leaves",
+  "field": "DeadheadLeaves",
+  "registrar": "reg",
+  "class": "BlockDeadheadLeaves",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "hirsute_hair",
+  "field": "HirsuteHair",
+  "registrar": "reg",
+  "class": "BlockHirsuteHair",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "tresses_hair",
+  "field": "TressesHair",
+  "registrar": "reg",
+  "class": "BlockTressesHair",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "lipoma_mass",
+  "field": "LipomaMass",
+  "registrar": "reg",
+  "class": "BlockLipomaMass",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "harleskinn_fence",
+  "field": "HarleskinnFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_fence",
+  "field": "InfestedFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_fence",
+  "field": "DeadheadFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_fence",
+  "field": "GothFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_fence",
+  "field": "ConsumedFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bruisewood_fence",
+  "field": "BrusewoodFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_fence",
+  "field": "CookedFleshFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_fence",
+  "field": "FleshFence",
+  "registrar": "reg",
+  "class": "BlockHarleskinnFence",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_workbench",
+  "field": "ConsumedWorkbench",
+  "registrar": "reg",
+  "class": "BlockSRPWorkbench",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_workbench",
+  "field": "InfestedWorkbench",
+  "registrar": "reg",
+  "class": "BlockSRPWorkbench",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_cactus",
+  "field": "ParasiteCactus",
+  "registrar": "reg",
+  "class": "BlockParasiteCactus",
+  "variants": null,
+  "tool": "axe",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "harleskinn_slab",
+  "field": "HarleskinnSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_cobblestone_slab",
+  "field": "InfestedCobblestoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_stone_slab",
+  "field": "InfestedStoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_dirt_slab",
+  "field": "InfestedDirtSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "reinforced_hivestone_slab",
+  "field": "ReinforcedHivestoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitic_colony_core_slab",
+  "field": "ParasiticColonyCoreSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "sac_of_flesh_slab",
+  "field": "SacOfFleshSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "dead_head_plank_slab",
+  "field": "DeadHeadPlankSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "weathered_bricks_slab",
+  "field": "WeatheredBricksSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitic_compressed_colony_stone_slab",
+  "field": "ParasiticCompressedColonyStoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "weathered_cobblestone_slab",
+  "field": "WeatheredCobblestoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "frost_weathered_stone_slab",
+  "field": "FrostWeatheredStoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_stone_brick_slab",
+  "field": "InfestedStoneBrickSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_terracotta_slab",
+  "field": "InfestedTerracottaSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "polished_infested_stone_slab",
+  "field": "PolishedInfestedStoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "residue_brick_slab",
+  "field": "ResidueBrickSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_sandstone_slab",
+  "field": "InfestedSandstoneSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "goth_plank_slab",
+  "field": "GothPlankSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "bruisewood_plank_slab",
+  "field": "BruisewoodPlankSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "consumed_plank_slab",
+  "field": "ConsumedPlankSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_plank_slab",
+  "field": "InfestedPlankSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "poland_skin_slab",
+  "field": "PolandSkinSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "locs_block_slab",
+  "field": "LocsBlockSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_slab",
+  "field": "CookedFleshSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "flesh_slab",
+  "field": "FleshSlab",
+  "registrar": "slab",
+  "class": "BlockHarleskinnSlab",
+  "variants": null,
+  "tool": "axe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "harleskinn_stairs",
+  "field": "HarleskinnStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "bruisewood_plank_stairs",
+  "field": "BruisewoodPlankStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_sandstone_stairs",
+  "field": "InfestedSandstoneStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_planks_stairs",
+  "field": "GothPlanksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadhead_plank_stairs",
+  "field": "DeadheadPlankStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "residue_stairs",
+  "field": "ResidueStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_planks_stairs",
+  "field": "InfestedPlanksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_planks_stairs",
+  "field": "ConsumedPlanksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_stone_bricks_stairs",
+  "field": "InfestedStoneBricksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_polished_stone_bricks_stairs",
+  "field": "InfestedPolishedStoneBricksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "wheathered_bricks_stairs",
+  "field": "WheatheredBricksStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "wheathered_cobblestone_stairs",
+  "field": "WheatheredCobblestoneStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "frost_weathered_stone_stairs",
+  "field": "FrostWeatheredStoneStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "flesh_stairs",
+  "field": "FleshStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "cooked_flesh_stairs",
+  "field": "CookedFleshStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_stone_stairs",
+  "field": "InfestedStoneStairs",
+  "registrar": "harleskinnStairs",
+  "class": "BlockHarleskinnStairs",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "goth_door",
+  "field": "GothDoor",
+  "registrar": "reg",
+  "class": "SRPDoor",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "brusewood_door",
+  "field": "BrusewoodDoor",
+  "registrar": "reg",
+  "class": "SRPDoor",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_door",
+  "field": "ConsumedDoor",
+  "registrar": "reg",
+  "class": "SRPDoor",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "thornshade",
+  "field": "Thornshade",
+  "registrar": "regNoItem",
+  "class": "BlockThornshade",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": false
+ },
+ {
+  "name": "diseased_sponge",
+  "field": "diseasedSponge",
+  "registrar": "reg",
+  "class": "BlockDiseasedSponge",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "brusewood_trapdoor",
+  "field": "BrusewoodTrapdoor",
+  "registrar": "reg",
+  "class": "SRPTrapDoor",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "consumed_trapdoor",
+  "field": "ConsumedTrapdoor",
+  "registrar": "reg",
+  "class": "SRPTrapDoor",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "residue_wall",
+  "field": "ResidueBrickWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_plank_wall",
+  "field": "InfestedPlankWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "bruisewood_plank_wall",
+  "field": "BruisewoodPlankWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "polished_infested_stone_wall",
+  "field": "PolishedInfestedStoneWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infested_stone_brick_wall",
+  "field": "InfestedStoneBrickWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "goth_plank_wall",
+  "field": "GothPlankWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infested_sandstone_wall",
+  "field": "InfestedSandstoneWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "consumed_plank_wall",
+  "field": "ConsumedPlankWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiteplank_deadhead_wall",
+  "field": "ParasitePlankDeadheadWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_weathb_wall",
+  "field": "ParasiteRubbleWeathbWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense_colony_wall",
+  "field": "ParasiteRubbleDenseColonyWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_weathfs_wall",
+  "field": "ParasiteRubbleWeathfsWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense_biome_wall",
+  "field": "ParasiteRubbleDenseBiomeWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_weathbc_wall",
+  "field": "ParasiteRubbleWeathbcWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_bricks_wall",
+  "field": "ParasiteRubbleBricksWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitecanister_bag_wall",
+  "field": "ParasiteCanisterBagWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infestedrubble_wall",
+  "field": "InfestedRubbleWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infestedstain_wall",
+  "field": "InfestedStainWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitestain_flesh_wall",
+  "field": "ParasiteStainFleshWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_metal_wall",
+  "field": "ParasiteRubbleMetalWall",
+  "registrar": "reg",
+  "class": "BlockWallBase",
+  "variants": null,
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_bonestairs",
+  "field": "ParasiteRubbleBoneStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_fleshstairs",
+  "field": "ParasiteRubbleFleshStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_stonestairs",
+  "field": "ParasiteRubbleStoneStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_stonedebrisstairs",
+  "field": "ParasiteRubbleStoneDebrisStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_woodstairs",
+  "field": "ParasiteRubbleWoodStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_bricksstairs",
+  "field": "ParasiteRubbleBrickStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_metalstairs",
+  "field": "ParasiteRubbleMetalStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_obsidianstairs",
+  "field": "ParasiteRubbleObsidianStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubble_fungusstairs",
+  "field": "ParasiteRubbleFungusStair",
+  "registrar": "rubbleStairs",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitestain_fleshstairs",
+  "field": "ParasiteStainFleshStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitestain_dirtstairs",
+  "field": "ParasiteStainDirtStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitestain_mudstairs",
+  "field": "ParasiteStainMudStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitestain_feelerstairs",
+  "field": "ParasiteStainFeelerStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense_wallstairs",
+  "field": "ParasiteRubbleDenseWallStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense_biomestairs",
+  "field": "ParasiteRubbleDenseNodeStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubbledense_colonystairs",
+  "field": "ParasiteRubbleDenseColonyStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitetrunk_ballstairs",
+  "field": "ParasiteTrunkBallStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitetrunk_treestairs",
+  "field": "ParasiteTrunkTreeStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitetrunk_plantstairs",
+  "field": "ParasiteTrunkPlantStair",
+  "registrar": "reg",
+  "class": "BlockStairBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasiterubbleslabhalf",
+  "field": "ParasiteRubbleSlabHalf",
+  "registrar": "regVariants",
+  "class": "BlockSlabRubble",
+  "variants": "BlockSlabRubble.EnumType",
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "parasitestainslabhalf",
+  "field": "ParasiteStainSlabHalf",
+  "registrar": "regVariants",
+  "class": "BlockSlabStain",
+  "variants": "BlockSlabStain.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "parasitetendril",
+  "field": "ParasiteVine",
+  "registrar": "reg",
+  "class": "BlockVineBase",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "parasitefog",
+  "field": "ParasiteFog",
+  "registrar": "reg",
+  "class": "BlockParasiteFog",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "deadblood",
+  "field": "DeadBlood",
+  "registrar": "regNoItem",
+  "class": "BlockFluid",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": false
+ },
+ {
+  "name": "srpweb",
+  "field": "SRPWeb",
+  "registrar": "regVariants",
+  "class": "BlockWebBase",
+  "variants": "BlockWebBase.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "evolutionlure",
+  "field": "evolutionLure",
+  "registrar": "regVariants",
+  "class": "BlockEvolutionLure",
+  "variants": "BlockEvolutionLure.EnumType",
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "tunnel",
+  "field": "buglin",
+  "registrar": "reg",
+  "class": "BlockBuglin",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "canisteractive",
+  "field": "ParasiteCanisterActive",
+  "registrar": "reg",
+  "class": "BlockParasiteCanisterC",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "dispatchern",
+  "field": "dodN",
+  "registrar": "reg",
+  "class": "BlockDod",
+  "variants": null,
+  "tool": null,
+  "level": null,
+  "item": true
+ },
+ {
+  "name": "infestedore",
+  "field": "InfestedOre",
+  "registrar": "regVariants",
+  "class": "BlockInfestedOre",
+  "variants": "BlockInfestedOre.EnumType",
+  "tool": "pickaxe",
+  "level": 1,
+  "item": true
+ },
+ {
+  "name": "infestedsand",
+  "field": "InfestedSand",
+  "registrar": "reg",
+  "class": "BlockFallingInfestedStain",
+  "variants": null,
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "goresim",
+  "field": "goreSim",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "gorepri",
+  "field": "gorePri",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "goreada",
+  "field": "goreAda",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "gorepur",
+  "field": "gorePur",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "gorefer",
+  "field": "goreFer",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ },
+ {
+  "name": "goremar",
+  "field": "goreMar",
+  "registrar": "regVariants",
+  "class": "BlockGore",
+  "variants": "BlockGore.EnumType",
+  "tool": "shovel",
+  "level": 0,
+  "item": true
+ }
+]

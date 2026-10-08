@@ -1,0 +1,22 @@
+{
+  "textures": [
+    "srparasites:gore/flesh_assimilated1",
+    "srparasites:gore/flesh_assimilated2",
+    "srparasites:gore/flesh_assimilated3",
+    "srparasites:gore/flesh_pure1",
+    "srparasites:gore/flesh_pure2",
+    "srparasites:gore/flesh_pure3",
+    "srparasites:gore/flesh_primitive1",
+    "srparasites:gore/flesh_primitive2",
+    "srparasites:gore/flesh_primitive3",
+    "srparasites:gore/flesh_adapted1",
+    "srparasites:gore/flesh_adapted2",
+    "srparasites:gore/flesh_adapted3",
+    "srparasites:vomit/vomit1",
+    "srparasites:vomit/vomit2",
+    "srparasites:vomit/vomit3",
+    "srparasites:vomit/vomit4",
+    "srparasites:vomit/vomit5",
+    "srparasites:vomit/vomit6"
+  ]
+}

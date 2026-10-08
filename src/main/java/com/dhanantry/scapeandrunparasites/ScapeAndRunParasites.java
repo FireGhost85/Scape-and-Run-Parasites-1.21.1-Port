@@ -1,5 +1,11 @@
 package com.dhanantry.scapeandrunparasites;
 
+import com.dhanantry.scapeandrunparasites.init.SRPBlockEntities;
+import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
+import com.dhanantry.scapeandrunparasites.init.SRPFluids;
+import com.dhanantry.scapeandrunparasites.init.SRPMenus;
+import com.dhanantry.scapeandrunparasites.init.SRPParticles;
+import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.init.SRPSounds;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -16,5 +22,11 @@ public class ScapeAndRunParasites {
     public ScapeAndRunParasites(IEventBus modEventBus, ModContainer modContainer) {
         Config.register(modContainer);
         SRPSounds.SOUNDS.register(modEventBus);
+        SRPPotions.register(modEventBus);
+        SRPParticles.register(modEventBus);
+        SRPFluids.register(modEventBus);
+        SRPBlocks.register(modEventBus);
+        SRPBlockEntities.register(modEventBus);
+        SRPMenus.register(modEventBus);
     }
 }
