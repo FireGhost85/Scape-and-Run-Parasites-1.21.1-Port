@@ -13,7 +13,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
 /** Registers the four SRP config files (same split as 1.12.2: SRParasites / Mobs / Systems / World) and bakes them into static fields. */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class Config {
     public static void register(ModContainer c) {
         c.registerConfig(ModConfig.Type.COMMON, SRPConfig.SPEC, "srparasites/SRParasites.toml");

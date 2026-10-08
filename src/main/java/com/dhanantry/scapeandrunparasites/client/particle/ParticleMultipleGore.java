@@ -82,17 +82,4 @@ public class ParticleMultipleGore extends LegacyParticle {
             return new ParticleMultipleGore(level, x, y, z, xSpeed, ySpeed, zSpeed, options.r(), this.sprites);
         }
     }
-
-    private net.minecraft.world.entity.EntityDimensions srpSize;
-
-    /** The 1.12 setSize(width, height): the entity dimensions are replaced and the bounding box refreshed. */
-    protected void setSize(float width, float height) {
-        this.srpSize = net.minecraft.world.entity.EntityDimensions.scalable(width, height);
-        this.refreshDimensions();
-    }
-
-    @Override
-    public net.minecraft.world.entity.EntityDimensions getDimensions(net.minecraft.world.entity.Pose pose) {
-        return this.srpSize != null ? this.srpSize : super.getDimensions(pose);
-    }
 }

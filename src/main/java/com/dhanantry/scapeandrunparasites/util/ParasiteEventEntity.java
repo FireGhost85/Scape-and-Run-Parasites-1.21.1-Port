@@ -592,16 +592,16 @@ public class ParasiteEventEntity {
                         tags.putInt("srpcothimmunity", ++key);
                     }
                 } else if (outOne instanceof Mob) {
-                    entityout = (Mob)outOne;
-                    entityout.copyPosition((Entity)entityin);
+                    Mob mobOut = (Mob)outOne;
+                    mobOut.copyPosition((Entity)entityin);
                     entityin.discard();
-                    entityout.finalizeSpawn((ServerLevel) entityout.level(), world.getCurrentDifficultyAt(entityout.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
+                    mobOut.finalizeSpawn((ServerLevel) mobOut.level(), world.getCurrentDifficultyAt(mobOut.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
                     if (entityin.hasCustomName()) {
-                        SRPEntityUtil.setCustomNameTag(entityout, SRPEntityUtil.getCustomNameTag(entityin));
-                        entityout.setCustomNameVisible(entityin.isCustomNameVisible());
+                        SRPEntityUtil.setCustomNameTag(mobOut, SRPEntityUtil.getCustomNameTag(entityin));
+                        mobOut.setCustomNameVisible(entityin.isCustomNameVisible());
                     }
-                    world.addFreshEntity((Entity)entityout);
-                    world.levelEvent(null, 1026, entityout.blockPosition(), 0);
+                    world.addFreshEntity((Entity)mobOut);
+                    world.levelEvent(null, 1026, mobOut.blockPosition(), 0);
                 }
                 flag = false;
             }
@@ -863,16 +863,16 @@ public class ParasiteEventEntity {
                 entityout.particleStatus((byte)7);
                 entityout.cannotDespawn(SRPConfig.convertedDespawn);
             } else if (outOne instanceof Mob) {
-                entityout = (Mob)outOne;
-                entityout.copyPosition((Entity)entityin);
+                Mob mobOut = (Mob)outOne;
+                mobOut.copyPosition((Entity)entityin);
                 entityin.discard();
-                entityout.finalizeSpawn((ServerLevel) entityout.level(), world.getCurrentDifficultyAt(entityout.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
+                mobOut.finalizeSpawn((ServerLevel) mobOut.level(), world.getCurrentDifficultyAt(mobOut.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
                 if (entityin.hasCustomName()) {
-                    SRPEntityUtil.setCustomNameTag(entityout, SRPEntityUtil.getCustomNameTag(entityin));
-                    entityout.setCustomNameVisible(entityin.isCustomNameVisible());
+                    SRPEntityUtil.setCustomNameTag(mobOut, SRPEntityUtil.getCustomNameTag(entityin));
+                    mobOut.setCustomNameVisible(entityin.isCustomNameVisible());
                 }
-                world.addFreshEntity((Entity)entityout);
-                world.levelEvent(null, 1026, entityout.blockPosition(), 0);
+                world.addFreshEntity((Entity)mobOut);
+                world.levelEvent(null, 1026, mobOut.blockPosition(), 0);
             }
             flag = false;
         }
