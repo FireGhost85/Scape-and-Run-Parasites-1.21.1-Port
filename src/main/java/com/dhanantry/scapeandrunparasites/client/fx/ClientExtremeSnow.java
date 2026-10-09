@@ -24,7 +24,9 @@ public final class ClientExtremeSnow {
     /** Distance at which the 1.10.9 exponential fog (density sqrt(ln 50) / 10) left 2 percent visibility; the linear fog ends there. */
     private static final float FOG_END = 10.0f;
     /** Height above the player's feet at which a flake is over its nominal spawn column (see onClientTick). */
-    private static final double COMPENSATE_HEIGHT = 10.5;
+    private static final double COMPENSATE_HEIGHT = 7.0;
+    /** Distance at which the closed-in fog hides the flakes. */
+    private static final double SEE_RANGE = 13.0;
     private static boolean enabled = false;
     private static float intensity = 1.0f;
     private static boolean forceAnywhere = true;
@@ -105,27 +107,34 @@ public final class ClientExtremeSnow {
         if (p == null) {
             return;
         }
-        double radius = 12.0;
+        // Spawn area: a uniform disc around the player instead of 1.10.9's gaussian (sigma 12) cut by a 20 block sphere. The wind shears the
+        // falling snow sideways, so a concentrated cloud always leaned downwind of the player (about 3 times as many flakes in front when
+        // looking downwind as when looking upwind, measured with a simulation of the particles). The disc is wide enough to cover everything
+        // the fog lets the player see (13 blocks) plus the wind shift, and the number of flakes is scaled to the disc so the density the
+        // player sees stays that of the original.
+        double windBase = Math.sqrt(windX * windX + windZ * windZ);
+        double radius = SEE_RANGE + 8.0 * windBase;
         ParticleStatus setting = mc.options.particles().get();
         double budget = setting == ParticleStatus.MINIMAL ? 0.25 : (setting == ParticleStatus.DECREASED ? 0.55 : 1.0);
         int base = 140 + (int) (360.0f * intensity);
-        int count = (int) ((double) base * 1.8 * budget);
+        int count = (int) (1.135 * radius * radius * ((double) base / 500.0) * budget);
         for (int i = 0; i < count; ++i) {
-            int z;
-            int x = (int) (p.getX() + w.random.nextGaussian() * radius);
-            BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z = (int) (p.getZ() + w.random.nextGaussian() * radius)));
+            double dist = radius * Math.sqrt(w.random.nextDouble());
+            double angle = w.random.nextDouble() * (Math.PI * 2.0);
+            double nominalX = p.getX() + dist * Math.cos(angle);
+            double nominalZ = p.getZ() + dist * Math.sin(angle);
+            int x = Mth.floor(nominalX);
+            int z = Mth.floor(nominalZ);
+            BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z));
             if (!w.canSeeSky(ground) || !forceAnywhere && !w.getBiome(ground).value().shouldSnow(w, ground)) continue;
             double spawnY = Math.max((double) (ground.getY() + 16 + w.random.nextInt(8)), p.getY() + 16.0 + (double) w.random.nextInt(8));
-            double nominalX = (double) x + 0.5 + (w.random.nextDouble() - 0.5);
-            double nominalZ = (double) z + 0.5 + (w.random.nextDouble() - 0.5);
             double jitter = 0.03;
             double vx = windX + (w.random.nextDouble() - 0.5) * jitter;
             double vz = windZ + (w.random.nextDouble() - 0.5) * jitter;
             double vy = -0.22 - 0.06 * (double) intensity - w.random.nextDouble() * 0.04;
             // The flake drifts downwind while it falls (1.10.9 had the same shear, the cloud sat downwind of the player). Run its own fall
             // forward to COMPENSATE_HEIGHT above the player's feet (same integrator as ParticleBlizzard) and start it upwind by the drift it
-            // gains until then: it passes that height exactly over its nominal point. A simulation of the cloud (flakes above the eye,
-            // 20 block range, every wind speed) puts the centre of the sky the player sees over the player for this height.
+            // gains until then: it passes that height exactly over its nominal point.
             double fall = spawnY - p.getY();
             double fallSpeed = vy;
             int ticks = 0;
@@ -138,7 +147,7 @@ public final class ClientExtremeSnow {
             double drift = (1.0 - Math.pow(0.99, ticks)) / 0.01;
             double sx = nominalX - vx * drift;
             double sz = nominalZ - vz * drift;
-            mc.particleEngine.add(new ParticleBlizzard(w, sx, spawnY, sz, vx, vy, vz, p, nominalX, nominalZ));
+            mc.particleEngine.add(new ParticleBlizzard(w, sx, spawnY, sz, vx, vy, vz, p, nominalX, nominalZ, radius + 2.0));
         }
     }
 
