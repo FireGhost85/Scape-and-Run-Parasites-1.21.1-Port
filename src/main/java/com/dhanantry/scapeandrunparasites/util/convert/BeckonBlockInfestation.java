@@ -243,7 +243,9 @@ public class BeckonBlockInfestation {
             return null;
         }
         if (!BuiltInRegistries.BLOCK.containsKey(rl)) {
-            return null;
+            // a 1.12 name of the default list (log, leaves, reeds, stained_glass:3 ...): the block the legacy tables of BlockIds give
+            BlockState legacy = BlockIds.tryParse(token.trim());
+            return legacy == null ? null : new ParsedState(legacy.getBlock(), -1, legacy);
         }
         Block b = (Block)BuiltInRegistries.BLOCK.get(rl);
         if (b == null) {

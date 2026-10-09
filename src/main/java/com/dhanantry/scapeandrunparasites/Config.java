@@ -4,6 +4,7 @@ import com.dhanantry.scapeandrunparasites.config.SRPConfig;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
+import com.dhanantry.scapeandrunparasites.util.LegacyIds;
 import com.dhanantry.scapeandrunparasites.util.SRPAttributes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -23,10 +24,10 @@ public class Config {
     }
 
     private static void bake(IConfigSpec spec) {
-        if (spec == SRPConfig.SPEC) SRPConfig.bake();
-        else if (spec == SRPConfigMobs.SPEC) SRPConfigMobs.bake();
-        else if (spec == SRPConfigSystems.SPEC) SRPConfigSystems.bake();
-        else if (spec == SRPConfigWorld.SPEC) SRPConfigWorld.bake();
+        if (spec == SRPConfig.SPEC) { SRPConfig.bake(); LegacyIds.fixConfig(SRPConfig.class); }
+        else if (spec == SRPConfigMobs.SPEC) { SRPConfigMobs.bake(); LegacyIds.fixConfig(SRPConfigMobs.class); }
+        else if (spec == SRPConfigSystems.SPEC) { SRPConfigSystems.bake(); LegacyIds.fixConfig(SRPConfigSystems.class); }
+        else if (spec == SRPConfigWorld.SPEC) { SRPConfigWorld.bake(); LegacyIds.fixConfig(SRPConfigWorld.class); }
         else return;
         // the 1.12 CommonProxy.init() derived SRPAttributes from the configs after they were loaded
         SRPAttributes.init();
@@ -42,6 +43,10 @@ public class Config {
         SRPConfigMobs.bake();
         SRPConfigSystems.bake();
         SRPConfigWorld.bake();
+        LegacyIds.fixConfig(SRPConfig.class);
+        LegacyIds.fixConfig(SRPConfigMobs.class);
+        LegacyIds.fixConfig(SRPConfigSystems.class);
+        LegacyIds.fixConfig(SRPConfigWorld.class);
         SRPAttributes.reset();
         SRPAttributes.init();
         com.dhanantry.scapeandrunparasites.init.SRPEntities.refreshAttributes();

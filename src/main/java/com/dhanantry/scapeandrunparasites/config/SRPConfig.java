@@ -16,7 +16,7 @@ public class SRPConfig {
     public static float globalKDResistanceMultiplier = 1.0f;
     public static String[] blackListedDimensions = new String[]{"-1", "1"};
     public static boolean blackListedDimensionsWhite = false;
-    public static String[] entitiesWillAttack = new String[]{"minecraft:villager_golem"};
+    public static String[] entitiesWillAttack = new String[]{"minecraft:iron_golem"};
     public static boolean entitiesWillAttackWhite = false;
     public static String[] entitiesWillAvoid = new String[]{"minecraft:villager"};
     public static boolean entitiesWillAvoidWhite = false;
@@ -814,7 +814,7 @@ public class SRPConfig {
         b.comment("Set to true if you want to use the list as a WhiteList.");
         k7 = b.define(List.of("Mobs Blacklisted Dimensions Inverted"), false);
         b.comment("Mobs that will target the parasites. Ex: \"minecraft:zombie\" or just \"minecraft\" for a whole mod.");
-        k8 = b.defineListAllowEmpty(List.of("Mobs with new target task"), List.of("minecraft:villager_golem"), () -> "", o -> o instanceof String);
+        k8 = b.defineListAllowEmpty(List.of("Mobs with new target task"), List.of("minecraft:iron_golem"), () -> "", o -> o instanceof String);
         b.comment("Set to true if you want to use the list as a BlackList.");
         k9 = b.define(List.of("Mobs with new target task Inverted"), false);
         b.comment("Mobs that will avoid the parasites. Ex: \"minecraft:zombie\" or just \"minecraft\" for a whole mod.");

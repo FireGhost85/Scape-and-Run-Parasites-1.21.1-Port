@@ -78,9 +78,9 @@ public class SRPConfigSystems {
     public static boolean COTHPopping = false;
     public static String[] COTHVictimParasite = new String[]{"minecraft:pig;srparasites:sim_pig", "minecraft:sheep;srparasites:sim_sheep", "minecraft:cow;srparasites:sim_cow", "minecraft:wolf;srparasites:sim_wolf", "minecraft:horse;srparasites:sim_horse", "minecraft:zombie;srparasites:sim_human", "minecraft:husk;srparasites:sim_human", "minecraft:zombie_villager;srparasites:sim_villager", "minecraft:villager;srparasites:sim_villager", "minecraft:polar_bear;srparasites:sim_bear", "minecraft:enderman;srparasites:sim_enderman", "minecraft:squid;srparasites:sim_squid", "wyrmsofnyrus:creepedhumanoid;srparasites:sim_human", "wyrmsofnyrus:creepedbiter;srparasites:sim_cow", "wyrmsofnyrus:crawler;srparasites:sim_bigspider", "wyrmsofnyrus:minos;srparasites:sim_cow", "wyrmsofnyrus:prime;srparasites:crux"};
     public static float hijackHealth = 0.5f;
-    public static String[] HIJACKVictimParasite = new String[]{"minecraft:villager_golem;srparasites:hi_golem", "minecraft:blaze;srparasites:hi_blaze", "minecraft:skeleton;srparasites:hi_skeleton"};
+    public static String[] HIJACKVictimParasite = new String[]{"minecraft:iron_golem;srparasites:hi_golem", "minecraft:blaze;srparasites:hi_blaze", "minecraft:skeleton;srparasites:hi_skeleton"};
     public static String[] COTHItemPrevent = new String[]{"minecraft:golden_apple;0.1;300", "minecraft:golden_carrot;0.03;150"};
-    public static String[] COTHImmuneList = new String[]{"minecraft:villager_golem", "minecraft:vex", "minecraft:creeper", "minecraft:slime", "minecraft:blaze", "minecraft:guardian", "minecraft:elder_guardian", "minecraft:stray", "minecraft:skeleton", "minecraft:skeleton_horse", "minecraft:wither_skeleton", "minecraft:magma_cube", "minecraft:ghast", "minecraft:shulker", "minecraft:snowman", "wyrmsofnyrus", "srrevenants"};
+    public static String[] COTHImmuneList = new String[]{"minecraft:iron_golem", "minecraft:vex", "minecraft:creeper", "minecraft:slime", "minecraft:blaze", "minecraft:guardian", "minecraft:elder_guardian", "minecraft:stray", "minecraft:skeleton", "minecraft:skeleton_horse", "minecraft:wither_skeleton", "minecraft:magma_cube", "minecraft:ghast", "minecraft:shulker", "minecraft:snow_golem", "wyrmsofnyrus", "srrevenants"};
     public static boolean COTHImmuneListWhite = false;
     public static float bleedingDamage = 0.06f;
     public static float bleedingDamageCap = 100.0f;
@@ -2161,7 +2161,7 @@ public class SRPConfigSystems {
         b.comment("Table that will be used for converting mobs, the Rupter will also be using this");
         k50 = b.defineListAllowEmpty(List.of("COTH Assimilated Transformation"), List.of("minecraft:pig;srparasites:sim_pig", "minecraft:sheep;srparasites:sim_sheep", "minecraft:cow;srparasites:sim_cow", "minecraft:wolf;srparasites:sim_wolf", "minecraft:horse;srparasites:sim_horse", "minecraft:zombie;srparasites:sim_human", "minecraft:husk;srparasites:sim_human", "minecraft:zombie_villager;srparasites:sim_villager", "minecraft:villager;srparasites:sim_villager", "minecraft:polar_bear;srparasites:sim_bear", "minecraft:enderman;srparasites:sim_enderman", "minecraft:squid;srparasites:sim_squid", "wyrmsofnyrus:creepedhumanoid;srparasites:sim_human", "wyrmsofnyrus:creepedbiter;srparasites:sim_cow", "wyrmsofnyrus:crawler;srparasites:sim_bigspider", "wyrmsofnyrus:minos;srparasites:sim_cow", "wyrmsofnyrus:prime;srparasites:crux"), () -> "", o -> o instanceof String);
         b.comment("Mobs that are immune to the COTH effect, Ex: \"minecraft:zombie\" or just \"minecraft\" for a whole mod");
-        k51 = b.defineListAllowEmpty(List.of("COTH Mob Immune Mob List"), List.of("minecraft:villager_golem", "minecraft:vex", "minecraft:creeper", "minecraft:slime", "minecraft:blaze", "minecraft:guardian", "minecraft:elder_guardian", "minecraft:stray", "minecraft:skeleton", "minecraft:skeleton_horse", "minecraft:wither_skeleton", "minecraft:magma_cube", "minecraft:ghast", "minecraft:shulker", "minecraft:snowman", "wyrmsofnyrus", "srrevenants"), () -> "", o -> o instanceof String);
+        k51 = b.defineListAllowEmpty(List.of("COTH Mob Immune Mob List"), List.of("minecraft:iron_golem", "minecraft:vex", "minecraft:creeper", "minecraft:slime", "minecraft:blaze", "minecraft:guardian", "minecraft:elder_guardian", "minecraft:stray", "minecraft:skeleton", "minecraft:skeleton_horse", "minecraft:wither_skeleton", "minecraft:magma_cube", "minecraft:ghast", "minecraft:shulker", "minecraft:snow_golem", "wyrmsofnyrus", "srrevenants"), () -> "", o -> o instanceof String);
         b.comment("Set to true if you want to use the list as a WhiteList.");
         k52 = b.define(List.of("COTH Mob Immune Mob List Inverted"), false);
         b.comment("Set to false if you dont want the effect to spread from mob to mob");
@@ -2227,7 +2227,7 @@ public class SRPConfigSystems {
         b.comment("Mobs with equal or lower percentage of health may be converted to hijacked versions.");
         k83 = b.defineInRange(List.of("Hijacked Health Required"), 0.5, 0.0, 1.0);
         b.comment("Table that will be used for hijacking mobs.");
-        k84 = b.defineListAllowEmpty(List.of("Hijacked Transformation"), List.of("minecraft:villager_golem;srparasites:hi_golem", "minecraft:blaze;srparasites:hi_blaze", "minecraft:skeleton;srparasites:hi_skeleton"), () -> "", o -> o instanceof String);
+        k84 = b.defineListAllowEmpty(List.of("Hijacked Transformation"), List.of("minecraft:iron_golem;srparasites:hi_golem", "minecraft:blaze;srparasites:hi_blaze", "minecraft:skeleton;srparasites:hi_skeleton"), () -> "", o -> o instanceof String);
         b.comment("Amount of damage % it will be sent to the Rooter, affected by amplifier.");
         k85 = b.defineInRange(List.of("Pivot Damage Sent"), 0.2375, 0.0, 1.0);
         b.comment("Amount of damage % that will not be removed by the Rooter.");

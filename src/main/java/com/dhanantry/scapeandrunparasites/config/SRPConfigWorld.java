@@ -56,7 +56,7 @@ public class SRPConfigWorld {
     public static boolean venkrolNode = true;
     public static int biomeHeartFreq = 30;
     public static float biomeHeartVol = 0.4f;
-    public static String[] biomeHealPenaltyBlackList = new String[]{"minecraft:villager_golem"};
+    public static String[] biomeHealPenaltyBlackList = new String[]{"minecraft:iron_golem"};
     public static boolean biomeHealPenaltyBlackListWhite = false;
     public static String[] biomeBlackList = new String[]{};
     public static boolean biomeBlackListInverted = false;
@@ -427,7 +427,7 @@ public class SRPConfigWorld {
         k11 = b.defineInRange(List.of("Bloody Ice break diameter"), 3, 1, 25);
         b.comment("Temperature threshold for using frozen parasite variants (Lodo, Inf Human, etc).\nIf the biome temperature at the mob's position is <= this value, it will spawn as a frozen variant,\nunless the biome is blacklisted below. Vanilla cold biomes are 0.15 or less.");
         k12 = b.defineInRange(List.of("Frozen variant temperature threshold"), 0.15, -1.0, 2.0);
-        b.comment("Biome blacklist for frozen parasite variants.\nUse biome registry names like:\n  minecraft:cold_taiga\n  minecraft:frozen_ocean\n  biomesoplenty:alps\n\nIf a biome is in this list, frozen variants will NOT be used there,\neven if the temperature is below frozenVariantTempThreshold.");
+        b.comment("Biome blacklist for frozen parasite variants.\nUse biome registry names like:\n  minecraft:snowy_taiga\n  minecraft:frozen_ocean\n  biomesoplenty:alps\n\nIf a biome is in this list, frozen variants will NOT be used there,\neven if the temperature is below frozenVariantTempThreshold.");
         k13 = b.defineListAllowEmpty(List.of("Frozen variant biome blacklist"), List.of(), () -> "", o -> o instanceof String);
         b.comment("If false, Venkrol tornadoes will never spawn or apply any effects.\nThis disables both the visual layer and the gameplay pull / lift.");
         k14 = b.define(List.of("Enable Venkrol tornadoes"), true);
@@ -510,7 +510,7 @@ public class SRPConfigWorld {
         b.comment("Amount of fog the biome will have.");
         k47 = b.defineInRange(List.of("Biome Fog Density"), 0.06, 0.0, 1.0);
         b.comment("Mobs that are immune to this penalty. Ex: \"minecraft:zombie\" or just \"minecraft\" for a whole mod.");
-        k48 = b.defineListAllowEmpty(List.of("Biome Heal Penalty BlackList"), List.of("minecraft:villager_golem"), () -> "", o -> o instanceof String);
+        k48 = b.defineListAllowEmpty(List.of("Biome Heal Penalty BlackList"), List.of("minecraft:iron_golem"), () -> "", o -> o instanceof String);
         b.comment("Set to true if you want to use the list as a WhiteList.");
         k49 = b.define(List.of("Biome Heal Penalty BlackList Inverted"), false);
         b.comment("List of potion effects that the parasites will spawn with. Ex. \"minecraft:grass:0;srparasites:parasitestain:1\"  Where: \n \"minecraft:grass:0\" is the block source, meta value important \n \"srparasites:parasitestain:1\" is the block to place instead, meta value is also important. \n");

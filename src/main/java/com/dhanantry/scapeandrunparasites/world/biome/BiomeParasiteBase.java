@@ -225,7 +225,13 @@ public abstract class BiomeParasiteBase {
             if ("minecraft:glass".equals(name)) {
                 System.out.println("[SRP] transformBlockList evaluating GLASS: rule=" + rule + " meta=" + meta);
             }
-            if (!nm[0].equals(src[0]) || !nm[1].equals(src[1]) || meta != Integer.parseInt(src[2]) || (putting = BlockIds.parseBlock(dst[0] + ":" + dst[1])) == null) continue;
+            boolean sameBlock = nm[0].equals(src[0]) && nm[1].equals(src[1]) && meta == Integer.parseInt(src[2]);
+            if (!sameBlock && !"srparasites".equals(src[0])) {
+                // a 1.12 name of the default lists (leaves:0, log:1, ...): the block of the legacy tables of BlockIds
+                BlockState legacy = BlockIds.tryParse(parts[0]);
+                sameBlock = legacy != null && legacy.getBlock() == worldIn.getBlockState(helper).getBlock();
+            }
+            if (!sameBlock || (putting = BlockIds.parseBlock(dst[0] + ":" + dst[1])) == null) continue;
             int dstMeta = Integer.parseInt(dst[2]);
             worldIn.setBlock(helper, BlockIds.legacyState(putting, dstMeta), 3);
             return true;

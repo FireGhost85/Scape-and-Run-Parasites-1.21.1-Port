@@ -111,7 +111,8 @@ public final class PearlHeldGlowRenderer {
         if (glitchFrames > 0) {
             float shakeAmp = GLITCH_SHAKE_BASE * (0.75f + 0.6f * amp);
             float shake = Mth.sin(((float)player.tickCount + pt) * (GLITCH_SHAKE_FREQ * (0.9f + 0.2f * amp))) * shakeAmp;
-            TintedBufferSource glitch = new TintedBufferSource(buffers, false, 1.0f, 1.0f, 1.0f, GLITCH_ALPHA);
+            // additive like the glow: 1.10.9 set the blend function (SRC_ALPHA, ONE) once for the glow and the glitch copies; a normal alpha blend drew solid ghost copies of the pearl that looked like it teleported
+            TintedBufferSource glitch = new TintedBufferSource(buffers, true, 1.0f, 1.0f, 1.0f, GLITCH_ALPHA);
             for (int p = 0; p < GLITCH_PASSES; ++p) {
                 float offX = (mc.level.random.nextFloat() * 2.0f - 1.0f) * (GLITCH_OFFSET_MAX * (0.6f + 0.6f * amp)) + shake;
                 float offY = (mc.level.random.nextFloat() * 2.0f - 1.0f) * (GLITCH_OFFSET_MAX * (0.6f + 0.6f * amp)) + shake;
