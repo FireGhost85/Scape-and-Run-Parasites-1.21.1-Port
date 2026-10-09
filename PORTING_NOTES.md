@@ -193,3 +193,5 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] SRPEntities.refreshAttributes no longer writes attribute instances that other mods entity types share (player got 15 base armor in a modpack); logs a warning instead.
 
 - [CHG] /srpguide unlockall / unlockcelestial now marks all celestial events discovered (was a stub printing 0).
+
+- [CHG] gore* blocks (named "remains") drop nothing: the original getItemDropped returned null (and they are not full cubes, so no silk-touch drop). Their loot tables are empty.
