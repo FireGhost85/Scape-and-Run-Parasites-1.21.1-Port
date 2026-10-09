@@ -1062,18 +1062,27 @@ public class SRPEventHandlerBus {
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public static void worldTick(LevelTickEvent.Pre event) {
         if (!event.getLevel().isClientSide) {
-            ++moo;
+            // the counters of the original run once per tick (in 1.12 the nether and the end are normally not loaded, so only the overworld ticked):
+            // here every loaded dimension fires the tick, a counter that is shared would run three times as fast
+            boolean overworld = event.getLevel().dimension() == Level.OVERWORLD;
+            if (overworld) {
+                ++moo;
+            }
             if (SRPConfigSystems.useEvolution && SRPConfigSystems.phaseCustomSpawner) {
                 if (event.getLevel().getServer() == null) {
                     return;
                 }
                 tickSpawn((ServerLevel)event.getLevel());
             }
-            if (moo >= 20 * SRPConfigSystems.disloSeconds) {
+            if (overworld && moo >= 20 * SRPConfigSystems.disloSeconds) {
                 moo = 0;
-                SRPSaveData.get(event.getLevel()).reduceCodesCooldown(DimKeys.of(event.getLevel()), SRPConfigSystems.disloSeconds, event.getLevel());
+                for (ServerLevel each : event.getLevel().getServer().getAllLevels()) {
+                    SRPSaveData.get(each).reduceCodesCooldown(DimKeys.of(each), SRPConfigSystems.disloSeconds, each);
+                }
             }
-            if (!SRPConfigWorld.meteorActive) {
+            if (!overworld) {
+                // the meteor timer counts the ticks of the overworld only
+            } else if (!SRPConfigWorld.meteorActive) {
                 meteor = 0;
             } else {
                 ++meteor;
