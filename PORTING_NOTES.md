@@ -191,3 +191,5 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] Meteor impact column search: the five placements of `WorldGenMeteorImpactUtil` and the two of `WorldGenParasiteMeteorCrash` use `topSolidOrLiquid` (1.12 `getTopSolidOrLiquidBlock`: highest solid or liquid block that is not a leaf block) instead of the 1.21 heightmap MOTION_BLOCKING_NO_LEAVES, which only skips the vanilla `LeavesBlock`: the mod's deadhead leaves (a plain `Block`, `isLeaves` in 1.12) counted as ground and got stain / rubble. `srparasites:deadhead_leaves` is also in the `minecraft:leaves` block tag. The top log of a tree trunk is still replaced, as in the original.
 
 - [CHG] SRPEntities.refreshAttributes no longer writes attribute instances that other mods entity types share (player got 15 base armor in a modpack); logs a warning instead.
+
+- [CHG] /srpguide unlockall / unlockcelestial now marks all celestial events discovered (was a stub printing 0).

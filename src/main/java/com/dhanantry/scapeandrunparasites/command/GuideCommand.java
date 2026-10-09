@@ -33,6 +33,17 @@ public class GuideCommand extends ArgCommand {
         return List.of("unlockall", "unlockblocks", "unlockcelestial", "unlockeffects", "clear", "clearall", "reset", "clearblocks", "clearcelestial", "cleareffects");
     }
 
+    private static int unlockCelestials(IBestiaryProgress prog) {
+        int count = 0;
+        for (com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectDefinition def : com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectRegistry.getObjects()) {
+            if (!prog.hasSeenCelestial(def.id)) {
+                prog.markCelestialSeen(def.id);
+                ++count;
+            }
+        }
+        return count;
+    }
+
     private static void sync(ServerPlayer p, IBestiaryProgress prog) {
         SRPSend.sendToPlayer(p, new BestiarySyncPayload(prog.serializeNBT()));
     }
@@ -82,7 +93,7 @@ public class GuideCommand extends ArgCommand {
                 }
                 tr(src, "command.srpguide.unlockall_ok", mobCount);
                 tr(src, "command.srpguide.unlockblocks_ok", blockCount);
-                tr(src, "command.srpguide.unlockcelestial_ok", 0);
+                tr(src, "command.srpguide.unlockcelestial_ok", unlockCelestials(prog));
                 tr(src, "command.srpguide.unlockeffects_ok", effectCount);
                 sync(p, prog);
             }
@@ -98,8 +109,7 @@ public class GuideCommand extends ArgCommand {
                 sync(p, prog);
             }
             case "unlockcelestial" -> {
-                // the celestial objects come with the celestial events (deferred)
-                tr(src, "command.srpguide.unlockcelestial_ok", 0);
+                tr(src, "command.srpguide.unlockcelestial_ok", unlockCelestials(prog));
                 sync(p, prog);
             }
             case "unlockeffects" -> {
