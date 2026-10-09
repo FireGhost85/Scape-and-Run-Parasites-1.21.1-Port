@@ -1255,6 +1255,20 @@ implements IHitboxedEntity, IDislodgmentTarget {
         super.playAmbientSound();
     }
 
+    /**
+     * {@code /kill}: parasites are specifically vulnerable to it. The command used to go through hurt(), where the invulnerability frames,
+     * damage cap, learned damage resistances, dislodgment and the hurt() overrides of the individual parasites could absorb it; now it
+     * kills outright (the normal death handling still runs: drops, scent, evolution points).
+     */
+    @Override
+    public void kill() {
+        if (this.level().isClientSide || this.isRemoved() || this.dead) {
+            return;
+        }
+        this.setHealth(0.0f);
+        this.die(this.damageSources().genericKill());
+    }
+
     public void die(DamageSource cause) {
         super.die(cause);
         if (!this.level().isClientSide) {
