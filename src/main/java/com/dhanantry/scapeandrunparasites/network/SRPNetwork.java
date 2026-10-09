@@ -35,6 +35,9 @@ public final class SRPNetwork {
         registrar.playToServer(ReconfigureProgressUnlockPayload.TYPE, ReconfigureProgressUnlockPayload.CODEC, (msg, ctx) -> ReconfigureProgressUnlockPayload.handle(msg, ctx));
         registrar.playToClient(SyncProgressSnapshotPayload.TYPE, SyncProgressSnapshotPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.progressSnapshot(msg, ctx));
         registrar.playToServer(RequestScanPayload.TYPE, RequestScanPayload.CODEC, (msg, ctx) -> RequestScanPayload.handle(msg, ctx));
+        registrar.playToClient(GuiDistortionStatePayload.TYPE, GuiDistortionStatePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.guiDistortion(msg, ctx));
+        registrar.playToClient(StarTypePayload.TYPE, StarTypePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.starType(msg, ctx));
+        registrar.playToClient(SyncBlizzardReversePayload.TYPE, SyncBlizzardReversePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.blizzardReverse(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);

@@ -22,12 +22,12 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 // Extra systems of the original that are ported after the core (see PORTING_NOTES.md [FLAG] "deferred extras"):
 // Star biomes / blizzards, celestial events, the JEI integration and the Star GenLayer.
 sourceSets.main.java {
-    exclude '**/world/star/**'
-    exclude '**/world/gen/GenLayerSRPStar.java'
+    exclude '**/world/star/SRPColdStarTreeHandler.java'
+    exclude '**/world/star/SRPColdVillageGenerator.java'
+    exclude '**/world/star/SRPColdVillageWallGenerator.java'
+    exclude '**/world/star/SRPFracturedTerrainHandler.java'
     exclude '**/world/biome/BiomeParasiteDecorator.java'
-    exclude '**/world/ExtremeSnowData.java'
     exclude '**/world/gen/HarlequinRockBushGen.java'
-    exclude '**/world/ExtremeSnowServer.java'
     // secondary features, ported after the parasites run (docs/PROGRESS_AND_REMAINING.md section 8)
     // bestiary pages that need the celestial events / the progress snapshot network (deferred)
 }

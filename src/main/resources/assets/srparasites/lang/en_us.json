@@ -2218,6 +2218,7 @@
  "gui.srparasites.worldsettings.open": "SRP World Options...",
  "gui.srparasites.worldsettings.subtitle": "Placeholder options",
  "gui.srparasites.worldsettings.done": "Done",
+ "gui.srparasites.worldsettings.config": "Mod Configuration...",
  "gui.srparasites.worldsettings.difficulty": "Difficulty Preset",
  "gui.srparasites.worldsettings.challenge": "Challenge Configs",
  "gui.srparasites.worldsettings.meteor": "Meteor Infection",

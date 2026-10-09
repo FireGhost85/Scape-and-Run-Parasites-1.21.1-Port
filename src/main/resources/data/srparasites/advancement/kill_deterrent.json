@@ -1,0 +1,107 @@
+{
+  "parent": "srparasites:kill_adapted",
+  "display": {
+    "icon": {
+      "id": "srparasites:ada_reeker_drop"
+    },
+    "title": {
+      "translate": "advancements.srparasites.kill_deterrent.title"
+    },
+    "description": {
+      "translate": "advancements.srparasites.kill_deterrent.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "k_dispatcherten": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:dispatcherten"
+            }
+          }
+        ]
+      }
+    },
+    "k_kyphosis": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:kyphosis"
+            }
+          }
+        ]
+      }
+    },
+    "k_seizer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:seizer"
+            }
+          }
+        ]
+      }
+    },
+    "k_sentry": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:sentry"
+            }
+          }
+        ]
+      }
+    },
+    "k_worm": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:worm"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "k_dispatcherten"
+    ],
+    [
+      "k_kyphosis"
+    ],
+    [
+      "k_seizer"
+    ],
+    [
+      "k_sentry"
+    ],
+    [
+      "k_worm"
+    ]
+  ]
+}

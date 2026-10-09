@@ -1,88 +1,99 @@
 package com.dhanantry.scapeandrunparasites.world.star;
 
-import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
+import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
+import com.dhanantry.scapeandrunparasites.network.SRPSend;
+import com.dhanantry.scapeandrunparasites.network.StarTypePayload;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldEntitySpawner;
-import com.dhanantry.scapeandrunparasites.world.star.SRPStarWorldData;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 
-public class SRPStarWorldEvents {
+/**
+ * Star world setup (SRPStarWorldEvents + SRPStarTypeSyncHandler of 1.10.9). The world creation screen stores the choice with
+ * {@link #markCreatingWorld}; when the overworld loads for the first time the choice (or the config default) is written to the
+ * world data. {@link SRPWorldEntitySpawner#starType} is the live value the biome mixin reads.
+ */
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
+public final class SRPStarWorldEvents {
     private static boolean creatingWorld = false;
-    private static int pendingCreationStarType = 0;
-    private static boolean pendingCreationMushroomTrees = false;
-    private static boolean pendingCreationFracturedTerrain = false;
+    private static int pendingStarType = 0;
+    private static boolean pendingMushroomTrees = false;
+    private static boolean pendingFracturedTerrain = false;
 
-    public static void markCreatingWorld() {
-        SRPStarWorldEvents.markCreatingWorld(SRPWorldEntitySpawner.starType, false, false);
-    }
-
-    public static void markCreatingWorld(int starType) {
-        SRPStarWorldEvents.markCreatingWorld(starType, false, false);
-    }
-
-    public static void markCreatingWorld(int starType, boolean mushroomTreesEnabled) {
-        SRPStarWorldEvents.markCreatingWorld(starType, mushroomTreesEnabled, false);
+    private SRPStarWorldEvents() {
     }
 
     public static void markCreatingWorld(int starType, boolean mushroomTreesEnabled, boolean fracturedTerrainEnabled) {
         creatingWorld = true;
-        pendingCreationStarType = SRPStarWorldEvents.sanitizeStarType(starType);
-        pendingCreationMushroomTrees = pendingCreationStarType == 1 && mushroomTreesEnabled;
-        pendingCreationFracturedTerrain = pendingCreationStarType == 1 && fracturedTerrainEnabled;
-        SRPWorldEntitySpawner.starType = pendingCreationStarType;
+        pendingStarType = sanitize(starType);
+        pendingMushroomTrees = pendingStarType == 1 && mushroomTreesEnabled;
+        pendingFracturedTerrain = pendingStarType == 1 && fracturedTerrainEnabled;
     }
 
-    public static int getActiveStarTypeForGeneration() {
-        if (creatingWorld) {
-            return pendingCreationStarType;
-        }
-        return SRPStarWorldEvents.sanitizeStarType(SRPWorldEntitySpawner.starType);
+    public static void clearPending() {
+        creatingWorld = false;
+        pendingStarType = 0;
+        pendingMushroomTrees = false;
+        pendingFracturedTerrain = false;
     }
 
-    private static int sanitizeStarType(int starType) {
-        if (starType < 0 || starType > 2) {
-            return 0;
-        }
-        return starType;
+    private static int sanitize(int starType) {
+        return starType < 0 || starType > 2 ? 0 : starType;
     }
 
     @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event) {
-        Level world = event.getLevel();
-        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
+    public static void onLevelLoad(LevelEvent.Load event) {
+        if (!(event.getLevel() instanceof ServerLevel level) || level.dimension() != Level.OVERWORLD) {
             return;
         }
-        SRPStarWorldData data = SRPStarWorldData.get(world);
-        if (creatingWorld) {
-            data.setStarType(pendingCreationStarType);
-            data.setMushroomTreesEnabled(pendingCreationStarType == 1 && pendingCreationMushroomTrees);
-            data.setFracturedTerrainEnabled(pendingCreationFracturedTerrain);
-            SRPWorldEntitySpawner.starType = pendingCreationStarType;
-            creatingWorld = false;
-            pendingCreationMushroomTrees = false;
-            pendingCreationFracturedTerrain = false;
-        } else {
-            SRPWorldEntitySpawner.starType = data.getStarType();
+        MinecraftServer server = level.getServer();
+        SRPStarWorldData data = SRPStarWorldData.get(server);
+        if (data.isFresh()) {
+            if (creatingWorld) {
+                data.setStarType(pendingStarType);
+                data.setMushroomTreesEnabled(pendingStarType == 1 && pendingMushroomTrees);
+                data.setFracturedTerrainEnabled(pendingFracturedTerrain);
+            } else {
+                data.setStarType(SRPConfigWorld.defaultStarWorldType);
+            }
+            data.markUsed();
+        }
+        clearPending();
+        SRPWorldEntitySpawner.starType = data.getStarType();
+        StarBiomeMapper.clearCache();
+    }
+
+    private static void send(ServerPlayer p) {
+        if (p.getServer() == null) {
+            return;
+        }
+        SRPSend.sendToPlayer(p, new StarTypePayload(SRPStarWorldData.get(p.getServer()).getStarType()));
+    }
+
+    @SubscribeEvent
+    public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
+        if (e.getEntity() instanceof ServerPlayer p) {
+            send(p);
         }
     }
 
     @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) {
-            return;
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent e) {
+        if (e.getEntity() instanceof ServerPlayer p) {
+            send(p);
         }
-        Level world = event.world;
-        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
-            return;
-        }
-        if (creatingWorld) {
-            SRPWorldEntitySpawner.starType = pendingCreationStarType;
-            return;
-        }
-        SRPStarWorldData data = SRPStarWorldData.get(world);
-        if (data.getStarType() != SRPWorldEntitySpawner.starType) {
-            SRPWorldEntitySpawner.starType = data.getStarType();
+    }
+
+    @SubscribeEvent
+    public static void onDimension(PlayerEvent.PlayerChangedDimensionEvent e) {
+        if (e.getEntity() instanceof ServerPlayer p) {
+            send(p);
         }
     }
 }
-

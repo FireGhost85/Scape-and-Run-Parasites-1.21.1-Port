@@ -31,7 +31,9 @@ public class Config {
         // the 1.12 CommonProxy.init() derived SRPAttributes from the configs after they were loaded
         SRPAttributes.init();
         com.dhanantry.scapeandrunparasites.init.SRPEntities.refreshAttributes();
+        com.dhanantry.scapeandrunparasites.init.SRPBlocks.init();
         com.dhanantry.scapeandrunparasites.init.SRPSpawning.init();
+        ScapeAndRunParasites.LOGGER.info("[SRP] config {} (re)loaded", spec == SRPConfig.SPEC ? "SRParasites" : spec == SRPConfigMobs.SPEC ? "SRParasitesMobs" : spec == SRPConfigSystems.SPEC ? "SRParasitesSystems" : "SRParasitesWorld");
     }
 
     /** {@code /srparasites readconfigurationfile}: bakes the four configs again and rebuilds what is derived from them. */
@@ -54,6 +56,13 @@ public class Config {
 
     @SubscribeEvent
     static void onReload(ModConfigEvent.Reloading event) {
-        bake(event.getConfig().getSpec());
+        // the file watcher fires on its own thread: derived state (attributes, spawning) is rebuilt on the server thread
+        IConfigSpec spec = event.getConfig().getSpec();
+        net.minecraft.server.MinecraftServer server = net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer();
+        if (server != null && !server.isSameThread()) {
+            server.execute(() -> bake(spec));
+        } else {
+            bake(spec);
+        }
     }
 }

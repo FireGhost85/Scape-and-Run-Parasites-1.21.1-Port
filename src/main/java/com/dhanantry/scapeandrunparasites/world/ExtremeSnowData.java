@@ -1,35 +1,22 @@
 package com.dhanantry.scapeandrunparasites.world;
 
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.saveddata.SavedData;
 
-public class ExtremeSnowData
-extends WorldSavedData {
-    private static final String KEY = "srp_extreme_snow";
+/** State of the extreme snow storm of a dimension (/srp_extremesnow). */
+public class ExtremeSnowData extends SavedData {
     private boolean enabled = false;
     private float intensity = 1.0f;
     private boolean forceAnywhere = true;
     private float windDeg = 30.0f;
     private float windSpeed = 0.5f;
 
-    public ExtremeSnowData() {
-        super(KEY);
-    }
-
-    public ExtremeSnowData(String name) {
-        super(name);
-    }
-
-    public static ExtremeSnowData get(Level world) {
-        String dimKey;
-        MapStorage storage = world.getPerWorldStorage();
-        ExtremeSnowData data = (ExtremeSnowData)storage.loadData(ExtremeSnowData.class, dimKey = "srp_extreme_snow_" + DimKeys.of(world));
-        if (data == null) {
-            data = new ExtremeSnowData(dimKey);
-            storage.setData(dimKey, (WorldSavedData)data);
-        }
-        return data;
+    public static ExtremeSnowData get(ServerLevel world) {
+        String key = "srp_extreme_snow_" + DimKeys.of(world).replace(':', '_');
+        return world.getDataStorage().computeIfAbsent(new SavedData.Factory<>(ExtremeSnowData::new, ExtremeSnowData::load, null), key);
     }
 
     public boolean isEnabled() {
@@ -42,10 +29,12 @@ extends WorldSavedData {
 
     public void setEnabled(boolean e) {
         this.enabled = e;
+        this.setDirty();
     }
 
     public void setIntensity(float i) {
         this.intensity = i;
+        this.setDirty();
     }
 
     public boolean isForceAnywhere() {
@@ -54,6 +43,7 @@ extends WorldSavedData {
 
     public void setForceAnywhere(boolean b) {
         this.forceAnywhere = b;
+        this.setDirty();
     }
 
     public float getWindDeg() {
@@ -62,6 +52,7 @@ extends WorldSavedData {
 
     public void setWindDeg(float d) {
         this.windDeg = d;
+        this.setDirty();
     }
 
     public float getWindSpeed() {
@@ -70,17 +61,21 @@ extends WorldSavedData {
 
     public void setWindSpeed(float s) {
         this.windSpeed = s;
+        this.setDirty();
     }
 
-    public void readFromNBT(CompoundTag nbt) {
-        this.enabled = nbt.getBoolean("enabled");
-        this.intensity = nbt.getFloat("intensity");
-        this.forceAnywhere = nbt.getBoolean("forceAnywhere");
-        this.windDeg = nbt.getFloat("windDeg");
-        this.windSpeed = nbt.getFloat("windSpeed");
+    public static ExtremeSnowData load(CompoundTag nbt, HolderLookup.Provider registries) {
+        ExtremeSnowData d = new ExtremeSnowData();
+        d.enabled = nbt.getBoolean("enabled");
+        d.intensity = nbt.contains("intensity") ? nbt.getFloat("intensity") : 1.0f;
+        d.forceAnywhere = !nbt.contains("forceAnywhere") || nbt.getBoolean("forceAnywhere");
+        d.windDeg = nbt.contains("windDeg") ? nbt.getFloat("windDeg") : 30.0f;
+        d.windSpeed = nbt.contains("windSpeed") ? nbt.getFloat("windSpeed") : 0.5f;
+        return d;
     }
 
-    public CompoundTag writeToNBT(CompoundTag nbt) {
+    @Override
+    public CompoundTag save(CompoundTag nbt, HolderLookup.Provider registries) {
         nbt.putBoolean("enabled", this.enabled);
         nbt.putFloat("intensity", this.intensity);
         nbt.putBoolean("forceAnywhere", this.forceAnywhere);
@@ -89,4 +84,3 @@ extends WorldSavedData {
         return nbt;
     }
 }
-

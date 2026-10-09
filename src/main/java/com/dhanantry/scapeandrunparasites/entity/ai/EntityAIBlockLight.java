@@ -91,6 +91,9 @@ extends Goal {
     }
 
     public void tick() {
+        if (this.target == null) {
+            return;
+        }
         double r = 5.0;
         double distance = this.realdistanceSq(this.target, this.parent.getX(), this.parent.getY(), this.parent.getZ());
         if (distance > r) {

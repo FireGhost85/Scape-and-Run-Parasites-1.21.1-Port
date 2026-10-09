@@ -1,0 +1,34 @@
+{
+  "parent": "srparasites:kill_deterrent",
+  "display": {
+    "icon": {
+      "id": "srparasites:cosmic_structural_failure_icon"
+    },
+    "title": {
+      "translate": "advancement.srparasites.cosmic_structural_failure.title"
+    },
+    "description": {
+      "translate": "advancement.srparasites.cosmic_structural_failure.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "kill_kirin": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:kirin"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

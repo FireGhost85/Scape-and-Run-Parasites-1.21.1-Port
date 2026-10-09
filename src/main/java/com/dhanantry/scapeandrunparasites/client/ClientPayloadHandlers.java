@@ -42,6 +42,21 @@ public final class ClientPayloadHandlers {
         ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.bestiary.client.gui.CurrentProgressClientCache.read(msg.tag()));
     }
 
+    public static void guiDistortion(com.dhanantry.scapeandrunparasites.network.GuiDistortionStatePayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            com.dhanantry.scapeandrunparasites.bestiary.client.gui.GuiDistortionHelper.clientDistortionDisabled = msg.disabled();
+            com.dhanantry.scapeandrunparasites.bestiary.client.gui.GuiDistortionHelper.clientCreativeOverride = msg.creativeOverride();
+        });
+    }
+
+    public static void starType(com.dhanantry.scapeandrunparasites.network.StarTypePayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.world.SRPClientStarWorldState.setStarType(msg.starType()));
+    }
+
+    public static void blizzardReverse(com.dhanantry.scapeandrunparasites.network.SyncBlizzardReversePayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.weather.SRPBlizzardDirectionClient.setReverseRequested(msg.reverse()));
+    }
+
     public static void fog(com.dhanantry.scapeandrunparasites.network.FogPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             SRPClientState.fog = msg.fog();

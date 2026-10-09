@@ -1,0 +1,34 @@
+{
+  "parent": "srparasites:kill_deterrent",
+  "display": {
+    "icon": {
+      "id": "srparasites:hellfire_chemical_warfare_icon"
+    },
+    "title": {
+      "translate": "advancement.srparasites.hellfire_chemical_warfare.title"
+    },
+    "description": {
+      "translate": "advancement.srparasites.hellfire_chemical_warfare.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "kill_draconite": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "srparasites:draconite"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

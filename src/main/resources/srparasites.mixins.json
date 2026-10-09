@@ -4,6 +4,7 @@
   "package": "com.dhanantry.scapeandrunparasites.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MultiNoiseBiomeSourceMixin"
   ],
   "client": [
   ],

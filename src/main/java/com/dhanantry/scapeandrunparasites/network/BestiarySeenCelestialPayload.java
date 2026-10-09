@@ -12,8 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
- * PacketBestiarySeenCelestial: the client saw a celestial object. The "columbus" and "stolas" advancements of the original are
- * granted once the celestial events and the advancements are ported.
+ * PacketBestiarySeenCelestial: the client saw a celestial object.
  */
 public record BestiarySeenCelestialPayload(String id) implements CustomPacketPayload {
     public static final Type<BestiarySeenCelestialPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "bestiary_seen_celestial"));
@@ -33,6 +32,16 @@ public record BestiarySeenCelestialPayload(String id) implements CustomPacketPay
                 IBestiaryProgress prog = BestiaryCapability.get(p);
                 if (!prog.hasSeenCelestial(msg.id())) {
                     prog.markCelestialSeen(msg.id());
+                }
+                int total = com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectRegistry.getObjectCount();
+                int discovered = prog.getSeenCelestials().size();
+                if (total > 0) {
+                    if (discovered >= com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectRegistry.getHalfDiscoveryThreshold()) {
+                        com.dhanantry.scapeandrunparasites.util.SRPAdvancementEvents.grantAll(p, "columbus");
+                    }
+                    if (discovered >= total) {
+                        com.dhanantry.scapeandrunparasites.util.SRPAdvancementEvents.grantAll(p, "stolas");
+                    }
                 }
                 SRPSend.sendToPlayer(p, new BestiarySyncPayload(prog.serializeNBT()));
             }

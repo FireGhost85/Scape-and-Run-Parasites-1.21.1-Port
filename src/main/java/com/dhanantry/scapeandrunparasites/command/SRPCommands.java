@@ -27,7 +27,14 @@ public final class SRPCommands {
                 new GuideCommand(),
                 new GuideClearCommand(),
                 new BestiaryStatsCommand(),
-                new CelestialCommand());
+                new CelestialCommand(),
+                new GuiDistortionCommand("srpguidistortion"),
+                new GuiDistortionCommand("srpguidist"),
+                new GuiDistortionCommand("srpdistortion"),
+                new ExtremeSnowCommand(),
+                new HarlequinCommands.Convert(),
+                new HarlequinCommands.Here(),
+                new HarlequinCommands.Scatter());
         for (ArgCommand command : commands) {
             command.register(event.getDispatcher());
         }

@@ -208,6 +208,8 @@ public class SRPConfigWorld {
     private static ModConfigSpec.ConfigValue<List<? extends String>> k19;
     private static ModConfigSpec.BooleanValue k20;
     private static ModConfigSpec.BooleanValue k21;
+    private static ModConfigSpec.IntValue kStarDefault;
+    public static int defaultStarWorldType = 0;
     private static ModConfigSpec.BooleanValue k22;
     private static ModConfigSpec.BooleanValue k23;
     private static ModConfigSpec.BooleanValue k24;
@@ -443,6 +445,8 @@ public class SRPConfigWorld {
         k20 = b.define(List.of("Enable Differing Star World Shaders"), true);
         b.comment("If false, disables the cold fog shader used by Cold Star worlds.");
         k21 = b.define(List.of("Enable Cold Star Fog Shader"), true);
+        b.comment("Star type of NEW worlds that are not created through the world creation screen (dedicated servers): 0 = normal, 1 = cold, 2 = warm.\nExisting worlds keep the star type they were created with.");
+        kStarDefault = b.defineInRange(List.of("Default Star World Type"), 0, 0, 2);
         b.comment("If true, bush-type blocks can be climbed.");
         k22 = b.define(List.of("Enable bush climbing"), true);
         b.comment("Allow Parasite loot block to damage the player when the item is taken.");
@@ -805,6 +809,7 @@ public class SRPConfigWorld {
         celestialEventBlacklist = k19.get().toArray(new String[0]);
         enableStarWorldShaders = k20.get();
         enableColdStarFogShader = k21.get();
+        defaultStarWorldType = kStarDefault.get();
         bushClimbingEnabled = k22.get();
         parasiteLootDamageOnTake = k23.get();
         residueFlammableWave = k24.get();

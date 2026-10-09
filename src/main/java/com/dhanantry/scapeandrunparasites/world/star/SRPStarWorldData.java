@@ -1,32 +1,32 @@
 package com.dhanantry.scapeandrunparasites.world.star;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.saveddata.SavedData;
 
-public class SRPStarWorldData
-extends WorldSavedData {
-    private static final String DATA_NAME = "srp_star_world_data";
+/** Star type of the world (0 normal, 1 cold, 2 warm) and its options, stored with the overworld (SRPStarWorldData of 1.10.9). */
+public class SRPStarWorldData extends SavedData {
+    public static final String DATA_NAME = "srp_star_world_data";
     private int starType = 0;
     private boolean mushroomTreesEnabled = false;
     private boolean fracturedTerrainEnabled = false;
+    /** True while the data was just created (a new world), so the creation settings can be applied once. */
+    private boolean fresh = true;
 
-    public SRPStarWorldData() {
-        super(DATA_NAME);
+    public static SRPStarWorldData get(MinecraftServer server) {
+        ServerLevel overworld = server.overworld();
+        return overworld.getDataStorage().computeIfAbsent(new SavedData.Factory<>(SRPStarWorldData::new, SRPStarWorldData::load, null), DATA_NAME);
     }
 
-    public SRPStarWorldData(String name) {
-        super(name);
+    public boolean isFresh() {
+        return this.fresh;
     }
 
-    public static SRPStarWorldData get(Level world) {
-        MapStorage storage = world.getPerWorldStorage();
-        SRPStarWorldData data = (SRPStarWorldData)storage.loadData(SRPStarWorldData.class, DATA_NAME);
-        if (data == null) {
-            data = new SRPStarWorldData();
-            storage.setData(DATA_NAME, (WorldSavedData)data);
-            data.markDirty();
-        }
-        return data;
+    public void markUsed() {
+        this.fresh = false;
+        this.setDirty();
     }
 
     public int getStarType() {
@@ -44,7 +44,7 @@ extends WorldSavedData {
             changed = true;
         }
         if (changed) {
-            this.markDirty();
+            this.setDirty();
         }
     }
 
@@ -55,7 +55,7 @@ extends WorldSavedData {
     public void setMushroomTreesEnabled(boolean enabled) {
         if (this.mushroomTreesEnabled != enabled) {
             this.mushroomTreesEnabled = enabled;
-            this.markDirty();
+            this.setDirty();
         }
     }
 
@@ -64,28 +64,30 @@ extends WorldSavedData {
     }
 
     public void setFracturedTerrainEnabled(boolean enabled) {
-        boolean allowed;
-        boolean bl = allowed = this.starType == 1 && enabled;
+        boolean allowed = this.starType == 1 && enabled;
         if (this.fracturedTerrainEnabled != allowed) {
             this.fracturedTerrainEnabled = allowed;
-            this.markDirty();
+            this.setDirty();
         }
     }
 
-    public void readFromNBT(CompoundTag nbt) {
-        this.starType = nbt.getInt("StarType");
-        if (this.starType < 0 || this.starType > 2) {
-            this.starType = 0;
+    public static SRPStarWorldData load(CompoundTag nbt, HolderLookup.Provider registries) {
+        SRPStarWorldData d = new SRPStarWorldData();
+        d.fresh = false;
+        d.starType = nbt.getInt("StarType");
+        if (d.starType < 0 || d.starType > 2) {
+            d.starType = 0;
         }
-        this.mushroomTreesEnabled = nbt.contains("MushroomTrees") && nbt.getBoolean("MushroomTrees");
-        this.fracturedTerrainEnabled = this.starType == 1 && nbt.contains("FracturedTerrain") && nbt.getBoolean("FracturedTerrain");
+        d.mushroomTreesEnabled = nbt.contains("MushroomTrees") && nbt.getBoolean("MushroomTrees");
+        d.fracturedTerrainEnabled = d.starType == 1 && nbt.contains("FracturedTerrain") && nbt.getBoolean("FracturedTerrain");
+        return d;
     }
 
-    public CompoundTag writeToNBT(CompoundTag compound) {
+    @Override
+    public CompoundTag save(CompoundTag compound, HolderLookup.Provider registries) {
         compound.putInt("StarType", this.starType);
         compound.putBoolean("MushroomTrees", this.mushroomTreesEnabled);
         compound.putBoolean("FracturedTerrain", this.fracturedTerrainEnabled);
         return compound;
     }
 }
-
