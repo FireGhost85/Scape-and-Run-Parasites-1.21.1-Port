@@ -209,7 +209,11 @@ public class SRPConfigWorld {
     private static ModConfigSpec.BooleanValue k20;
     private static ModConfigSpec.BooleanValue k21;
     private static ModConfigSpec.IntValue kStarDefault;
+    private static ModConfigSpec.BooleanValue kStarMushroom;
+    private static ModConfigSpec.BooleanValue kStarFractured;
     public static int defaultStarWorldType = 0;
+    public static boolean defaultStarWorldMushroomTrees = false;
+    public static boolean defaultStarWorldFracturedTerrain = false;
     private static ModConfigSpec.BooleanValue k22;
     private static ModConfigSpec.BooleanValue k23;
     private static ModConfigSpec.BooleanValue k24;
@@ -447,6 +451,10 @@ public class SRPConfigWorld {
         k21 = b.define(List.of("Enable Cold Star Fog Shader"), true);
         b.comment("Star type of NEW worlds that are not created through the world creation screen (dedicated servers): 0 = normal, 1 = cold, 2 = warm.\nExisting worlds keep the star type they were created with.");
         kStarDefault = b.defineInRange(List.of("Default Star World Type"), 0, 0, 2);
+        b.comment("Cold star worlds (Default Star World Type 1) created without the world creation screen (dedicated servers): use deadhead mushroom trees instead of the normal deadhead trees.");
+        kStarMushroom = b.define(List.of("Default Star World Mushroom Trees"), false);
+        b.comment("Cold star worlds created without the world creation screen (dedicated servers): fractured terrain (tectonic plates, cracks and ridges).");
+        kStarFractured = b.define(List.of("Default Star World Fractured Terrain"), false);
         b.comment("If true, bush-type blocks can be climbed.");
         k22 = b.define(List.of("Enable bush climbing"), true);
         b.comment("Allow Parasite loot block to damage the player when the item is taken.");
@@ -810,6 +818,8 @@ public class SRPConfigWorld {
         enableStarWorldShaders = k20.get();
         enableColdStarFogShader = k21.get();
         defaultStarWorldType = kStarDefault.get();
+        defaultStarWorldMushroomTrees = kStarMushroom.get();
+        defaultStarWorldFracturedTerrain = kStarFractured.get();
         bushClimbingEnabled = k22.get();
         parasiteLootDamageOnTake = k23.get();
         residueFlammableWave = k24.get();

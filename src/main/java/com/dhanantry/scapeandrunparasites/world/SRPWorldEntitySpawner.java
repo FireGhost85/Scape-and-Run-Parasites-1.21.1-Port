@@ -12,4 +12,7 @@ public class SRPWorldEntitySpawner {
     public static final int STAR_COLD = 1;
     public static final int STAR_WARM = 2;
     public static int starType = 0;
+    /** Live copies of the star world options (read by the world generation threads, set when the overworld loads). */
+    public static volatile boolean mushroomTrees = false;
+    public static volatile boolean fracturedTerrain = false;
 }

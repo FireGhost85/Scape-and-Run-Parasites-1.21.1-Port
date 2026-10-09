@@ -212,7 +212,7 @@ public final class SRPColdVillageWallGenerator {
     }
 
     private static BlockPos findTerrainSurface(Level world, BlockPos pos) {
-        BlockPos p = world.getHeight(BlockPos.containing(pos.getX(), 0, pos.getZ())).below();
+        BlockPos p = world.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, new BlockPos(pos.getX(), 0, pos.getZ())).below();
         while (p.getY() > 1) {
             BlockState state = world.getBlockState(p);
             if (!SRPColdVillageWallGenerator.isSurfaceJunk(state)) {
@@ -220,7 +220,7 @@ public final class SRPColdVillageWallGenerator {
                     p = p.below();
                     continue;
                 }
-                if (state.isSideSolid((BlockGetter)world, p, Direction.UP)) {
+                if (state.isFaceSturdy(world, p, Direction.UP)) {
                     return p.above();
                 }
             }

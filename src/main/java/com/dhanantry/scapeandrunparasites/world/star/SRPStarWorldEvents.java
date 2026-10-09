@@ -61,11 +61,15 @@ public final class SRPStarWorldEvents {
                 data.setFracturedTerrainEnabled(pendingFracturedTerrain);
             } else {
                 data.setStarType(SRPConfigWorld.defaultStarWorldType);
+                data.setMushroomTreesEnabled(SRPConfigWorld.defaultStarWorldType == 1 && SRPConfigWorld.defaultStarWorldMushroomTrees);
+                data.setFracturedTerrainEnabled(SRPConfigWorld.defaultStarWorldFracturedTerrain);
             }
             data.markUsed();
         }
         clearPending();
         SRPWorldEntitySpawner.starType = data.getStarType();
+        SRPWorldEntitySpawner.mushroomTrees = data.getStarType() == 1 && data.isMushroomTreesEnabled();
+        SRPWorldEntitySpawner.fracturedTerrain = data.isFracturedTerrainEnabled();
         StarBiomeMapper.clearCache();
     }
 

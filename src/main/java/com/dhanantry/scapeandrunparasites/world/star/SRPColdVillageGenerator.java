@@ -3,11 +3,9 @@ package com.dhanantry.scapeandrunparasites.world.star;
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteTrunk;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.init.SRPItems;
-import com.dhanantry.scapeandrunparasites.phase.DimKeys;
 import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldEntitySpawner;
 import com.dhanantry.scapeandrunparasites.world.star.SRPColdVillageWallGenerator;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,9 +18,20 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.EmptyBlockGetter;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -33,11 +42,9 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-public class SRPColdVillageGenerator
-implements IWorldGenerator {
+public final class SRPColdVillageGenerator {
     private static final int VILLAGE_DISTANCE = 20;
     private static final int VILLAGE_SEPARATION = 5;
     private static final int VILLAGE_SALT = 10387312;
@@ -50,14 +57,22 @@ implements IWorldGenerator {
     private static final ResourceLocation SMALL_1 = ResourceLocation.fromNamespaceAndPath("srparasites", "dh_village_small1");
     private static final ResourceLocation SMALL_2 = ResourceLocation.fromNamespaceAndPath("srparasites", "dh_village_small2");
 
-    public void generate(RandomSource random, int chunkX, int chunkZ, Level world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (world == null || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
-            return;
-        }
+    /** Whether the chunk is the chunk of a village of the grid (the village grid of 1.12, with the salt of this generator). */
+    public static boolean isVillageChunk(ServerLevel level, int chunkX, int chunkZ) {
+        return new SRPColdVillageGenerator().isVillageChunkOf(level, chunkX, chunkZ);
+    }
+
+    /** Builds the village of the chunk (IWorldGenerator.generate of 1.10.9); the chunks around are loaded as needed. */
+    public static void generateVillage(ServerLevel level, int chunkX, int chunkZ) {
+        long seed = level.getSeed() ^ ((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
+        new SRPColdVillageGenerator().generate(RandomSource.create(seed), chunkX, chunkZ, level);
+    }
+
+    private void generate(RandomSource random, int chunkX, int chunkZ, ServerLevel world) {
         if (SRPWorldEntitySpawner.starType != 1) {
             return;
         }
-        if (!this.isVillageChunk(world, chunkX, chunkZ)) {
+        if (!this.isVillageChunkOf(world, chunkX, chunkZ)) {
             return;
         }
         int centerX = (chunkX << 4) + 8;
@@ -75,7 +90,7 @@ implements IWorldGenerator {
         this.generateVillage(world, random, center);
     }
 
-    private boolean isVillageChunk(Level world, int chunkX, int chunkZ) {
+    private boolean isVillageChunkOf(ServerLevel world, int chunkX, int chunkZ) {
         int regionX = chunkX;
         int regionZ = chunkZ;
         if (regionX < 0) {
@@ -86,31 +101,31 @@ implements IWorldGenerator {
         }
         int gridX = regionX / 20;
         int gridZ = regionZ / 20;
-        RandomSource rand = world.setRandomSeed(gridX, gridZ, 10387312);
+        java.util.Random rand = new java.util.Random((long) gridX * 341873128712L + (long) gridZ * 132897987541L + world.getSeed() + 10387312L);
         gridX *= 20;
         gridZ *= 20;
         return chunkX == (gridX += rand.nextInt(15)) && chunkZ == (gridZ += rand.nextInt(15));
     }
 
-    private boolean isValidColdVillageBiome(Level world, BlockPos center) {
+    private boolean isValidColdVillageBiome(ServerLevel world, BlockPos center) {
         int radius = 20;
         int checked = 0;
         int valid = 0;
         for (int x = -radius; x <= radius; x += 8) {
             for (int z = -radius; z <= radius; z += 8) {
                 ++checked;
-                if (!this.isColdVillageBiome(world.getBiome(center.offset(x, 0, z)).value())) continue;
+                if (!this.isColdVillageBiome(world.getBiome(center.offset(x, 0, z)))) continue;
                 ++valid;
             }
         }
         return checked > 0 && valid >= Math.max(1, checked * 2 / 3);
     }
 
-    private boolean isColdVillageBiome(Biome biome) {
-        return biome == Biomes.icePlains || biome == Biomes.coldTaiga || biome == Biomes.coldTaigaHills || biome == Biomes.coldBeach || biome == Biomes.frozenRiver;
+    private boolean isColdVillageBiome(Holder<Biome> biome) {
+        return biome.is(Biomes.SNOWY_PLAINS) || biome.is(Biomes.SNOWY_TAIGA) || biome.is(Biomes.SNOWY_BEACH) || biome.is(Biomes.FROZEN_RIVER);
     }
 
-    private void generateVillage(Level world, RandomSource random, BlockPos center) {
+    private void generateVillage(ServerLevel world, RandomSource random, BlockPos center) {
         Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
         VillageStyle style = this.pickVillageStyle(random);
         ArrayList<SRPColdVillageWallGenerator.WallExclusion> wallExclusions = new ArrayList<SRPColdVillageWallGenerator.WallExclusion>();
@@ -138,7 +153,7 @@ implements IWorldGenerator {
         return new VillageStyle(116, 15, 2, 2);
     }
 
-    private int placePatternBuildings(Level world, RandomSource random, BlockPos center, Rotation rotation, VillageStyle style, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions) {
+    private int placePatternBuildings(ServerLevel world, RandomSource random, BlockPos center, Rotation rotation, VillageStyle style, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions) {
         int count = 0;
         if (this.placeAnchoredScaled(world, wallExclusions, SMALL_1, center, this.scaleOffset(-16, style.spreadPercent), 0, rotation, false)) {
             ++count;
@@ -176,7 +191,7 @@ implements IWorldGenerator {
         return (int)Math.round((double)value * ((double)percent / 100.0));
     }
 
-    private boolean placeAnchoredScaled(Level world, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, ResourceLocation structure, BlockPos center, int offsetX, int offsetZ, Rotation rotation, boolean blacksmith) {
+    private boolean placeAnchoredScaled(ServerLevel world, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, ResourceLocation structure, BlockPos center, int offsetX, int offsetZ, Rotation rotation, boolean blacksmith) {
         BlockPos offset = this.rotateOffset(offsetX, offsetZ, rotation);
         BlockPos doorPos = center.offset(offset.getX(), 0, offset.getZ());
         if (this.isBadBuildArea(world, doorPos, 8)) {
@@ -196,16 +211,15 @@ implements IWorldGenerator {
         return false;
     }
 
-    private void addWallExclusion(Level world, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, ResourceLocation structure, BlockPos origin, Rotation rotation, int padding) {
-        if (world.getMinecraftServer() == null || wallExclusions == null) {
+    private void addWallExclusion(ServerLevel world, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, ResourceLocation structure, BlockPos origin, Rotation rotation, int padding) {
+        if (wallExclusions == null) {
             return;
         }
-        TemplateManager manager = world.getSaveHandler().getStructureTemplateManager();
-        Template template = manager.getTemplate(world.getMinecraftServer(), structure);
+        StructureTemplate template = world.getServer().getStructureManager().get(structure).orElse(null);
         if (template == null) {
             return;
         }
-        BlockPos size = template.getSize();
+        Vec3i size = template.getSize();
         int maxLocalX = Math.max(0, size.getX() - 1);
         int maxLocalZ = Math.max(0, size.getZ() - 1);
         BlockPos a = this.transformLocal(origin, 0, 0, 0, size, rotation);
@@ -234,12 +248,8 @@ implements IWorldGenerator {
         return BlockPos.containing(x, 0, z);
     }
 
-    private boolean placeAnchored(Level world, ResourceLocation structure, BlockPos entrancePos, Rotation rotation, boolean blacksmith) {
-        if (world.getMinecraftServer() == null) {
-            return false;
-        }
-        TemplateManager manager = world.getSaveHandler().getStructureTemplateManager();
-        Template template = manager.getTemplate(world.getMinecraftServer(), structure);
+    private boolean placeAnchored(ServerLevel world, ResourceLocation structure, BlockPos entrancePos, Rotation rotation, boolean blacksmith) {
+        StructureTemplate template = world.getServer().getStructureManager().get(structure).orElse(null);
         if (template == null) {
             return false;
         }
@@ -247,8 +257,8 @@ implements IWorldGenerator {
             return false;
         }
         this.clearTreeBlocksForTemplate(world, template, entrancePos, rotation);
-        PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
-        template.addBlocksToWorld(world, entrancePos, settings);
+        StructurePlaceSettings settings = new StructurePlaceSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false);
+        template.placeInWorld(world, entrancePos, entrancePos, settings, world.getRandom(), 2);
         this.buildRubbleSupports(world, template, entrancePos, rotation);
         if (blacksmith) {
             this.fillBlacksmithChests(world, entrancePos, template, rotation);
@@ -256,7 +266,7 @@ implements IWorldGenerator {
         return true;
     }
 
-    private boolean isIceLakeArea(Level world, BlockPos center, int radius) {
+    private boolean isIceLakeArea(ServerLevel world, BlockPos center, int radius) {
         int bad = 0;
         int checked = 0;
         for (int x = -radius; x <= radius; x += 4) {
@@ -270,7 +280,7 @@ implements IWorldGenerator {
         return checked > 0 && bad > Math.max(4, checked / 2);
     }
 
-    private boolean isBadBuildArea(Level world, BlockPos center, int radius) {
+    private boolean isBadBuildArea(ServerLevel world, BlockPos center, int radius) {
         radius = Math.max(3, Math.min(radius, 12));
         int bad = 0;
         int checked = 0;
@@ -303,8 +313,8 @@ implements IWorldGenerator {
         return block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == LegacyMaterial.water;
     }
 
-    private BlockPos findTerrainSurface(Level world, BlockPos pos) {
-        BlockPos p = world.getHeight(BlockPos.containing(pos.getX(), 0, pos.getZ())).below();
+    private BlockPos findTerrainSurface(ServerLevel world, BlockPos pos) {
+        BlockPos p = world.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(pos.getX(), 0, pos.getZ())).below();
         while (p.getY() > 1) {
             BlockState state = world.getBlockState(p);
             if (!this.isSurfaceJunk(state)) {
@@ -312,7 +322,7 @@ implements IWorldGenerator {
                     p = p.below();
                     continue;
                 }
-                if (state.isSideSolid((BlockGetter)world, p, Direction.UP)) {
+                if (state.isFaceSturdy(world, p, Direction.UP)) {
                     return p.above();
                 }
             }
@@ -327,8 +337,8 @@ implements IWorldGenerator {
         return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow;
     }
 
-    private void clearTreeBlocksForTemplate(Level world, Template template, BlockPos origin, Rotation rotation) {
-        BlockPos size = template.getSize();
+    private void clearTreeBlocksForTemplate(ServerLevel world, StructureTemplate template, BlockPos origin, Rotation rotation) {
+        Vec3i size = template.getSize();
         int sizeX = size.getX();
         int sizeY = Math.min(size.getY() + 3, 18);
         int sizeZ = size.getZ();
@@ -350,34 +360,34 @@ implements IWorldGenerator {
         return block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.leaves;
     }
 
-    private void buildRubbleSupports(Level world, Template template, BlockPos origin, Rotation rotation) {
-        List<Template.BlockInfo> blocks = this.getTemplateBlocks(template);
+    private void buildRubbleSupports(ServerLevel world, StructureTemplate template, BlockPos origin, Rotation rotation) {
+        List<StructureTemplate.StructureBlockInfo> blocks = this.getTemplateBlocks(template);
         if (blocks == null || blocks.isEmpty()) {
             return;
         }
-        BlockPos size = template.getSize();
+        Vec3i size = template.getSize();
         int foundationY = this.findTemplateFoundationLayer(blocks);
         if (foundationY < 0) {
             return;
         }
         BlockState averageSupportState = this.findAverageSupportState(world, blocks, origin, size, rotation, foundationY);
-        for (Template.BlockInfo info : blocks) {
+        for (StructureTemplate.StructureBlockInfo info : blocks) {
             BlockPos sourcePos;
             BlockState sourceState;
-            if (info == null || info.pos == null || info.blockState == null || info.pos.getY() != foundationY || !this.isValidFoundationSource(info.blockState) || !this.isValidFoundationSource(sourceState = world.getBlockState(sourcePos = this.transformLocal(origin, info.pos.getX(), info.pos.getY(), info.pos.getZ(), size, rotation)))) continue;
+            if (info == null || info.pos() == null || info.state() == null || info.pos().getY() != foundationY || !this.isValidFoundationSource(info.state()) || !this.isValidFoundationSource(sourceState = world.getBlockState(sourcePos = this.transformLocal(origin, info.pos().getX(), info.pos().getY(), info.pos().getZ(), size, rotation)))) continue;
             BlockState supportState = this.isGoodSupportCube(sourceState) ? sourceState : averageSupportState;
             this.duplicateFoundationDown(world, sourcePos, supportState);
         }
     }
 
-    private BlockState findAverageSupportState(Level world, List<Template.BlockInfo> blocks, BlockPos origin, BlockPos size, Rotation rotation, int foundationY) {
+    private BlockState findAverageSupportState(ServerLevel world, List<StructureTemplate.StructureBlockInfo> blocks, BlockPos origin, Vec3i size, Rotation rotation, int foundationY) {
         HashMap<BlockState, Integer> counts = new HashMap<BlockState, Integer>();
         BlockState bestState = Blocks.DIRT.defaultBlockState();
         int bestCount = 0;
-        for (Template.BlockInfo info : blocks) {
+        for (StructureTemplate.StructureBlockInfo info : blocks) {
             BlockPos worldPos;
             BlockState worldState;
-            if (info == null || info.pos == null || info.blockState == null || info.pos.getY() != foundationY || !this.isValidFoundationSource(info.blockState) || !this.isValidFoundationSource(worldState = world.getBlockState(worldPos = this.transformLocal(origin, info.pos.getX(), info.pos.getY(), info.pos.getZ(), size, rotation))) || !this.isGoodSupportCube(worldState)) continue;
+            if (info == null || info.pos() == null || info.state() == null || info.pos().getY() != foundationY || !this.isValidFoundationSource(info.state()) || !this.isValidFoundationSource(worldState = world.getBlockState(worldPos = this.transformLocal(origin, info.pos().getX(), info.pos().getY(), info.pos().getZ(), size, rotation))) || !this.isGoodSupportCube(worldState)) continue;
             Integer count = (Integer)counts.get(worldState);
             int newCount = count == null ? 1 : count + 1;
             counts.put(worldState, newCount);
@@ -400,16 +410,16 @@ implements IWorldGenerator {
         if (material == LegacyMaterial.air || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || material == LegacyMaterial.water || material == LegacyMaterial.lava) {
             return false;
         }
-        return state.isFullCube();
+        return Block.isShapeFullBlock(state.getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO));
     }
 
-    private int findTemplateFoundationLayer(List<Template.BlockInfo> blocks) {
+    private int findTemplateFoundationLayer(List<StructureTemplate.StructureBlockInfo> blocks) {
         int y;
         int[] counts = new int[256];
         int maxCount = 0;
-        for (Template.BlockInfo info : blocks) {
+        for (StructureTemplate.StructureBlockInfo info : blocks) {
             int y2;
-            if (info == null || info.pos == null || info.blockState == null || !this.isValidFoundationSource(info.blockState) || (y2 = info.pos.getY()) < 0 || y2 >= counts.length) continue;
+            if (info == null || info.pos() == null || info.state() == null || !this.isValidFoundationSource(info.state()) || (y2 = info.pos().getY()) < 0 || y2 >= counts.length) continue;
             int n = y2;
             counts[n] = counts[n] + 1;
             maxCount = Math.max(maxCount, counts[y2]);
@@ -429,18 +439,23 @@ implements IWorldGenerator {
         return -1;
     }
 
-    private List<Template.BlockInfo> getTemplateBlocks(Template template) {
+    private static java.lang.reflect.Field palettesField;
+
+    @SuppressWarnings("unchecked")
+    private List<StructureTemplate.StructureBlockInfo> getTemplateBlocks(StructureTemplate template) {
         try {
-            Field field = ReflectionHelper.findField(Template.class, (String)"blocks", (String)"blocks");
-            field.setAccessible(true);
-            return (List)field.get(template);
-        }
-        catch (Throwable throwable) {
+            if (palettesField == null) {
+                palettesField = StructureTemplate.class.getDeclaredField("palettes");
+                palettesField.setAccessible(true);
+            }
+            List<StructureTemplate.Palette> palettes = (List<StructureTemplate.Palette>) palettesField.get(template);
+            return palettes.isEmpty() ? Collections.emptyList() : palettes.get(0).blocks();
+        } catch (Throwable t) {
             return Collections.emptyList();
         }
     }
 
-    private void duplicateFoundationDown(Level world, BlockPos sourcePos, BlockState sourceState) {
+    private void duplicateFoundationDown(ServerLevel world, BlockPos sourcePos, BlockState sourceState) {
         BlockPos pos = sourcePos.below();
         int placed = 0;
         while (pos.getY() > 1 && placed < 32) {
@@ -469,29 +484,19 @@ implements IWorldGenerator {
         return block != Blocks.AIR && block != Blocks.STRUCTURE_VOID && block != Blocks.SNOW && block != Blocks.SHORT_GRASS && block != Blocks.DEAD_BUSH && block != Blocks.OAK_LEAVES && block != Blocks.ACACIA_LEAVES && block != Blocks.OAK_LOG && block != Blocks.ACACIA_LOG && material != LegacyMaterial.air && material != LegacyMaterial.plants && material != LegacyMaterial.vine && material != LegacyMaterial.leaves && material != LegacyMaterial.snow && material != LegacyMaterial.water && material != LegacyMaterial.lava;
     }
 
-    private boolean shouldFillSupport(Level world, BlockPos pos) {
+    private boolean shouldFillSupport(ServerLevel world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         LegacyMaterial material = LegacyMaterial.of(state);
         return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || material == LegacyMaterial.water;
     }
 
-    private BlockPos transformLocal(BlockPos origin, int localX, int localY, int localZ, BlockPos size, Rotation rotation) {
-        switch (rotation) {
-            case CLOCKWISE_90: {
-                return origin.offset(size.getZ() - 1 - localZ, localY, localX);
-            }
-            case CLOCKWISE_180: {
-                return origin.offset(size.getX() - 1 - localX, localY, size.getZ() - 1 - localZ);
-            }
-            case COUNTERCLOCKWISE_90: {
-                return origin.offset(localZ, localY, size.getX() - 1 - localX);
-            }
-        }
-        return origin.offset(localX, localY, localZ);
+    /** The world position of a template position for the rotation the template is placed with (the same transform StructureTemplate#placeInWorld applies). */
+    private BlockPos transformLocal(BlockPos origin, int localX, int localY, int localZ, Vec3i size, Rotation rotation) {
+        return origin.offset(StructureTemplate.calculateRelativePosition(new StructurePlaceSettings().setMirror(Mirror.NONE).setRotation(rotation), new BlockPos(localX, localY, localZ)));
     }
 
-    private void scatterLogPiles(Level world, RandomSource random, BlockPos center, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, int buildingCount, VillageStyle style) {
+    private void scatterLogPiles(ServerLevel world, RandomSource random, BlockPos center, List<SRPColdVillageWallGenerator.WallExclusion> wallExclusions, int buildingCount, VillageStyle style) {
         if (world == null || wallExclusions == null || wallExclusions.isEmpty()) {
             return;
         }
@@ -550,14 +555,14 @@ implements IWorldGenerator {
         return min + random.nextInt(max - min + 1);
     }
 
-    private boolean placeLogPile(Level world, RandomSource random, BlockPos surface) {
+    private boolean placeLogPile(ServerLevel world, RandomSource random, BlockPos surface) {
         BlockPos base;
         BlockPos target;
         int i;
         boolean axisX = random.nextBoolean();
         int length = 2 + random.nextInt(3);
         int dir = random.nextBoolean() ? 1 : -1;
-        BlockState logState = SRPBlocks.ParasiteTrunk.get().defaultBlockState().setValue(BlockParasiteTrunk.VARIANT, (BlockParasiteTrunk.EnumType.DEADHEAD)).setValue((Property)BlockRotatedPillar.AXIS, (axisX ? Direction.Axis.X : Direction.Axis.Z));
+        BlockState logState = SRPBlocks.ParasiteTrunk.get().defaultBlockState().setValue(BlockParasiteTrunk.VARIANT, (BlockParasiteTrunk.EnumType.DEADHEAD)).setValue((Property)RotatedPillarBlock.AXIS, (axisX ? Direction.Axis.X : Direction.Axis.Z));
         for (i = 0; i < length; ++i) {
             target = axisX ? surface.offset(i * dir, 0, 0) : surface.offset(0, 0, i * dir);
             base = this.findTerrainSurface(world, target);
@@ -580,7 +585,7 @@ implements IWorldGenerator {
         return true;
     }
 
-    private boolean canPlaceLogPileAt(Level world, BlockPos pos) {
+    private boolean canPlaceLogPileAt(ServerLevel world, BlockPos pos) {
         if (pos == null || pos.getY() <= 1) {
             return false;
         }
@@ -594,74 +599,71 @@ implements IWorldGenerator {
         return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.snow || state.canBeReplaced();
     }
 
-    private void spawnVillagers(Level world, RandomSource random, BlockPos center, int count) {
+    private void spawnVillagers(ServerLevel world, RandomSource random, BlockPos center, int count) {
         if (world.isClientSide) {
             return;
         }
         for (int i = 0; i < count; ++i) {
             BlockPos pos = this.findVillagerSpawnPos(world, random, center);
             if (pos == null) continue;
-            Villager villager = new Villager(world);
+            Villager villager = new Villager(EntityType.VILLAGER, world);
             villager.setPos((double)pos.getX() + 0.5, (double)pos.getY(), (double)pos.getZ() + 0.5);
-            villager.finalizeSpawn((ServerLevel) villager.level(), world.getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, null);
+            villager.finalizeSpawn((ServerLevel) villager.level(), world.getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null);
             world.addFreshEntity((Entity)villager);
         }
     }
 
-    private BlockPos findVillagerSpawnPos(Level world, RandomSource random, BlockPos center) {
+    private BlockPos findVillagerSpawnPos(ServerLevel world, RandomSource random, BlockPos center) {
         for (int tries = 0; tries < 32; ++tries) {
             int z;
             int x = center.getX() + random.nextInt(45) - 22;
             BlockPos pos = this.findTerrainSurface(world, BlockPos.containing(x, 0, z = center.getZ() + random.nextInt(45) - 22));
-            if (pos == null || !world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.getBlockState(pos.below()).isSideSolid((BlockGetter)world, pos.below(), Direction.UP)) continue;
+            if (pos == null || !world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP)) continue;
             return pos;
         }
         return null;
     }
 
-    private void fillBlacksmithChests(Level world, BlockPos origin, Template template, Rotation rotation) {
-        if (world.isClientSide || !(world instanceof ServerLevel)) {
-            return;
-        }
-        BlockPos size = template.getSize();
+    private void fillBlacksmithChests(ServerLevel world, BlockPos origin, StructureTemplate template, Rotation rotation) {
+        Vec3i size = template.getSize();
         int maxX = Math.max(size.getX(), size.getZ()) + 4;
         int maxY = size.getY() + 4;
         int maxZ = Math.max(size.getX(), size.getZ()) + 4;
-        for (int x = -2; x <= maxX; ++x) {
+        // the template is placed with its rotation, so the box around the origin is searched in all four directions
+        for (int x = -maxX; x <= maxX; ++x) {
             for (int y = -2; y <= maxY; ++y) {
-                for (int z = -2; z <= maxZ; ++z) {
+                for (int z = -maxZ; z <= maxZ; ++z) {
                     BlockPos pos = origin.offset(x, y, z);
                     BlockEntity te = world.getBlockEntity(pos);
-                    if (!(te instanceof TileEntityChest)) continue;
-                    this.fillChest((ServerLevel)world, (TileEntityChest)te, world.random);
+                    if (!(te instanceof ChestBlockEntity)) continue;
+                    this.fillChest(world, (ChestBlockEntity)te, world.random);
                 }
             }
         }
     }
 
-    private void fillChest(ServerLevel world, TileEntityChest chest, RandomSource random) {
-        for (int i = 0; i < chest.getSizeInventory(); ++i) {
-            chest.setInventorySlotContents(i, ItemStack.EMPTY);
+    private void fillChest(ServerLevel world, ChestBlockEntity chest, RandomSource random) {
+        for (int i = 0; i < chest.getContainerSize(); ++i) {
+            chest.setItem(i, ItemStack.EMPTY);
         }
-        LootTable table = world.getLootTableManager().getLootTableFromLocation(LootTableList.CHESTS_VILLAGE_BLACKSMITH);
-        LootContext context = new LootContext.Builder(world).build();
-        List<? extends ItemStack> loot = table.generateLootForPools(random, context);
-        Collections.shuffle(loot, random);
+        LootTable table = world.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.VILLAGE_WEAPONSMITH);
+        List<ItemStack> loot = new ArrayList<>(table.getRandomItems(new LootParams.Builder(world).create(LootContextParamSets.EMPTY), random.nextLong()));
+        Collections.shuffle(loot, new java.util.Random(random.nextLong()));
         for (ItemStack stack : loot) {
-            this.addRandomStack((AbstractContainerMenu)chest, stack, random);
+            this.addRandomStack(chest, stack, random);
         }
         int berries = 2 + random.nextInt(4);
-        this.addRandomStack((AbstractContainerMenu)chest, new ItemStack(SRPItems.itemThornshadeBerry.get(), berries), random);
+        this.addRandomStack(chest, new ItemStack(SRPItems.itemThornshadeBerry.get(), berries), random);
     }
 
-    private void addRandomStack(AbstractContainerMenu inventory, ItemStack stack, RandomSource random) {
+    private void addRandomStack(Container inventory, ItemStack stack, RandomSource random) {
         if (stack == null || stack.isEmpty()) {
             return;
         }
         for (int tries = 0; tries < 80; ++tries) {
-            int slot = random.nextInt(inventory.getSizeInventory());
-            if (!inventory.getStackInSlot(slot).isEmpty()) continue;
-            inventory.setInventorySlotContents(slot, stack.copy());
+            int slot = random.nextInt(inventory.getContainerSize());
+            if (!inventory.getItem(slot).isEmpty()) continue;
+            inventory.setItem(slot, stack.copy());
             return;
         }
     }

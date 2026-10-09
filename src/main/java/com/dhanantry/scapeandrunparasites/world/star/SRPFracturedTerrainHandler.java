@@ -1,16 +1,15 @@
 package com.dhanantry.scapeandrunparasites.world.star;
 
-import com.dhanantry.scapeandrunparasites.phase.DimKeys;
 import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
-import com.dhanantry.scapeandrunparasites.world.star.SRPStarWorldData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
 
-public class SRPFracturedTerrainHandler {
+public final class SRPFracturedTerrainHandler {
     private static final int PLATE_SIZE = 96;
     private static final int PLATE_JITTER = 28;
     private static final double CRACK_WIDTH = 2.25;
@@ -22,22 +21,26 @@ public class SRPFracturedTerrainHandler {
     private static final int MIN_PLATE_OFFSET = -12;
     private static final int MAX_PLATE_OFFSET = 16;
 
-    @SubscribeEvent(priority=EventPriority.HIGHEST)
-    public void onPopulatePre(PopulateChunkEvent.Pre event) {
-        Level world = event.getLevel();
-        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
-            return;
-        }
-        SRPStarWorldData data = SRPStarWorldData.get(world);
-        if (data == null || data.getStarType() != 1 || !data.isFracturedTerrainEnabled()) {
-            return;
-        }
-        this.fractureChunk(world, event.getChunkX(), event.getChunkZ());
+    private final int minY;
+    private final int maxY;
+
+    private SRPFracturedTerrainHandler(int minY, int maxY) {
+        this.minY = minY;
+        this.maxY = maxY;
     }
 
-    private void fractureChunk(Level world, int chunkX, int chunkZ) {
-        Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
-        long seed = world.getSeed();
+    /**
+     * Fractures a chunk of the cold star world before its features are placed (PopulateChunkEvent.Pre of 1.10.9, here called by
+     * {@code ChunkGeneratorMixin} at the start of the decoration of the chunk). The plates only depend on the seed and the world
+     * coordinates, so the cracks continue across chunk borders.
+     */
+    public static void apply(WorldGenLevel level, ChunkAccess chunk) {
+        new SRPFracturedTerrainHandler(level.getMinBuildHeight(), level.getMaxBuildHeight()).fractureChunk(chunk, level.getSeed());
+    }
+
+    private void fractureChunk(ChunkAccess chunk, long seed) {
+        int chunkX = chunk.getPos().x;
+        int chunkZ = chunk.getPos().z;
         for (int localX = 0; localX < 16; ++localX) {
             for (int localZ = 0; localZ < 16; ++localZ) {
                 boolean collisionRidge;
@@ -46,11 +49,11 @@ public class SRPFracturedTerrainHandler {
                 int worldZ = (chunkZ << 4) + localZ;
                 PlateSample sample = this.samplePlate(seed, worldX, worldZ);
                 int topY = this.findSurfaceY(chunk, localX, localZ);
-                if (topY <= 4) continue;
-                BlockState originalSurface = chunk.getBlockState(localX, topY, localZ);
+                if (topY <= this.minY + 4) continue;
+                BlockState originalSurface = this.getBlock(chunk, worldX, topY, worldZ);
                 int plateOffset = this.getPlateOffset(sample.primaryHash);
                 int roughness = this.getSurfaceRoughness(seed, worldX, worldZ);
-                int targetY = this.clamp(topY + plateOffset + roughness, 4, 238);
+                int targetY = this.clamp(topY + plateOffset + roughness, this.minY + 4, this.maxY - 18);
                 boolean bl = onBoundary = sample.boundaryGap <= 4.75;
                 if (!onBoundary) {
                     this.reshapePlateSurface(chunk, worldX, worldZ, topY, targetY, originalSurface);
@@ -61,7 +64,7 @@ public class SRPFracturedTerrainHandler {
                 if (collisionRidge) {
                     int rise = 7 + this.value(boundaryHash >>> 11, 13);
                     double closeness = 1.0 - Math.min(1.0, sample.boundaryGap / 4.75);
-                    int collisionY = this.clamp(targetY + (int)Math.round((double)rise * closeness), 4, 244);
+                    int collisionY = this.clamp(targetY + (int)Math.round((double)rise * closeness), this.minY + 4, this.maxY - 12);
                     this.reshapePlateSurface(chunk, worldX, worldZ, topY, collisionY, originalSurface);
                     this.addCollisionTeeth(chunk, seed, worldX, worldZ, localX, localZ, collisionY, boundaryHash);
                     continue;
@@ -70,8 +73,7 @@ public class SRPFracturedTerrainHandler {
                 this.carvePlateCrack(chunk, seed, worldX, worldZ, localX, localZ, targetY, sample, boundaryHash);
             }
         }
-        chunk.generateSkylightMap();
-        chunk.setModified(true);
+        chunk.setUnsaved(true);
     }
 
     private PlateSample samplePlate(long seed, int worldX, int worldZ) {
@@ -123,7 +125,7 @@ public class SRPFracturedTerrainHandler {
         return (int)Math.round(broad * 1.25 + detail * 0.45);
     }
 
-    private void reshapePlateSurface(Chunk chunk, int worldX, int worldZ, int originalTopY, int targetY, BlockState originalSurface) {
+    private void reshapePlateSurface(ChunkAccess chunk, int worldX, int worldZ, int originalTopY, int targetY, BlockState originalSurface) {
         block6: {
             BlockState below;
             BlockState existing;
@@ -149,13 +151,13 @@ public class SRPFracturedTerrainHandler {
             BlockState target = this.getBlock(chunk, worldX, targetY, worldZ);
             if (!this.canReplaceTerrainTop(target)) break block6;
             this.setBlock(chunk, worldX, targetY, worldZ, profile.surface);
-            for (int depth = 1; depth <= 3 && targetY - depth > 1 && this.canReplaceTerrainTop(below = this.getBlock(chunk, worldX, targetY - depth, worldZ)); ++depth) {
+            for (int depth = 1; depth <= 3 && targetY - depth > this.minY + 1 && this.canReplaceTerrainTop(below = this.getBlock(chunk, worldX, targetY - depth, worldZ)); ++depth) {
                 this.setBlock(chunk, worldX, targetY - depth, worldZ, profile.filler);
             }
         }
     }
 
-    private void carvePlateCrack(Chunk chunk, long seed, int worldX, int worldZ, int localX, int localZ, int surfaceY, PlateSample sample, long boundaryHash) {
+    private void carvePlateCrack(ChunkAccess chunk, long seed, int worldX, int worldZ, int localX, int localZ, int surfaceY, PlateSample sample, long boundaryHash) {
         double width = 2.25 + (double)this.value(boundaryHash >>> 8, 100) / 100.0 * 1.75;
         if (sample.boundaryGap > width) {
             return;
@@ -165,9 +167,9 @@ public class SRPFracturedTerrainHandler {
             return;
         }
         int depth = 20 + this.value(boundaryHash >>> 19, 33);
-        int bottomY = Math.max(4, surfaceY - depth);
+        int bottomY = Math.max(this.minY + 4, surfaceY - depth);
         for (int y = surfaceY; y >= bottomY; --y) {
-            BlockState state = chunk.getBlockState(localX, y, localZ);
+            BlockState state = this.getBlock(chunk, worldX, y, worldZ);
             if (!this.canCarveTerrain(state)) {
                 if (!LegacyMaterial.of(state).isLiquid()) continue;
                 break;
@@ -179,7 +181,7 @@ public class SRPFracturedTerrainHandler {
         }
     }
 
-    private void addCrackShelf(Chunk chunk, int worldX, int worldZ, int surfaceY, int bottomY, long hash) {
+    private void addCrackShelf(ChunkAccess chunk, int worldX, int worldZ, int surfaceY, int bottomY, long hash) {
         int shelfY = bottomY + Math.max(3, (surfaceY - bottomY) / 2);
         if (shelfY >= surfaceY - 2) {
             return;
@@ -190,25 +192,25 @@ public class SRPFracturedTerrainHandler {
         }
     }
 
-    private void addCollisionTeeth(Chunk chunk, long seed, int worldX, int worldZ, int localX, int localZ, int surfaceY, long boundaryHash) {
+    private void addCollisionTeeth(ChunkAccess chunk, long seed, int worldX, int worldZ, int localX, int localZ, int surfaceY, long boundaryHash) {
         double ridgeNoise = this.coherentNoise(seed, worldX, worldZ, 11, boundaryHash ^ 0xDB4F0B9175AE2165L);
         if (ridgeNoise < 0.28) {
             return;
         }
         int extra = 2 + (int)Math.round(Math.min(1.0, (ridgeNoise - 0.28) / 0.72) * 6.0);
-        for (int i = 1; i <= extra && surfaceY + i < 250; ++i) {
+        for (int i = 1; i <= extra && surfaceY + i < this.maxY - 6; ++i) {
             this.setBlock(chunk, worldX, surfaceY + i, worldZ, Blocks.STONE.defaultBlockState());
         }
     }
 
-    private int findSurfaceY(Chunk chunk, int localX, int localZ) {
+    private int findSurfaceY(ChunkAccess chunk, int localX, int localZ) {
         int height;
-        for (int y = height = Math.min(255, Math.max(1, chunk.getHeightValue(localX, localZ) - 1)); y > 1; --y) {
-            BlockState state = chunk.getBlockState(localX, y, localZ);
+        for (int y = height = Math.min(this.maxY - 1, Math.max(this.minY + 1, chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, localX, localZ) - 1)); y > this.minY + 1; --y) {
+            BlockState state = this.getBlock(chunk, localX, y, localZ);
             if (state.getBlock() == Blocks.AIR || state.getBlock() == Blocks.SNOW) continue;
             return y;
         }
-        return 1;
+        return this.minY + 1;
     }
 
     private SurfaceProfile getProfile(BlockState surface) {
@@ -245,7 +247,7 @@ public class SRPFracturedTerrainHandler {
 
     private boolean canCarveTerrain(BlockState state) {
         Block block = state.getBlock();
-        if (block == Blocks.BEDROCK || LegacyMaterial.of(state).isLiquid() || block.hasTileEntity(state)) {
+        if (block == Blocks.BEDROCK || LegacyMaterial.of(state).isLiquid() || state.hasBlockEntity()) {
             return false;
         }
         LegacyMaterial material = LegacyMaterial.of(state);
@@ -253,18 +255,24 @@ public class SRPFracturedTerrainHandler {
     }
 
     private boolean canReplaceTerrainTop(BlockState state) {
-        if (state.getBlock().hasTileEntity(state)) {
+        if (state.hasBlockEntity()) {
             return false;
         }
         return this.canCarveTerrain(state) || state.getBlock() == Blocks.AIR;
     }
 
-    private BlockState getBlock(Chunk chunk, int worldX, int y, int worldZ) {
-        return chunk.getBlockState(worldX & 0xF, y, worldZ & 0xF);
+    private BlockState getBlock(ChunkAccess chunk, int worldX, int y, int worldZ) {
+        if (y < this.minY || y >= this.maxY) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return chunk.getBlockState(new BlockPos(worldX, y, worldZ));
     }
 
-    private void setBlock(Chunk chunk, int worldX, int y, int worldZ, BlockState state) {
-        chunk.setBlockState(BlockPos.containing(worldX, y, worldZ), state);
+    private void setBlock(ChunkAccess chunk, int worldX, int y, int worldZ, BlockState state) {
+        if (y < this.minY || y >= this.maxY) {
+            return;
+        }
+        chunk.setBlockState(new BlockPos(worldX, y, worldZ), state, false);
     }
 
     private double coherentNoise(long seed, int worldX, int worldZ, int scale, long salt) {

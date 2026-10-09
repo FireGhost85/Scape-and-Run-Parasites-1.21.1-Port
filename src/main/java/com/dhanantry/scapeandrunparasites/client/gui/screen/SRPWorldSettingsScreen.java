@@ -28,6 +28,10 @@ public class SRPWorldSettingsScreen extends Screen {
     private Button starBtn;
     private Button mushroomBtn;
     private Button fracturedBtn;
+    private int previewX;
+    private int previewY;
+    private int previewW = 160;
+    private int previewH = 122;
 
     public SRPWorldSettingsScreen(Screen parent) {
         super(Component.translatable("gui.srparasites.worldsettings.title"));
@@ -67,8 +71,14 @@ public class SRPWorldSettingsScreen extends Screen {
     protected void init() {
         pendingStarType = SRPWorldEntitySpawner.starType == 1 || SRPWorldEntitySpawner.starType == 2 ? SRPWorldEntitySpawner.starType : 0;
         int cx = this.width / 2;
-        int left = cx - 88;
         int top = 60;
+        int gap = 12;
+        int totalW = 176 + gap + 160;
+        int left = Math.max(8, cx - totalW / 2);
+        this.previewX = left + 176 + gap;
+        this.previewY = top - 4;
+        this.previewW = Math.max(110, Math.min(160, this.width - this.previewX - 12));
+        this.previewH = 122;
         this.difficultyBtn = this.addRenderableWidget(Button.builder(this.difficultyLabel(), b -> {
             SRPPace.choiceNUMBER = (SRPPace.choiceNUMBER + 1) % 4;
             this.refresh();
@@ -102,6 +112,13 @@ public class SRPWorldSettingsScreen extends Screen {
             this.minecraft.setScreen(this.parent);
         }).bounds(cx - 100, this.height - 28, 200, 20).build());
         this.refresh();
+    }
+
+    /** The preview panel is drawn on the background, behind the buttons. */
+    @Override
+    public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(g, mouseX, mouseY, partialTick);
+        WorldPreviewPanel.draw(g, this.previewX, this.previewY, this.previewW, this.previewH, SRPPace.choiceNUMBER, SRPConfigWorld.meteorActive, pendingStarType);
     }
 
     @Override
