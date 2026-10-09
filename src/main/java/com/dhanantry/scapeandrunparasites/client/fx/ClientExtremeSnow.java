@@ -23,6 +23,8 @@ import net.neoforged.neoforge.client.event.ViewportEvent;
 public final class ClientExtremeSnow {
     /** Distance at which the 1.10.9 exponential fog (density sqrt(ln 50) / 10) left 2 percent visibility; the linear fog ends there. */
     private static final float FOG_END = 10.0f;
+    /** Height above the player's feet at which a flake is over its nominal spawn column (see onClientTick). */
+    private static final double COMPENSATE_HEIGHT = 10.5;
     private static boolean enabled = false;
     private static float intensity = 1.0f;
     private static boolean forceAnywhere = true;
@@ -114,14 +116,29 @@ public final class ClientExtremeSnow {
             BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z = (int) (p.getZ() + w.random.nextGaussian() * radius)));
             if (!w.canSeeSky(ground) || !forceAnywhere && !w.getBiome(ground).value().shouldSnow(w, ground)) continue;
             double spawnY = Math.max((double) (ground.getY() + 16 + w.random.nextInt(8)), p.getY() + 16.0 + (double) w.random.nextInt(8));
-            // the flakes drift downwind while they fall (tuned in game: 10 ticks of wind): start them upwind so the snowfall is centred on the player
-            double sx = (double) x + 0.5 + (w.random.nextDouble() - 0.5) - windX * 10.0;
-            double sz = (double) z + 0.5 + (w.random.nextDouble() - 0.5) - windZ * 10.0;
+            double nominalX = (double) x + 0.5 + (w.random.nextDouble() - 0.5);
+            double nominalZ = (double) z + 0.5 + (w.random.nextDouble() - 0.5);
             double jitter = 0.03;
             double vx = windX + (w.random.nextDouble() - 0.5) * jitter;
             double vz = windZ + (w.random.nextDouble() - 0.5) * jitter;
             double vy = -0.22 - 0.06 * (double) intensity - w.random.nextDouble() * 0.04;
-            mc.particleEngine.add(new ParticleBlizzard(w, sx, spawnY, sz, vx, vy, vz, p));
+            // The flake drifts downwind while it falls (1.10.9 had the same shear, the cloud sat downwind of the player). Run its own fall
+            // forward to COMPENSATE_HEIGHT above the player's feet (same integrator as ParticleBlizzard) and start it upwind by the drift it
+            // gains until then: it passes that height exactly over its nominal point. A simulation of the cloud (flakes above the eye,
+            // 20 block range, every wind speed) puts the centre of the sky the player sees over the player for this height.
+            double fall = spawnY - p.getY();
+            double fallSpeed = vy;
+            int ticks = 0;
+            while (fall > COMPENSATE_HEIGHT && ticks < 200) {
+                fallSpeed -= 0.05;
+                fall += fallSpeed;
+                fallSpeed *= 0.99;
+                ++ticks;
+            }
+            double drift = (1.0 - Math.pow(0.99, ticks)) / 0.01;
+            double sx = nominalX - vx * drift;
+            double sz = nominalZ - vz * drift;
+            mc.particleEngine.add(new ParticleBlizzard(w, sx, spawnY, sz, vx, vy, vz, p, nominalX, nominalZ));
         }
     }
 

@@ -17,9 +17,18 @@ public class ParticleBlizzard extends LegacyParticle {
     private final LocalPlayer focus;
     private final float snowDigSize;
     private int frame = 0;
+    /** Where the flake would land without the wind (the spawn is shifted upwind); the 20 block range limit is measured from here so the cloud is not cut off-centre. */
+    private final double nominalX;
+    private final double nominalZ;
 
     public ParticleBlizzard(ClientLevel w, double x, double y, double z, double vx, double vy, double vz, @Nullable LocalPlayer focus) {
+        this(w, x, y, z, vx, vy, vz, focus, x, z);
+    }
+
+    public ParticleBlizzard(ClientLevel w, double x, double y, double z, double vx, double vy, double vz, @Nullable LocalPlayer focus, double nominalX, double nominalZ) {
         super(w, x, y, z, vx, vy, vz);
+        this.nominalX = nominalX;
+        this.nominalZ = nominalZ;
         this.setSprite(ParticleSprites.vanilla(GENERIC[0]));
         this.xd *= (double) 0.1f;
         this.yd *= (double) 0.1f;
@@ -73,7 +82,7 @@ public class ParticleBlizzard extends LegacyParticle {
             this.remove();
             return;
         }
-        if (this.focus != null && this.focus.distanceToSqr(this.x, this.y, this.z) > 400.0) {
+        if (this.focus != null && this.focus.distanceToSqr(this.nominalX, this.y, this.nominalZ) > 400.0) {
             this.remove();
         }
     }
