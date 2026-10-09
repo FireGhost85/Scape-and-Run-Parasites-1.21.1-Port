@@ -32,7 +32,7 @@ public class ItemClockEvolution extends ItemBase {
             if (data != null) {
                 cooldown = data.getCooldown(level, DimKeys.of(level));
                 phase = data.getEvolutionPhase(DimKeys.of(level));
-                PacketDistributor.sendToAllPlayers(new ClockPayload(cooldown, phase, data.getDeveLevel(), 2));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ClockPayload(cooldown, phase, data.getDeveLevel(), 2));
             }
         }
     }

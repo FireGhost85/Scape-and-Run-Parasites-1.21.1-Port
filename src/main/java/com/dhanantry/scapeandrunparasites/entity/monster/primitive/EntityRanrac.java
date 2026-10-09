@@ -136,7 +136,7 @@ implements EntityCanPullMobs {
                     }
                     this.setParasiteStatus(3);
                     if (this.srpTicks == 10 && this.getTarget() instanceof ServerPlayer) {
-                        PacketDistributor.sendToPlayer((ServerPlayer)this.getTarget(), new QlipShakePayload(250, 0, true, false, 4.0f));
+                        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)this.getTarget(), new QlipShakePayload(250, 0, true, false, 4.0f));
                     }
                     ++this.pulling;
                     if (this.pulling > 200) {

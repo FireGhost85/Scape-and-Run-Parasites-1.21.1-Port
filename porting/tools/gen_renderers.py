@@ -26,6 +26,20 @@ for chunk in handler.split('registerEntityRenderingHandler(')[1:]:
     r = re.search(r'return new (\w+)\(manager([^)]*)\);', chunk.split('registerEntityRenderingHandler(')[0])
     if m and r:
         pairs.append((m.group(1), r.group(1), r.group(2)))
+for ent, rend in re.findall(r'registerEntityRenderingHandler\((\w+)\.class, (\w+)::new\)', handler):
+    pairs.append((ent, rend, ''))
+proj_re = re.compile(r'registerEntityRenderingHandler\((\w+)\.class.*?return new SRPProjectile\(manager, ([\d.]+f), new ResourceLocation\("(\w+)", "([^"]+)"\)\);', re.S)
+projectiles = []
+for chunk in handler.split('registerEntityRenderingHandler(')[1:]:
+    chunk = 'registerEntityRenderingHandler(' + chunk.split('registerEntityRenderingHandler(')[0]
+    m = proj_re.match(chunk)
+    if m:
+        projectiles.append(m.groups())
+# renderers that exist in the jar but are not registered by the original handler (the entities would be invisible in 1.12)
+extra_pairs = [('EntityAboHead', 'RenderAboHead', ''), ('EntityQuac', 'RenderQuac', '')]
+for ent, rend, extra in extra_pairs:
+    if not any(p[0] == ent for p in pairs):
+        pairs.append((ent, rend, extra))
 lines = []
 missing = []
 seen = set()
@@ -40,13 +54,20 @@ for ent, rend, extra in pairs:
         missing.append('%s -> %s (renderer not ported yet)' % (ent, rend))
         continue
     lines.append('        e.registerEntityRenderer(SRPEntities.%s.get(), ctx -> new %s(new RenderManager(ctx)%s));' % (holder[ent], rend, extra))
-imports = sorted(set('import com.dhanantry.scapeandrunparasites.%s;' % render_files[r] for _, r, _ in pairs if r in render_files))
+for ent, scale, ns, path in projectiles:
+    if ent in seen or ent not in holder:
+        continue
+    seen.add(ent)
+    lines.append('        e.registerEntityRenderer(SRPEntities.%s.get(), ctx -> new SRPProjectile(new RenderManager(ctx), %s, ResourceLocation.fromNamespaceAndPath("%s", "%s")));' % (holder[ent], scale, ns, path))
+imports = sorted(set('import com.dhanantry.scapeandrunparasites.%s;' % render_files[r] for _, r, _ in pairs if r in render_files) | {'import com.dhanantry.scapeandrunparasites.client.SRPProjectile;'})
 
 out = '''package com.dhanantry.scapeandrunparasites.client;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.client.legacy.RenderManager;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderNothing;
 import com.dhanantry.scapeandrunparasites.init.SRPEntities;
+import net.minecraft.resources.ResourceLocation;
 %s
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -62,12 +83,25 @@ public final class ClientRenderers {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers e) {
 %s
+        // 1.12 drew nothing for an entity without a renderer, 1.21 crashes the client: give every remaining type of the mod an empty one
+        java.util.Set<net.minecraft.world.entity.EntityType<?>> done = new java.util.HashSet<>(java.util.Arrays.asList(%s));
+        for (var holder : SRPEntities.ENTITIES.getEntries()) {
+            net.minecraft.world.entity.EntityType<?> type = holder.get();
+            if (!done.contains(type)) {
+                registerNothing(e, type);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void registerNothing(EntityRenderersEvent.RegisterRenderers e, net.minecraft.world.entity.EntityType<?> type) {
+        e.registerEntityRenderer((net.minecraft.world.entity.EntityType<net.minecraft.world.entity.Entity>) type, ctx -> new RenderNothing(new RenderManager(ctx)));
     }
     /* not registered yet:
 %s
      */
 }
-''' % ('\n'.join(imports), '\n'.join(lines), '\n'.join('     ' + m for m in missing))
+''' % ('\n'.join(imports), '\n'.join(lines), ', '.join(re.findall(r'registerEntityRenderer\((SRPEntities\.\w+\.get\(\))', '\n'.join(lines))), '\n'.join('     ' + m for m in missing))
 open(os.path.join(SRC, 'client/ClientRenderers.java'), 'w', encoding='utf8').write(out)
 print(len(lines), 'registered;', len(missing), 'missing')
 for m in missing:

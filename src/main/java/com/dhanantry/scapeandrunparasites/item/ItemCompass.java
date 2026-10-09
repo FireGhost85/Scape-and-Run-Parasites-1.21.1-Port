@@ -25,9 +25,9 @@ public abstract class ItemCompass extends Item {
         if (!level.isClientSide && entity.tickCount % 20 == 0) {
             BlockPos pos = this.getOrigin(entity, level);
             if (pos != null) {
-                PacketDistributor.sendToAllPlayers(new CompassPayload(pos.getX(), pos.getY(), pos.getZ(), this.type));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new CompassPayload(pos.getX(), pos.getY(), pos.getZ(), this.type));
             } else {
-                PacketDistributor.sendToAllPlayers(new CompassPayload(level.random.nextInt(), level.random.nextInt(), level.random.nextInt(), this.type));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new CompassPayload(level.random.nextInt(), level.random.nextInt(), level.random.nextInt(), this.type));
             }
         }
     }

@@ -243,7 +243,7 @@ EntityBodyParts {
                 this.level().addFreshEntity((Entity)tendril);
                 this.leftTendril.discard();
                 this.level().broadcastEntityEvent((Entity)this, (byte)11);
-                PacketDistributor.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
                 this.changeStateTo(false);
             }
         } else if (this.rightTendril.getPartId() == id) {
@@ -255,7 +255,7 @@ EntityBodyParts {
                 this.level().addFreshEntity((Entity)tendril);
                 this.rightTendril.discard();
                 this.level().broadcastEntityEvent((Entity)this, (byte)22);
-                PacketDistributor.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
                 this.changeStateTo(false);
             }
         } else if (this.head.getPartId() == id) {
@@ -267,7 +267,7 @@ EntityBodyParts {
                 this.level().addFreshEntity((Entity)tendril);
                 this.head.discard();
                 this.level().broadcastEntityEvent((Entity)this, (byte)33);
-                PacketDistributor.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
             }
         }
         return flag;

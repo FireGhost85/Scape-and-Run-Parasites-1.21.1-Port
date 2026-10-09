@@ -2,12 +2,18 @@ package com.dhanantry.scapeandrunparasites.client;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.client.legacy.RenderManager;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderNothing;
+import com.dhanantry.scapeandrunparasites.init.SRPEntities;
+import net.minecraft.resources.ResourceLocation;
+import com.dhanantry.scapeandrunparasites.client.SRPProjectile;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.HitboxNoRender;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderDamage;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderProjectileHomming;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderScent;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderSource;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.RenderTCloud;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.abomination.RenderAboFaces;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.abomination.RenderAboHead;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.adapted.RenderBanoAdapted;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.adapted.RenderCanraAdapted;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.adapted.RenderEmanaAdapted;
@@ -24,6 +30,7 @@ import com.dhanantry.scapeandrunparasites.client.renderer.entity.ancient.RenderA
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.ancient.RenderOronco;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.ancient.RenderOroncoTen;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.ancient.RenderTerla;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.awakened.RenderOroncoAW;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderCruxA;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderCruxB;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderDone;
@@ -34,6 +41,7 @@ import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderInh
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderInhooS;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderLeer;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderMes;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.crude.RenderQuac;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.derived.RenderHeblu;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.derived.RenderKirin;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.deterrent.RenderDodT;
@@ -107,14 +115,18 @@ import com.dhanantry.scapeandrunparasites.client.renderer.entity.infected.specia
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.infected.special.RenderSpeVillager;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderBiomass;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderBomb;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderEntityBody;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderEntityBodyModel;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderGore;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderMeteor;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderNade;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderOrbBoom;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderOrbScary;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderOrbVoid;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderRemain;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderTendril;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderWave;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.misc.RenderWaveShock;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.primitive.RenderBano;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.primitive.RenderCanra;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.primitive.RenderEmana;
@@ -136,6 +148,7 @@ import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.RenderFlog
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.RenderGanro;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.RenderOmboo;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.RenderOrch;
+import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.RenderRond;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderElvia;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderFlam;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderJinjo;
@@ -143,7 +156,6 @@ import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderPheon;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderTenn;
 import com.dhanantry.scapeandrunparasites.client.renderer.entity.pure.preeminent.RenderVesta;
-import com.dhanantry.scapeandrunparasites.init.SRPEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -298,11 +310,42 @@ public final class ClientRenderers {
         e.registerEntityRenderer(SRPEntities.NADE.get(), ctx -> new RenderNade(new RenderManager(ctx)));
         e.registerEntityRenderer(SRPEntities.METEOR.get(), ctx -> new RenderMeteor(new RenderManager(ctx)));
         e.registerEntityRenderer(SRPEntities.WAVE.get(), ctx -> new RenderWave(new RenderManager(ctx)));
+        e.registerEntityRenderer(SRPEntities.WAVESHOCK.get(), ctx -> new RenderWaveShock(new RenderManager(ctx)));
+        e.registerEntityRenderer(SRPEntities.REMAIN.get(), ctx -> new RenderRemain(new RenderManager(ctx)));
+        e.registerEntityRenderer(SRPEntities.ABO_HEAD.get(), ctx -> new RenderAboHead(new RenderManager(ctx)));
+        e.registerEntityRenderer(SRPEntities.CARRIER_WORM.get(), ctx -> new RenderQuac(new RenderManager(ctx)));
+        e.registerEntityRenderer(SRPEntities.WEBBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/webball.png")));
+        e.registerEntityRenderer(SRPEntities.SPINEBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/spineball.png")));
+        e.registerEntityRenderer(SRPEntities.NADEBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/nade.png")));
+        e.registerEntityRenderer(SRPEntities.SALIVABALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/alafha.png")));
+        e.registerEntityRenderer(SRPEntities.BALLBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/anged.png")));
+        e.registerEntityRenderer(SRPEntities.PULLINGBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/pullingweb.png")));
+        e.registerEntityRenderer(SRPEntities.ANCIENTBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/ancient.png")));
+        e.registerEntityRenderer(SRPEntities.ANTIINFESTEDBLOCK.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/cleaner.png")));
+        e.registerEntityRenderer(SRPEntities.BIOMASSBALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/biomass.png")));
+        e.registerEntityRenderer(SRPEntities.MISSILE.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/dragone.png")));
+        e.registerEntityRenderer(SRPEntities.BALLMALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/lencia.png")));
+        e.registerEntityRenderer(SRPEntities.BALLTALL.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/elvia.png")));
+        e.registerEntityRenderer(SRPEntities.SALIVAEFF.get(), ctx -> new SRPProjectile(new RenderManager(ctx), 0.5f, ResourceLocation.fromNamespaceAndPath("srparasites", "textures/entity/projectile/elvia.png")));
+        // 1.12 drew nothing for an entity without a renderer, 1.21 crashes the client: give every remaining type of the mod an empty one
+        java.util.Set<net.minecraft.world.entity.EntityType<?>> done = new java.util.HashSet<>(java.util.Arrays.asList(SRPEntities.KIRIN.get(), SRPEntities.DRACONITE.get(), SRPEntities.CARRIER_HEAVY.get(), SRPEntities.CARRIER_LIGHT.get(), SRPEntities.BUGLIN.get(), SRPEntities.CARRIER_FLYING.get(), SRPEntities.RUPTER.get(), SRPEntities.GNAT.get(), SRPEntities.LICE.get(), SRPEntities.MANGLER.get(), SRPEntities.BECKON_SI.get(), SRPEntities.BECKON_SII.get(), SRPEntities.BECKON_SIII.get(), SRPEntities.BECKON_SIV.get(), SRPEntities.DISPATCHERTEN.get(), SRPEntities.ROOTERBALL.get(), SRPEntities.WORM.get(), SRPEntities.DISPATCHER_SI.get(), SRPEntities.DISPATCHER_SII.get(), SRPEntities.DISPATCHER_SIII.get(), SRPEntities.DISPATCHER_SIV.get(), SRPEntities.ROOTER_SI.get(), SRPEntities.ROOTER_SII.get(), SRPEntities.ROOTER_SIII.get(), SRPEntities.ROOTER_SIV.get(), SRPEntities.MOVINGFLESH.get(), SRPEntities.KYPHOSIS.get(), SRPEntities.SEIZER.get(), SRPEntities.SENTRY.get(), SRPEntities.WORKER.get(), SRPEntities.ANC_OVERLORD.get(), SRPEntities.ANC_DREADNAUT.get(), SRPEntities.ANC_DREADNAUT_TEN.get(), SRPEntities.ANC_POD.get(), SRPEntities.ABO_BODIES.get(), SRPEntities.AIRSCREW.get(), SRPEntities.DREDGE.get(), SRPEntities.HOST.get(), SRPEntities.HOSTII.get(), SRPEntities.THRALL.get(), SRPEntities.INCOMPLETEFORM_SMALL.get(), SRPEntities.INCOMPLETEFORM_MEDIUM.get(), SRPEntities.SIM_BIGSPIDER.get(), SRPEntities.SIM_ENDERMAN.get(), SRPEntities.SIM_ENDERMANHEAD.get(), SRPEntities.SIM_HUMAN.get(), SRPEntities.SIM_HUMANHEAD.get(), SRPEntities.SIM_COW.get(), SRPEntities.SIM_SQUID.get(), SRPEntities.SIM_COWHEAD.get(), SRPEntities.SIM_SHEEP.get(), SRPEntities.SIM_SHEEPHEAD.get(), SRPEntities.SIM_WOLF.get(), SRPEntities.SIM_WOLFHEAD.get(), SRPEntities.SIM_PIG.get(), SRPEntities.SIM_PIGHEAD.get(), SRPEntities.SIM_VILLAGER.get(), SRPEntities.SIM_VILLAGERHEAD.get(), SRPEntities.SIM_HORSE.get(), SRPEntities.SIM_HORSEHEAD.get(), SRPEntities.SIM_ADVENTURER.get(), SRPEntities.SIM_ADVENTURERHEAD.get(), SRPEntities.SIM_BEAR.get(), SRPEntities.SIM_DRAGONE.get(), SRPEntities.SIM_DRAGONEHEAD.get(), SRPEntities.FER_BEAR.get(), SRPEntities.FER_COW.get(), SRPEntities.FER_ENDERMAN.get(), SRPEntities.FER_HORSE.get(), SRPEntities.FER_VILLAGER.get(), SRPEntities.FER_HUMAN.get(), SRPEntities.FER_SHEEP.get(), SRPEntities.FER_PIG.get(), SRPEntities.FER_WOLF.get(), SRPEntities.MAR_VILLAGER.get(), SRPEntities.MAR_HUMAN.get(), SRPEntities.MAR_COW.get(), SRPEntities.MAR_ENDERMAN.get(), SRPEntities.MAR_SHEEP.get(), SRPEntities.MAR_BEAR.get(), SRPEntities.HI_GOLEM.get(), SRPEntities.HI_SKELETON.get(), SRPEntities.HI_BLAZE.get(), SRPEntities.PRI_YELLOWEYE.get(), SRPEntities.ADA_YELLOWEYE.get(), SRPEntities.PRI_DEVOURER.get(), SRPEntities.ADA_DEVOURER.get(), SRPEntities.PRI_MANDUCATER.get(), SRPEntities.ADA_MANDUCATER.get(), SRPEntities.PRI_SUMMONER.get(), SRPEntities.ADA_SUMMONER.get(), SRPEntities.PRI_REEKER.get(), SRPEntities.ADA_REEKER.get(), SRPEntities.PRI_BOLSTER.get(), SRPEntities.ADA_BOLSTER.get(), SRPEntities.PRI_LONGARMS.get(), SRPEntities.ADA_LONGARMS.get(), SRPEntities.PRI_TOZOON.get(), SRPEntities.ADA_TOZOON.get(), SRPEntities.PRI_VERMIN.get(), SRPEntities.ADA_VERMIN.get(), SRPEntities.PRI_ARACHNIDA.get(), SRPEntities.ADA_ARACHNIDA.get(), SRPEntities.PRI_BURROWER.get(), SRPEntities.ADA_BURROWER.get(), SRPEntities.PRI_VISCERA.get(), SRPEntities.ADA_VISCERA.get(), SRPEntities.OVERSEER.get(), SRPEntities.WARDEN.get(), SRPEntities.VIGILANTE.get(), SRPEntities.BOMBER_LIGHT.get(), SRPEntities.BOMBER_HEAVY.get(), SRPEntities.SUCCOR.get(), SRPEntities.HAUNTER.get(), SRPEntities.WRAITH.get(), SRPEntities.ARCHITECT.get(), SRPEntities.BOGLE.get(), SRPEntities.CARRIER_COLONY.get(), SRPEntities.MARAUDER.get(), SRPEntities.MONARCH.get(), SRPEntities.GRUNT.get(), SRPEntities.HEED.get(), SRPEntities.CRUX.get(), SRPEntities.CRUX_INCOMPLETE.get(), SRPEntities.HEBLU_LIGHT.get(), SRPEntities.TENDRIL.get(), SRPEntities.DAMAGE.get(), SRPEntities.BOMB.get(), SRPEntities.BIOMASS.get(), SRPEntities.GORE.get(), SRPEntities.HOMMING.get(), SRPEntities.KIRIN_SLASH.get(), SRPEntities.CLOUDTOXIC.get(), SRPEntities.SCENT.get(), SRPEntities.SOURCE.get(), SRPEntities.ORBSCARY.get(), SRPEntities.ORBVOID.get(), SRPEntities.ORBBOOM.get(), SRPEntities.NADE.get(), SRPEntities.METEOR.get(), SRPEntities.WAVE.get(), SRPEntities.WAVESHOCK.get(), SRPEntities.REMAIN.get(), SRPEntities.ABO_HEAD.get(), SRPEntities.CARRIER_WORM.get(), SRPEntities.WEBBALL.get(), SRPEntities.SPINEBALL.get(), SRPEntities.NADEBALL.get(), SRPEntities.SALIVABALL.get(), SRPEntities.BALLBALL.get(), SRPEntities.PULLINGBALL.get(), SRPEntities.ANCIENTBALL.get(), SRPEntities.ANTIINFESTEDBLOCK.get(), SRPEntities.BIOMASSBALL.get(), SRPEntities.MISSILE.get(), SRPEntities.BALLMALL.get(), SRPEntities.BALLTALL.get(), SRPEntities.SALIVAEFF.get()));
+        for (var holder : SRPEntities.ENTITIES.getEntries()) {
+            net.minecraft.world.entity.EntityType<?> type = holder.get();
+            if (!done.contains(type)) {
+                registerNothing(e, type);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void registerNothing(EntityRenderersEvent.RegisterRenderers e, net.minecraft.world.entity.EntityType<?> type) {
+        e.registerEntityRenderer((net.minecraft.world.entity.EntityType<net.minecraft.world.entity.Entity>) type, ctx -> new RenderNothing(new RenderManager(ctx)));
     }
     /* not registered yet:
      EntityOroncoAW (entity type not registered) -> RenderOroncoAW
      EntityRond (entity type not registered) -> RenderRond
      EntityBody (entity type not registered) -> RenderEntityBody
      EntityBodyModel (entity type not registered) -> RenderEntityBodyModel
+     EntityHitbox (entity type not registered) -> HitboxNoRender
      */
 }

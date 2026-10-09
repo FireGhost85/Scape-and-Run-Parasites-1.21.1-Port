@@ -201,7 +201,7 @@ RangedAttackMob {
                 this.leftTendril.discard();
                 this.level().broadcastEntityEvent((Entity)this, (byte)11);
                 this.cutResistances(SRPConfig.adaptedPointDamCap / 2);
-                PacketDistributor.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
             }
         } else if (this.rightTendril.getPartId() == id) {
             this.rightTendrilHealth -= amount;
@@ -213,7 +213,7 @@ RangedAttackMob {
                 this.rightTendril.discard();
                 this.level().broadcastEntityEvent((Entity)this, (byte)22);
                 this.cutResistances(SRPConfig.adaptedPointDamCap / 2);
-                PacketDistributor.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new EntityBodyDeadPayload(this.getId(), id));
             }
         }
         return flag;

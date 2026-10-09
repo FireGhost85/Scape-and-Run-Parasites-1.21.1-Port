@@ -103,7 +103,7 @@ public class BlockInfestationPurifier extends BlockBase implements EntityBlock {
             double cx = pos.getX() + 0.5;
             double cy = pos.getY() + 0.9;
             double cz = pos.getZ() + 0.5;
-            PacketDistributor.sendToPlayersNear(server, null, cx, cy, cz, 64.0, new PureParticlesPayload(cx, cy, cz, 24, 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersNear(server, null, cx, cy, cz, 64.0, new PureParticlesPayload(cx, cy, cz, 24, 1));
             this.spawnStartPulse(server, pos);
             te.startAt(below, player.getUUID());
             player.displayClientMessage(Component.translatable("message.srparasites.purifier_started"), true);

@@ -145,7 +145,7 @@ extends EntityPAssimara {
         Mot.addX(player, this.randomX * strength);
         Mot.addZ(player, this.randomZ * strength);
         if (this.srpTicks == 10 && player instanceof ServerPlayer && !this.level().isClientSide) {
-            PacketDistributor.sendToPlayer((ServerPlayer)player, new QlipShakePayload(250, 0, true, false, 4.0f));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)player, new QlipShakePayload(250, 0, true, false, 4.0f));
         }
     }
 

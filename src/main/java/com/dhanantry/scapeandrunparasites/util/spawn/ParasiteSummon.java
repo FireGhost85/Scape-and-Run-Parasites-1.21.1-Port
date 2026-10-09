@@ -332,7 +332,7 @@ public class ParasiteSummon {
         EntityMeteor meteor = new EntityMeteor(SRPEntities.METEOR.get(), world, oX, oY, oZ, motionX, motionY, motionZ);
         world.addFreshEntity((Entity)meteor);
         for (Player mob : world.players()) {
-            PacketDistributor.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(0, 0, true, false, 0.0f));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(0, 0, true, false, 0.0f));
         }
     }
 }

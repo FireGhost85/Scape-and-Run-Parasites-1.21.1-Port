@@ -50,7 +50,7 @@ public final class VengeanceGrappleHandler {
     private static void fxAroundTracking(ServerLevel ws, Vec3 pos, VengeanceFxPayload pkt) {
         for (ServerPlayer p : ws.players()) {
             if (p.distanceToSqr(pos.x, pos.y, pos.z) > 4096.0) continue;
-            PacketDistributor.sendToPlayer(p, pkt);
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer(p, pkt);
         }
     }
 

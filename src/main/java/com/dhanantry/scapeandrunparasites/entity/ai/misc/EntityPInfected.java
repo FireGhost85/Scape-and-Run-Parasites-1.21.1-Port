@@ -187,7 +187,7 @@ implements EntityCanSpawn {
             ++this.check;
             this.level().broadcastEntityEvent((Entity)this, (byte)16);
             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3, false, false));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), this.getBbWidth(), this.getBbHeight(), 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), this.getBbWidth(), this.getBbHeight(), 1));
             if (this.timer < 8) {
                 return;
             }
@@ -322,7 +322,7 @@ implements EntityCanSpawn {
         if (wea == SRPItems.itemAssimilate.get() && this.host.length() != 0 && hand == InteractionHand.MAIN_HAND) {
             this.level().broadcastEntityEvent((Entity)this, (byte)16);
             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3, false, false));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), this.getBbWidth(), this.getBbHeight(), 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), this.getBbWidth(), this.getBbHeight(), 1));
             LivingEntity entityout = (LivingEntity)SRPEntityUtil.create((ResourceLocation)ResourceLocation.parse(this.host), (Level)this.level());
             entityout.copyPosition((Entity)this);
             this.particleStatus((byte)7);

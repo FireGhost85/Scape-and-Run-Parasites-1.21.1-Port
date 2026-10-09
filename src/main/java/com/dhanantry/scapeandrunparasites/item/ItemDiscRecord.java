@@ -36,7 +36,7 @@ public class ItemDiscRecord extends Item {
         }
         var state = e.getLevel().getBlockState(e.getPos());
         if (state.is(Blocks.JUKEBOX) && !state.getValue(JukeboxBlock.HAS_RECORD) && e.getLevel() instanceof ServerLevel server) {
-            PacketDistributor.sendToPlayersInDimension(server, new MovingSoundPayload(104));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersInDimension(server, new MovingSoundPayload(104));
         }
     }
 }

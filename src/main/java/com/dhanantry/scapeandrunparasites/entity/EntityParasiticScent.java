@@ -73,7 +73,7 @@ extends Entity {
         this.bossInfo.addPlayer(player);
         List<? extends Player> playerEntityList = this.level().players();
         for (Player entityPlayer : playerEntityList) {
-            PacketDistributor.sendToPlayersInDimension((ServerLevel) this.level(), new MovingSoundPayload(102));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersInDimension((ServerLevel) this.level(), new MovingSoundPayload(102));
         }
     }
 
@@ -82,7 +82,7 @@ extends Entity {
         this.bossInfo.removePlayer(player);
         List<? extends Player> playerEntityList = this.level().players();
         for (Player entityPlayer : playerEntityList) {
-            PacketDistributor.sendToPlayersInDimension((ServerLevel) this.level(), new MovingSoundPayload(103));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersInDimension((ServerLevel) this.level(), new MovingSoundPayload(103));
         }
     }
 

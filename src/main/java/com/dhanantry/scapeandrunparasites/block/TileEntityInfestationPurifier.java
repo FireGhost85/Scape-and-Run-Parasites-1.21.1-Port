@@ -91,7 +91,7 @@ public class TileEntityInfestationPurifier extends BlockEntity {
                         double x = cur.getX() + 0.5;
                         double y = cur.getY() + 1.0;
                         double z = cur.getZ() + 0.5;
-                        PacketDistributor.sendToPlayersNear(server, null, x, y, z, 64.0, new PureParticlesPayload(x, y, z, 8 + level.random.nextInt(4), 0));
+                        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersNear(server, null, x, y, z, 64.0, new PureParticlesPayload(x, y, z, 8 + level.random.nextInt(4), 0));
                     }
                 }
             }

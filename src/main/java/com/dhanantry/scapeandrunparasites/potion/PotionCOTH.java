@@ -73,7 +73,7 @@ public class PotionCOTH extends SRPEffectBase {
             particle = this.effectCOTHTransform(entity, dur, tickFlag, flagPr, amplifier == 1);
         }
         if (particle) {
-            PacketDistributor.sendToAllPlayers(ParticlePayload.at(entity, 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(ParticlePayload.at(entity, 1));
         }
         return true;
     }

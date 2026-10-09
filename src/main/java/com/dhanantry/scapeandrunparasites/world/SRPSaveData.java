@@ -544,7 +544,7 @@ public class SRPSaveData extends SavedData {
         if (d != null) {
             MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
             ServerLevel target = DimKeys.level(server, id);
-            if (target != null) PacketDistributor.sendToPlayersInDimension(target, new EvoPhaseCancelPayload(in));
+            if (target != null) com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersInDimension(target, new EvoPhaseCancelPayload(in));
             d.evolution = in;
             if (override) this.checkPhase(id, in, worldIn);
             if (worldIn != null) d.timeEvolution = (int) worldIn.getGameTime();

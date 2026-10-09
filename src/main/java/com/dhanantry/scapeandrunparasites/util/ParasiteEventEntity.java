@@ -437,7 +437,7 @@ public class ParasiteEventEntity {
                             entityAlt.setXRot(entityAlt.getXRot() - (-20.0f));
                             entityin.level().addFreshEntity((Entity)entityAlt);
                             entityAlt.updateSTR();
-                            PacketDistributor.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), 0.5f, 0.5f, 10));
+                            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), 0.5f, 0.5f, 10));
                         }
                     } else {
                         EntityBiomass entityout = new EntityBiomass(SRPEntities.BIOMASS.get(), entityin.level(), entityin, stage, target, payfather);
@@ -501,7 +501,7 @@ public class ParasiteEventEntity {
                 return;
             }
             entityin.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3, false, false));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), entityin.getBbWidth(), entityin.getBbHeight(), 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), entityin.getBbWidth(), entityin.getBbHeight(), 1));
             tags.putInt("srpcothimmunity", ++key);
             if (key < 3 && !ignoreKey) {
                 return;
@@ -632,7 +632,7 @@ public class ParasiteEventEntity {
                 return;
             }
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3, false, false));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(entity.getX(), entity.getY(), entity.getZ(), entity.getBbWidth(), entity.getBbHeight(), 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(entity.getX(), entity.getY(), entity.getZ(), entity.getBbWidth(), entity.getBbHeight(), 1));
             tags.putInt("srpcothimmunity", ++key);
             if (key < 3) {
                 return;
@@ -717,7 +717,7 @@ public class ParasiteEventEntity {
                 return false;
             }
             entityin.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3, false, false));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), entityin.getBbWidth(), entityin.getBbHeight(), 1));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(entityin.getX(), entityin.getY(), entityin.getZ(), entityin.getBbWidth(), entityin.getBbHeight(), 1));
             tags.putInt("srpcothimmunity", ++key);
             if (key < 3 && !ignoreKey) {
                 return false;
@@ -989,7 +989,7 @@ public class ParasiteEventEntity {
             return;
         }
         List<? extends Player> playerEntityList = worldIn.players();
-        PacketDistributor.sendToPlayersInDimension((ServerLevel) worldIn, new MovingSoundPayload(warning));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersInDimension((ServerLevel) worldIn, new MovingSoundPayload(warning));
         if (!message.equals("")) {
             for (Player entityPlayer : playerEntityList) {
                 entityPlayer.sendSystemMessage(Component.literal(message));
@@ -1419,7 +1419,7 @@ public class ParasiteEventEntity {
                 return;
             }
             data.addGlobalResistance(da);
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(in.getX(), in.getY(), in.getZ(), in.getBbWidth(), in.getBbHeight(), 4));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(in.getX(), in.getY(), in.getZ(), in.getBbWidth(), in.getBbHeight(), 4));
         }
     }
 

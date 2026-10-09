@@ -147,7 +147,7 @@ public class TileEntityCanister extends RandomizableContainerBlockEntity {
                     if (this.level.random.nextBoolean()) {
                         this.level.playSound(null, this.worldPosition, SRPSounds.CYST_EATING.get(), SoundSource.HOSTILE, 0.25f, 1.0f);
                     }
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(i + 0.5, j + 0.7, k + 0.5, 0.5f, 0.5f, 2));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(i + 0.5, j + 0.7, k + 0.5, 0.5f, 0.5f, 2));
                     this.setChanged();
                     return;
                 }

@@ -182,7 +182,7 @@ public class BlockEvolutionLure extends BlockBase implements IVariantBlock<Block
 
     /** 1.12 {@code SRPPacketParticle(x + 0.5, pos.getY(), z + 0.5, 0.5, 0.5, 2)} sent to all players; the y is the lure's. */
     private static void sendBurst(BlockPos at, BlockPos lure) {
-        PacketDistributor.sendToAllPlayers(new ParticlePayload(at.getX() + 0.5, lure.getY(), at.getZ() + 0.5, 0.5f, 0.5f, 2));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(at.getX() + 0.5, lure.getY(), at.getZ() + 0.5, 0.5f, 0.5f, 2));
     }
 
     @Override

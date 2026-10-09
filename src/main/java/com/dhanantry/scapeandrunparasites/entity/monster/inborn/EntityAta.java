@@ -82,7 +82,7 @@ extends EntityParasiteBase {
         super.aiStep();
         ++this.lifespan;
         if (this.lifespan > 1200) {
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
             this.discard();
         }
     }
@@ -111,19 +111,19 @@ extends EntityParasiteBase {
             LivingEntity target = (LivingEntity)entityIn;
             if (target.getHealth() <= target.getMaxHealth() * SRPConfigSystems.hijackHealth) {
                 if (ParasiteEventEntity.convertEntityFeral((LivingEntity)entityIn, entityIn.getPersistentData(), true, SRPConfigSystems.COTHVictimParasite) || ParasiteEventEntity.hijackEntity((LivingEntity)entityIn, SRPConfigSystems.HIJACKVictimParasite)) {
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 11));
                 } else {
                     entityIn.hurt(this.damageSources().mobAttack(this), (float)this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
                 }
             } else {
                 entityIn.hurt(this.damageSources().mobAttack(this), (float)this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
             }
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
-            PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
             this.playSound(SRPSounds.BUTHOL_BOOM.get(), 0.3f, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2f + 1.0f);
             SRPPotions.applyStackPotion(SRPPotions.VIRA_E, (LivingEntity)entityIn, 120, 2);
             this.discard();
@@ -132,7 +132,7 @@ extends EntityParasiteBase {
 
     @Override
     protected void tickDeath() {
-        PacketDistributor.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.getX(), this.getY(), this.getZ(), 0.5f, 0.5f, 10));
         this.discard();
     }
 

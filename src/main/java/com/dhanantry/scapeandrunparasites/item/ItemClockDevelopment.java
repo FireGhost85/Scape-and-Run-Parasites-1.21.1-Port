@@ -21,7 +21,7 @@ public class ItemClockDevelopment extends ItemBase {
         if (!world.isClientSide && entity.tickCount % 20 == 0) {
             SRPSaveData data = SRPSaveData.get(world);
             if (data != null) {
-                PacketDistributor.sendToAllPlayers(new ClockPayload(data.getCooldown(world, DimKeys.of(world)), data.getEvolutionPhase(DimKeys.of(world)), data.getDeveLevel(), 2));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ClockPayload(data.getCooldown(world, DimKeys.of(world)), data.getEvolutionPhase(DimKeys.of(world)), data.getDeveLevel(), 2));
             }
         }
     }

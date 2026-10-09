@@ -53,15 +53,15 @@ public class BlockBiomePurifier extends BlockBase {
         double ax = pos.getX() + 0.5;
         double ay = pos.getY() + 0.1;
         double az = pos.getZ() + 0.5;
-        PacketDistributor.sendToPlayersNear(server, null, ax, ay, az, 64.0, new PureParticlesPayload(ax, ay, az, 24, 0));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersNear(server, null, ax, ay, az, 64.0, new PureParticlesPayload(ax, ay, az, 24, 0));
         double bx = pos.getX() + 0.5;
         double by = pos.getY() + 0.9;
         double bz = pos.getZ() + 0.5;
-        PacketDistributor.sendToPlayersNear(server, null, bx, by, bz, 64.0, new PureParticlesPayload(bx, by, bz, 24, 1));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersNear(server, null, bx, by, bz, 64.0, new PureParticlesPayload(bx, by, bz, 24, 1));
         double cx = pos.getX() + 0.5;
         double cy = pos.getY() + 0.5;
         double cz = pos.getZ() + 0.5;
-        PacketDistributor.sendToPlayersNear(server, null, cx, cy, cz, 64.0, new BlocksPayloads.Flash(cx, cy, cz, 0, 20, 20));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersNear(server, null, cx, cy, cz, 64.0, new BlocksPayloads.Flash(cx, cy, cz, 0, 20, 20));
         return InteractionResult.PASS;
     }
 

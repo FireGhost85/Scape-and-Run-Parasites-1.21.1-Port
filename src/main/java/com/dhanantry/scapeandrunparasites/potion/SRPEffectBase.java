@@ -93,9 +93,9 @@ public class SRPEffectBase extends MobEffect {
     private void sendParticle(LivingEntity entity, byte type, boolean showForSelf) {
         ParticlePayload packet = ParticlePayload.at(entity, type);
         if (showForSelf) {
-            PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, packet);
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersTrackingEntityAndSelf(entity, packet);
         } else {
-            PacketDistributor.sendToPlayersTrackingEntity(entity, packet);
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayersTrackingEntity(entity, packet);
         }
     }
 

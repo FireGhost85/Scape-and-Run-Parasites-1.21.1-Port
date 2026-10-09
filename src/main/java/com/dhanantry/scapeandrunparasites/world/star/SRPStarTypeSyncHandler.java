@@ -43,7 +43,7 @@ public final class SRPStarTypeSyncHandler {
             return;
         }
         int starType = SRPStarWorldData.get((Level)overworld).getStarType();
-        PacketDistributor.sendToPlayer((ServerPlayer)serverPlayer, new SyncStarTypePayload(starType));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)serverPlayer, new SyncStarTypePayload(starType));
     }
 }
 

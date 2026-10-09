@@ -46,7 +46,7 @@ public final class SRPBlizzardDerivedHandler {
         Boolean previous = LAST_STATE.get(id);
         if (previous == null || previous != reverse) {
             LAST_STATE.put(id, reverse);
-            PacketDistributor.sendToPlayer((ServerPlayer)player, new SyncBlizzardReversePayload(reverse));
+            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)player, new SyncBlizzardReversePayload(reverse));
         }
     }
 

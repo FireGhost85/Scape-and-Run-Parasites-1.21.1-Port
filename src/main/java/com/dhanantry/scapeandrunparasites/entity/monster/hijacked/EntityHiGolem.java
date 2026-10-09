@@ -145,7 +145,7 @@ implements EntityBodyParts {
                 if (this.srpTicks == 10 && this.positi == null) {
                     if (passenger instanceof Player) {
                         Player player = (Player)passenger;
-                        PacketDistributor.sendToPlayer((ServerPlayer)player, new QlipShakePayload(250, 0, true, false, 4.0f));
+                        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)player, new QlipShakePayload(250, 0, true, false, 4.0f));
                         if (player.getAbilities().invulnerable) {
                             return;
                         }
@@ -367,7 +367,7 @@ implements EntityBodyParts {
             this.getTarget().startRiding((Entity)this, true);
             if (this.getTarget() instanceof ServerPlayer) {
                 Player player = (Player)this.getTarget();
-                PacketDistributor.sendToPlayer((ServerPlayer)player, new QlipShakePayload(2500, 0, true, false, 4.0f));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)player, new QlipShakePayload(2500, 0, true, false, 4.0f));
             }
         }
         if (this.positicool == 2) {

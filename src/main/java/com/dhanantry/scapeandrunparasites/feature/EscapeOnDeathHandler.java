@@ -63,14 +63,14 @@ public class EscapeOnDeathHandler {
         persisted.putBoolean(OFFER_TAG, offer);
         persisted.putLong(WINDOW_TAG, nowMs);
         p.getPersistentData().put(PERSIST_TAG, persisted);
-        PacketDistributor.sendToPlayer(p, new EscapeOfferPayload(offer));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer(p, new EscapeOfferPayload(offer));
     }
 
     public static void clearOffer(ServerPlayer p) {
         CompoundTag persisted = p.getPersistentData().getCompound(PERSIST_TAG);
         persisted.putBoolean(OFFER_TAG, false);
         p.getPersistentData().put(PERSIST_TAG, persisted);
-        PacketDistributor.sendToPlayer(p, new EscapeOfferPayload(false));
+        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer(p, new EscapeOfferPayload(false));
     }
 
     /** C2SRequestEscape: marks the next respawn of the player as an escape. */

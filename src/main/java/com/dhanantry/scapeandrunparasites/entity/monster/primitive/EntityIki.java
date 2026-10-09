@@ -280,7 +280,7 @@ EntityCanFly {
                 if (this.parent.getTarget() != null) {
                     out.copyPosition((Entity)this.parent);
                     this.parent.level().addFreshEntity((Entity)out);
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(this.parent.getX(), this.parent.getY(), this.parent.getZ(), 0.5f, 0.5f, 10));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.parent.getX(), this.parent.getY(), this.parent.getZ(), 0.5f, 0.5f, 10));
                 }
             } else {
                 EntityBomb bomb = new EntityBomb(SRPEntities.BOMB.get(), this.parent.level(), this.parent, false);
@@ -296,7 +296,7 @@ EntityCanFly {
                     bomb.setXRot(bomb.getXRot() - (-20.0f));
                     this.parent.level().addFreshEntity((Entity)bomb);
                     bomb.updateSTR();
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(this.parent.getX(), this.parent.getY(), this.parent.getZ(), 0.5f, 0.5f, 10));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(this.parent.getX(), this.parent.getY(), this.parent.getZ(), 0.5f, 0.5f, 10));
                 }
             }
         }

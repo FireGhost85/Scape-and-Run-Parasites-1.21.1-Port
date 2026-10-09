@@ -130,7 +130,7 @@ extends EntityPStationary {
                         this.getNavigation().moveTo((Entity)this.getTarget(), 0.0);
                         this.lookAt((Entity)this.getTarget());
                         if (this.srpTicks == 10 && this.getTarget() instanceof ServerPlayer) {
-                            PacketDistributor.sendToPlayer((ServerPlayer)this.getTarget(), new QlipShakePayload(250, 0, true, false, 4.0f));
+                            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)this.getTarget(), new QlipShakePayload(250, 0, true, false, 4.0f));
                         }
                     } else {
                         this.setParasiteStatus(2);

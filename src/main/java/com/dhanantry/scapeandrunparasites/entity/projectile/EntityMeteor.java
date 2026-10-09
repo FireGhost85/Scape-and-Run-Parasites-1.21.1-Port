@@ -90,7 +90,7 @@ extends Entity {
             for (Player mob : players) {
                 float str = EntityMeteor.getDistancePack(this.blockPosition(), mob.blockPosition(), 150);
                 if (!(str > 0.0f)) continue;
-                PacketDistributor.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(20, 0, false, true, str * 2.0f));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(20, 0, false, true, str * 2.0f));
             }
             if (this.getRandom().nextInt(2) == 0) {
                 double spread = 0.9;
@@ -161,7 +161,7 @@ extends Entity {
                         float str;
                         if (!(mob instanceof LivingEntity)) continue;
                         if (mob instanceof Player && (str = EntityMeteor.getDistancePack(this.blockPosition(), mob.blockPosition(), 400)) > 0.0f) {
-                            PacketDistributor.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(150, 0, false, true, str * 8.0f));
+                            com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)mob, new QlipShakePayload(150, 0, false, true, str * 8.0f));
                         }
                         if ((str = EntityMeteor.getDistancePack(this.blockPosition(), mob.blockPosition(), SRPConfigWorld.meteorDamage)) > 0.0f) {
                             mob.hurt(this.damageSources().fallingBlock(this), str * 450.0f);

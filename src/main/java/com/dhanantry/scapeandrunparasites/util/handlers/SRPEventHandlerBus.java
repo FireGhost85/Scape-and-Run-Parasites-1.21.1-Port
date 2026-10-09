@@ -609,11 +609,11 @@ public class SRPEventHandlerBus {
                     double chance = Double.parseDouble(atm[1]);
                     if (!(event.getLevel().random.nextDouble() < chance)) continue;
                     ((LivingEntity)event.getTarget()).addEffect(new MobEffectInstance(SRPPotions.EPEL_E, dur * 20, 0));
-                    PacketDistributor.sendToAllPlayers(new ParticlePayload(event.getTarget().getX(), event.getTarget().getY(), event.getTarget().getZ(), event.getTarget().getBbWidth(), event.getTarget().getBbHeight(), 3));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(event.getTarget().getX(), event.getTarget().getY(), event.getTarget().getZ(), event.getTarget().getBbWidth(), event.getTarget().getBbHeight(), 3));
                     continue;
                 }
                 ((LivingEntity)event.getTarget()).addEffect(new MobEffectInstance(SRPPotions.EPEL_E, dur * 20, 0));
-                PacketDistributor.sendToAllPlayers(new ParticlePayload(event.getTarget().getX(), event.getTarget().getY(), event.getTarget().getZ(), event.getTarget().getBbWidth(), event.getTarget().getBbHeight(), 3));
+                com.dhanantry.scapeandrunparasites.network.SRPSend.sendToAllPlayers(new ParticlePayload(event.getTarget().getX(), event.getTarget().getY(), event.getTarget().getZ(), event.getTarget().getBbWidth(), event.getTarget().getBbHeight(), 3));
             }
         }
     }
@@ -1656,14 +1656,14 @@ public class SRPEventHandlerBus {
                     fogGreen = biomeChecked.getGreenValue();
                     fogBlue = biomeChecked.getBlueValue();
                     if (fog < SRPConfigWorld.biomeFogDensity) {
-                        PacketDistributor.sendToPlayer((ServerPlayer)thePlayer, new FogPayload(fog, fogRed, fogGreen, fogBlue));
+                        com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)thePlayer, new FogPayload(fog, fogRed, fogGreen, fogBlue));
                     }
                 } else if (fog > 0.0f) {
                     fog = Math.max(fog - 8.0E-4f, 0.0f);
                     fogRed = 0.0f;
                     fogGreen = 0.0f;
                     fogBlue = 0.0f;
-                    PacketDistributor.sendToPlayer((ServerPlayer)thePlayer, new FogPayload(fog, fogRed, fogGreen, fogBlue));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)thePlayer, new FogPayload(fog, fogRed, fogGreen, fogBlue));
                 }
                 ++heart;
                 if (heart < SRPConfigWorld.biomeHeartFreq) {
@@ -1673,7 +1673,7 @@ public class SRPEventHandlerBus {
                 if (isParaBiome && (age = (data = SRPWorldData.get(thePlayer.level())).nearestHeartAge(thePlayer.blockPosition(), true, 0)) > 0) {
                     int totalS = data.getDistanceSpreadByAge(age, true);
                     float vol = ((float)data.isInRangeOfHeart(thePlayer.blockPosition(), totalS) / (float)totalS - 1.0f) * -1.0f;
-                    PacketDistributor.sendToPlayer((ServerPlayer)thePlayer, new MovingSoundPayload(-1, vol));
+                    com.dhanantry.scapeandrunparasites.network.SRPSend.sendToPlayer((ServerPlayer)thePlayer, new MovingSoundPayload(-1, vol));
                 }
             }
         }
