@@ -123,7 +123,25 @@ public class SRPConfigRootScreen extends OptionsSubScreen {
             return;
         }
         if (!this.query.isBlank()) {
-            SRPConfigSectionScreen.fillSearchResults(this.list, this.font, this.options, this.width, this.tops, this.query);
+            SRPConfigSectionScreen.fillSearchResults(this.list, this.font, this.options, this.width, this, this.tops, this.query, tokens -> {
+                // the config files themselves are results too
+                int added = 0;
+                for (ModConfig cfg : this.configs()) {
+                    String name = Component.translatable(this.fileKey(cfg), this.mod.getModInfo().getDisplayName()).getString().toLowerCase(Locale.ROOT);
+                    boolean all = true;
+                    for (String t : tokens) {
+                        all &= name.contains(t);
+                    }
+                    if (all && cfg.getSpec() instanceof ModConfigSpec spec && spec.isLoaded()) {
+                        this.list.addSmall(new StringWidget(Button.BIG_WIDTH / 2, Button.DEFAULT_HEIGHT, Component.translatable("neoforge.configuration.uitext.section",
+                                Component.translatable(this.fileKey(cfg), this.mod.getModInfo().getDisplayName())), this.font).alignLeft(),
+                                Button.builder(Component.translatable("neoforge.configuration.uitext.section", Component.translatable("neoforge.configuration.uitext.sectiontext")),
+                                        b -> this.open(cfg)).width(Button.DEFAULT_WIDTH).build());
+                        ++added;
+                    }
+                }
+                return added;
+            });
             return;
         }
         this.list.children().clear();

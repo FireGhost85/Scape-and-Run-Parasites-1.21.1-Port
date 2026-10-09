@@ -167,6 +167,10 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
                 // a sub section that was never opened has no font / minecraft yet, its widgets need them
                 sub.minecraft = this.minecraft;
                 sub.font = this.font;
+                // the category itself is a result when its name matches, then everything below it is searched
+                if (matches(tokens, this.getTranslationComponent(key).getString().toLowerCase(Locale.ROOT))) {
+                    out.add(new Result(this, entry));
+                }
                 sub.collect(tokens, out);
             }
         }
@@ -223,7 +227,7 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
             return this;
         }
         this.searching = true;
-        fillSearchResults(this.list, this.font, this.options, this.width, List.of(this), this.query);
+        fillSearchResults(this.list, this.font, this.options, this.width, this, List.of(this), this.query, null);
         return this;
     }
 
@@ -292,15 +296,21 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     }
 
     /** Lists the settings of the given top screens (and everything below them) that match the typed words. */
-    static void fillSearchResults(OptionsList list, Font font, Options options, int screenWidth, List<SRPConfigSectionScreen> tops, String query) {
+    static void fillSearchResults(OptionsList list, Font font, Options options, int screenWidth, Screen host, List<SRPConfigSectionScreen> tops, String query,
+            java.util.function.ToIntFunction<String[]> header) {
         list.children().clear();
         String[] tokens = query.toLowerCase(Locale.ROOT).trim().split("\\s+");
         List<Result> results = new ArrayList<>();
         for (SRPConfigSectionScreen top : tops) {
             top.collect(tokens, results);
         }
-        int shown = 0;
+        int shown = header == null ? 0 : header.applyAsInt(tokens);
         for (Result r : results) {
+            if (!(r.entry().getRawValue() instanceof ConfigValue<?>)) {
+                r.screen().addCategoryRow(list, r.entry(), host, screenWidth);
+                ++shown;
+                continue;
+            }
             Element element = r.screen().elementFor(r.entry());
             if (element == null || element.name() == null) {
                 continue;
@@ -320,6 +330,25 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
         if (shown == 0) {
             list.addSmall(new StringWidget(Button.DEFAULT_WIDTH * 2, Button.DEFAULT_HEIGHT, Component.translatable("srparasites.configuration.search.none").withStyle(ChatFormatting.GRAY), font), null);
         }
+    }
+
+    /** A result row for a category: its name and a button that opens it; closing it returns to the screen showing the search. */
+    private void addCategoryRow(OptionsList list, Entry entry, Screen host, int screenWidth) {
+        String key = entry.getKey();
+        UnmodifiableConfig subsection = (UnmodifiableConfig) entry.getRawValue();
+        UnmodifiableConfig subconfig = (UnmodifiableConfig) this.context.valueSpecs().get(key);
+        MutableComponent tip = Component.empty();
+        if (!this.sectionLabel.isEmpty()) {
+            tip.append(Component.literal(this.sectionLabel).withStyle(ChatFormatting.GRAY)).append("\n");
+        }
+        tip.append(this.getTooltipComponent(key, null));
+        StringWidget label = new WideLabel(screenWidth, Component.translatable("neoforge.configuration.uitext.section", this.getTranslationComponent(key)), this.font);
+        label.setTooltip(Tooltip.create(tip));
+        Button button = Button.builder(Component.translatable("neoforge.configuration.uitext.section", Component.translatable("neoforge.configuration.uitext.sectiontext")),
+                b -> this.minecraft.setScreen(new SRPConfigSectionScreen(this.context, host, subconfig.valueMap(), key, subsection.entrySet(),
+                        Component.translatable(this.getTranslationKey(key)), this.getTranslationComponent(key).getString(), this.state)))
+                .width(Button.DEFAULT_WIDTH).tooltip(Tooltip.create(tip)).build();
+        list.addSmall(label, button);
     }
 
     /** Gives a top screen that is never opened the font it needs to build widgets. */
