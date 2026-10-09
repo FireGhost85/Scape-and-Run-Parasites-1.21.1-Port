@@ -108,3 +108,7 @@ Details and file list in `porting/notes/blocks.md`.
 - [FLAG] A few events reference files the 1.12 jar never contained, so those mobs stay silent as in the original: Burrower (`zaa`/`azaa` hurt, living, death), `quac` (carrier worm), `wymo.death`, `attack` (tozoon special), vector removed.
 - [ADD] Mob effect names (`effect.srparasites.<id>`, from the old `mob_effect.srparasites:<id>` entries, e.g. Call of the Hive) and the 37 effect icons (`textures/mob_effect/<id>.png`, copied from the `gui/potion_*` textures).
 - [CHG] `infestremain_infested` model ignored its own texture (the shared model uses `#texture`); fixed. The block itself is a 2 pixel high layer in the original too.
+
+## Client features (partial)
+- [ADD] Parasite phase music: `client/ClientMusic` (tick logic of `soundThree`: random pause, music of the phase, stops when leaving a vector or on scent) plus `RequestEvoPhasePayload` (C2S, once a second; the server answers with the existing `UpdateEvoPhasePayload`, which nothing sent before). Not ported: removal of vanilla streaming music (`soundTwo`) and the parasite biome music (biomes are deferred). Untested in game.
+- [FLAG] Still not ported: fog, mouse reach, infected-player armor layer (SRPLayerBipedArmor/SRPModelBiped), the three block-entity renderers (relay controller, trophy, distorted sign), held-pearl glow, screen overlays.

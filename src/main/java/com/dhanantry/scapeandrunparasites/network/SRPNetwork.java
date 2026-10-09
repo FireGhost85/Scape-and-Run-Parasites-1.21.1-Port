@@ -25,6 +25,7 @@ public final class SRPNetwork {
         registrar.playToClient(UpdateEvoPhasePayload.TYPE, UpdateEvoPhasePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.updateEvoPhase(msg, ctx));
         registrar.playToClient(EscapeOfferPayload.TYPE, EscapeOfferPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.escapeOffer(msg, ctx));
         registrar.playToServer(RequestEscapePayload.TYPE, RequestEscapePayload.CODEC, (msg, ctx) -> com.dhanantry.scapeandrunparasites.feature.EscapeOnDeathHandler.requestEscape(msg, ctx));
+        registrar.playToServer(RequestEvoPhasePayload.TYPE, RequestEvoPhasePayload.CODEC, (msg, ctx) -> RequestEvoPhasePayload.handle(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);
