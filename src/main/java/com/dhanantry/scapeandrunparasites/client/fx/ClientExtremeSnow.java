@@ -25,8 +25,10 @@ public final class ClientExtremeSnow {
     private static final float FOG_END = 10.0f;
     /** Height above the player's feet at which a flake is over its nominal spawn column (see onClientTick). */
     private static final double COMPENSATE_HEIGHT = 7.0;
-    /** Distance at which the closed-in fog hides the flakes. */
-    private static final double SEE_RANGE = 13.0;
+    /** Radius of the disc around the player in which the flakes are spawned (what the fog shows plus the wind shift). */
+    private static final double SPAWN_RADIUS = 16.0;
+    /** Lowest spawn height above the ground. */
+    private static final int SPAWN_HEIGHT = 10;
     private static boolean enabled = false;
     private static float intensity = 1.0f;
     private static boolean forceAnywhere = true;
@@ -107,17 +109,16 @@ public final class ClientExtremeSnow {
         if (p == null) {
             return;
         }
-        // Spawn area: a uniform disc around the player instead of 1.10.9's gaussian (sigma 12) cut by a 20 block sphere. The wind shears the
-        // falling snow sideways, so a concentrated cloud always leaned downwind of the player (about 3 times as many flakes in front when
-        // looking downwind as when looking upwind, measured with a simulation of the particles). The disc is wide enough to cover everything
-        // the fog lets the player see (13 blocks) plus the wind shift, and the number of flakes is scaled to the disc so the density the
-        // player sees stays that of the original.
-        double windBase = Math.sqrt(windX * windX + windZ * windZ);
-        double radius = SEE_RANGE + 8.0 * windBase;
+        // Spawn layout: a uniform disc around the player, from 10 to 14 blocks above the ground, instead of 1.10.9's gaussian (sigma 12)
+        // cut by a 20 block sphere, from 16 to 23 blocks. The wind shears the falling snow sideways, so the concentrated cloud always
+        // leaned downwind of the player (looking downwind showed up to 70 times the flakes of looking upwind with a strong wind, measured with
+        // a simulation of the particles), and most of the flakes' fall happened higher than the fog lets the player see. The disc covers what
+        // the fog shows plus the wind shift, the lower start keeps the number of live flakes the same as in the original (about 2800).
         ParticleStatus setting = mc.options.particles().get();
         double budget = setting == ParticleStatus.MINIMAL ? 0.25 : (setting == ParticleStatus.DECREASED ? 0.55 : 1.0);
         int base = 140 + (int) (360.0f * intensity);
-        int count = (int) (1.135 * radius * radius * ((double) base / 500.0) * budget);
+        int count = (int) (170.0 * ((double) base / 500.0) * budget);
+        double radius = SPAWN_RADIUS;
         for (int i = 0; i < count; ++i) {
             double dist = radius * Math.sqrt(w.random.nextDouble());
             double angle = w.random.nextDouble() * (Math.PI * 2.0);
@@ -127,7 +128,7 @@ public final class ClientExtremeSnow {
             int z = Mth.floor(nominalZ);
             BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z));
             if (!w.canSeeSky(ground) || !forceAnywhere && !w.getBiome(ground).value().shouldSnow(w, ground)) continue;
-            double spawnY = Math.max((double) (ground.getY() + 16 + w.random.nextInt(8)), p.getY() + 16.0 + (double) w.random.nextInt(8));
+            double spawnY = Math.max((double) (ground.getY() + SPAWN_HEIGHT + w.random.nextInt(5)), p.getY() + (double) SPAWN_HEIGHT + (double) w.random.nextInt(5));
             double jitter = 0.03;
             double vx = windX + (w.random.nextDouble() - 0.5) * jitter;
             double vz = windZ + (w.random.nextDouble() - 0.5) * jitter;
