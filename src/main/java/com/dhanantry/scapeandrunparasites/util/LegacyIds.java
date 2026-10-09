@@ -75,4 +75,26 @@ public final class LegacyIds {
             }
         }
     }
+
+    /**
+     * Conversion lists written before an entry existed do not have it (the illagers that 1.12 did not have are in the defaults of
+     * "COTH Assimilated Transformation" now): adds every {@code victim;result} entry whose victim has no entry in the list yet.
+     */
+    public static String[] withDefaultEntries(String[] list, String... entries) {
+        java.util.List<String> out = new java.util.ArrayList<>(list == null ? java.util.List.of() : java.util.Arrays.asList(list));
+        for (String entry : entries) {
+            String victim = entry.substring(0, entry.indexOf(';') + 1);
+            boolean present = false;
+            for (String existing : out) {
+                if (existing != null && existing.trim().startsWith(victim)) {
+                    present = true;
+                    break;
+                }
+            }
+            if (!present) {
+                out.add(entry);
+            }
+        }
+        return out.toArray(new String[0]);
+    }
 }

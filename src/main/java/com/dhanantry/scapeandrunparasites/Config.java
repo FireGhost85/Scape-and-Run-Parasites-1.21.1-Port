@@ -26,7 +26,7 @@ public class Config {
     private static void bake(IConfigSpec spec) {
         if (spec == SRPConfig.SPEC) { SRPConfig.bake(); LegacyIds.fixConfig(SRPConfig.class); }
         else if (spec == SRPConfigMobs.SPEC) { SRPConfigMobs.bake(); LegacyIds.fixConfig(SRPConfigMobs.class); }
-        else if (spec == SRPConfigSystems.SPEC) { SRPConfigSystems.bake(); LegacyIds.fixConfig(SRPConfigSystems.class); }
+        else if (spec == SRPConfigSystems.SPEC) { SRPConfigSystems.bake(); LegacyIds.fixConfig(SRPConfigSystems.class); addDefaultEntries(); }
         else if (spec == SRPConfigWorld.SPEC) { SRPConfigWorld.bake(); LegacyIds.fixConfig(SRPConfigWorld.class); }
         else return;
         // the 1.12 CommonProxy.init() derived SRPAttributes from the configs after they were loaded
@@ -35,6 +35,12 @@ public class Config {
         com.dhanantry.scapeandrunparasites.init.SRPBlocks.init();
         com.dhanantry.scapeandrunparasites.init.SRPSpawning.init();
         ScapeAndRunParasites.LOGGER.info("[SRP] config {} (re)loaded", spec == SRPConfig.SPEC ? "SRParasites" : spec == SRPConfigMobs.SPEC ? "SRParasitesMobs" : spec == SRPConfigSystems.SPEC ? "SRParasitesSystems" : "SRParasitesWorld");
+    }
+
+    /** Entries that were added to the defaults of a list after a config file may have been written. */
+    private static void addDefaultEntries() {
+        SRPConfigSystems.COTHVictimParasite = LegacyIds.withDefaultEntries(SRPConfigSystems.COTHVictimParasite,
+                "minecraft:pillager;srparasites:sim_villager", "minecraft:vindicator;srparasites:sim_villager", "minecraft:evoker;srparasites:sim_villager");
     }
 
     /** {@code /srparasites readconfigurationfile}: bakes the four configs again and rebuilds what is derived from them. */
@@ -47,6 +53,7 @@ public class Config {
         LegacyIds.fixConfig(SRPConfigMobs.class);
         LegacyIds.fixConfig(SRPConfigSystems.class);
         LegacyIds.fixConfig(SRPConfigWorld.class);
+        addDefaultEntries();
         SRPAttributes.reset();
         SRPAttributes.init();
         com.dhanantry.scapeandrunparasites.init.SRPEntities.refreshAttributes();
