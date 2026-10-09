@@ -110,6 +110,11 @@ public class BestiaryScreen extends Screen {
         }
     }
 
+    /** The 1.21 menu background blurs the screen; the bestiary draws its own dark overlay in render(). */
+    @Override
+    public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+    }
+
     @Override
     public boolean isPauseScreen() {
         return false;
@@ -157,7 +162,7 @@ public class BestiaryScreen extends Screen {
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(g, mouseX, mouseY, partialTick);
+        g.fillGradient(0, 0, this.width, this.height, 0xC0101010, 0xD0101010);
         this.clickAreas.clear();
         this.clickable.clear();
         this.spin += partialTick * 2.0f;
