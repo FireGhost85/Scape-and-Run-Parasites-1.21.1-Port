@@ -15,7 +15,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 
-/** PearlHeldGlowRenderer of 1.10.9: the pearl in the first person hand is drawn again as a jittering glow, with glitch frames near an infected enderman. */
+/**
+ * PearlHeldGlowRenderer of 1.10.9: the pearl in the first person hand is drawn again as a jittering glow, with glitch frames near an infected enderman.
+ *
+ * <p>The copies are drawn at full strength: 1.12 item quads carry their own (white) vertex colour, so the {@code glColor} tint and alpha
+ * of the original code never reached the copies. They are additive full copies of the pearl, which is why the whole pearl seemed to
+ * vibrate and glitch there (the {@code GLOW_BASE_ALPHA} and {@code GLITCH_ALPHA} constants are the dead values of the original).
+ */
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT)
 public final class PearlHeldGlowRenderer {
     private static final float GLOW_BASE_ALPHA = 0.4f;
@@ -90,8 +96,7 @@ public final class PearlHeldGlowRenderer {
         float t = ((float)player.tickCount + pt) * GLOW_TIME_SPEED;
         for (int layer = 0; layer < GLOW_LAYERS; ++layer) {
             float baseR = GLOW_BASE_RADIUS + (float)layer * GLOW_RADIUS_STEP;
-            float layerAlpha = GLOW_BASE_ALPHA * (1.0f - (float)layer * 0.2f);
-            TintedBufferSource tinted = new TintedBufferSource(buffers, true, 0.85f, 0.95f, 1.0f, layerAlpha);
+            TintedBufferSource tinted = new TintedBufferSource(buffers, true, 1.0f, 1.0f, 1.0f, 1.0f);
             for (int i = 0; i < GLOW_SAMPLES; ++i) {
                 float a = (float)i / (float)GLOW_SAMPLES * ((float)Math.PI * 2);
                 float aW = Mth.sin(t * 0.9f + (float)i * 0.7f) * GLOW_ANGLE_WOBBLE;
@@ -112,7 +117,7 @@ public final class PearlHeldGlowRenderer {
             float shakeAmp = GLITCH_SHAKE_BASE * (0.75f + 0.6f * amp);
             float shake = Mth.sin(((float)player.tickCount + pt) * (GLITCH_SHAKE_FREQ * (0.9f + 0.2f * amp))) * shakeAmp;
             // additive like the glow: 1.10.9 set the blend function (SRC_ALPHA, ONE) once for the glow and the glitch copies; a normal alpha blend drew solid ghost copies of the pearl that looked like it teleported
-            TintedBufferSource glitch = new TintedBufferSource(buffers, true, 1.0f, 1.0f, 1.0f, GLITCH_ALPHA);
+            TintedBufferSource glitch = new TintedBufferSource(buffers, true, 1.0f, 1.0f, 1.0f, 1.0f);
             for (int p = 0; p < GLITCH_PASSES; ++p) {
                 float offX = (mc.level.random.nextFloat() * 2.0f - 1.0f) * (GLITCH_OFFSET_MAX * (0.6f + 0.6f * amp)) + shake;
                 float offY = (mc.level.random.nextFloat() * 2.0f - 1.0f) * (GLITCH_OFFSET_MAX * (0.6f + 0.6f * amp)) + shake;
