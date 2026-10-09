@@ -33,6 +33,18 @@ public class Config {
         com.dhanantry.scapeandrunparasites.init.SRPSpawning.init();
     }
 
+    /** {@code /srparasites readconfigurationfile}: bakes the four configs again and rebuilds what is derived from them. */
+    public static void rebakeAll() {
+        SRPConfig.bake();
+        SRPConfigMobs.bake();
+        SRPConfigSystems.bake();
+        SRPConfigWorld.bake();
+        SRPAttributes.reset();
+        SRPAttributes.init();
+        com.dhanantry.scapeandrunparasites.init.SRPBlocks.init();
+        com.dhanantry.scapeandrunparasites.init.SRPSpawning.init();
+    }
+
     @SubscribeEvent
     static void onLoad(ModConfigEvent.Loading event) {
         bake(event.getConfig().getSpec());
