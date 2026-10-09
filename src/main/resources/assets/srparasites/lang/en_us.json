@@ -5197,5 +5197,6 @@
  "srparasites.configuration.title": "%s Configuration",
  "srparasites.configuration.search": "Search settings",
  "srparasites.configuration.search.hint": "Search this category and everything below it...",
- "srparasites.configuration.search.none": "No settings match your search."
+ "srparasites.configuration.search.none": "No settings match your search.",
+ "srparasites.configuration.search.hint.all": "Search every category of every config file..."
 }

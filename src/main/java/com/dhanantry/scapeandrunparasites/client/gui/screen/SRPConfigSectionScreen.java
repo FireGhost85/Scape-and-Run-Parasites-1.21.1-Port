@@ -10,6 +10,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.StringWidget;
@@ -35,7 +39,7 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     private static final int MAX_RESULTS = 250;
 
     /** Shared by a whole tree of section screens: the order of the edits made while searching, for Undo. */
-    private static final class SearchState {
+    static final class SearchState {
         final Deque<SRPConfigSectionScreen> order = new ArrayDeque<>();
         boolean undoing;
     }
@@ -49,9 +53,13 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     private EditBox searchBox;
 
     public SRPConfigSectionScreen(Screen parent, ModConfig.Type type, ModConfig modConfig, Component title) {
+        this(parent, type, modConfig, title, new SearchState());
+    }
+
+    SRPConfigSectionScreen(Screen parent, ModConfig.Type type, ModConfig modConfig, Component title, SearchState state) {
         super(parent, type, modConfig, title, (c, k, e) -> e);
         this.sectionLabel = "";
-        this.state = new SearchState();
+        this.state = state;
     }
 
     private SRPConfigSectionScreen(Context parentContext, Screen parent, Map<String, Object> valueSpecs, String key, Set<? extends Entry> entries, Component title,
@@ -63,6 +71,11 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
 
     public static ConfigurationScreen create(ModContainer container, Screen parent) {
         return new ConfigurationScreen(container, parent, (a, b, c, d) -> new SRPConfigSectionScreen(a, b, c, d));
+    }
+
+    /** The main screen with a search bar over every config file. */
+    public static Screen createRoot(ModContainer container, Screen parent) {
+        return new SRPConfigRootScreen(container, parent);
     }
 
     // ------------------------------------------------------------------ layout
@@ -209,10 +222,18 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
             return this;
         }
         this.searching = true;
-        this.list.children().clear();
-        String[] tokens = this.query.toLowerCase(Locale.ROOT).trim().split("\\s+");
+        fillSearchResults(this.list, this.font, this.options, List.of(this), this.query);
+        return this;
+    }
+
+    /** Lists the settings of the given top screens (and everything below them) that match the typed words. */
+    static void fillSearchResults(OptionsList list, Font font, Options options, List<SRPConfigSectionScreen> tops, String query) {
+        list.children().clear();
+        String[] tokens = query.toLowerCase(Locale.ROOT).trim().split("\\s+");
         List<Result> results = new ArrayList<>();
-        this.collect(tokens, results);
+        for (SRPConfigSectionScreen top : tops) {
+            top.collect(tokens, results);
+        }
         int shown = 0;
         for (Result r : results) {
             Element element = r.screen().elementFor(r.entry());
@@ -226,15 +247,55 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
             if (element.tooltip() != null) {
                 tip.append(element.tooltip());
             }
-            StringWidget label = new StringWidget(Button.DEFAULT_WIDTH, Button.DEFAULT_HEIGHT, element.name(), this.font).alignLeft();
+            StringWidget label = new StringWidget(Button.DEFAULT_WIDTH, Button.DEFAULT_HEIGHT, element.name(), font).alignLeft();
             label.setTooltip(Tooltip.create(tip));
-            this.list.addSmall(label, element.getWidget(this.options));
+            list.addSmall(label, element.getWidget(options));
             ++shown;
         }
         if (shown == 0) {
-            this.list.addSmall(new StringWidget(Button.DEFAULT_WIDTH * 2, Button.DEFAULT_HEIGHT, Component.translatable("srparasites.configuration.search.none").withStyle(ChatFormatting.GRAY), this.font), null);
+            list.addSmall(new StringWidget(Button.DEFAULT_WIDTH * 2, Button.DEFAULT_HEIGHT, Component.translatable("srparasites.configuration.search.none").withStyle(ChatFormatting.GRAY), font), null);
         }
-        return this;
+    }
+
+    /** Gives a top screen that is never opened the font it needs to build widgets. */
+    void attach(Minecraft mc, Font f) {
+        this.minecraft = mc;
+        this.font = f;
+    }
+
+    /** Saves the edits made in search results of a top screen that is never closed itself. */
+    void flush() {
+        this.collectChildChanges();
+        if (this.changed) {
+            this.context.modSpec().save();
+        }
+        this.clearChanged();
+    }
+
+    private void clearChanged() {
+        this.changed = false;
+        for (ConfigurationScreen.ConfigurationSectionScreen child : this.sectionCache.values()) {
+            if (child instanceof SRPConfigSectionScreen s) {
+                s.clearChanged();
+            }
+        }
+    }
+
+    static boolean canUndoLast(SearchState state) {
+        SRPConfigSectionScreen top = state.order.peek();
+        return top != null && top.undoManager.canUndo();
+    }
+
+    static void undoLast(SearchState state) {
+        SRPConfigSectionScreen last = state.order.poll();
+        if (last != null) {
+            state.undoing = true;
+            try {
+                last.undoManager.undo();
+            } finally {
+                state.undoing = false;
+            }
+        }
     }
 
     // ------------------------------------------------------------------ undo / reset
@@ -251,15 +312,7 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     protected void createUndoButton() {
         this.undoButton = Button.builder(ConfigurationScreen.UNDO, button -> {
             if (this.searching) {
-                SRPConfigSectionScreen last = this.state.order.poll();
-                if (last != null) {
-                    this.state.undoing = true;
-                    try {
-                        last.undoManager.undo();
-                    } finally {
-                        this.state.undoing = false;
-                    }
-                }
+                undoLast(this.state);
             } else {
                 this.undoManager.undo();
             }
@@ -272,8 +325,7 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     protected void setUndoButtonstate(boolean state) {
         if (this.undoButton != null) {
             if (this.searching) {
-                SRPConfigSectionScreen top = this.state.order.peek();
-                this.undoButton.active = top != null && top.undoManager.canUndo();
+                this.undoButton.active = canUndoLast(this.state);
             } else {
                 this.undoButton.active = state;
             }

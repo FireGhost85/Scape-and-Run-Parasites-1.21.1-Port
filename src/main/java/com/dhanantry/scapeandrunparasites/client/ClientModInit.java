@@ -10,6 +10,6 @@ public final class ClientModInit {
     }
 
     public static void registerConfigScreen(ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, SRPConfigSectionScreen::create);
+        container.registerExtensionPoint(IConfigScreenFactory.class, SRPConfigSectionScreen::createRoot);
     }
 }

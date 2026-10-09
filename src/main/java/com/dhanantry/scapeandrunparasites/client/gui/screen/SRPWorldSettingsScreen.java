@@ -94,7 +94,7 @@ public class SRPWorldSettingsScreen extends Screen {
         }).bounds(left, top + 96, 176, 20).build());
         ModList.get().getModContainerById(ScapeAndRunParasites.MODID).ifPresent(container ->
                 this.addRenderableWidget(Button.builder(Component.translatable("gui.srparasites.worldsettings.config"), b ->
-                        this.minecraft.setScreen(SRPConfigSectionScreen.create(container, this))).bounds(left, top + 124, 176, 20).build()));
+                        this.minecraft.setScreen(SRPConfigSectionScreen.createRoot(container, this))).bounds(left, top + 124, 176, 20).build()));
         this.addRenderableWidget(Button.builder(Component.translatable("gui.srparasites.worldsettings.done"), b -> {
             boolean cold = pendingStarType == 1;
             SRPStarWorldEvents.markCreatingWorld(pendingStarType, cold && pendingMushroomTrees, cold && pendingFracturedTerrain);
