@@ -71,7 +71,7 @@ implements IMessage {
     public static class Handler
     implements IMessageHandler<PacketCelestialNightState, IMessage> {
         public IMessage onMessage(PacketCelestialNightState msg, MessageContext ctx) {
-            Minecraft.getMinecraft().addScheduledTask(() -> {
+            Minecraft.getInstance().addScheduledTask(() -> {
                 HashSet<String> a = new HashSet<String>();
                 for (String s : msg.active) {
                     a.add(s);

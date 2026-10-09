@@ -5,337 +5,256 @@ import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.init.SRPSpawning;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
-import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
-import com.dhanantry.scapeandrunparasites.world.SRPWorldData;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.event.EventHooks;
 
+/**
+ * The parasite spawner of the original (SRPEventHandlerBus.tickSpawn -> findChunksForSpawning): replaces the vanilla spawn
+ * cycle for the parasites with the phase / origin driven spawn lists of {@link SRPSpawning}. Called every tick of a level by
+ * {@link com.dhanantry.scapeandrunparasites.util.handlers.SRPEventHandlerBus}.
+ */
 public class SRPWorldParasiteSpawner {
-    private static final Set<ChunkPos> eligibleChunksForSpawning = Sets.newHashSet();
+    private static final Set<ChunkPos> eligibleChunksForSpawning = new HashSet<>();
     private static int lock = 0;
-    private static int originC = 0;
     public static boolean triggerSPAWNING = false;
     public static int choiceNUMBER = 1;
 
     public static int findChunksForSpawning(ServerLevel worldServerIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs, boolean spawnOnSetTickRate) {
         if (!SRPConfigWorld.originActivated) {
-            return SRPWorldParasiteSpawner.findChunksForSpawningVanilla(worldServerIn, spawnHostileMobs, spawnPeacefulMobs, spawnOnSetTickRate);
+            return spawnCycle(worldServerIn, spawnHostileMobs, spawnPeacefulMobs, false);
         }
-        return SRPWorldParasiteSpawner.findChunksForSpawningOrigin(worldServerIn, spawnHostileMobs, spawnPeacefulMobs, spawnOnSetTickRate);
+        return spawnCycle(worldServerIn, spawnHostileMobs, spawnPeacefulMobs, true);
     }
 
-    public static int findChunksForSpawningVanilla(ServerLevel worldServerIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs, boolean spawnOnSetTickRate) {
-        if (!spawnHostileMobs && !spawnPeacefulMobs) {
+    /** {@code origin == false}: findChunksForSpawningVanilla, {@code true}: findChunksForSpawningOrigin of the original. */
+    private static int spawnCycle(ServerLevel level, boolean hostile, boolean peaceful, boolean origin) {
+        if (!hostile && !peaceful) {
             return 0;
         }
         if (!SRPSpawning.totalParasites) {
-            if (++lock > 40) {
+            if (++lock > (origin ? 7 : 40)) {
                 SRPSpawning.totalParasites = true;
                 lock = 0;
             }
             return 0;
         }
         eligibleChunksForSpawning.clear();
-        for (Player entityplayer : worldServerIn.players()) {
-            if (entityplayer.isSpectator()) continue;
-            int j = Mth.floor((double)(entityplayer.getX() / 16.0));
-            int k = Mth.floor((double)(entityplayer.getZ() / 16.0));
+        SRPWorldData worldData = null;
+        SRPSaveData saveData = SRPSaveData.get(level);
+        boolean originsExist = false;
+        boolean originlessAllowed = false;
+        if (origin) {
+            worldData = SRPWorldData.get(level);
+            originsExist = worldData != null && !worldData.getorigins("x").isEmpty();
+            originlessAllowed = saveData != null && saveData.getDeveLevel() >= SRPConfigSystems.deveOriginlessUse;
+        }
+        for (Player player : level.players()) {
+            if (player.isSpectator()) continue;
+            int j = Mth.floor(player.getX() / 16.0);
+            int k = Mth.floor(player.getZ() / 16.0);
             for (int i1 = -8; i1 <= 8; ++i1) {
                 for (int j1 = -8; j1 <= 8; ++j1) {
-                    PlayerChunkMapEntry playerchunkmapentry;
-                    boolean flag = i1 == -8 || i1 == 8 || j1 == -8 || j1 == 8;
+                    boolean edge = i1 == -8 || i1 == 8 || j1 == -8 || j1 == 8;
                     ChunkPos chunkpos = new ChunkPos(i1 + j, j1 + k);
-                    if (eligibleChunksForSpawning.contains(chunkpos) || flag || !worldServerIn.getWorldBorder().contains(chunkpos) || (playerchunkmapentry = worldServerIn.getPlayerChunkMap().getEntry(chunkpos.chunkXPos, chunkpos.chunkZPos)) == null || !playerchunkmapentry.isSentToPlayers()) continue;
+                    if (eligibleChunksForSpawning.contains(chunkpos) || edge || !level.getWorldBorder().isWithinBounds(chunkpos)
+                            || level.getChunkSource().getChunkNow(chunkpos.x, chunkpos.z) == null) continue;
                     eligibleChunksForSpawning.add(chunkpos);
                 }
             }
         }
-        int j4 = 0;
-        BlockPos blockpos1 = worldServerIn.getSpawnPoint();
-        ArrayList shuffled = Lists.newArrayList(eligibleChunksForSpawning);
+        if (origin) {
+            filterEligibleChunksForOrigin(worldData, originsExist, originlessAllowed);
+            if (eligibleChunksForSpawning.isEmpty()) {
+                return 0;
+            }
+        }
+        int spawned = 0;
+        BlockPos spawnPoint = level.getSharedSpawnPos();
+        List<ChunkPos> shuffled = new ArrayList<>(eligibleChunksForSpawning);
         Collections.shuffle(shuffled);
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        block5: for (ChunkPos chunkpos1 : shuffled) {
-            BlockPos blockpos = SRPWorldParasiteSpawner.getRandomChunkPosition((Level)worldServerIn, chunkpos1.chunkXPos, chunkpos1.chunkZPos);
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+        chunks:
+        for (ChunkPos chunkpos1 : shuffled) {
+            BlockPos blockpos = getRandomChunkPosition(level, chunkpos1.x, chunkpos1.z);
             int k1 = blockpos.getX();
             int l1 = blockpos.getY();
             int i2 = blockpos.getZ();
-            BlockState iblockstate = worldServerIn.getBlockState(blockpos);
-            if (iblockstate.isNormalCube()) continue;
-            int j2 = 0;
-            block6: for (int k2 = 0; k2 < 3; ++k2) {
+            BlockState state = level.getBlockState(blockpos);
+            if (state.isRedstoneConductor(level, blockpos)) continue;
+            int packCount = 0;
+            groups:
+            for (int k2 = 0; k2 < 3; ++k2) {
                 int l2 = k1;
                 int i3 = l1;
                 int j3 = i2;
-                Biome.SpawnListEntry biome$spawnlistentry = null;
-                SpawnGroupData ientitylivingdata = null;
-                int l3 = Mth.ceiling_double_int((double)(Math.random() * 4.0));
-                for (int i4 = 0; i4 < l3; ++i4) {
-                    EntityParasiteBase entityliving;
-                    Player closest;
-                    blockpos$mutableblockpos.set(l2 += worldServerIn.random.nextInt(6) - worldServerIn.random.nextInt(6), i3 += worldServerIn.random.nextInt(1) - worldServerIn.random.nextInt(1), j3 += worldServerIn.random.nextInt(6) - worldServerIn.random.nextInt(6));
-                    float f = (float)l2 + 0.5f;
-                    float f1 = (float)j3 + 0.5f;
-                    if (worldServerIn.isAnyPlayerWithinRangeAt((double)f, (double)i3, (double)f1, 24.0) || !(blockpos1.distToLowCornerSqr((double)f, (double)i3, (double)f1) >= 576.0)) continue;
-                    if (biome$spawnlistentry == null && (biome$spawnlistentry = SRPWorldParasiteSpawner.getSpawnListEntryForTypeAt(worldServerIn, (BlockPos)blockpos$mutableblockpos)) == null) continue block6;
-                    Mob.SpawnPlacementType ground = EntitySpawnPlacementRegistry.getPlacementForEntity((Class)biome$spawnlistentry.entityClass);
-                    if (ground == Mob.SpawnPlacementType.IN_AIR && (closest = SRPWorldParasiteSpawner.getClosestPlayer(f, i3, f1, 24.0, (Level)worldServerIn)) != null) {
-                        double base = closest.getY();
-                        double randomOff = worldServerIn.random.nextInt(21) - 10;
-                        base = Math.max(base, (double)worldServerIn.getWorldInfo().getTerrainType().getMinimumSpawnHeight((Level)worldServerIn) / 2.0);
-                        base = Math.min(base, (double)SRPConfigWorld.spawnerSKYLimitUp);
-                        blockpos$mutableblockpos.setPos((double)l2, base + randomOff, (double)j3);
+                SRPSpawning.SpawnEntry entry = null;
+                SpawnGroupData groupData = null;
+                int tries = Mth.ceil(Math.random() * 4.0);
+                for (int i4 = 0; i4 < tries; ++i4) {
+                    l2 += level.random.nextInt(6) - level.random.nextInt(6);
+                    i3 += level.random.nextInt(1) - level.random.nextInt(1);
+                    j3 += level.random.nextInt(6) - level.random.nextInt(6);
+                    mutable.set(l2, i3, j3);
+                    float f = (float) l2 + 0.5f;
+                    float f1 = (float) j3 + 0.5f;
+                    if (level.hasNearbyAlivePlayer(f, i3, f1, 24.0) || !(spawnPoint.distToCenterSqr(f, i3, f1) >= 576.0)) continue;
+                    if (entry == null) {
+                        entry = origin
+                                ? getSpawnListEntryForTypeAtOrigin(level, mutable, saveData, worldData, originsExist, originlessAllowed)
+                                : getSpawnListEntryForTypeAt(level, mutable);
+                        if (entry == null) continue groups;
                     }
-                    if (!SRPWorldParasiteSpawner.canCreatureTypeSpawnAtLocation(ground, (Level)worldServerIn, (BlockPos)blockpos$mutableblockpos)) continue;
-                    try {
-                        entityliving = (EntityParasiteBase)biome$spawnlistentry.newInstance((Level)worldServerIn);
-                        entityliving.canSpawnSpawn = true;
-                    }
-                    catch (Exception exception) {
-                        return j4;
-                    }
-                    entityliving.moveTo(f, i3, f1, worldServerIn.random.nextFloat() * 360.0f, 0.0f);
-                    Event.Result canSpawn = EventHooks.canEntitySpawn((Mob)entityliving, (Level)worldServerIn, (float)f, (float)i3, (float)f1, (boolean)false);
-                    if (canSpawn == Event.Result.ALLOW || canSpawn == Event.Result.DEFAULT && entityliving.getCanSpawnHere()) {
-                        if (!EventHooks.doSpecialSpawn((Mob)entityliving, (Level)worldServerIn, (float)f, (float)i3, (float)f1)) {
-                            ientitylivingdata = entityliving.finalizeSpawn((ServerLevel) entityliving.level(), worldServerIn.getCurrentDifficultyAt(entityliving.blockPosition()), MobSpawnType.MOB_SUMMONED, ientitylivingdata);
-                        }
-                        if (entityliving.checkSpawnObstruction()) {
-                            ++j2;
-                            worldServerIn.addFreshEntity((Entity)entityliving);
-                        } else {
-                            entityliving.discard();
-                        }
-                        if (j2 >= EventHooks.getMaxSpawnPackSize((Mob)entityliving)) continue block5;
-                    }
-                    j4 += j2;
-                }
-            }
-        }
-        return j4;
-    }
-
-    public static int findChunksForSpawningOrigin(ServerLevel worldServerIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs, boolean spawnOnSetTickRate) {
-        if (!spawnHostileMobs && !spawnPeacefulMobs) {
-            return 0;
-        }
-        if (!SRPSpawning.totalParasites) {
-            if (++lock > 7) {
-                SRPSpawning.totalParasites = true;
-                lock = 0;
-            }
-            return 0;
-        }
-        eligibleChunksForSpawning.clear();
-        SRPWorldData worldData = SRPWorldData.get((Level)worldServerIn);
-        SRPSaveData saveData225 = SRPSaveData.get((Level)worldServerIn, 225);
-        SRPSaveData saveData72 = SRPSaveData.get((Level)worldServerIn, 72);
-        boolean originsExist = worldData != null && !worldData.getorigins("x").isEmpty();
-        boolean originlessAllowed = saveData225 != null && saveData225.getDeveLevel() >= SRPConfigSystems.deveOriginlessUse;
-        for (Player entityplayer : worldServerIn.players()) {
-            if (entityplayer.isSpectator()) continue;
-            int j = Mth.floor((double)(entityplayer.getX() / 16.0));
-            int k = Mth.floor((double)(entityplayer.getZ() / 16.0));
-            for (int i1 = -8; i1 <= 8; ++i1) {
-                for (int j1 = -8; j1 <= 8; ++j1) {
-                    PlayerChunkMapEntry playerchunkmapentry;
-                    boolean flag = i1 == -8 || i1 == 8 || j1 == -8 || j1 == 8;
-                    ChunkPos chunkpos = new ChunkPos(i1 + j, j1 + k);
-                    if (eligibleChunksForSpawning.contains(chunkpos) || flag || !worldServerIn.getWorldBorder().contains(chunkpos) || (playerchunkmapentry = worldServerIn.getPlayerChunkMap().getEntry(chunkpos.chunkXPos, chunkpos.chunkZPos)) == null || !playerchunkmapentry.isSentToPlayers()) continue;
-                    eligibleChunksForSpawning.add(chunkpos);
-                }
-            }
-        }
-        SRPWorldParasiteSpawner.filterEligibleChunksForOrigin(worldData, originsExist, originlessAllowed);
-        if (eligibleChunksForSpawning.isEmpty()) {
-            return 0;
-        }
-        int j4 = 0;
-        BlockPos blockpos1 = worldServerIn.getSpawnPoint();
-        ArrayList shuffled = Lists.newArrayList(eligibleChunksForSpawning);
-        Collections.shuffle(shuffled);
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        block5: for (ChunkPos chunkpos1 : shuffled) {
-            BlockPos blockpos = SRPWorldParasiteSpawner.getRandomChunkPosition((Level)worldServerIn, chunkpos1.chunkXPos, chunkpos1.chunkZPos);
-            int k1 = blockpos.getX();
-            int l1 = blockpos.getY();
-            int i2 = blockpos.getZ();
-            BlockState iblockstate = worldServerIn.getBlockState(blockpos);
-            if (iblockstate.isNormalCube()) continue;
-            int j2 = 0;
-            block6: for (int k2 = 0; k2 < 3; ++k2) {
-                int l2 = k1;
-                int i3 = l1;
-                int j3 = i2;
-                Biome.SpawnListEntry biome$spawnlistentry = null;
-                SpawnGroupData ientitylivingdata = null;
-                int l3 = Mth.ceiling_double_int((double)(Math.random() * 4.0));
-                for (int i4 = 0; i4 < l3; ++i4) {
-                    EntityParasiteBase entityliving;
-                    blockpos$mutableblockpos.set(l2 += worldServerIn.random.nextInt(6) - worldServerIn.random.nextInt(6), i3 += worldServerIn.random.nextInt(1) - worldServerIn.random.nextInt(1), j3 += worldServerIn.random.nextInt(6) - worldServerIn.random.nextInt(6));
-                    float f = (float)l2 + 0.5f;
-                    float f1 = (float)j3 + 0.5f;
-                    if (worldServerIn.isAnyPlayerWithinRangeAt((double)f, (double)i3, (double)f1, 24.0) || !(blockpos1.distToLowCornerSqr((double)f, (double)i3, (double)f1) >= 576.0)) continue;
-                    if (biome$spawnlistentry == null && (biome$spawnlistentry = SRPWorldParasiteSpawner.getSpawnListEntryForTypeAtOrigin(worldServerIn, (BlockPos)blockpos$mutableblockpos, saveData72, worldData, originsExist, originlessAllowed)) == null) continue block6;
-                    Mob.SpawnPlacementType ground = EntitySpawnPlacementRegistry.getPlacementForEntity((Class)biome$spawnlistentry.entityClass);
-                    if (ground == Mob.SpawnPlacementType.IN_AIR) {
-                        if (worldServerIn.random.nextDouble() <= 0.7) continue;
-                        Player closest = SRPWorldParasiteSpawner.getClosestPlayer(f, i3, f1, 24.0, (Level)worldServerIn);
+                    SRPSpawning.Placement ground = SRPSpawning.placementOf(entry.entityType);
+                    if (ground == SRPSpawning.Placement.IN_AIR) {
+                        if (origin && level.random.nextDouble() <= 0.7) continue;
+                        Player closest = getClosestPlayer(f, i3, f1, 24.0, level);
                         if (closest != null) {
                             double base = closest.getY();
-                            double randomOff = worldServerIn.random.nextInt(21) - 10;
-                            base = Math.max(base, (double)worldServerIn.getWorldInfo().getTerrainType().getMinimumSpawnHeight((Level)worldServerIn) / 2.0);
-                            base = Math.min(base, (double)SRPConfigWorld.spawnerSKYLimitUp);
-                            blockpos$mutableblockpos.setPos((double)l2, base + randomOff, (double)j3);
+                            double randomOff = level.random.nextInt(21) - 10;
+                            base = Math.max(base, (double) level.getMinBuildHeight() / 2.0);
+                            base = Math.min(base, (double) SRPConfigWorld.spawnerSKYLimitUp);
+                            mutable.set(l2, (int) (base + randomOff), j3);
                         }
                     }
-                    if (!SRPWorldParasiteSpawner.canCreatureTypeSpawnAtLocation(ground, (Level)worldServerIn, (BlockPos)blockpos$mutableblockpos)) continue;
-                    try {
-                        entityliving = (EntityParasiteBase)biome$spawnlistentry.newInstance((Level)worldServerIn);
-                        entityliving.canSpawnSpawn = true;
+                    if (!canCreatureTypeSpawnAtLocation(ground, level, mutable)) continue;
+                    Entity created = entry.entityType.create(level);
+                    if (!(created instanceof EntityParasiteBase parasite)) {
+                        if (created != null) created.discard();
+                        return spawned;
                     }
-                    catch (Exception exception) {
-                        return j4;
+                    parasite.canSpawnSpawn = true;
+                    parasite.moveTo(f, origin ? mutable.getY() : i3, f1, level.random.nextFloat() * 360.0f, 0.0f);
+                    if (parasite.getCanSpawnHere() && EventHooks.checkSpawnPosition(parasite, level, MobSpawnType.NATURAL)) {
+                        groupData = EventHooks.finalizeMobSpawn(parasite, level, level.getCurrentDifficultyAt(parasite.blockPosition()), MobSpawnType.NATURAL, groupData);
+                        ++packCount;
+                        level.addFreshEntity(parasite);
+                        if (packCount >= EventHooks.getMaxSpawnClusterSize(parasite)) continue chunks;
+                    } else {
+                        parasite.discard();
                     }
-                    entityliving.moveTo(f, i3, f1, worldServerIn.random.nextFloat() * 360.0f, 0.0f);
-                    entityliving.moveTo(f, blockpos$mutableblockpos.getY(), f1, worldServerIn.random.nextFloat() * 360.0f, 0.0f);
-                    Event.Result canSpawn = EventHooks.canEntitySpawn((Mob)entityliving, (Level)worldServerIn, (float)f, (float)i3, (float)f1, (boolean)false);
-                    if (canSpawn == Event.Result.ALLOW || canSpawn == Event.Result.DEFAULT && entityliving.getCanSpawnHere()) {
-                        if (!EventHooks.doSpecialSpawn((Mob)entityliving, (Level)worldServerIn, (float)f, (float)i3, (float)f1)) {
-                            ientitylivingdata = entityliving.finalizeSpawn((ServerLevel) entityliving.level(), worldServerIn.getCurrentDifficultyAt(entityliving.blockPosition()), MobSpawnType.MOB_SUMMONED, ientitylivingdata);
-                        }
-                        if (entityliving.checkSpawnObstruction()) {
-                            ++j2;
-                            worldServerIn.addFreshEntity((Entity)entityliving);
-                        } else {
-                            entityliving.discard();
-                        }
-                        if (j2 >= EventHooks.getMaxSpawnPackSize((Mob)entityliving)) continue block5;
-                    }
-                    j4 += j2;
+                    spawned += packCount;
                 }
             }
         }
-        return j4;
+        return spawned;
     }
 
     @Nullable
     private static Player getClosestPlayer(double x, double y, double z, double distance, Level world) {
         double d0 = -1.0;
-        Player entityplayer = null;
-        List<? extends Player> list = world.players();
-        for (Player entityPlayer : list) {
+        Player found = null;
+        for (Player player : world.players()) {
             double d1;
-            if (!EntitySelector.NO_SPECTATORS.apply(entityPlayer) || !((d1 = entityPlayer.distanceToSqr(x, y, z)) > distance * distance) || d0 != -1.0 && !(d1 < d0)) continue;
+            if (player.isSpectator() || !((d1 = player.distanceToSqr(x, y, z)) > distance * distance) || d0 != -1.0 && !(d1 < d0)) continue;
             d0 = d1;
-            entityplayer = entityPlayer;
+            found = player;
         }
-        return entityplayer;
+        return found;
     }
 
     private static BlockPos getRandomChunkPosition(Level worldIn, int x, int z) {
-        Chunk chunk = worldIn.getChunkFromChunkCoords(x, z);
         int i = x * 16 + worldIn.random.nextInt(16);
         int j = z * 16 + worldIn.random.nextInt(16);
-        int k = Mth.roundUp((int)(chunk.getHeight(BlockPos.containing(i, 0, j)) + 1), (int)16);
-        int l = worldIn.random.nextInt(Math.max(1, k > 0 ? k : chunk.getTopFilledSegment() + 16 - 1));
-        return BlockPos.containing(i, l, j);
+        int minY = worldIn.getMinBuildHeight();
+        int height = worldIn.getHeight(Heightmap.Types.WORLD_SURFACE, i, j);
+        int k = Mth.roundToward(height + 1, 16);
+        int l = worldIn.random.nextInt(Math.max(1, k > 0 ? k - minY : worldIn.getMaxBuildHeight() - minY)) + minY;
+        return new BlockPos(i, l, j);
     }
 
-    public static boolean canCreatureTypeSpawnAtLocation(Mob.SpawnPlacementType spawnPlacementTypeIn, Level worldIn, BlockPos pos) {
-        if (!worldIn.getWorldBorder().contains(pos)) {
+    public static boolean canCreatureTypeSpawnAtLocation(SRPSpawning.Placement placement, Level worldIn, BlockPos pos) {
+        if (!worldIn.getWorldBorder().isWithinBounds(pos)) {
             return false;
         }
-        return SRPWorldParasiteSpawner.canCreatureTypeSpawnBody(spawnPlacementTypeIn, worldIn, pos);
+        return canCreatureTypeSpawnBody(placement, worldIn, pos);
     }
 
-    public static boolean canCreatureTypeSpawnBody(Mob.SpawnPlacementType spawnPlacementTypeIn, Level worldIn, BlockPos pos) {
-        BlockState iblockstate = worldIn.getBlockState(pos);
-        if (spawnPlacementTypeIn == Mob.SpawnPlacementType.IN_WATER) {
-            return iblockstate.getMaterial() == Material.water && worldIn.getBlockState(pos.below()).getFluidState().is(FluidTags.WATER) && !worldIn.getBlockState(pos.above()).isNormalCube();
+    public static boolean canCreatureTypeSpawnBody(SRPSpawning.Placement placement, Level worldIn, BlockPos pos) {
+        BlockState state = worldIn.getBlockState(pos);
+        if (placement == SRPSpawning.Placement.IN_WATER) {
+            return LegacyMaterial.of(state) == LegacyMaterial.water && worldIn.getBlockState(pos.below()).getFluidState().is(FluidTags.WATER)
+                    && !worldIn.getBlockState(pos.above()).isRedstoneConductor(worldIn, pos.above());
         }
-        if (spawnPlacementTypeIn == Mob.SpawnPlacementType.IN_AIR) {
-            return iblockstate.getBlock() == Blocks.AIR && worldIn.getBlockState(pos.below()).getBlock() == Blocks.AIR && worldIn.getBlockState(pos.above()).getBlock() == Blocks.AIR;
+        if (placement == SRPSpawning.Placement.IN_AIR) {
+            return state.getBlock() == Blocks.AIR && worldIn.getBlockState(pos.below()).getBlock() == Blocks.AIR && worldIn.getBlockState(pos.above()).getBlock() == Blocks.AIR;
         }
-        BlockPos blockpos = pos.below();
-        BlockState state = worldIn.getBlockState(blockpos);
-        if (!state.getBlock().canCreatureSpawn(state, (BlockGetter)worldIn, blockpos, spawnPlacementTypeIn)) {
+        BlockPos below = pos.below();
+        BlockState belowState = worldIn.getBlockState(below);
+        // 1.12 canCreatureSpawn: a solid top face that is not bedrock / barrier
+        if (!belowState.isFaceSturdy(worldIn, below, net.minecraft.core.Direction.UP)) {
             return false;
         }
-        Block block = worldIn.getBlockState(blockpos).getBlock();
+        Block block = belowState.getBlock();
         boolean flag = block != Blocks.BEDROCK && block != Blocks.BARRIER;
-        return flag && SRPWorldParasiteSpawner.isValidEmptySpawnBlock(iblockstate) && SRPWorldParasiteSpawner.isValidEmptySpawnBlock(worldIn.getBlockState(pos.above()));
+        return flag && isValidEmptySpawnBlock(worldIn, pos, state) && isValidEmptySpawnBlock(worldIn, pos.above(), worldIn.getBlockState(pos.above()));
     }
 
-    public static boolean isValidEmptySpawnBlock(BlockState state) {
-        if (state.isBlockNormalCube()) {
+    public static boolean isValidEmptySpawnBlock(Level level, BlockPos pos, BlockState state) {
+        if (state.isRedstoneConductor(level, pos)) {
             return false;
         }
-        if (state.canProvidePower()) {
+        if (state.isSignalSource()) {
             return false;
         }
-        if (state.getMaterial().isLiquid()) {
+        if (LegacyMaterial.of(state).isLiquid()) {
             return false;
         }
-        return !BlockRailBase.isRailBlock((BlockState)state);
+        return !(state.getBlock() instanceof BaseRailBlock);
     }
 
     private static void filterEligibleChunksForOrigin(SRPWorldData data, boolean originsExist, boolean originlessAllowed) {
         if (!originsExist || originlessAllowed || data == null || eligibleChunksForSpawning.isEmpty()) {
             return;
         }
-        ArrayList<Integer> originsX = data.getorigins("x");
-        ArrayList<Integer> originsZ = data.getorigins("z");
-        ArrayList<Integer> originsA = data.getorigins("a");
+        List<Integer> originsX = data.getorigins("x");
+        List<Integer> originsZ = data.getorigins("z");
+        List<Integer> originsA = data.getorigins("a");
         int originCount = Math.min(originsX.size(), Math.min(originsZ.size(), originsA.size()));
-        ArrayList<Integer> coloniesX = data.getColonies("x");
-        ArrayList<Integer> coloniesY = data.getColonies("y");
-        ArrayList<Integer> coloniesZ = data.getColonies("z");
+        List<Integer> coloniesX = data.getColonies("x");
+        List<Integer> coloniesY = data.getColonies("y");
+        List<Integer> coloniesZ = data.getColonies("z");
         int colonyCount = Math.min(coloniesX.size(), Math.min(coloniesY.size(), coloniesZ.size()));
         int[] colonyRadii = new int[colonyCount];
         for (int i = 0; i < colonyCount; ++i) {
-            BlockPos colonyPos = BlockPos.containing(coloniesX.get(i).intValue(), coloniesY.get(i).intValue(), coloniesZ.get(i).intValue());
+            BlockPos colonyPos = new BlockPos(coloniesX.get(i), coloniesY.get(i), coloniesZ.get(i));
             colonyRadii[i] = Math.max(0, data.getColonyDistanceSpreadByPosition(colonyPos, false));
         }
         Iterator<ChunkPos> chunkIterator = eligibleChunksForSpawning.iterator();
         while (chunkIterator.hasNext()) {
-            int i;
             ChunkPos chunkPos = chunkIterator.next();
             boolean inRange = false;
-            for (i = 0; i < originCount; ++i) {
-                if (!SRPWorldParasiteSpawner.chunkIntersectsRadius2D(chunkPos.chunkXPos, chunkPos.chunkZPos, originsX.get(i), originsZ.get(i), originsA.get(i))) continue;
+            for (int i = 0; i < originCount; ++i) {
+                if (!chunkIntersectsRadius2D(chunkPos.x, chunkPos.z, originsX.get(i), originsZ.get(i), originsA.get(i))) continue;
                 inRange = true;
                 break;
             }
             if (!inRange) {
-                for (i = 0; i < colonyCount; ++i) {
-                    if (!SRPWorldParasiteSpawner.chunkIntersectsRadius2D(chunkPos.chunkXPos, chunkPos.chunkZPos, coloniesX.get(i), coloniesZ.get(i), colonyRadii[i])) continue;
+                for (int i = 0; i < colonyCount; ++i) {
+                    if (!chunkIntersectsRadius2D(chunkPos.x, chunkPos.z, coloniesX.get(i), coloniesZ.get(i), colonyRadii[i])) continue;
                     inRange = true;
                     break;
                 }
@@ -346,9 +265,6 @@ public class SRPWorldParasiteSpawner {
     }
 
     private static boolean chunkIntersectsRadius2D(int chunkX, int chunkZ, int centerX, int centerZ, int radius) {
-        long radiusSq;
-        int closestZ;
-        long dz;
         if (radius <= 0) {
             return false;
         }
@@ -357,52 +273,58 @@ public class SRPWorldParasiteSpawner {
         int minZ = chunkZ << 4;
         int maxZ = minZ + 15;
         int closestX = Math.max(minX, Math.min(centerX, maxX));
-        long dx = (long)centerX - (long)closestX;
-        return dx * dx + (dz = (long)centerZ - (long)(closestZ = Math.max(minZ, Math.min(centerZ, maxZ)))) * dz <= (radiusSq = (long)radius * (long)radius);
+        long dx = (long) centerX - (long) closestX;
+        int closestZ = Math.max(minZ, Math.min(centerZ, maxZ));
+        long dz = (long) centerZ - (long) closestZ;
+        long radiusSq = (long) radius * (long) radius;
+        return dx * dx + dz * dz <= radiusSq;
     }
 
     @Nullable
-    public static Biome.SpawnListEntry getSpawnListEntryForTypeAt(ServerLevel worldServerIn, BlockPos pos) {
-        SRPSaveData dat = SRPSaveData.get((Level)worldServerIn, 72);
-        int id = DimKeys.of(worldServerIn);
+    public static SRPSpawning.SpawnEntry getSpawnListEntryForTypeAt(ServerLevel worldServerIn, BlockPos pos) {
+        SRPSaveData dat = SRPSaveData.get(worldServerIn);
+        String id = DimKeys.of(worldServerIn);
         if (dat == null) {
             return null;
         }
         if (SRPConfigWorld.originActivated) {
-            SRPWorldData data = SRPWorldData.get((Level)worldServerIn);
+            SRPWorldData data = SRPWorldData.get(worldServerIn);
             boolean originsExist = data != null && !data.getorigins("x").isEmpty();
-            SRPSaveData saveData225 = SRPSaveData.get((Level)worldServerIn, 225);
+            SRPSaveData saveData225 = SRPSaveData.get(worldServerIn);
             boolean originlessAllowed = saveData225 != null && saveData225.getDeveLevel() >= SRPConfigSystems.deveOriginlessUse;
-            return SRPWorldParasiteSpawner.getSpawnListEntryForTypeAtOrigin(worldServerIn, pos, dat, data, originsExist, originlessAllowed);
+            return getSpawnListEntryForTypeAtOrigin(worldServerIn, pos, dat, data, originsExist, originlessAllowed);
         }
-        List<Biome.SpawnListEntry> list = SRPSpawning.getSpawns((Level)worldServerIn, id, dat.getEvolutionPhase(id), dat);
-        Biome.SpawnListEntry chosen = list != null && !list.isEmpty() ? (Biome.SpawnListEntry)WeightedRandom.getRandomItem((Random)worldServerIn.random, list) : null;
-        return chosen;
+        return pick(worldServerIn, SRPSpawning.getSpawns(worldServerIn, id, dat.getEvolutionPhase(id), dat));
     }
 
     @Nullable
-    private static Biome.SpawnListEntry getSpawnListEntryForTypeAtOrigin(ServerLevel worldServerIn, BlockPos pos, SRPSaveData dat, SRPWorldData data, boolean originsExist, boolean originlessAllowed) {
-        int id = DimKeys.of(worldServerIn);
-        if (!SRPWorldParasiteSpawner.isPosWithinOrigin((Level)worldServerIn, pos, data, originsExist, originlessAllowed)) {
+    private static SRPSpawning.SpawnEntry getSpawnListEntryForTypeAtOrigin(ServerLevel worldServerIn, BlockPos pos, SRPSaveData dat, SRPWorldData data, boolean originsExist, boolean originlessAllowed) {
+        String id = DimKeys.of(worldServerIn);
+        if (!isPosWithinOrigin(worldServerIn, pos, data, originsExist, originlessAllowed)) {
             return null;
         }
-        byte phase = dat.getEvolutionPhase(id);
+        int phase = dat.getEvolutionPhase(id);
         if (phase == -1) {
             if (!originsExist) {
                 return null;
             }
-            List<Biome.SpawnListEntry> list = SRPSpawning.getSpawns((Level)worldServerIn, id, phase, dat);
-            Biome.SpawnListEntry chosen = list != null && !list.isEmpty() ? (Biome.SpawnListEntry)WeightedRandom.getRandomItem((Random)worldServerIn.random, list) : null;
-            return chosen;
+            return pick(worldServerIn, SRPSpawning.getSpawns(worldServerIn, id, phase, dat));
         }
-        byte phaseToUse = originsExist ? phase : (byte)0;
-        List<Biome.SpawnListEntry> list = SRPSpawning.getSpawns((Level)worldServerIn, id, phaseToUse, dat);
-        Biome.SpawnListEntry chosen = list != null && !list.isEmpty() ? (Biome.SpawnListEntry)WeightedRandom.getRandomItem((Random)worldServerIn.random, list) : null;
-        return chosen;
+        int phaseToUse = originsExist ? phase : 0;
+        return pick(worldServerIn, SRPSpawning.getSpawns(worldServerIn, id, phaseToUse, dat));
+    }
+
+    @Nullable
+    private static SRPSpawning.SpawnEntry pick(ServerLevel level, @Nullable List<SRPSpawning.SpawnEntry> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        Optional<SRPSpawning.SpawnEntry> chosen = WeightedRandom.getRandomItem(level.random, list);
+        return chosen.orElse(null);
     }
 
     private static boolean isPosWithinOrigin(Level world, BlockPos pos, SRPWorldData data, boolean originsExist, boolean originlessAllowed) {
-        if (world.getBiome(pos).value() instanceof BiomeParasiteBase) {
+        if (com.dhanantry.scapeandrunparasites.block.SRPBlockLinks.isParasiteBiome(world, pos)) {
             return true;
         }
         if (data == null) {
@@ -414,9 +336,4 @@ public class SRPWorldParasiteSpawner {
         }
         return a > 0 || originsExist && originlessAllowed || !originsExist && !data.getTriggerMet();
     }
-
-    private static String posToString(BlockPos pos) {
-        return "(" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")";
-    }
 }
-

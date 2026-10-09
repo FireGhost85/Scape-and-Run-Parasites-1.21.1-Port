@@ -1,13 +1,12 @@
 package com.dhanantry.scapeandrunparasites.util;
 
-import com.dhanantry.scapeandrunparasites.SRPMain;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteSpreading;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
-import com.dhanantry.scapeandrunparasites.network.SRPCommandDislodgment;
-import com.dhanantry.scapeandrunparasites.network.SRPCommandEvolution;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.phase.PhaseConfig;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventEntity;
 import com.dhanantry.scapeandrunparasites.util.SRPAttributes;
 import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
@@ -16,15 +15,18 @@ import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteColo
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteNodeCore;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -33,7 +35,7 @@ public class ParasiteEventWorld {
 
     public static boolean blockException(Level worldIn, BlockPos pos, Block block, BlockState state, String[] list, boolean invert, float maxHardness) {
         float bHard = state.getDestroySpeed(worldIn, pos);
-        if (block instanceof BlockBreakable && state.getMaterial() == Material.ice) {
+        if (block instanceof HalfTransparentBlock && LegacyMaterial.of(state) == LegacyMaterial.ice) {
             return false;
         }
         if (bHard > maxHardness || bHard < 0.0f) {
@@ -42,7 +44,7 @@ public class ParasiteEventWorld {
         if (ParasiteEventEntity.checkName(block.builtInRegistryHolder().key().location().toString(), list, invert)) {
             return true;
         }
-        return block instanceof BlockBreakable || block instanceof BlockContainer || block instanceof BlockOre || block instanceof BlockHorizontal || block instanceof BlockTNT || block.isPassable((BlockGetter)worldIn, pos) || block instanceof IPlantable || !state.isFullCube();
+        return block instanceof HalfTransparentBlock || block instanceof BaseEntityBlock || block instanceof DropExperienceBlock || block instanceof HorizontalDirectionalBlock || block instanceof TntBlock || block.isPassable((BlockGetter)worldIn, pos) || block instanceof IPlantable || !state.isFullCube();
     }
 
     public static int canBiomeStillExist(Level worldIn, BlockPos pos, boolean spread) {
@@ -70,7 +72,7 @@ public class ParasiteEventWorld {
         if (!ParasiteEventWorld.chechBlackListNodes(worldIn)) {
             return 2;
         }
-        BlockPos origin = worldIn.getSpawnPoint();
+        BlockPos origin = worldIn.getSharedSpawnPos();
         if (ParasiteEventWorld.getDistanceSQ(origin.getX(), origin.getY(), origin.getZ(), pos.getX(), pos.getY(), pos.getZ()) < (double)(SRPConfigWorld.minimumDistanceFromSpawnPoint * SRPConfigWorld.minimumDistanceFromSpawnPoint)) {
             return 5;
         }
@@ -89,7 +91,7 @@ public class ParasiteEventWorld {
         int key = data.setNode(pos.getX(), pos.getY(), pos.getZ(), type);
         if (key == 1) {
             WorldGenParasiteNodeCore gen = new WorldGenParasiteNodeCore(false, 1, type);
-            gen.generate(worldIn, new Random(), pos);
+            gen.generate(worldIn, worldIn.random, pos);
             BlockParasiteSpreading.SpreadBiome(worldIn, pos, 1, type);
             ParasiteEventEntity.alertAllPlayerDim(worldIn, SRPConfigWorld.nodeWarning, 100);
             return 1;
@@ -105,8 +107,8 @@ public class ParasiteEventWorld {
     }
 
     private static boolean chechBlackListNodes(Level worldIn) {
-        for (int i : SRPConfigWorld.blackListedDimensionsNodes) {
-            if (i != DimKeys.of(worldIn)) continue;
+        for (String i : SRPConfigWorld.blackListedDimensionsNodes) {
+            if (!DimKeys.normalize(i).equals(DimKeys.of(worldIn))) continue;
             return true;
         }
         return false;
@@ -171,7 +173,7 @@ public class ParasiteEventWorld {
         int key = data.setColony(newPos.getX(), newPos.getY(), newPos.getZ());
         if (key == 1) {
             WorldGenParasiteColonyCore gen = new WorldGenParasiteColonyCore(false, 1);
-            gen.generate(worldIn, new Random(), newPos);
+            gen.generate(worldIn, worldIn.random, newPos);
             ParasiteEventEntity.alertAllPlayerDim(worldIn, SRPConfigWorld.colonyWarning, 101);
             return 1;
         }
@@ -179,8 +181,8 @@ public class ParasiteEventWorld {
     }
 
     private static boolean chechBlackListColonies(Level worldIn) {
-        for (int i : SRPConfigWorld.blackListedDimensionsColonies) {
-            if (i != DimKeys.of(worldIn)) continue;
+        for (String i : SRPConfigWorld.blackListedDimensionsColonies) {
+            if (!DimKeys.normalize(i).equals(DimKeys.of(worldIn))) continue;
             return true;
         }
         return false;
@@ -238,13 +240,13 @@ public class ParasiteEventWorld {
             return 3;
         }
         SRPWorldData data = SRPWorldData.get(worldIn);
-        int key = data.setOrigin(worldIn, pos.getX(), pos.getY(), pos.getZ(), health *= SRPCommandEvolution.getVectorHealthBonus(SRPSaveData.get(worldIn, -421).getEvolutionPhase(DimKeys.of(worldIn))), radius);
-        Player nearestPlayer = worldIn.getClosestPlayer((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), -1.0, false);
+        int key = data.setOrigin(worldIn, pos.getX(), pos.getY(), pos.getZ(), health *= PhaseConfig.getVectorHealthBonus(SRPSaveData.get(worldIn, -421).getEvolutionPhase(DimKeys.of(worldIn))), radius);
+        Player nearestPlayer = worldIn.getNearestPlayer((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), -1.0, false);
         if (nearestPlayer != null) {
             double horizontalDistance = Math.sqrt(Math.pow((double)pos.getX() - nearestPlayer.getX(), 2.0) + Math.pow((double)pos.getZ() - nearestPlayer.getZ(), 2.0));
-            SRPMain.logger.debug("[EIV DEBUG] placeOriginInWorld called. pos={} health={} radius={} resultKey={} nearestPlayer={} playerPos={} horizontalDistance={} trueDistance={} totalOrigins={}", pos, health, radius, key, nearestPlayer.getName().getString(), nearestPlayer.blockPosition(), String.format("%.2f", horizontalDistance), String.format("%.2f", Math.sqrt(nearestPlayer.distanceToSqr((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()))), data.getorigins("x").size());
+            ScapeAndRunParasites.LOGGER.debug("[EIV DEBUG] placeOriginInWorld called. pos={} health={} radius={} resultKey={} nearestPlayer={} playerPos={} horizontalDistance={} trueDistance={} totalOrigins={}", pos, health, radius, key, nearestPlayer.getName().getString(), nearestPlayer.blockPosition(), String.format("%.2f", horizontalDistance), String.format("%.2f", Math.sqrt(nearestPlayer.distanceToSqr((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()))), data.getorigins("x").size());
         } else {
-            SRPMain.logger.debug("[EIV DEBUG] placeOriginInWorld called. pos={} health={} radius={} resultKey={} no nearest player found. totalOrigins={}", pos, health, radius, key, data.getorigins("x").size());
+            ScapeAndRunParasites.LOGGER.debug("[EIV DEBUG] placeOriginInWorld called. pos={} health={} radius={} resultKey={} no nearest player found. totalOrigins={}", pos, health, radius, key, data.getorigins("x").size());
         }
         if (key == 1) {
             if (SRPConfigWorld.originNewMess.length() > 0) {
@@ -272,7 +274,7 @@ public class ParasiteEventWorld {
             return false;
         }
         if (data.removeOrigin(pos.getX(), pos.getY(), pos.getZ(), worldIn)) {
-            if (DimKeys.of(worldIn) == -1) {
+            if (DimKeys.of(worldIn).equals(DimKeys.normalize("-1"))) {
                 if (SRPConfigWorld.originGoneOB.length() > 0) {
                     ParasiteEventEntity.alertAllPlayerDim(worldIn, SRPConfigWorld.originGoneOB, 402);
                 }
@@ -323,7 +325,7 @@ public class ParasiteEventWorld {
                 return;
             }
         }
-        if ((disloEve = SRPCommandDislodgment.getDisloPhase(phase = data.getEvolutionPhase(dim = DimKeys.of(world)))) == null) {
+        if ((disloEve = PhaseConfig.getDisloPhase(phase = data.getEvolutionPhase(dim = DimKeys.of(world)))) == null) {
             return;
         }
         ArrayList<Byte> halo = new ArrayList<Byte>();
@@ -339,9 +341,9 @@ public class ParasiteEventWorld {
         boolean looop = false;
         for (int gggg = 10; gggg > 0 && !looop; --gggg) {
             byte dislo = (Byte)halo.get(world.random.nextInt(halo.size()));
-            int cost = (int)((double)SRPCommandDislodgment.getDisloPointPrice(dislo) * SRPCommandDislodgment.getDisloPhaseCost(phase));
-            int duration = (int)((double)SRPCommandDislodgment.getDisloDuration(dislo) * SRPCommandDislodgment.getDisloPhaseDuration(phase));
-            int value = (int)((double)SRPCommandDislodgment.getDisloValue(dislo) * SRPCommandDislodgment.getDisloPhaseValue(phase));
+            int cost = (int)((double)PhaseConfig.getDisloPointPrice(dislo) * PhaseConfig.getDisloPhaseCost(phase));
+            int duration = (int)((double)PhaseConfig.getDisloDuration(dislo) * PhaseConfig.getDisloPhaseDuration(phase));
+            int value = (int)((double)PhaseConfig.getDisloValue(dislo) * PhaseConfig.getDisloPhaseValue(phase));
             looop = data.setCurrentCode(DimKeys.of(world), dislo, value, duration, world, true, cost);
         }
         disloCool = SRPConfigSystems.disloGlobalCooldown;

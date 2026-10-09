@@ -2,12 +2,12 @@ package com.dhanantry.scapeandrunparasites.init;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
+import com.dhanantry.scapeandrunparasites.entity.EntityDamage;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbBoom;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbScary;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbVoid;
 import com.dhanantry.scapeandrunparasites.entity.EntityParasiticScent;
 import com.dhanantry.scapeandrunparasites.entity.EntityRemain;
-import com.dhanantry.scapeandrunparasites.entity.EntityDamage;
 import com.dhanantry.scapeandrunparasites.entity.EntitySource;
 import com.dhanantry.scapeandrunparasites.entity.EntityToxicCloud;
 import com.dhanantry.scapeandrunparasites.entity.monster.EntityBiomass;

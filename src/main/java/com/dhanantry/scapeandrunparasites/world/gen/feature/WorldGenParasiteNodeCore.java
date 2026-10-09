@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.ticks.TickPriority;
 
 public class WorldGenParasiteNodeCore
 extends WorldGenParasiteGenAbstract {
@@ -88,7 +89,7 @@ extends WorldGenParasiteGenAbstract {
                     }
                 }
                 this.placeDirt(worldIn, position.below());
-                worldIn.updateBlockTick(position.below(), worldIn.getBlockState(position.below()).getBlock(), 60, 5);
+                worldIn.scheduleTick(position.below(), worldIn.getBlockState(position.below()).getBlock(), 60, TickPriority.byValue(5));
                 helper = position;
                 for (int i = 0; i <= 3; ++i) {
                     int o;

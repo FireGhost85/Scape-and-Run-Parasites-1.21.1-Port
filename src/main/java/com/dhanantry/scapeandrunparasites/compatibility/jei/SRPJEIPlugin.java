@@ -8,14 +8,15 @@ import com.dhanantry.scapeandrunparasites.recipes.InfuserFurnaceRecipe;
 import com.dhanantry.scapeandrunparasites.recipes.InfuserFurnaceRecipes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
 
 @JEIPlugin
 public class SRPJEIPlugin
@@ -34,7 +35,7 @@ implements IModPlugin {
             jeiRecipes.add(new InfuserFurnaceJEIRecipe(r));
         }
         registry.addRecipes(jeiRecipes, "srparasites.infuser_furnace");
-        Block infuser = (Block)ForgeRegistries.BLOCKS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "infuser_furnace"));
+        Block infuser = (Block)BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("srparasites", "infuser_furnace"));
         if (infuser != null && infuser != Blocks.AIR && !(infuserStack = new ItemStack(infuser)).isEmpty()) {
             registry.addRecipeCatalyst(infuserStack, new String[]{"srparasites.infuser_furnace"});
         }

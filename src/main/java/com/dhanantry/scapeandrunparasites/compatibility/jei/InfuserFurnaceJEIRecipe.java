@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.ItemStack;
 
-
 public class InfuserFurnaceJEIRecipe
 implements IRecipeWrapper {
     private final InfuserFurnaceRecipe recipe;

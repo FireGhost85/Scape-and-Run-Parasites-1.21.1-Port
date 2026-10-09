@@ -5,8 +5,8 @@ import com.dhanantry.scapeandrunparasites.phase.DimKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +31,7 @@ implements IWorldGenerator {
             return;
         }
         ServerLevel ws = (ServerLevel)world;
-        if (DimKeys.of(ws) != 0) {
+        if (!DimKeys.of(ws).equals(DimKeys.normalize("0"))) {
             return;
         }
         int bx = (chunkX << 4) + 8 + rand.nextInt(6) - 3;
@@ -101,7 +101,7 @@ implements IWorldGenerator {
         if (block == Blocks.WATER || block == Blocks.WATER || block == Blocks.LAVA || block == Blocks.LAVA) {
             return true;
         }
-        return block.isLeaves(state, (BlockGetter)ws, pos);
+        return state.is(BlockTags.LEAVES);
     }
 
     private boolean flatEnough(ServerLevel ws, BlockPos center, int radius, int maxDelta) {

@@ -30,6 +30,7 @@ public class Config {
         else return;
         // the 1.12 CommonProxy.init() derived SRPAttributes from the configs after they were loaded
         SRPAttributes.init();
+        com.dhanantry.scapeandrunparasites.init.SRPSpawning.init();
     }
 
     @SubscribeEvent

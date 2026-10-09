@@ -60,10 +60,10 @@ public final class SRPResidueFireManager {
 
     @SubscribeEvent
     public static void onWorldUnload(WorldEvent.Unload e) {
-        if (e.getWorld().isClientSide) {
+        if (e.getLevel().isClientSide) {
             return;
         }
-        TRACK.remove(DimKeys.of(e.getWorld()));
+        TRACK.remove(DimKeys.of(e.getLevel()));
     }
 }
 

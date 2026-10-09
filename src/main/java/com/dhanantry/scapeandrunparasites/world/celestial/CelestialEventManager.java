@@ -107,7 +107,7 @@ public class CelestialEventManager {
         CelestialNightData.DimState s = data.getOrCreate(dim);
         s.active.clear();
         s.forced.clear();
-        s.darkDaysStartTime = world.getWorldTime() + 160L;
+        s.darkDaysStartTime = world.getDayTime() + 160L;
         s.darkDaysEndTime = -1L;
         s.darkDaysEndingSoundPlayed = false;
         data.markDirty();
@@ -136,7 +136,7 @@ public class CelestialEventManager {
             return;
         }
         s.darkDaysStartTime = -1L;
-        s.darkDaysEndTime = world.getWorldTime() + 200L;
+        s.darkDaysEndTime = world.getDayTime() + 200L;
         s.darkDaysEndingSoundPlayed = true;
         data.markDirty();
         CelestialEventManager.syncDim(world, dim);
@@ -166,7 +166,7 @@ public class CelestialEventManager {
             return;
         }
         int dim = DimKeys.of(world);
-        long nightIndex = world.getWorldTime() / 24000L;
+        long nightIndex = world.getDayTime() / 24000L;
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         if (s.forced.contains("dark_days")) {
@@ -204,7 +204,7 @@ public class CelestialEventManager {
         int dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
-        long now = world.getWorldTime();
+        long now = world.getDayTime();
         if (s.darkDaysStartTime > 0L && now >= s.darkDaysStartTime) {
             s.darkDaysStartTime = -1L;
             s.active.clear();
@@ -269,7 +269,7 @@ public class CelestialEventManager {
         if (activeOrQueued) {
             return;
         }
-        long worldTime = world.getWorldTime();
+        long worldTime = world.getDayTime();
         long dayStart = worldTime - worldTime % 24000L;
         long day = dayStart / 24000L;
         long dayTime = worldTime % 24000L;

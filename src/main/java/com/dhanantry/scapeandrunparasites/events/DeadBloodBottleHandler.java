@@ -2,6 +2,7 @@ package com.dhanantry.scapeandrunparasites.events;
 
 import com.dhanantry.scapeandrunparasites.init.SRPFluids;
 import com.dhanantry.scapeandrunparasites.init.SRPItems;
+import com.dhanantry.scapeandrunparasites.util.SRPEntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +15,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public class DeadBloodBottleHandler {
     @SubscribeEvent
@@ -23,7 +25,7 @@ public class DeadBloodBottleHandler {
             return;
         }
         Player player = e.getEntityPlayer();
-        Level world = e.getWorld();
+        Level world = e.getLevel();
         ItemStack held = e.getItemStack();
         if (held.isEmpty() || held.getItem() != Items.GLASS_BOTTLE) {
             return;

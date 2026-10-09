@@ -1,0 +1,34 @@
+    public void decorate(Level worldIn, RandomSource rand, BlockPos pos) {
+        super.decorate(worldIn, rand, pos);
+    }
+
+    public void genTerrainBlocks(Level worldIn, RandomSource rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
+        super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        double d0 = 1.0;
+        if (d0 > 0.0) {
+            int i = x & 0xF;
+            int j = z & 0xF;
+            for (int k = 255; k >= 0; --k) {
+                if (chunkPrimerIn.getBlockState(j, k, i).getMaterialPlaceholder() == LegacyMaterial.air) continue;
+                if (k != 62 || chunkPrimerIn.getBlockState(j, k, i).getBlock() == Blocks.WATER) break;
+                chunkPrimerIn.setBlockState(j, k, i, WATER);
+                break;
+            }
+        }
+    }
+
+    public int getSkyColorByTemp(float currentTemperature) {
+        return SRPConfigWorld.biomeTwoSkyColor;
+    }
+
+    public int getGrassColorAtPos(BlockPos blockPos) {
+        return SRPConfigWorld.biomeTwoGrassColor;
+    }
+
+    public int getFoliageColorAtPos(BlockPos blockPos) {
+        return SRPConfigWorld.biomeTwoFoliageColor;
+    }
+
+    public int getWaterColorMultiplier() {
+        return SRPConfigWorld.biomeTwoWaterColor;
+    }

@@ -17,7 +17,7 @@ public final class SRPRemainHooks {
         if (!(e.getEntity() instanceof LightningBolt)) {
             return;
         }
-        Level w = e.getWorld();
+        Level w = e.getLevel();
         if (w.isClientSide) {
             return;
         }

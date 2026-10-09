@@ -4,7 +4,6 @@ import com.dhanantry.scapeandrunparasites.compatibility.jei.SRPBrewingJEIRecipe;
 import javax.annotation.Nonnull;
 import net.minecraft.resources.ResourceLocation;
 
-
 public class SRPBrewingCategory
 implements IRecipeCategory<SRPBrewingJEIRecipe> {
     public static final String UID = "srparasites.srp_brewing";

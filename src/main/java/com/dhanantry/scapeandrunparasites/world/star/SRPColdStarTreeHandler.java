@@ -2,9 +2,11 @@ package com.dhanantry.scapeandrunparasites.world.star;
 
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenDeadheadTreeStructure;
 import com.dhanantry.scapeandrunparasites.world.star.SRPStarWorldData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ChunkPos;
@@ -30,8 +32,8 @@ public class SRPColdStarTreeHandler {
         if (event.getType() != DecorateBiomeEvent.Decorate.EventType.TREE) {
             return;
         }
-        Level world = event.getWorld();
-        if (world == null || world.isClientSide || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        Level world = event.getLevel();
+        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         SRPStarWorldData data = SRPStarWorldData.get(world);
@@ -170,7 +172,7 @@ public class SRPColdStarTreeHandler {
             if (this.isForbiddenSurface(state)) {
                 return null;
             }
-            if (state.getMaterial().isSolid()) {
+            if (LegacyMaterial.of(state).isSolid()) {
                 return pos;
             }
             return null;
@@ -214,7 +216,7 @@ public class SRPColdStarTreeHandler {
         if (block == Blocks.SNOW) {
             return true;
         }
-        if (state.getMaterial().isLiquid()) {
+        if (LegacyMaterial.of(state).isLiquid()) {
             return false;
         }
         return block.isReplaceable((BlockGetter)world, pos);
@@ -222,12 +224,12 @@ public class SRPColdStarTreeHandler {
 
     private boolean isTreeOrLeaves(BlockState state, Level world, BlockPos pos) {
         Block block = state.getBlock();
-        return block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == SRPBlocks.ParasiteTrunk.get() || block.isLeaves(state, (BlockGetter)world, pos);
+        return block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == SRPBlocks.ParasiteTrunk.get() || state.is(BlockTags.LEAVES);
     }
 
     private boolean isForbiddenSurface(BlockState state) {
         Block block = state.getBlock();
-        return block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || state.getMaterial().isLiquid();
+        return block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || LegacyMaterial.of(state).isLiquid();
     }
 
     private boolean isValidNormalGround(BlockState state) {

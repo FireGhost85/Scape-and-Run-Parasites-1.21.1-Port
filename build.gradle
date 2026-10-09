@@ -18,6 +18,18 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+
+// Extra systems of the original that are ported after the core (see PORTING_NOTES.md [FLAG] "deferred extras"):
+// Star biomes / blizzards, celestial events, the JEI integration and the Star GenLayer.
+sourceSets.main.java {
+    exclude '**/world/star/**'
+    exclude '**/world/celestial/**'
+    exclude '**/world/CelestialNightData.java'
+    exclude '**/compatibility/jei/**'
+    exclude '**/world/gen/GenLayerSRPStar.java'
+    exclude '**/world/biome/BiomeParasiteDecorator.java'
+}
+
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version

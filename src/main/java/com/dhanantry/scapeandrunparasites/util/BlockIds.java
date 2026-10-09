@@ -234,4 +234,24 @@ public final class BlockIds {
         }
         return meta == 0 ? state : null;
     }
+
+    /** The 1.12 {@code getMetaFromState} of an SRP block: variant ordinal (plus 8 for a top slab), infestation stage or 0. */
+    public static int legacyMeta(BlockState state) {
+        Block block = state.getBlock();
+        if (block instanceof IVariantBlock<?> variant) {
+            Enum<?> value = (Enum<?>) state.getValue((Property) variant.getVariantProperty());
+            int meta = value.ordinal();
+            if (block instanceof SlabBlock && state.hasProperty(SlabBlock.TYPE) && state.getValue(SlabBlock.TYPE) == SlabType.TOP) {
+                meta |= 8;
+            }
+            return meta;
+        }
+        if (block instanceof IStagedBlock staged && staged.getStageProperty() != null) {
+            return state.getValue(staged.getStageProperty());
+        }
+        if (block instanceof SlabBlock && state.hasProperty(SlabBlock.TYPE) && state.getValue(SlabBlock.TYPE) == SlabType.TOP) {
+            return 8;
+        }
+        return 0;
+    }
 }

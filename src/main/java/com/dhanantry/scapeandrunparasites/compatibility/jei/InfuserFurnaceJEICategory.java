@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
-
 public class InfuserFurnaceJEICategory
 implements IRecipeCategory<InfuserFurnaceJEIRecipe> {
     public static final String UID = "srparasites.infuser_furnace";

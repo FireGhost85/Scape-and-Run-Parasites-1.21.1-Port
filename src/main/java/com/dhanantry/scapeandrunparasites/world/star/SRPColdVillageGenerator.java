@@ -4,6 +4,7 @@ import com.dhanantry.scapeandrunparasites.block.BlockParasiteTrunk;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.init.SRPItems;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldEntitySpawner;
 import com.dhanantry.scapeandrunparasites.world.star.SRPColdVillageWallGenerator;
 import java.lang.reflect.Field;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -51,7 +51,7 @@ implements IWorldGenerator {
     private static final ResourceLocation SMALL_2 = ResourceLocation.fromNamespaceAndPath("srparasites", "dh_village_small2");
 
     public void generate(RandomSource random, int chunkX, int chunkZ, Level world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (world == null || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        if (world == null || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         if (SRPWorldEntitySpawner.starType != 1) {
@@ -299,8 +299,8 @@ implements IWorldGenerator {
 
     private boolean isBadVillageSurface(BlockState state) {
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == Material.water;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == LegacyMaterial.water;
     }
 
     private BlockPos findTerrainSurface(Level world, BlockPos pos) {
@@ -323,8 +323,8 @@ implements IWorldGenerator {
 
     private boolean isSurfaceJunk(BlockState state) {
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow;
     }
 
     private void clearTreeBlocksForTemplate(Level world, Template template, BlockPos origin, Rotation rotation) {
@@ -346,8 +346,8 @@ implements IWorldGenerator {
 
     private boolean isTreeBlock(BlockState state) {
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == Material.leaves;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.leaves;
     }
 
     private void buildRubbleSupports(Level world, Template template, BlockPos origin, Rotation rotation) {
@@ -393,11 +393,11 @@ implements IWorldGenerator {
             return false;
         }
         Block block = state.getBlock();
-        Material material = state.getMaterial();
+        LegacyMaterial material = LegacyMaterial.of(state);
         if (block == Blocks.AIR || block == Blocks.STRUCTURE_VOID) {
             return false;
         }
-        if (material == Material.air || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow || material == Material.water || material == Material.lava) {
+        if (material == LegacyMaterial.air || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || material == LegacyMaterial.water || material == LegacyMaterial.lava) {
             return false;
         }
         return state.isFullCube();
@@ -446,8 +446,8 @@ implements IWorldGenerator {
         while (pos.getY() > 1 && placed < 32) {
             BlockState state = world.getBlockState(pos);
             Block block = state.getBlock();
-            Material material = state.getMaterial();
-            if (block == Blocks.SNOW || material == Material.snow) {
+            LegacyMaterial material = LegacyMaterial.of(state);
+            if (block == Blocks.SNOW || material == LegacyMaterial.snow) {
                 world.setBlock(pos, sourceState, 2);
                 pos = pos.below();
                 ++placed;
@@ -465,15 +465,15 @@ implements IWorldGenerator {
             return false;
         }
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block != Blocks.AIR && block != Blocks.STRUCTURE_VOID && block != Blocks.SNOW && block != Blocks.SHORT_GRASS && block != Blocks.DEAD_BUSH && block != Blocks.OAK_LEAVES && block != Blocks.ACACIA_LEAVES && block != Blocks.OAK_LOG && block != Blocks.ACACIA_LOG && material != Material.air && material != Material.plants && material != Material.vine && material != Material.leaves && material != Material.snow && material != Material.water && material != Material.lava;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block != Blocks.AIR && block != Blocks.STRUCTURE_VOID && block != Blocks.SNOW && block != Blocks.SHORT_GRASS && block != Blocks.DEAD_BUSH && block != Blocks.OAK_LEAVES && block != Blocks.ACACIA_LEAVES && block != Blocks.OAK_LOG && block != Blocks.ACACIA_LOG && material != LegacyMaterial.air && material != LegacyMaterial.plants && material != LegacyMaterial.vine && material != LegacyMaterial.leaves && material != LegacyMaterial.snow && material != LegacyMaterial.water && material != LegacyMaterial.lava;
     }
 
     private boolean shouldFillSupport(Level world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow || material == Material.water;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.WATER || block == Blocks.WATER || block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || material == LegacyMaterial.water;
     }
 
     private BlockPos transformLocal(BlockPos origin, int localX, int localY, int localZ, BlockPos size, Rotation rotation) {
@@ -590,8 +590,8 @@ implements IWorldGenerator {
         }
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == Material.plants || material == Material.vine || material == Material.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
     }
 
     private void spawnVillagers(Level world, RandomSource random, BlockPos center, int count) {

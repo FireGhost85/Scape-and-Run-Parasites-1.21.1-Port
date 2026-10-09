@@ -3,7 +3,8 @@ package com.dhanantry.scapeandrunparasites.events;
 import com.dhanantry.scapeandrunparasites.entity.ai.SoundEaterSoundHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 
 @Mod.EventBusSubscriber(modid="srparasites")
 public class SoundEaterArrowImpactHandler {

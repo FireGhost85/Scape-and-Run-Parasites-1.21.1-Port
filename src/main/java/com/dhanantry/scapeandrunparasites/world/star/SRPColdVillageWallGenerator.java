@@ -2,9 +2,9 @@ package com.dhanantry.scapeandrunparasites.world.star;
 
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.util.BlockIds;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -249,8 +249,8 @@ public final class SRPColdVillageWallGenerator {
 
     private static boolean isSurfaceJunk(BlockState state) {
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == SRPBlocks.ParasiteRubble.get() || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == SRPBlocks.ParasiteRubble.get() || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow;
     }
 
     private static void placeFoundation(Level world, BlockPos start, int maxDepth) {
@@ -265,22 +265,22 @@ public final class SRPColdVillageWallGenerator {
     private static boolean isBadWallSurface(Level world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || block == Blocks.WATER || block == Blocks.WATER || material == Material.water;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.FROSTED_ICE || block == Blocks.WATER || block == Blocks.WATER || material == LegacyMaterial.water;
     }
 
     private static boolean canReplaceWallBlock(Level world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
     }
 
     private static boolean shouldFillSupport(Level world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == Material.plants || material == Material.vine || material == Material.leaves || material == Material.snow;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow;
     }
 
     private static double copySign(double value, double sign) {

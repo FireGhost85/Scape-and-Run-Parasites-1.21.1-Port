@@ -2,6 +2,7 @@ package com.dhanantry.scapeandrunparasites.world.gen.feature;
 
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteTrunk;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.gen.WorldGenerator;
 import java.util.ArrayList;
 import java.util.List;
@@ -207,7 +208,7 @@ extends WorldGenerator {
         if (world.isEmptyBlock(pos) || state.getBlock().isReplaceable((BlockGetter)world, pos)) {
             return false;
         }
-        return state.getMaterial().isSolid() || state.getMaterial().isLiquid();
+        return LegacyMaterial.of(state).isSolid() || LegacyMaterial.of(state).isLiquid();
     }
 
     private boolean canRootReplace(Level world, BlockPos pos) {

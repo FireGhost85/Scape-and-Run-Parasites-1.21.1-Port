@@ -18,12 +18,10 @@ import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteTall
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteTenFlower;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteTree;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteTreeThin;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 
 public class BiomeParasiteShrouded
@@ -33,16 +31,6 @@ extends BiomeParasiteBase {
     public WorldGenerator grassP1 = new WorldGenParasiteBush(false, BlockParasiteBush.EnumType.EYE, 1);
     public WorldGenerator grassP2 = new WorldGenParasiteBush(false, BlockParasiteBush.EnumType.POP, 2);
 
-    public BiomeParasiteShrouded() {
-        super(new Biome.BiomeProperties("Parasite Biome Shrouded").setBaseHeight(0.13f).setHeightVariation(0.5f));
-        this.theBiomeDecorator.treesPerChunk = 1;
-        this.theBiomeDecorator.extraTreeChance = 0.0f;
-        this.theBiomeDecorator.grassPerChunk = 15;
-        this.theBiomeDecorator.flowersPerChunk = 4;
-        this.theBiomeDecorator.deadBushPerChunk = 2;
-        this.theBiomeDecorator.cactiPerChunk = 15;
-        this.theBiomeDecorator.bigMushroomsPerChunk = 1;
-    }
 
     public WorldGenAbstractTree genBigTreeChance(RandomSource rand) {
         if (rand.nextInt(3) == 0) {
@@ -56,41 +44,6 @@ extends BiomeParasiteBase {
             return this.grassP2;
         }
         return this.grassP1;
-    }
-
-    public void decorate(Level worldIn, RandomSource rand, BlockPos pos) {
-        super.decorate(worldIn, rand, pos);
-    }
-
-    public void genTerrainBlocks(Level worldIn, RandomSource rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
-        super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
-        double d0 = 1.0;
-        if (d0 > 0.0) {
-            int i = x & 0xF;
-            int j = z & 0xF;
-            for (int k = 255; k >= 0; --k) {
-                if (chunkPrimerIn.getBlockState(j, k, i).getMaterialPlaceholder() == Material.air) continue;
-                if (k != 62 || chunkPrimerIn.getBlockState(j, k, i).getBlock() == Blocks.WATER) break;
-                chunkPrimerIn.setBlockState(j, k, i, WATER);
-                break;
-            }
-        }
-    }
-
-    public int getSkyColorByTemp(float currentTemperature) {
-        return SRPConfigWorld.biomeOneSkyColor;
-    }
-
-    public int getGrassColorAtPos(BlockPos blockPos) {
-        return SRPConfigWorld.biomeOneGrassColor;
-    }
-
-    public int getFoliageColorAtPos(BlockPos blockPos) {
-        return SRPConfigWorld.biomeOneFoliageColor;
-    }
-
-    public int getWaterColorMultiplier() {
-        return SRPConfigWorld.biomeOneWaterColor;
     }
 
     @Override

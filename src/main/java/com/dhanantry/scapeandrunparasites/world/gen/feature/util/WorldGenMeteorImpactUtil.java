@@ -1,6 +1,7 @@
 package com.dhanantry.scapeandrunparasites.world.gen.feature.util;
 
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.gen.WorldGenCustomStructures;
 import com.dhanantry.scapeandrunparasites.world.gen.structure.WorldGenStructure;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -121,8 +121,8 @@ public final class WorldGenMeteorImpactUtil {
                 int cut = topY - (int)Math.round((double)depth * curve);
                 for (int y = topY; y > cut && y > 5 && world.hasChunkAt(p = BlockPos.containing(cx + x, y, cz + z)); --y) {
                     BlockState s = world.getBlockState(p);
-                    Material m = s.getMaterial();
-                    if (m == Material.air || p.getY() <= 5) continue;
+                    LegacyMaterial m = LegacyMaterial.of(s);
+                    if (m == LegacyMaterial.air || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
                 BlockPos top = world.getTopSolidOrLiquidBlock(BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
@@ -260,7 +260,7 @@ public final class WorldGenMeteorImpactUtil {
                 for (int y = yMin; y <= yMax; ++y) {
                     BlockState s;
                     BlockPos p = BlockPos.containing(ax, y, az);
-                    if (!world.hasChunkAt(p) || (s = world.getBlockState(p)).getMaterial() == Material.air || !WorldGenMeteorImpactUtil.isVegetation(s) || p.getY() <= 5) continue;
+                    if (!world.hasChunkAt(p) || (s = world.getBlockState(p)).getMaterial() == LegacyMaterial.air || !WorldGenMeteorImpactUtil.isVegetation(s) || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
             }
@@ -283,7 +283,7 @@ public final class WorldGenMeteorImpactUtil {
                     BlockState s;
                     BlockPos p;
                     int d2 = x * x + y * y + z * z;
-                    if (d2 > rr || !world.hasChunkAt(p = BlockPos.containing(cx + x, cy + y, cz + z)) || (s = world.getBlockState(p)).getMaterial() == Material.air || p.getY() <= 5) continue;
+                    if (d2 > rr || !world.hasChunkAt(p = BlockPos.containing(cx + x, cy + y, cz + z)) || (s = world.getBlockState(p)).getMaterial() == LegacyMaterial.air || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                     if (!any) {
                         any = true;
@@ -306,8 +306,8 @@ public final class WorldGenMeteorImpactUtil {
 
     private static boolean isVegetation(BlockState s) {
         Block b = s.getBlock();
-        Material m = s.getMaterial();
-        if (m == Material.leaves || m == Material.wood || m == Material.vine) {
+        LegacyMaterial m = LegacyMaterial.of(s);
+        if (m == LegacyMaterial.leaves || m == LegacyMaterial.wood || m == LegacyMaterial.vine) {
             return true;
         }
         if (b == Blocks.OAK_LEAVES || b == Blocks.ACACIA_LEAVES || b == Blocks.OAK_LOG || b == Blocks.ACACIA_LOG || b == Blocks.VINE || b == Blocks.TORCH || b == Blocks.REDSTONE_TORCH || b == Blocks.UNLIT_REDSTONE_TORCH || b == Blocks.SNOW || b == Blocks.ICE || b == Blocks.PACKED_ICE || b == Blocks.FROSTED_ICE || b == Blocks.FIRE || b == Blocks.SHORT_GRASS || b == Blocks.DEAD_BUSH || b == Blocks.DANDELION || b == Blocks.POPPY || b == Blocks.BROWN_MUSHROOM || b == Blocks.RED_MUSHROOM || b == Blocks.TALL_GRASS) {
@@ -352,7 +352,7 @@ public final class WorldGenMeteorImpactUtil {
                         world.notifyNeighborsOfStateChange(p, b, true);
                         continue;
                     }
-                    if (s.getMaterial() != Material.air) continue;
+                    if (LegacyMaterial.of(s) != LegacyMaterial.air) continue;
                     BlockPos p2 = p.above();
                     BlockState s2 = world.getBlockState(p2);
                     Block b2 = s2.getBlock();

@@ -1,6 +1,6 @@
 package com.dhanantry.scapeandrunparasites.world;
 
-import com.dhanantry.scapeandrunparasites.SRPMain;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.block.BlockBiomeCore;
 import com.dhanantry.scapeandrunparasites.block.BlockColonyCore;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
@@ -12,15 +12,18 @@ import com.dhanantry.scapeandrunparasites.world.SRPWorldEntitySpawner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.saveddata.SavedData;
 
 public class SRPWorldData
-extends WorldSavedData {
+extends SavedData {
     private static final String DATA_NAME = "srparasites_data";
     private ArrayList<Integer> nodeX = new ArrayList();
     private ArrayList<Integer> nodeY = new ArrayList();
@@ -41,38 +44,42 @@ extends WorldSavedData {
     private boolean dimMeteor;
 
     public SRPWorldData(Level world) {
-        super(DATA_NAME);
         this.create(world);
     }
 
-    public SRPWorldData(String name) {
-        super(name);
+    public SRPWorldData() {
     }
 
+    /** The data of the level (1.12 per world storage); null on the client. */
     public static SRPWorldData get(Level world) {
-        if (world == null) {
+        if (!(world instanceof ServerLevel server)) {
             return null;
         }
-        MapStorage storage = world.getPerWorldStorage();
-        SRPWorldData instance = (SRPWorldData)storage.loadData(SRPWorldData.class, DATA_NAME);
-        if (instance == null) {
-            instance = new SRPWorldData(world);
-            storage.setData(DATA_NAME, (WorldSavedData)instance);
-        } else {
-            instance.updateDays(world);
-        }
+        SRPWorldData instance = server.getDataStorage().computeIfAbsent(new SavedData.Factory<>(() -> new SRPWorldData(server), (tag, provider) -> {
+            SRPWorldData loaded = new SRPWorldData();
+            loaded.readFromNBT(tag);
+            return loaded;
+        }, null), DATA_NAME);
+        instance.updateDays(world);
         return instance;
     }
 
+    @Override
+    public CompoundTag save(CompoundTag compound, HolderLookup.Provider registries) {
+        return this.writeToNBT(compound);
+    }
+
     private void create(Level world) {
-        SRPMain.logger.debug("Creating SRPWorldData for dim {}", DimKeys.of(world));
-        boolean meteorIsEnabled = Arrays.stream(SRPConfigWorld.meteorBlacklistDims).noneMatch(dim -> dim == DimKeys.of(world));
+        ScapeAndRunParasites.LOGGER.debug("Creating SRPWorldData for dim {}", DimKeys.of(world));
+        boolean meteorIsEnabled = Arrays.stream(SRPConfigWorld.meteorBlacklistDims).noneMatch(dim -> DimKeys.of(world).equals(DimKeys.normalize(String.valueOf(dim))));
         this.setTriggerMet(meteorIsEnabled && (SRPWorldEntitySpawner.triggerSPAWNING || SRPConfigWorld.meteorActive));
-        this.markDirty();
+        this.setDirty();
     }
 
     public void resetInstance(Level world) {
-        world.getPerWorldStorage().setData(DATA_NAME, (WorldSavedData)new SRPWorldData(world));
+        if (world instanceof ServerLevel server) {
+            server.getDataStorage().set(DATA_NAME, new SRPWorldData(world));
+        }
     }
 
     public void readFromNBT(CompoundTag compound) {
@@ -102,7 +109,7 @@ extends WorldSavedData {
             tagListA = compound.getList("srpnodesages", 10);
             tagListT = compound.getList("srpnodestypes", 10);
             if (tagListX.size() != tagListY.size() || tagListX.size() != tagListZ.size() || tagListX.size() != tagListA.size() || tagListX.size() != tagListT.size()) {
-                SRPMain.logger.log(Level.ERROR, "Problem while reading nodes coords");
+                ScapeAndRunParasites.LOGGER.error("Problem while reading nodes coords");
             } else {
                 for (i = 0; i < tagListX.size(); ++i) {
                     tagX = tagListX.getCompound(i);
@@ -130,7 +137,7 @@ extends WorldSavedData {
             tagListA = compound.getList("srporiginsareas", 10);
             tagListT = compound.getList("srporiginshealths", 10);
             if (tagListX.size() != tagListY.size() || tagListX.size() != tagListZ.size() || tagListX.size() != tagListA.size() || tagListX.size() != tagListT.size()) {
-                SRPMain.logger.log(Level.ERROR, "Problem while reading origins coords");
+                ScapeAndRunParasites.LOGGER.error("Problem while reading origins coords");
             } else {
                 for (i = 0; i < tagListX.size(); ++i) {
                     tagX = tagListX.getCompound(i);
@@ -157,7 +164,7 @@ extends WorldSavedData {
             tagListZ = compound.getList("srpcoloniescoordsz", 10);
             tagListA = compound.getList("srpcoloniesages", 10);
             if (tagListX.size() != tagListY.size() || tagListX.size() != tagListZ.size() || tagListX.size() != tagListA.size()) {
-                SRPMain.logger.log(Level.ERROR, "Problem while reading colonies coords");
+                ScapeAndRunParasites.LOGGER.error("Problem while reading colonies coords");
             } else {
                 for (int i2 = 0; i2 < tagListX.size(); ++i2) {
                     CompoundTag tagX2 = tagListX.getCompound(i2);
@@ -179,7 +186,7 @@ extends WorldSavedData {
             tagListX = compound.getList("srpcolonyresistancei", 10);
             tagListY = compound.getList("srpcolonyresistances", 10);
             if (tagListX.size() != tagListY.size()) {
-                SRPMain.logger.log(Level.ERROR, "Problem while reading resistance");
+                ScapeAndRunParasites.LOGGER.error("Problem while reading resistance");
             } else {
                 for (int i3 = 0; i3 < tagListX.size(); ++i3) {
                     CompoundTag tagX3 = tagListX.getCompound(i3);
@@ -213,7 +220,7 @@ extends WorldSavedData {
         compound.putString("srpversion", "1.10.9");
         compound.putBoolean("srpmeteor", this.dimMeteor);
         if (this.nodeX.size() != this.nodeY.size() || this.nodeX.size() != this.nodeZ.size() || this.nodeX.size() != this.nodeA.size() || this.nodeX.size() != this.nodeT.size()) {
-            SRPMain.logger.log(Level.ERROR, "Problem while writing nodes coords");
+            ScapeAndRunParasites.LOGGER.error("Problem while writing nodes coords");
         } else {
             tagListX = new ListTag();
             tagListY = new ListTag();
@@ -249,7 +256,7 @@ extends WorldSavedData {
             compound.put("srpnodestypes", (Tag)tagListT);
         }
         if (this.originX.size() != this.originY.size() || this.originX.size() != this.originZ.size() || this.originX.size() != this.originA.size() || this.originX.size() != this.originH.size()) {
-            SRPMain.logger.log(Level.ERROR, "Problem while writing origins coords");
+            ScapeAndRunParasites.LOGGER.error("Problem while writing origins coords");
         } else {
             tagListX = new ListTag();
             tagListY = new ListTag();
@@ -285,7 +292,7 @@ extends WorldSavedData {
             compound.put("srporiginshealths", (Tag)tagListT);
         }
         if (this.colonyX.size() != this.colonyY.size() || this.colonyX.size() != this.colonyZ.size() || this.colonyX.size() != this.colonyA.size()) {
-            SRPMain.logger.log(Level.ERROR, "Problem while writing colonies coords");
+            ScapeAndRunParasites.LOGGER.error("Problem while writing colonies coords");
         } else {
             tagListX = new ListTag();
             tagListY = new ListTag();
@@ -315,7 +322,7 @@ extends WorldSavedData {
             compound.put("srpcoloniesages", (Tag)tagListA);
         }
         if (this.resistanceI.size() != this.resistanceS.size()) {
-            SRPMain.logger.log(Level.ERROR, "Problem while writing resistance");
+            ScapeAndRunParasites.LOGGER.error("Problem while writing resistance");
         } else {
             tagListX = new ListTag();
             tagListY = new ListTag();
@@ -356,7 +363,7 @@ extends WorldSavedData {
         this.originZ = new ArrayList();
         this.originA = new ArrayList();
         this.originH = new ArrayList();
-        this.markDirty();
+        this.setDirty();
     }
 
     public ArrayList<Integer> getorigins(String i) {
@@ -397,7 +404,7 @@ extends WorldSavedData {
             this.originZ.add(z);
             this.originA.add(radius);
             this.originH.add(heatlh);
-            this.markDirty();
+            this.setDirty();
             this.setEIVHealthToData(world, data);
         }
         if (data.getEvolutionPhase(DimKeys.of(world)) == -1) {
@@ -469,7 +476,7 @@ extends WorldSavedData {
             this.originZ.remove(i);
             this.originA.remove(i);
             this.originH.remove(i);
-            this.markDirty();
+            this.setDirty();
             this.setEIVHealthToData(worldIn, SRPSaveData.get(worldIn));
             return true;
         }
@@ -556,7 +563,7 @@ extends WorldSavedData {
     }
 
     public void updateOriginValues(Level world, int updates, SRPSaveData data) {
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         byte phase = data.getEvolutionPhase(dim);
         while (updates > 0) {
             for (int i = 0; i < this.originA.size(); ++i) {
@@ -569,7 +576,7 @@ extends WorldSavedData {
             }
             --updates;
         }
-        this.markDirty();
+        this.setDirty();
         this.setEIVHealthToData(world, data);
     }
 
@@ -696,7 +703,7 @@ extends WorldSavedData {
             } else {
                 this.originH.set(healthID, amount);
             }
-            this.markDirty();
+            this.setDirty();
             this.setEIVHealthToData(worldIn, data);
             return true;
         }
@@ -709,7 +716,7 @@ extends WorldSavedData {
         this.nodeZ = new ArrayList();
         this.nodeA = new ArrayList();
         this.nodeT = new ArrayList();
-        this.markDirty();
+        this.setDirty();
     }
 
     public ArrayList<Integer> getNodes(String i) {
@@ -757,7 +764,7 @@ extends WorldSavedData {
             this.nodeZ.add(z);
             this.nodeA.add(1);
             this.nodeT.add((byte)type);
-            this.markDirty();
+            this.setDirty();
         }
         return canAdd;
     }
@@ -780,7 +787,7 @@ extends WorldSavedData {
             this.nodeZ.remove(i);
             this.nodeA.remove(i);
             this.nodeT.remove(i);
-            this.markDirty();
+            this.setDirty();
             return true;
         }
         return false;
@@ -921,13 +928,13 @@ extends WorldSavedData {
         for (int i = this.nodeX.size() - 1; i >= 0; --i) {
             BlockState state;
             BlockPos pos = BlockPos.containing(this.nodeX.get(i).intValue(), this.nodeY.get(i).intValue(), this.nodeZ.get(i).intValue());
-            if (!worldIn.isAreaLoaded(pos, 3) || (state = worldIn.getBlockState(pos)).getBlock() == SRPBlocks.BiomeHeart.get() && state.getPropertyNames().contains(BlockBiomeCore.ACTIVE) && (Integer)state.getValue((Property)BlockBiomeCore.ACTIVE) > 0) continue;
+            if (!worldIn.isAreaLoaded(pos, 3) || (state = worldIn.getBlockState(pos)).getBlock() == SRPBlocks.BiomeHeart.get() && state.hasProperty(BlockBiomeCore.ACTIVE) && (Integer)state.getValue((Property)BlockBiomeCore.ACTIVE) > 0) continue;
             this.nodeX.remove(i);
             this.nodeY.remove(i);
             this.nodeZ.remove(i);
             this.nodeA.remove(i);
             this.nodeT.remove(i);
-            this.markDirty();
+            this.setDirty();
         }
     }
 
@@ -953,7 +960,7 @@ extends WorldSavedData {
         this.colonyY = new ArrayList();
         this.colonyZ = new ArrayList();
         this.colonyA = new ArrayList();
-        this.markDirty();
+        this.setDirty();
     }
 
     public ArrayList<Integer> getColonies(String i) {
@@ -993,7 +1000,7 @@ extends WorldSavedData {
             this.colonyY.add(y);
             this.colonyZ.add(z);
             this.colonyA.add(1);
-            this.markDirty();
+            this.setDirty();
         }
         return canAdd;
     }
@@ -1015,7 +1022,7 @@ extends WorldSavedData {
             this.colonyY.remove(i);
             this.colonyZ.remove(i);
             this.colonyA.remove(i);
-            this.markDirty();
+            this.setDirty();
             return true;
         }
         return false;
@@ -1104,12 +1111,12 @@ extends WorldSavedData {
         for (int i = this.colonyX.size() - 1; i >= 0; --i) {
             BlockState state;
             BlockPos pos = BlockPos.containing(this.colonyX.get(i).intValue(), this.colonyY.get(i).intValue(), this.colonyZ.get(i).intValue());
-            if (!worldIn.isAreaLoaded(pos, 3) || ((state = worldIn.getBlockState(pos)).getBlock() == SRPBlocks.ColonyHeart.get() || state.getBlock() == SRPBlocks.ColonyOutpost.get()) && state.getPropertyNames().contains(BlockColonyCore.ACTIVE) && (Integer)state.getValue((Property)BlockColonyCore.ACTIVE) > 0) continue;
+            if (!worldIn.isAreaLoaded(pos, 3) || ((state = worldIn.getBlockState(pos)).getBlock() == SRPBlocks.ColonyHeart.get() || state.getBlock() == SRPBlocks.ColonyOutpost.get()) && state.hasProperty(BlockColonyCore.ACTIVE) && (Integer)state.getValue((Property)BlockColonyCore.ACTIVE) > 0) continue;
             this.colonyX.remove(i);
             this.colonyY.remove(i);
             this.colonyZ.remove(i);
             this.colonyA.remove(i);
-            this.markDirty();
+            this.setDirty();
         }
     }
 
@@ -1126,7 +1133,7 @@ extends WorldSavedData {
             this.resistanceS.add(damage);
             this.resistanceI.add(1);
         }
-        this.markDirty();
+        this.setDirty();
     }
 
     public String getMostCommonDamageS() {
@@ -1155,7 +1162,7 @@ extends WorldSavedData {
     public void resetGlobalAdaptation() {
         this.resistanceI = new ArrayList();
         this.resistanceS = new ArrayList();
-        this.markDirty();
+        this.setDirty();
     }
 
     public ArrayList<String> getAdaptationS() {
@@ -1182,7 +1189,7 @@ extends WorldSavedData {
             atm = this.colonyA.get(i) + count;
             this.colonyA.set(i, atm);
         }
-        this.markDirty();
+        this.setDirty();
         this.updateOriginValues(world, count, data);
     }
 }

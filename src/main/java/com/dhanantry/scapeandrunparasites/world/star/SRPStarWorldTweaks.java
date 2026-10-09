@@ -2,8 +2,8 @@ package com.dhanantry.scapeandrunparasites.world.star;
 
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.star.SRPStarWorldData;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -17,8 +17,8 @@ public class SRPStarWorldTweaks {
 
     @SubscribeEvent
     public void onPopulatePost(PopulateChunkEvent.Post event) {
-        Level world = event.getWorld();
-        if (world == null || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        Level world = event.getLevel();
+        if (world == null || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         int starType = SRPStarWorldData.get(world).getStarType();
@@ -29,8 +29,8 @@ public class SRPStarWorldTweaks {
 
     @SubscribeEvent
     public void onDecoratePost(DecorateBiomeEvent.Post event) {
-        Level world = event.getWorld();
-        if (world == null || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        Level world = event.getLevel();
+        if (world == null || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         int starType = SRPStarWorldData.get(world).getStarType();
@@ -51,7 +51,7 @@ public class SRPStarWorldTweaks {
                 for (int y = 63; y > 48; --y) {
                     pos.set(startX + x, y, startZ + z);
                     BlockState state = world.getBlockState((BlockPos)pos);
-                    if (state.getMaterial() != Material.water && state.getBlock() != Blocks.ICE) continue;
+                    if (LegacyMaterial.of(state) != LegacyMaterial.water && state.getBlock() != Blocks.ICE) continue;
                     world.setBlock((BlockPos)pos, Blocks.AIR.defaultBlockState(), 2);
                 }
             }

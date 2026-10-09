@@ -1,7 +1,7 @@
 package com.dhanantry.scapeandrunparasites.util.convert;
 
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import java.util.Collection;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.properties.Property;
 public final class HarlequinBlockConverter {
     public static Block convert(Level world, BlockPos pos, BlockState state, boolean blotchHere, RandomSource rand, Config cfg) {
         Block b = state.getBlock();
-        Material mat = state.getMaterial();
-        if (mat == Material.air || mat == Material.water || mat == Material.lava) {
+        LegacyMaterial mat = LegacyMaterial.of(state);
+        if (mat == LegacyMaterial.air || mat == LegacyMaterial.water || mat == LegacyMaterial.lava) {
             return null;
         }
         if (b instanceof BlockLeaves) {
@@ -85,7 +85,7 @@ public final class HarlequinBlockConverter {
     }
 
     private static boolean isAnySandstone(BlockState s) {
-        return s.getBlock() instanceof BlockSandStone || s.getBlock() == Blocks.RED_SANDSTONE;
+        return s.getBlock() instanceof SandstoneBlock || s.getBlock() == Blocks.RED_SANDSTONE;
     }
 
     private static boolean canSustain(Level world, BlockState ground, BlockPos pos, Block plant) {

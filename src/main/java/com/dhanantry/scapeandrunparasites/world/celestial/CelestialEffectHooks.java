@@ -9,13 +9,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class CelestialEffectHooks {
     private static boolean isNight(Level world) {
-        long dayTime = world.getWorldTime() % 24000L;
+        long dayTime = world.getDayTime() % 24000L;
         return dayTime >= 13000L && dayTime <= 23000L;
     }
 
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent e) {
-        Level world = e.getWorld();
+        Level world = e.getLevel();
         if (world == null || world.isClientSide) {
             return;
         }

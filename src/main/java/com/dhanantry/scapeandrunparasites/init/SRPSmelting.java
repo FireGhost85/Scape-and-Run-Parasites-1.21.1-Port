@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.init;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +12,7 @@ public final class SRPSmelting {
     }
 
     private static ItemStack b(String path, int meta, int count) {
-        Block blk = (Block)ForgeRegistries.BLOCKS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", path));
+        Block blk = (Block)BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("srparasites", path));
         if (blk == null) {
             throw new IllegalStateException("Missing block: srparasites:" + path);
         }

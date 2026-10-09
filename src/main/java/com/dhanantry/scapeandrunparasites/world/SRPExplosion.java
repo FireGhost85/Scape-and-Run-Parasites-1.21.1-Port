@@ -2,12 +2,13 @@ package com.dhanantry.scapeandrunparasites.world;
 
 import com.dhanantry.scapeandrunparasites.config.SRPConfig;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
+import com.dhanantry.scapeandrunparasites.util.BlockIds;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.util.Mot;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -90,7 +91,7 @@ extends Explosion {
                     for (float f = this.size * (0.7f + this.world.random.nextFloat() * 0.6f); f > 0.0f; f -= 0.22500001f) {
                         BlockPos blockpos = BlockPos.containing(d4, d6, d8);
                         BlockState iblockstate = this.world.getBlockState(blockpos);
-                        if (iblockstate.getMaterial() != Material.air) {
+                        if (LegacyMaterial.of(iblockstate) != LegacyMaterial.air) {
                             float f2 = this.exploder != null ? this.exploder.getExplosionResistance((Explosion)this, this.world, blockpos, iblockstate) : iblockstate.getBlock().getExplosionResistance(this.world, blockpos, null, (Explosion)this);
                             f -= (f2 + 0.3f) * 0.3f;
                         }
@@ -169,16 +170,16 @@ extends Explosion {
                     this.world.addParticle(ParticleTypes.POOF, (d0 + this.x) / 2.0, (d1 + this.y) / 2.0, (d2 + this.z) / 2.0, d3 *= (d7 *= (double)(this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3f)), d4 *= d7, d5 *= d7);
                     this.world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, d3, d4, d5);
                 }
-                if (iblockstate.getMaterial() == Material.air) continue;
+                if (LegacyMaterial.of(iblockstate) == LegacyMaterial.air) continue;
                 if (block.canDropFromExplosion((Explosion)this) && this.shooterTwo != null) {
-                    this.shooterTwo.addToBlockInv(block.builtInRegistryHolder().key().location().toString() + ";" + block.getMetaFromStatePlaceholder(iblockstate));
+                    this.shooterTwo.addToBlockInv(block.builtInRegistryHolder().key().location().toString() + ";" + BlockIds.legacyMeta(iblockstate));
                 }
                 block.onBlockExploded(this.world, blockpos, (Explosion)this);
             }
         }
         if (this.causesFire) {
             for (BlockPos blockpos1 : this.affectedBlockPositions) {
-                if (this.world.getBlockState(blockpos1).getMaterialPlaceholder() != Material.air || !this.world.getBlockState(blockpos1.below()).isCollisionShapeFullBlock(this.world, blockpos1.below()) || this.random.nextInt(3) != 0) continue;
+                if (this.world.getBlockState(blockpos1).getMaterialPlaceholder() != LegacyMaterial.air || !this.world.getBlockState(blockpos1.below()).isCollisionShapeFullBlock(this.world, blockpos1.below()) || this.random.nextInt(3) != 0) continue;
                 this.world.setBlockAndUpdate(blockpos1, Blocks.FIRE.defaultBlockState());
             }
         }

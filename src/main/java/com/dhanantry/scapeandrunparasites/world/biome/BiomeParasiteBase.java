@@ -5,16 +5,15 @@ import com.dhanantry.scapeandrunparasites.block.BlockParasiteStain;
 import com.dhanantry.scapeandrunparasites.block.IMetaName;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
+import com.dhanantry.scapeandrunparasites.util.BlockIds;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventWorld;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteDecorator;
 import com.dhanantry.scapeandrunparasites.world.gen.WorldGenAbstractTree;
-import java.util.Collection;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -22,29 +21,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 
-public abstract class BiomeParasiteBase
-extends Biome {
+public abstract class BiomeParasiteBase {
     protected WorldGenAbstractTree tree;
 
-    public BiomeParasiteBase(Biome.BiomeProperties properties) {
-        super(properties);
-    }
+    private static final java.util.Map<net.minecraft.resources.ResourceKey<Biome>, BiomeParasiteBase> INSTANCES = new java.util.HashMap<>();
 
-    public void setBlocks() {
-        String[] blockList = this.getDirt().split(":");
-        Block one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-        this.topBlock = one.getStateFromMeta(Integer.parseInt(blockList[2]));
-        blockList = this.getStone().split(":");
-        one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-        this.fillerBlock = one.getStateFromMeta(Integer.parseInt(blockList[2]));
-        this.theBiomeDecorator = new BiomeParasiteDecorator(this);
-    }
-
-    public void mobListClear() {
-        this.spawnableCreatureList.clear();
-        this.spawnableMonsterList.clear();
-        this.spawnableWaterCreatureList.clear();
-        this.spawnableCaveCreatureList.clear();
+    /** The block palette / feature helper of a parasite biome (the biome itself is a data driven 1.21 biome). */
+    public static BiomeParasiteBase get(net.minecraft.resources.ResourceKey<Biome> key) {
+        return INSTANCES.computeIfAbsent(key, k -> k.equals(com.dhanantry.scapeandrunparasites.block.SRPBlockLinks.BIOME_HARLEQUIN) ? new BiomeParasiteHarlequin() : new BiomeParasiteShrouded());
     }
 
     public abstract float getRedValue();
@@ -86,12 +70,12 @@ extends Biome {
         String[] blockList;
         int currentMeta;
         BlockState lookingState = worldIn.getBlockState(helper);
-        Material mat = lookingState.getMaterial();
+        LegacyMaterial mat = LegacyMaterial.of(lookingState);
         Block lookingBlock = lookingState.getBlock();
         if (lookingBlock instanceof IMetaName) {
             return 0;
         }
-        if (mat == Material.air || mat == Material.water || mat == Material.lava) {
+        if (mat == LegacyMaterial.air || mat == LegacyMaterial.water || mat == LegacyMaterial.lava) {
             return 0;
         }
         ResourceLocation rl = lookingBlock.builtInRegistryHolder().key().location();
@@ -99,7 +83,7 @@ extends Biome {
             return 0;
         }
         String lookingName = rl.toString();
-        if (BiomeParasiteBase.transformBlockList(helper, worldIn, lookingName, currentMeta = lookingBlock.getMetaFromStatePlaceholder(lookingState), blockList = this.getBlockList())) {
+        if (BiomeParasiteBase.transformBlockList(helper, worldIn, lookingName, currentMeta = BlockIds.legacyMeta(lookingState), blockList = this.getBlockList())) {
             return 1;
         }
         if (ParasiteEventWorld.blockException(worldIn, helper, lookingBlock, lookingState, SRPConfigWorld.blockBBiomeList, SRPConfigWorld.blockBBiomeListWhite, SRPConfigWorld.biomeBlockIMaxH)) {
@@ -108,73 +92,73 @@ extends Biome {
         if (BiomeParasiteBase.transformBlockList(helper, worldIn, lookingName, currentMeta, blockList)) {
             return 1;
         }
-        if (lookingBlock.isWood((BlockGetter)worldIn, helper) || lookingBlock == SRPBlocks.InfestedTrunk.get()) {
+        if (worldIn.getBlockState(helper).is(BlockTags.LOGS) || lookingBlock == SRPBlocks.InfestedTrunk.get()) {
             blockList = this.getLog().split(":");
-            Block one2 = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one2.getStateFromMeta(Integer.parseInt(blockList[2])));
+            Block one2 = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             return 1;
         }
-        if (lookingBlock.isLeaves(lookingState, (BlockGetter)worldIn, helper)) {
+        if (lookingState.is(BlockTags.LEAVES)) {
             BlockPos below;
             blockList = this.getLeaves().split(":");
-            Block one3 = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one3.getStateFromMeta(Integer.parseInt(blockList[2])));
+            Block one3 = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             if (rand.nextInt(100) < 30 && worldIn.isEmptyBlock(below = helper.below())) {
                 blockList = this.getLeavesG().split(":");
-                one3 = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-                BlockState growth = BiomeParasiteBase.setFacingIfPresent(one3.getStateFromMeta(Integer.parseInt(blockList[2])), Direction.DOWN);
+                one3 = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+                BlockState growth = BiomeParasiteBase.setFacingIfPresent(BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]), Direction.DOWN);
                 worldIn.setBlock(below, growth, 2);
             }
             return 1;
         }
         if (lookingBlock == SRPBlocks.InfestedStain.get()) {
             blockList = this.getDirt().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
         }
-        if (mat == Material.ground || mat == Material.grass) {
+        if (mat == LegacyMaterial.ground || mat == LegacyMaterial.grass) {
             blockList = this.getDirt().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (lookingBlock instanceof BlockSand) {
+        if (lookingBlock instanceof net.minecraft.world.level.block.SandBlock) {
             blockList = this.getSand().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (lookingBlock instanceof BlockSandStone) {
+        if (lookingBlock.builtInRegistryHolder().key().location().getPath().contains("sandstone")) {
             blockList = this.getSandstone().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (lookingBlock == Blocks.GRAVEL || mat == Material.sand) {
+        if (lookingBlock == Blocks.GRAVEL || mat == LegacyMaterial.sand) {
             blockList = this.getGravel().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
         if (lookingBlock == Blocks.COBBLESTONE) {
             blockList = this.getCobblestone().split(":");
-            one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-            worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+            one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+            worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (mat == Material.rock) {
+        if (mat == LegacyMaterial.rock) {
             if (lookingBlock == SRPBlocks.BiomeHeart.get() || lookingBlock == SRPBlocks.ColonyHeart.get()) {
                 return 0;
             }
@@ -184,26 +168,26 @@ extends Biome {
                 worldIn.setBlockAndUpdate(helper, SRPBlocks.ParasiteRubble.get().defaultBlockState().setValue(BlockParasiteRubble.VARIANT, (BlockParasiteRubble.EnumType.BRICKS)));
             } else {
                 blockList = this.getStone().split(":");
-                one = Block.getBlockFromName((String)(blockList[0] + ":" + blockList[1]));
-                worldIn.setBlockAndUpdate(helper, one.getStateFromMeta(Integer.parseInt(blockList[2])));
+                one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
+                worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));
             }
             this.spawnGenFeatureParasite(worldIn, helper.above(), rand);
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (mat == Material.plants) {
+        if (mat == LegacyMaterial.plants) {
             worldIn.setBlockAndUpdate(helper, SRPBlocks.ParasiteStain.get().defaultBlockState().setValue(BlockParasiteStain.VARIANT, (BlockParasiteStain.EnumType.FLESH)));
             return 1;
         }
-        if (mat == Material.ice || mat == Material.packedIce) {
+        if (mat == LegacyMaterial.ice || mat == LegacyMaterial.packedIce) {
             worldIn.setBlockAndUpdate(helper, SRPBlocks.BloodyIce.get().defaultBlockState());
             return 1;
         }
-        if (mat == Material.iron) {
+        if (mat == LegacyMaterial.iron) {
             worldIn.setBlockAndUpdate(helper, SRPBlocks.ParasiteRubble.get().defaultBlockState().setValue(BlockParasiteRubble.VARIANT, (BlockParasiteRubble.EnumType.METAL)));
             return 1;
         }
-        if (mat == Material.wood && lookingBlock != SRPBlocks.InfestedTrunk.get()) {
+        if (mat == LegacyMaterial.wood && lookingBlock != SRPBlocks.InfestedTrunk.get()) {
             if (lookingBlock.builtInRegistryHolder().key().location().toString().contains("mushroom")) {
                 worldIn.setBlockAndUpdate(helper, SRPBlocks.ParasiteRubble.get().defaultBlockState().setValue(BlockParasiteRubble.VARIANT, (BlockParasiteRubble.EnumType.FUNGUS)));
             } else {
@@ -214,12 +198,11 @@ extends Biome {
         return 0;
     }
 
+    @SuppressWarnings("unchecked")
     private static BlockState setFacingIfPresent(BlockState state, Direction face) {
-        Collection props = state.getPropertyNames();
-        for (Property p : props) {
-            Property pf;
-            if (!p.getName().equalsIgnoreCase("facing") || p.getValueClass() != Direction.class || !(pf = p).getAllowedValues().contains(face)) continue;
-            return state.setValue(pf, face);
+        for (Property<?> p : state.getProperties()) {
+            if (!p.getName().equalsIgnoreCase("facing") || p.getValueClass() != Direction.class || !((Property<Direction>) p).getPossibleValues().contains(face)) continue;
+            return state.setValue((Property<Direction>) p, face);
         }
         return state;
     }
@@ -238,9 +221,9 @@ extends Biome {
             if ("minecraft:glass".equals(name)) {
                 System.out.println("[SRP] transformBlockList evaluating GLASS: rule=" + rule + " meta=" + meta);
             }
-            if (!nm[0].equals(src[0]) || !nm[1].equals(src[1]) || meta != Integer.parseInt(src[2]) || (putting = Block.getBlockFromName((String)(dst[0] + ":" + dst[1]))) == null) continue;
+            if (!nm[0].equals(src[0]) || !nm[1].equals(src[1]) || meta != Integer.parseInt(src[2]) || (putting = BlockIds.parseBlock(dst[0] + ":" + dst[1])) == null) continue;
             int dstMeta = Integer.parseInt(dst[2]);
-            worldIn.setBlock(helper, putting.getStateFromMeta(dstMeta), 3);
+            worldIn.setBlock(helper, BlockIds.legacyState(putting, dstMeta), 3);
             return true;
         }
         return false;

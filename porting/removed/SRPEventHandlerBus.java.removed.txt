@@ -1,0 +1,354 @@
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) {
+            return;
+        }
+        if (mc.player.hasEffect(SRPPotions.INDEAF_E)) {
+            int i = Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey();
+            KeyBinding cfr_ignored_0 = mc.gameSettings.keyBindForward;
+            KeyBinding.setKeyBindState((int)i, (boolean)false);
+            KeyBinding cfr_ignored_1 = mc.gameSettings.keyBindBack;
+            KeyBinding.setKeyBindState((int)i, (boolean)false);
+            KeyBinding cfr_ignored_2 = mc.gameSettings.keyBindLeft;
+            KeyBinding.setKeyBindState((int)i, (boolean)false);
+            KeyBinding cfr_ignored_3 = mc.gameSettings.keyBindRight;
+            KeyBinding.setKeyBindState((int)i, (boolean)false);
+            KeyBinding cfr_ignored_4 = mc.gameSettings.keyBindJump;
+            KeyBinding.setKeyBindState((int)i, (boolean)false);
+        }
+    }
+
+    @SubscribeEvent
+    public void soundTwo(PlayStreamingSourceEvent event) {
+        ScapeAndRunParasites.LOGGER.debug("phase: {} s: {} ticks: {}", clientCurrentEvoPhase, event.getName(), musicTimer);
+        if (!SRPConfig.musicTrue) {
+            return;
+        }
+        if (!(event.getName().contains("srparasites") || clientCurrentEvoPhase <= 0 && clientScent <= 0)) {
+            if (SRPConfigWorld.originActivated && clientScent <= 0 && clientVector <= 0) {
+                return;
+            }
+            this.musicToRemove.add(event.getSound());
+            ScapeAndRunParasites.LOGGER.debug("added {}", event.getName());
+        }
+    }
+
+    @SubscribeEvent
+    public void soundThree(TickEvent.PlayerTickEvent event) {
+        if (!SRPConfig.musicTrue) {
+            return;
+        }
+        if (event.phase == TickEvent.Phase.END) {
+            return;
+        }
+        if (event.side != Side.CLIENT) {
+            return;
+        }
+        if (Minecraft.getInstance() == null) {
+            return;
+        }
+        if (event.player.tickCount % 20 == 0) {
+            PacketDistributor.sendToServer(new SRPPacketRequestEvoPhaseClient());
+        }
+        int prev = clientVector;
+        if (clientVector > -10) {
+            --clientVector;
+        }
+        if (SRPConfigWorld.originActivated && clientVector <= 0) {
+            if (prev > 0) {
+                Minecraft.getInstance().getSoundHandler().stop("", SoundSource.MUSIC);
+            }
+            return;
+        }
+        if (!this.musicToRemove.isEmpty()) {
+            for (int i = 0; i < this.musicToRemove.size(); ++i) {
+                if (Minecraft.getInstance().getSoundHandler().isSoundPlaying(this.musicToRemove.get(i))) {
+                    Minecraft.getInstance().getSoundHandler().stopSound(this.musicToRemove.get(i));
+                    this.musicToRemove.remove(i);
+                    --i;
+                    continue;
+                }
+                this.lockedMu = (byte)(this.lockedMu + 1);
+            }
+            if (this.lockedMu >= 100) {
+                this.musicToRemove = new ArrayList();
+            }
+        }
+        if (musicTimer >= 0) {
+            --musicTimer;
+        }
+        if (clientScent >= 0) {
+            --clientScent;
+        }
+        if (clientScent == -1) {
+            Minecraft.getInstance().getSoundHandler().stop("", SoundSource.MUSIC);
+            clientScent = -10;
+        }
+        if (musicTimer <= 0 && this.musicToRemove.isEmpty() && clientCurrentEvoPhase > 0) {
+            SRPEventHandlerBus.resetSouncTicker(0);
+            MusicTicker.MusicType evoPhaseMusic = this.getMusicPhase();
+            if (evoPhaseMusic == null) {
+                return;
+            }
+            if (clientScent <= 0) {
+                Minecraft.getInstance().getSoundHandler().stop("", SoundSource.MUSIC);
+                Minecraft.getInstance().getSoundHandler().playSound((SoundInstance)PositionedSoundRecord.getMusicRecord((SoundEvent)evoPhaseMusic.getMusicLocation()));
+            }
+        } else {
+            SRPEventHandlerBus.resetSouncTicker(0);
+        }
+    }
+
+    private MusicTicker.MusicType getMusicPhase() {
+        EntityPlayerSP player = Minecraft.getInstance().player;
+        if (player.level().getBiome(player.blockPosition()).value() instanceof BiomeParasiteBase) {
+            return SRPMusic.BIOME_MUSIC;
+        }
+        switch (clientCurrentEvoPhase) {
+            case 1: {
+                return SRPMusic.EVPHASE_1_MUSIC;
+            }
+            case 2: {
+                return SRPMusic.EVPHASE_2_MUSIC;
+            }
+            case 3: {
+                return SRPMusic.EVPHASE_3_MUSIC;
+            }
+            case 4: {
+                return SRPMusic.EVPHASE_4_MUSIC;
+            }
+            case 5: {
+                return SRPMusic.EVPHASE_5_MUSIC;
+            }
+            case 6: {
+                return SRPMusic.EVPHASE_6_MUSIC;
+            }
+            case 7: {
+                return SRPMusic.EVPHASE_7_MUSIC;
+            }
+            case 8: {
+                return SRPMusic.EVPHASE_8_MUSIC;
+            }
+            case 9: {
+                return SRPMusic.EVPHASE_9_MUSIC;
+            }
+            case 10: {
+                return SRPMusic.EVPHASE_10_MUSIC;
+            }
+        }
+        return null;
+    }
+
+    public static void resetSouncTicker(int in) {
+        int goo;
+        if (in > 0) {
+            if (musicTimer < in) {
+                return;
+            }
+            musicTimer = in;
+            return;
+        }
+        RandomSource rand = RandomSource.create();
+        int atm2 = SRPConfig.musicMax - SRPConfig.musicMin + 1;
+        if (atm2 <= 0 || SRPConfig.musicMax <= SRPConfig.musicMin) {
+            int n = SRPConfig.musicMax + 1000;
+        }
+        if (musicTimer < (goo = rand.nextInt(atm2) + SRPConfig.musicMin) && musicTimer > 0) {
+            return;
+        }
+        musicTimer = goo;
+    }
+
+    @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+    public void onEvent(EntityViewRenderEvent.FogDensity event) {
+        Entity entity = event.getEntity();
+        if (entity.isInsideOfMaterial(SRPBlocks.PARASITEBLOOD)) {
+            GlStateManager.setFog((GlStateManager.FogMode)GlStateManager.FogMode.EXP);
+            event.setDensity(1.0f);
+            event.setCanceled(true);
+            return;
+        }
+        if (fog > 0.0f && !Minecraft.getInstance().player.hasEffect(MobEffects.BLINDNESS)) {
+            GlStateManager.setFog((GlStateManager.FogMode)GlStateManager.FogMode.EXP);
+            event.setDensity(fog);
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+    public void onEvent(EntityViewRenderEvent.FogColors event) {
+        Entity entity = event.getEntity();
+        if (entity.isInsideOfMaterial(SRPBlocks.PARASITEBLOOD)) {
+            event.setRed(0.1f);
+            event.setGreen(0.6f);
+            event.setBlue(0.2f);
+            return;
+        }
+        if ((double)fog > (double)SRPConfigWorld.biomeFogDensity * 0.2 && !Minecraft.getInstance().player.hasEffect(MobEffects.BLINDNESS)) {
+            event.setRed(fogRed);
+            event.setGreen(fogGreen);
+            event.setBlue(fogBlue);
+        }
+    }
+
+    @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+    public void onEvent(MouseEvent event) {
+        if (SRPConfig.weaponCancelPacket) {
+            return;
+        }
+        if (event.getButton() == 0 && event.isButtonstate()) {
+            float reach;
+            HitResult mov;
+            IHaveReach ieri;
+            ItemStack itemstack;
+            Minecraft mc = Minecraft.getInstance();
+            EntityPlayerSP thePlayer = mc.player;
+            if (thePlayer != null && (itemstack = thePlayer.getMainHandItem()) != null && (ieri = itemstack.getItem() instanceof IHaveReach ? (IHaveReach)itemstack.getItem() : null) != null && (mov = this.getMouseOverExtended(reach = ieri.getReach())) != null && mov.entityHit != null && mov.entityHit.hurtResistantTime == 0 && mov.entityHit != thePlayer) {
+                PacketDistributor.sendToServer(new SRPPacketMeleeRange(mov.entityHit.getId()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void stitchEventPre(TextureStitchEvent.Pre event) {
+        event.getMap().registerSprite(ParticleFog.PARTICLES_TEXTURE);
+        event.getMap().registerSprite(ParticleEen.RED);
+        event.getMap().registerSprite(ParticleDot.DOT);
+        event.getMap().registerSprite(ParticleRHappy.REDHAPPY);
+        event.getMap().registerSprite(ParticleFlash.FLASH);
+        event.getMap().registerSprite(ParticleBlood.BLOOD1);
+        event.getMap().registerSprite(ParticleBlood.BLOOD2);
+        event.getMap().registerSprite(ParticleBlood.BLOOD_LAND);
+        event.getMap().registerSprite(ParticleSpore.WHITE1);
+        event.getMap().registerSprite(ParticleSpore.WHITE2);
+        event.getMap().registerSprite(ParticleSpore.WHITE3);
+        event.getMap().registerSprite(ParticleSpore.WHITE4);
+        event.getMap().registerSprite(ParticleMultipleGore.ASSIMILATED1);
+        event.getMap().registerSprite(ParticleMultipleGore.ASSIMILATED2);
+        event.getMap().registerSprite(ParticleMultipleGore.ASSIMILATED3);
+        event.getMap().registerSprite(ParticleMultipleGore.PURE1);
+        event.getMap().registerSprite(ParticleMultipleGore.PURE2);
+        event.getMap().registerSprite(ParticleMultipleGore.PURE3);
+        event.getMap().registerSprite(ParticleMultipleGore.PRIMITIVE1);
+        event.getMap().registerSprite(ParticleMultipleGore.PRIMITIVE2);
+        event.getMap().registerSprite(ParticleMultipleGore.PRIMITIVE3);
+        event.getMap().registerSprite(ParticleMultipleGore.ADAPTED1);
+        event.getMap().registerSprite(ParticleMultipleGore.ADAPTED2);
+        event.getMap().registerSprite(ParticleMultipleGore.ADAPTED3);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT1);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT2);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT3);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT4);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT5);
+        event.getMap().registerSprite(ParticleMultipleGore.VOMIT6);
+        event.getMap().registerSprite(ParticleBiomass.BIOMASS1);
+        event.getMap().registerSprite(ParticleBiomass.BIOMASS2);
+        event.getMap().registerSprite(ParticleBiomass.BIOMASS3);
+        event.getMap().registerSprite(ParticleBiomass.BIOMASS4);
+        event.getMap().registerSprite(ParticleWind.WIND1);
+        event.getMap().registerSprite(ParticleWind.WIND2);
+        event.getMap().registerSprite(ParticleWind.WIND3);
+        event.getMap().registerSprite(ParticleWind.WIND4);
+        event.getMap().registerSprite(ParticleWind.WIND5);
+        event.getMap().registerSprite(ParticleWind.WIND6);
+        event.getMap().registerSprite(ParticleWind.WIND7);
+        event.getMap().registerSprite(ParticleWind.WIND8);
+        event.getMap().registerSprite(ParticleWind.WIND9);
+        event.getMap().registerSprite(ParticleWind.WIND10);
+        event.getMap().registerSprite(ParticleWind.WIND11);
+        event.getMap().registerSprite(ParticleWind.WIND12);
+        event.getMap().registerSprite(ParticleWind.WIND13);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG_INTRO1);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG_INTRO2);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG_INTRO3);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG_INTRO4);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG_INTRO5);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG1);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG2);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG3);
+        event.getMap().registerSprite(ParticleCoolerFog.FOG4);
+        event.getMap().registerSprite(ParticleRage.RAGE1);
+        event.getMap().registerSprite(ParticleRage.RAGE2);
+        event.getMap().registerSprite(ParticleRage.RAGE3);
+    }
+
+    @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+    public void guiPlayer(GuiOpenEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        EntityPlayerSP player = mc.player;
+        if (player == null || event.getGui() == null) {
+            return;
+        }
+        if (player.isCreative() || event.getGui().doesGuiPauseGame()) {
+            return;
+        }
+        if (player.hasEffect(SRPPotions.FEAR_E) && SRPConfigSystems.fearActive && !player.getAbilities().invulnerable && player.getEffect(SRPPotions.FEAR_E).getAmplifier() >= 3 && player.level().random.nextDouble() < (double)SRPConfigSystems.fearInvChance) {
+            player.displayClientMessage(Component.translatable("message.srparasites.feargui", new Object[0]), true);
+            this.closeG = true;
+        }
+    }
+
+    @SubscribeEvent
+    public void onMouse(MouseEvent event) {
+        if (event.getButton() != 0 || !event.isButtonstate()) {
+            return;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        EntityPlayerSP p = mc.player;
+        if (p == null) {
+            return;
+        }
+        Item item = p.getMainHandItem().getItem();
+        if (!(item instanceof WeaponToolMeleeBase)) {
+            return;
+        }
+        if (p.getCooldowns().isOnCooldown(item)) {
+            event.setCanceled(true);
+        }
+    }
+
+    private HitResult getMouseOverExtended(float dist) {
+        Minecraft mc = FMLClientHandler.instance().getClient();
+        Entity theRenderViewEntity = mc.getRenderViewEntity();
+        assert (theRenderViewEntity != null);
+        AABB theViewBoundingBox = new AABB(theRenderViewEntity.getX() - 0.5, theRenderViewEntity.getY() - 0.0, theRenderViewEntity.getZ() - 0.5, theRenderViewEntity.getX() + 0.5, theRenderViewEntity.getY() + 1.5, theRenderViewEntity.getZ() + 0.5);
+        HitResult returnMOP = null;
+        if (mc.theWorld != null) {
+            double var2 = dist;
+            returnMOP = theRenderViewEntity.rayTrace(var2, 0.0f);
+            double calcdist = var2;
+            Vec3 pos = theRenderViewEntity.getEyePosition(0.0f);
+            var2 = calcdist;
+            if (returnMOP != null) {
+                calcdist = returnMOP.getLocation().distanceTo(pos);
+            }
+            Vec3 lookvec = theRenderViewEntity.getViewVector(0.0f);
+            Vec3 var8 = pos.add(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
+            Entity pointedEntity = null;
+            float var9 = 1.0f;
+            List<? extends Entity> list = mc.theWorld.getEntities(theRenderViewEntity, theViewBoundingBox.addCoord(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2).expandTowards((double)var9, (double)var9, (double)var9));
+            double d = calcdist;
+            for (Entity entity : list) {
+                double d1;
+                if (!entity.canBeCollidedWith()) continue;
+                float bordersize = entity.getPickRadius();
+                AABB aabb = new AABB(entity.getX() - (double)(entity.getBbWidth() / 2.0f), entity.getY(), entity.getZ() - (double)(entity.getBbWidth() / 2.0f), entity.getX() + (double)(entity.getBbWidth() / 2.0f), entity.getY() + (double)entity.getBbHeight(), entity.getZ() + (double)(entity.getBbWidth() / 2.0f));
+                aabb.addCoord((double)bordersize, (double)bordersize, (double)bordersize);
+                HitResult mop0 = aabb.clip(pos, var8);
+                if (aabb.isVecInside(pos)) {
+                    if (!(0.0 < d) && d != 0.0) continue;
+                    pointedEntity = entity;
+                    d = 0.0;
+                    continue;
+                }
+                if (mop0 == null || !((d1 = pos.distanceTo(mop0.getLocation())) < d) && d != 0.0) continue;
+                pointedEntity = entity;
+                d = d1;
+            }
+            if (pointedEntity != null && (d < calcdist || returnMOP == null)) {
+                returnMOP = new HitResult(pointedEntity);
+            }
+        }
+        return returnMOP;
+    }

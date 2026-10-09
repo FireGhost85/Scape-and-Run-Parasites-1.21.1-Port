@@ -1,8 +1,8 @@
 package com.dhanantry.scapeandrunparasites.world.star;
 
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.star.SRPStarWorldData;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,8 +24,8 @@ public class SRPFracturedTerrainHandler {
 
     @SubscribeEvent(priority=EventPriority.HIGHEST)
     public void onPopulatePre(PopulateChunkEvent.Pre event) {
-        Level world = event.getWorld();
-        if (world == null || world.isClientSide || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        Level world = event.getLevel();
+        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         SRPStarWorldData data = SRPStarWorldData.get(world);
@@ -169,7 +169,7 @@ public class SRPFracturedTerrainHandler {
         for (int y = surfaceY; y >= bottomY; --y) {
             BlockState state = chunk.getBlockState(localX, y, localZ);
             if (!this.canCarveTerrain(state)) {
-                if (!state.getMaterial().isLiquid()) continue;
+                if (!LegacyMaterial.of(state).isLiquid()) continue;
                 break;
             }
             this.setBlock(chunk, worldX, y, worldZ, Blocks.AIR.defaultBlockState());
@@ -236,20 +236,20 @@ public class SRPFracturedTerrainHandler {
 
     private boolean isTerrainSurface(BlockState state) {
         Block block = state.getBlock();
-        if (block == Blocks.BEDROCK || state.getMaterial().isLiquid()) {
+        if (block == Blocks.BEDROCK || LegacyMaterial.of(state).isLiquid()) {
             return false;
         }
-        Material material = state.getMaterial();
-        return material == Material.rock || material == Material.ground || material == Material.grass || material == Material.sand || material == Material.snow || material == Material.craftedSnow || material == Material.ice || material == Material.packedIce;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return material == LegacyMaterial.rock || material == LegacyMaterial.ground || material == LegacyMaterial.grass || material == LegacyMaterial.sand || material == LegacyMaterial.snow || material == LegacyMaterial.craftedSnow || material == LegacyMaterial.ice || material == LegacyMaterial.packedIce;
     }
 
     private boolean canCarveTerrain(BlockState state) {
         Block block = state.getBlock();
-        if (block == Blocks.BEDROCK || state.getMaterial().isLiquid() || block.hasTileEntity(state)) {
+        if (block == Blocks.BEDROCK || LegacyMaterial.of(state).isLiquid() || block.hasTileEntity(state)) {
             return false;
         }
-        Material material = state.getMaterial();
-        return material == Material.rock || material == Material.ground || material == Material.grass || material == Material.sand || material == Material.snow || material == Material.craftedSnow || material == Material.ice || material == Material.packedIce;
+        LegacyMaterial material = LegacyMaterial.of(state);
+        return material == LegacyMaterial.rock || material == LegacyMaterial.ground || material == LegacyMaterial.grass || material == LegacyMaterial.sand || material == LegacyMaterial.snow || material == LegacyMaterial.craftedSnow || material == LegacyMaterial.ice || material == LegacyMaterial.packedIce;
     }
 
     private boolean canReplaceTerrainTop(BlockState state) {

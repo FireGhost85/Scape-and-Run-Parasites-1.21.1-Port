@@ -4,7 +4,6 @@ import com.dhanantry.scapeandrunparasites.SRPMain;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import java.util.HashMap;
 
-
 public class ModCompatibility {
     public static HashMap<String, Boolean> modCompatModules = new HashMap();
     public static boolean FLUIDLOGGED_API;

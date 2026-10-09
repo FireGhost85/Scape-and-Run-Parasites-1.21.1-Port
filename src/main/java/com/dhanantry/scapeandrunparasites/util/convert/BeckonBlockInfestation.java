@@ -16,6 +16,8 @@ import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.init.SRPEntities;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
+import com.dhanantry.scapeandrunparasites.util.BlockIds;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventEntity;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventWorld;
 import com.dhanantry.scapeandrunparasites.util.SRPEntityUtil;
@@ -24,30 +26,36 @@ import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteBush
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.DirtPathBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.FurnaceBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.ticks.TickPriority;
 
 public class BeckonBlockInfestation {
     private static final Logger INFEST_LOG = LogManager.getLogger((String)"SRP-Infest");
     private static final boolean DEBUG = false;
     public static int blockInfestedCount;
-    private static final HashMap<Material, BlockState> conversionCache;
+    private static final HashMap<LegacyMaterial, BlockState> conversionCache;
     private static final HashMap<BlockMetaKey, BlockState> customConvertCache;
     private static int customConvertHash;
 
@@ -93,10 +101,10 @@ public class BeckonBlockInfestation {
                     }
                     flagV = 0;
                     BlockPos venPos = mob.blockPosition();
-                    if (worldIn.getLightBrightness(venPos.above()) < (float)SRPConfigSystems.rsBlockLight / 15.0f) {
+                    if (SRPEntityUtil.lightBrightness(worldIn, venPos.above()) < (float)SRPConfigSystems.rsBlockLight / 15.0f) {
                         ++flagV;
                     }
-                    if (worldIn.getLightFor(LightLayer.BLOCK, venPos.above()) >= SRPConfigSystems.rsBlockLight) continue;
+                    if (worldIn.getBrightness(LightLayer.BLOCK, venPos.above()) >= SRPConfigSystems.rsBlockLight) continue;
                     ++flagV;
                 }
                 if (flagV < 2) {
@@ -231,10 +239,10 @@ public class BeckonBlockInfestation {
         catch (Exception e) {
             return null;
         }
-        if (!Block.blockRegistry.containsKey(rl)) {
+        if (!BuiltInRegistries.BLOCK.containsKey(rl)) {
             return null;
         }
-        Block b = (Block)Block.blockRegistry.getObject(rl);
+        Block b = (Block)BuiltInRegistries.BLOCK.get(rl);
         if (b == null) {
             return null;
         }
@@ -244,7 +252,7 @@ public class BeckonBlockInfestation {
         if (meta < 0 && b instanceof LiquidBlock) {
             meta = 0;
         }
-        BlockState st = meta >= 0 ? b.getStateFromMeta(meta) : b.defaultBlockState();
+        BlockState st = meta >= 0 ? BlockIds.legacyState(b, meta) : b.defaultBlockState();
         return new ParsedState(b, meta, st);
     }
 
@@ -253,7 +261,7 @@ public class BeckonBlockInfestation {
             return null;
         }
         BeckonBlockInfestation.rebuildCustomConvertCacheIfNeeded();
-        int meta = lookingBlock.getMetaFromStatePlaceholder(lookingState);
+        int meta = BlockIds.legacyMeta(lookingState);
         BlockState dst = customConvertCache.get(new BlockMetaKey(lookingBlock, meta));
         if (dst == null) {
             dst = customConvertCache.get(new BlockMetaKey(lookingBlock, -1));
@@ -290,7 +298,7 @@ public class BeckonBlockInfestation {
             BlockPos helper = BlockParasiteSpreading.directionToSpread(pos, dir);
             BlockState lookingState = worldIn.getBlockState(helper);
             Block lookingBlock = lookingState.getBlock();
-            Material mat = lookingState.getMaterial();
+            LegacyMaterial mat = LegacyMaterial.of(lookingState);
             if (lookingBlock instanceof IMetaName || BeckonBlockInfestation.isSrpInfestedBlock(lookingBlock)) continue;
             if (stage < 4 && !BeckonBlockInfestation.isSrpBlock(lookingBlock) && (custom = BeckonBlockInfestation.getCustomConvertedState(lookingBlock, lookingState, stage)) != null) {
                 worldIn.setBlock(helper, custom, 3);
@@ -350,7 +358,7 @@ public class BeckonBlockInfestation {
                     worldIn.setBlock(helper, copy, 3);
                     continue;
                 }
-                if (lookingBlock.isWood((BlockGetter)worldIn, helper)) {
+                if (worldIn.getBlockState(helper).is(BlockTags.LOGS)) {
                     ++convertedBlocks;
                     worldIn.setBlock(helper, BeckonBlockInfestation.createStagedState(SRPBlocks.InfestedTrunk.get().defaultBlockState(), stage), 3);
                     continue;
@@ -359,12 +367,12 @@ public class BeckonBlockInfestation {
             if (ParasiteEventWorld.blockException(worldIn, helper, lookingBlock, lookingState, SRPConfigSystems.blockBList, SRPConfigSystems.blockBListWhite, SRPConfigSystems.rsBlockIMaxH) && stage <= 3) continue;
             if (lookingBlock instanceof BlockBase) {
                 if (lookingBlock == SRPBlocks.BiomeHeart.get() || lookingBlock == SRPBlocks.ColonyHeart.get() || BeckonBlockInfestation.isSrpInfestedBlock(lookingBlock)) continue;
-                int lookM = lookingBlock.getMetaFromStatePlaceholder(lookingState);
+                int lookM = BlockIds.legacyMeta(lookingState);
                 if (!conversionCache.containsKey(mat)) continue;
                 BlockState newState = BeckonBlockInfestation.createStagedState(conversionCache.get(mat), stage);
                 if (stage >= 4 && (lookM <= 1 || stage == 5)) {
                     worldIn.setBlock(helper, newState, 3);
-                    worldIn.updateBlockTick(helper, newState.getBlock(), 40, 5);
+                    worldIn.scheduleTick(helper, newState.getBlock(), 40, TickPriority.byValue(5));
                     continue;
                 }
                 if (lookM >= stage || stage >= 4) continue;
@@ -384,7 +392,7 @@ public class BeckonBlockInfestation {
 
     private static void spawnBeckonFromInfestation(Level worldIn, BlockPos pos, int stage) {
         if (worldIn.random.nextDouble() < SRPConfigSystems.rsVenkrolEmpty && stage != 1 && (worldIn.getBlockState(pos.above()).getBlock() == Blocks.AIR || worldIn.getBlockState(pos.above()).getBlock() instanceof BushBlock)) {
-            if (worldIn.getLightBrightness(pos.above()) > 0.46666667f || worldIn.getLightFor(LightLayer.BLOCK, pos.above()) > 7) {
+            if (SRPEntityUtil.lightBrightness(worldIn, pos.above()) > 0.46666667f || worldIn.getBrightness(LightLayer.BLOCK, pos.above()) > 7) {
                 return;
             }
             List<? extends Entity> serverList = SRPEntityUtil.allEntities(worldIn);
@@ -412,32 +420,32 @@ public class BeckonBlockInfestation {
         if (rl == null) {
             return false;
         }
-        if (!"srparasites".equals(rl.getResourceDomain())) {
+        if (!"srparasites".equals(rl.getNamespace())) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("infest");
     }
 
     private static boolean isSrpBlock(Block b) {
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
-        return rl != null && "srparasites".equals(rl.getResourceDomain());
+        return rl != null && "srparasites".equals(rl.getNamespace());
     }
 
     private static boolean isPathBlock(Block b) {
-        if (b == Blocks.GRASS_PATH || b instanceof BlockGrassPath) {
+        if (b == Blocks.DIRT_PATH || b instanceof DirtPathBlock) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("path");
     }
 
     private static boolean isFenceBlock(Block b) {
-        if (b instanceof BlockFence) {
+        if (b instanceof FenceBlock) {
             return true;
         }
         if (b instanceof FenceGateBlock) {
@@ -447,74 +455,74 @@ public class BeckonBlockInfestation {
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("fence") && !path.contains("gate");
     }
 
     private static boolean isAnyPlanks(Block b, BlockState s) {
-        if (b instanceof BlockPlanks) {
+        if (b.defaultBlockState().is(BlockTags.PLANKS)) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("planks") || path.endsWith("_plank") || path.contains("wood_plank");
     }
 
     private static boolean isGlassBlock(Block b, BlockState s) {
-        if (b instanceof BlockGlass) {
+        if (b instanceof AbstractGlassBlock) {
             return true;
         }
-        if (s.getMaterial() == Material.glass && !(b instanceof BlockPane)) {
+        if (LegacyMaterial.of(s) == LegacyMaterial.glass && !(b instanceof IronBarsBlock)) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("glass") && !path.contains("pane");
     }
 
     private static boolean isGlassPaneBlock(Block b) {
-        if (b instanceof BlockPane) {
+        if (b instanceof IronBarsBlock) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("pane");
     }
 
     private static boolean isFurnaceBlock(Block b) {
-        return b == Blocks.FURNACE || b == Blocks.LIT_FURNACE || b instanceof BlockFurnace;
+        return b == Blocks.FURNACE || b instanceof FurnaceBlock;
     }
 
     private static boolean isStoneStairs(Block b, BlockState s) {
-        if (b instanceof BlockStairs && s.getMaterial() == Material.rock) {
+        if (b instanceof StairBlock && LegacyMaterial.of(s) == LegacyMaterial.rock) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("stairs") && (path.contains("stone") || path.contains("brick") || path.contains("sandstone"));
     }
 
     private static boolean isWoodStairs(Block b, BlockState s) {
-        if (b instanceof BlockStairs && s.getMaterial() == Material.wood) {
+        if (b instanceof StairBlock && LegacyMaterial.of(s) == LegacyMaterial.wood) {
             return true;
         }
         ResourceLocation rl = b.builtInRegistryHolder().key().location();
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("stairs") && (path.contains("oak") || path.contains("spruce") || path.contains("birch") || path.contains("jungle") || path.contains("acacia") || path.contains("dark_oak") || path.contains("wood"));
     }
 
@@ -549,16 +557,16 @@ public class BeckonBlockInfestation {
         if (rl == null) {
             return false;
         }
-        String path = rl.getResourcePath().toLowerCase(Locale.ROOT);
+        String path = rl.getPath().toLowerCase(Locale.ROOT);
         return path.contains("cobblestone") && !path.contains("wall") && !path.contains("stairs");
     }
 
     static {
         conversionCache = new HashMap();
-        conversionCache.put(Material.ground, SRPBlocks.InfestedStain.get().defaultBlockState());
-        conversionCache.put(Material.grass, SRPBlocks.InfestedStain.get().defaultBlockState());
-        conversionCache.put(Material.sand, SRPBlocks.InfestedSand.get().defaultBlockState());
-        conversionCache.put(Material.rock, SRPBlocks.InfestedRubble.get().defaultBlockState());
+        conversionCache.put(LegacyMaterial.ground, SRPBlocks.InfestedStain.get().defaultBlockState());
+        conversionCache.put(LegacyMaterial.grass, SRPBlocks.InfestedStain.get().defaultBlockState());
+        conversionCache.put(LegacyMaterial.sand, SRPBlocks.InfestedSand.get().defaultBlockState());
+        conversionCache.put(LegacyMaterial.rock, SRPBlocks.InfestedRubble.get().defaultBlockState());
         customConvertCache = new HashMap();
         customConvertHash = 0;
     }

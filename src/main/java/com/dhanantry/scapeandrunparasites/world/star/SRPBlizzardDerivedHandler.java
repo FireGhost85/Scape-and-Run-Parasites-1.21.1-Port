@@ -51,7 +51,7 @@ public final class SRPBlizzardDerivedHandler {
 
     private static boolean shouldReverse(ServerPlayer player) {
         Level world = player.level();
-        if (world.dimensionType() == null || DimKeys.of(world) != 0) {
+        if (world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return false;
         }
         if (SRPStarWorldData.get(world).getStarType() != 1) {

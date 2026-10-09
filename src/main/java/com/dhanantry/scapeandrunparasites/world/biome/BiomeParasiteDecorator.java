@@ -1,12 +1,12 @@
 package com.dhanantry.scapeandrunparasites.world.biome;
 
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteBush;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
 import com.dhanantry.scapeandrunparasites.world.gen.WorldGenAbstractTree;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteBall;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteBigBall;
 import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteBush;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -82,7 +82,7 @@ extends BiomeDecorator {
                 int l10;
                 int i7 = random.nextInt(16) + 8;
                 int j14 = worldIn.getHeight(this.chunkPos.offset(i7, 0, l10 = random.nextInt(16) + 8)).getY() + 32;
-                if (j14 <= 0 || (blockflower = (blockflower$enumflowertype = biomeIn.pickRandomFlower(random, blockpos1 = this.chunkPos.offset(i7, k17 = random.nextInt(j14), l10))).getBlockType().getBlock()).defaultBlockState().getMaterial() == Material.air) continue;
+                if (j14 <= 0 || (blockflower = (blockflower$enumflowertype = biomeIn.pickRandomFlower(random, blockpos1 = this.chunkPos.offset(i7, k17 = random.nextInt(j14), l10))).getBlockType().getBlock()).LegacyMaterial.of(defaultBlockState()) == LegacyMaterial.air) continue;
                 new WorldGenParasiteBush(false, BlockParasiteBush.EnumType.EYE, 2).generate(worldIn, random, blockpos1);
             }
         }

@@ -33,7 +33,7 @@ public class BlockSRPFlower extends BushBlock {
         return isGrassGroundSandClay(state);
     }
 
-    /** 1.12 material test: {@code Material.grass}, {@code ground}, {@code sand} or {@code clay}. */
+    /** 1.12 material test: {@code LegacyMaterial.grass}, {@code ground}, {@code sand} or {@code clay}. */
     static boolean isGrassGroundSandClay(BlockState state) {
         if (state.is(BlockTags.DIRT) || state.is(BlockTags.SAND)) {
             return true;

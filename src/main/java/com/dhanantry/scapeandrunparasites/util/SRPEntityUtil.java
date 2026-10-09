@@ -83,7 +83,7 @@ public final class SRPEntityUtil {
         return event.getResult();
     }
 
-    /** {@code World.getLightBrightness(pos)} of the overworld: light level 0..15 through the 1.12 brightness table. */
+    /** {@code SRPEntityUtil.lightBrightness(World, pos)} of the overworld: light level 0..15 through the 1.12 brightness table. */
     public static float lightBrightness(Level level, net.minecraft.core.BlockPos pos) {
         int light = level.getMaxLocalRawBrightness(pos);
         float f1 = 1.0f - (float) light / 15.0f;

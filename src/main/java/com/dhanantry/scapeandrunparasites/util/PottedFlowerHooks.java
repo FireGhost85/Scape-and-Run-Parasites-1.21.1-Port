@@ -18,10 +18,10 @@ public final class PottedFlowerHooks {
         if (e.getFace() == Direction.UP) {
             return;
         }
-        if (e.getWorld().getBlockState(e.getPos()).getBlock() != Blocks.FLOWER_POT) {
+        if (e.getLevel().getBlockState(e.getPos()).getBlock() != Blocks.FLOWER_POT) {
             return;
         }
-        BlockEntity te = e.getWorld().getBlockEntity(e.getPos());
+        BlockEntity te = e.getLevel().getBlockEntity(e.getPos());
         if (!(te instanceof TileEntityFlowerPot)) {
             return;
         }
@@ -40,8 +40,8 @@ public final class PottedFlowerHooks {
         if (potted == null) {
             return;
         }
-        if (!e.getWorld().isClientSide) {
-            e.getWorld().setBlock(e.getPos(), potted.defaultBlockState(), 3);
+        if (!e.getLevel().isClientSide) {
+            e.getLevel().setBlock(e.getPos(), potted.defaultBlockState(), 3);
             if (!e.getEntityPlayer().getAbilities().instabuild) {
                 held.shrink(1);
             }

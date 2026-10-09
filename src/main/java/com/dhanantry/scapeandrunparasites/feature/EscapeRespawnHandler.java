@@ -2,11 +2,13 @@ package com.dhanantry.scapeandrunparasites.feature;
 
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.feature.EscapeOnDeathHandler;
+import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class EscapeRespawnHandler {
     private static final String PERSIST_TAG = "PlayerPersisted";
@@ -54,7 +56,7 @@ public class EscapeRespawnHandler {
     private static BlockPos descendToSolid(ServerLevel w, BlockPos start) {
         BlockPos pos = start;
         for (int i = 0; i < 16; ++i) {
-            Material m = w.getBlockState(pos).getMaterialPlaceholder();
+            LegacyMaterial m = w.getBlockState(pos).getMaterialPlaceholder();
             if (m.isSolid()) {
                 return pos;
             }
@@ -67,8 +69,8 @@ public class EscapeRespawnHandler {
         if (solid == null) {
             return false;
         }
-        Material m = w.getBlockState(solid).getMaterialPlaceholder();
-        if (!m.isSolid() || m == Material.leaves) {
+        LegacyMaterial m = w.getBlockState(solid).getMaterialPlaceholder();
+        if (!m.isSolid() || m == LegacyMaterial.leaves) {
             return false;
         }
         BlockPos feet = solid.above();

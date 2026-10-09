@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.world.entity.player.Player;
 
-
 public final class SRPBestiaryApi {
     private SRPBestiaryApi() {
     }

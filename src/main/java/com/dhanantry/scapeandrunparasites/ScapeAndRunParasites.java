@@ -34,6 +34,7 @@ public class ScapeAndRunParasites {
         SRPArmorMaterials.register(modEventBus);
         SRPItems.register(modEventBus);
         SRPEntities.ENTITIES.register(modEventBus);
+        com.dhanantry.scapeandrunparasites.world.spawner.SRPSpawnBiomeModifier.SERIALIZERS.register(modEventBus);
         modEventBus.addListener(SRPEntities::registerAttributes);
     }
 }

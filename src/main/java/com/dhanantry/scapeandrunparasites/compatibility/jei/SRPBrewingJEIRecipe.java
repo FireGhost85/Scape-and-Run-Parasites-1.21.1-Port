@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.ItemStack;
 
-
 public class SRPBrewingJEIRecipe
 implements IRecipeWrapper {
     private final List<ItemStack> inputs;

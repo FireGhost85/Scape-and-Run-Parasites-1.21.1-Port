@@ -1,11 +1,13 @@
 package com.dhanantry.scapeandrunparasites.events;
 
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
+import net.neoforged.bus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid="srparasites")
 public final class SignEffectHandler {
@@ -20,7 +22,7 @@ public final class SignEffectHandler {
         }
         Player p = e.player;
         if (SIGN_ITEM == null) {
-            SIGN_ITEM = Item.getByNameOrId((String)CHARM_ID);
+            SIGN_ITEM = BuiltInRegistries.ITEM.get(ResourceLocation.parse(CHARM_ID));
         }
         if (SIGN_ITEM == null) {
             return;

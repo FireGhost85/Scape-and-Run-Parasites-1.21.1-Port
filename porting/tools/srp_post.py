@@ -129,6 +129,57 @@ RULES = [
     (r'ChatFormatting\.getTextWithoutFormattingCodes\(\(String\)([^;]*?)\);', r'ChatFormatting.stripFormatting(\1);'),
     (r'\b(super|this)\.(rotateCorpse|doRender|bindEntityTexture|renderModel|preRenderCallback|getEntityTexture|isVisible|setBrightness|getColorMultiplier|shouldRender|handleRotationFloat|interpolateRotation)\(\((?:LivingEntity|Mob|Entity|PathfinderMob)\)', r'\1.\2('),
     (r'\.thePlayer\b', '.player'),
+    (r'\.getResourcePath\(\)', '.getPath()'),
+    (r'\.getResourceDomain\(\)', '.getNamespace()'),
+    (r'(\w+)\.getLightFor\(LightLayer\.BLOCK, ', r'\1.getBrightness(LightLayer.BLOCK, '),
+    (r'\bBlock\.blockRegistry\.containsKey\(', 'BuiltInRegistries.BLOCK.containsKey('),
+    (r'\(Block\)Block\.blockRegistry\.getObject\(', '(Block)BuiltInRegistries.BLOCK.get('),
+    (r'Blocks\.GRASS_PATH', 'Blocks.DIRT_PATH'),
+    (r'\bBlockGrassPath\b', 'DirtPathBlock'),
+    (r'\bBlockFence\b', 'FenceBlock'),
+    (r'\bBlockGlass\b', 'AbstractGlassBlock'),
+    (r'\bBlockPane\b', 'IronBarsBlock'),
+    (r'\bBlockFurnace\b', 'FurnaceBlock'),
+    (r'\bb == Blocks\.LIT_FURNACE \|\| ', ''),
+    (r'\bBlockStairs\b', 'StairBlock'),
+    (r'\bBlockContainer\b', 'BaseEntityBlock'),
+    (r'\bBlockOre\b', 'DropExperienceBlock'),
+    (r'\bBlockHorizontal\b', 'HorizontalDirectionalBlock'),
+    (r'\bBlockTNT\b', 'TntBlock'),
+    (r'\bBlockBreakable\b', 'HalfTransparentBlock'),
+    (r'\bBlockSandStone\b', 'SandstoneBlock'),
+    (r'(\w+) instanceof BlockPlanks\b', r'\1.defaultBlockState().is(BlockTags.PLANKS)'),
+    (r'for \(int i : (SRPConfigWorld\.\w+)\) \{\s*if \(i != DimKeys\.of\((\w+)\)\) continue;', r'for (String i : \1) {\n            if (!DimKeys.normalize(i).equals(DimKeys.of(\2))) continue;'),
+    (r'DimKeys\.of\((\w+)\) == (-?\d+)', r'DimKeys.of(\1).equals(DimKeys.normalize("\2"))'),
+    (r'DimKeys\.of\((\w+)\) != (-?\d+)', r'!DimKeys.of(\1).equals(DimKeys.normalize("\2"))'),
+    (r'gen\.generate\((\w+), new Random\(\), ', r'gen.generate(\1, \1.random, '),
+    (r'(\w+)\.getSpawnPoint\(\)', r'\1.getSharedSpawnPos()'),
+    (r'\.getClosestPlayer\(', '.getNearestPlayer('),
+    (r'Map<Material,', 'Map<LegacyMaterial,'),
+    (r'(Enum)?Map<Material,', 'Map<LegacyMaterial,'),
+    (r'new HashMap<Material,', 'new HashMap<LegacyMaterial,'),
+    (r'\bevent\.getEntityLiving\(\)', 'event.getEntity()'),
+    (r'\bevent\.getEntityPlayer\(\)', 'event.getEntity()'),
+    (r'\b(event|e)\.getWorld\(\)', r'\1.getLevel()'),
+    (r'SRPSaveData\.get\(([^(),]+(?:\([^()]*\))?(?:\.\w+\(\))?), \d+\)', r'SRPSaveData.get(\1)'),
+    (r'\.setChatStyle\(new Style\(\)\.setColor\(ChatFormatting\.(\w+)\)\)', r'.withStyle(ChatFormatting.\1)'),
+    (r'EntityList\.getKeyEntity\(\(Entity\)([^;]*?)\)\.toString\(\)', r'BuiltInRegistries.ENTITY_TYPE.getKey(\1.getType()).toString()'),
+    (r'Item\.getByNameOrId\(\(String\)([^;]*?)\);', r'BuiltInRegistries.ITEM.get(ResourceLocation.parse(\1));'),
+    (r'\(Block\)ForgeRegistries\.BLOCKS\.getValue\(', '(Block)BuiltInRegistries.BLOCK.get('),
+    (r'Mth\.ceiling_float_int\(', 'Mth.ceil('),
+    (r'Mth\.ceiling_double_int\(', 'Mth.ceil('),
+    (r'\.isElytraFlying\(\)', '.isFallFlying()'),
+    (r'\.canBlockSeeSky\(', '.canSeeSky('),
+    (r'\.getWorldTime\(\)', '.getDayTime()'),
+    (r'\.getWorldInfo\(\)\.getWorldTotalTime\(\)', '.getGameTime()'),
+    (r'(\w+)\.isChild\(\)', r'\1.isBaby()'),
+    (r'(\w+)\.getStateFromMeta\(Integer\.parseInt\((\w+)\[2\]\)\)', r'BlockIds.parse(\2[0] + ":" + \2[1] + ":" + \2[2])'),
+    (r'\bMaterial\.([a-z]\w*)\b', r'LegacyMaterial.\1'),
+    (r'\bMaterial (\w+) = ', r'LegacyMaterial \1 = '),
+    (r'\w+\.isWood\(\(BlockGetter\)(\w+), (\w+)\)', r'\1.getBlockState(\2).is(BlockTags.LOGS)'),
+    (r'\w+\.isLeaves\((\w+), \(BlockGetter\)\w+, \w+\)', r'\1.is(BlockTags.LEAVES)'),
+    (r'import net\.minecraft\.client\.resources\.model\.Material;\n', ''),
+    (r'\w+(?:\.\w+\(\))*\.getMetaFromStatePlaceholder\(([^()]*(?:\([^()]*\))?)\)', r'BlockIds.legacyMeta(\1)'),
     (r'BossEvent\.Color\b', 'BossEvent.BossBarColor'),
     (r'BossEvent\.Overlay\b', 'BossEvent.BossBarOverlay'),
     (r'public void addTrackingPlayer\(ServerPlayer (\w+)\) \{\s*super\.addTrackingPlayer\(', r'public void startSeenByPlayer(ServerPlayer \1) {\n        super.startSeenByPlayer('),
@@ -237,6 +288,39 @@ def fix_calls(text):
                 return 'PacketDistributor.sendToPlayer((ServerPlayer)%s, new %sPayload(%s))' % (re.sub(r'^\(ServerPlayer\)', '', args[1].strip()), mm.group(1), mm.group(2))
         return None
     text = rewrite_calls(text, r'SRPNetwork\.CHANNEL\.sendTo\(', net)
+
+    def lbright(m, args):
+        if len(args) == 1:
+            return 'SRPEntityUtil.lightBrightness(%s, %s)' % (m.group(1), args[0])
+        return None
+    text = rewrite_calls(text, RECV + r'\.getLightBrightness\(', lbright)
+
+    def ubt(m, args):
+        if len(args) == 4:
+            return '%s.scheduleTick(%s, %s, %s, TickPriority.byValue(%s))' % (m.group(1), args[0], args[1], args[2], args[3])
+        return None
+    text = rewrite_calls(text, RECV + r'\.updateBlockTick\(', ubt)
+
+    def gbn(m, args):
+        if len(args) == 1:
+            a = re.sub(r'^\(String\)', '', args[0].strip())
+            if a.startswith('(') and a.endswith(')') and a.count('(') == a.count(')'):
+                a = a[1:-1]
+            return 'BlockIds.parseBlock(%s)' % a
+        return None
+    text = rewrite_calls(text, r'Block\.getBlockFromName\(', gbn)
+
+    def gsm(m, args):
+        if len(args) == 1:
+            return 'BlockIds.legacyState(%s, %s)' % (m.group(1), args[0])
+        return None
+    text = rewrite_calls(text, RECV + r'\.getStateFromMeta\(', gsm)
+
+    def gmat(m, args):
+        if len(args) == 0:
+            return 'LegacyMaterial.of(%s)' % m.group(1)
+        return None
+    text = rewrite_calls(text, RECV + r'\.getMaterial(?:Placeholder)?\(', gmat)
 
     def spp(m, args):
         args = [a for a in args if a.strip()]

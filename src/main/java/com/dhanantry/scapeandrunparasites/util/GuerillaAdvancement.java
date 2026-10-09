@@ -26,17 +26,17 @@ public final class GuerillaAdvancement {
 
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
-        if (!(event.getEntityLiving() instanceof ServerPlayer)) {
+        if (!(event.getEntity() instanceof ServerPlayer)) {
             return;
         }
-        if (event.getEntityLiving().level().isClientSide) {
+        if (event.getEntity().level().isClientSide) {
             return;
         }
         Entity trueSrc = event.getSource().getEntity();
         if (!(trueSrc instanceof ServerPlayer)) {
             return;
         }
-        ServerPlayer victim = (ServerPlayer)event.getEntityLiving();
+        ServerPlayer victim = (ServerPlayer)event.getEntity();
         ServerPlayer killer = (ServerPlayer)trueSrc;
         CompoundTag tag = victim.getPersistentData();
         if (!tag.contains(TAG_APPLIER)) {

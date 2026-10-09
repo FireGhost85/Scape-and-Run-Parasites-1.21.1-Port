@@ -12,10 +12,10 @@ public final class SRPDebugRules {
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load e) {
-        if (e.getWorld().isClientSide) {
+        if (e.getLevel().isClientSide) {
             return;
         }
-        GameRules rules = e.getWorld().getGameRules();
+        GameRules rules = e.getLevel().getGameRules();
         if (!rules.hasRule(RULE_FORCE_HARLEQUIN)) {
             rules.addGameRule(RULE_FORCE_HARLEQUIN, "false", GameRules.ValueType.BOOLEAN_VALUE);
         }

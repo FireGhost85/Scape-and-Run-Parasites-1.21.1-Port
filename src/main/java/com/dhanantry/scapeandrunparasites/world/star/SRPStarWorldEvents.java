@@ -48,8 +48,8 @@ public class SRPStarWorldEvents {
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
-        Level world = event.getWorld();
-        if (world == null || world.isClientSide || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        Level world = event.getLevel();
+        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         SRPStarWorldData data = SRPStarWorldData.get(world);
@@ -72,7 +72,7 @@ public class SRPStarWorldEvents {
             return;
         }
         Level world = event.world;
-        if (world == null || world.isClientSide || world.dimensionType() == null || DimKeys.of(world) != 0) {
+        if (world == null || world.isClientSide || world.dimensionType() == null || !DimKeys.of(world).equals(DimKeys.normalize("0"))) {
             return;
         }
         if (creatingWorld) {
