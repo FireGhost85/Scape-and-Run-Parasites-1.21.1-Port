@@ -9,6 +9,10 @@ public final class SRPClientState {
     public static int clientScent = 0;
     public static int clientVector = 0;
     public static int musicTimer = 1000;
+    public static float fog;
+    public static float fogRed;
+    public static float fogGreen;
+    public static float fogBlue;
 
     private SRPClientState() {}
 
@@ -34,5 +38,6 @@ public final class SRPClientState {
         clientCurrentEvoPhase = 0;
         clientScent = 0;
         musicTimer = 1000;
+        fog = 0.0f;
     }
 }

@@ -1,45 +1,53 @@
 package com.dhanantry.scapeandrunparasites.compatibility.jei;
 
-import com.dhanantry.scapeandrunparasites.compatibility.jei.SRPBrewingJEIRecipe;
-import javax.annotation.Nonnull;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
-public class SRPBrewingCategory
-implements IRecipeCategory<SRPBrewingJEIRecipe> {
-    public static final String UID = "srparasites.srp_brewing";
-    private static final ResourceLocation VANILLA_BREWING = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/container/brewing_stand.png");
+public class SRPBrewingCategory implements IRecipeCategory<SRPBrewingJEIRecipe> {
+    public static final RecipeType<SRPBrewingJEIRecipe> TYPE = RecipeType.create(ScapeAndRunParasites.MODID, "srp_brewing", SRPBrewingJEIRecipe.class);
+    private static final ResourceLocation VANILLA_BREWING = ResourceLocation.withDefaultNamespace("textures/gui/container/brewing_stand.png");
     private final IDrawable background;
+    private final IDrawable icon;
 
     public SRPBrewingCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(VANILLA_BREWING, 0, 0, 176, 80);
+        this.icon = guiHelper.createDrawableItemStack(new ItemStack(Items.BREWING_STAND));
     }
 
-    @Nonnull
-    public String getUid() {
-        return UID;
+    @Override
+    public RecipeType<SRPBrewingJEIRecipe> getRecipeType() {
+        return TYPE;
     }
 
-    @Nonnull
-    public String getTitle() {
-        return "SRP Brewing";
+    @Override
+    public Component getTitle() {
+        return Component.literal("SRP Brewing");
     }
 
-    @Nonnull
-    public String getModName() {
-        return "Scape and Run: Parasites";
-    }
-
-    @Nonnull
+    @Override
     public IDrawable getBackground() {
         return this.background;
     }
 
-    public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull SRPBrewingJEIRecipe recipeWrapper, @Nonnull IIngredients ingredients) {
-        IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-        stacks.init(0, true, 55, 50);
-        stacks.init(1, true, 78, 16);
-        stacks.init(2, false, 101, 50);
-        stacks.set(ingredients);
+    @Override
+    public IDrawable getIcon() {
+        return this.icon;
+    }
+
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, SRPBrewingJEIRecipe recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 56, 51).addItemStacks(recipe.inputs());
+        builder.addSlot(RecipeIngredientRole.INPUT, 79, 17).addItemStacks(recipe.reagents());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 102, 51).addItemStack(recipe.output());
     }
 }
-

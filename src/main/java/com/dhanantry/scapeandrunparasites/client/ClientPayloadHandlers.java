@@ -34,6 +34,15 @@ public final class ClientPayloadHandlers {
         ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.BestiaryClient.applySync(msg.progress()));
     }
 
+    public static void fog(com.dhanantry.scapeandrunparasites.network.FogPayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            SRPClientState.fog = msg.fog();
+            SRPClientState.fogRed = msg.red();
+            SRPClientState.fogGreen = msg.green();
+            SRPClientState.fogBlue = msg.blue();
+        });
+    }
+
     public static void evoPhaseCancel(EvoPhaseCancelPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             stopMusic();

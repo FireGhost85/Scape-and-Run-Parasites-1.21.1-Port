@@ -25,7 +25,6 @@ sourceSets.main.java {
     exclude '**/world/star/**'
     exclude '**/world/celestial/**'
     exclude '**/world/CelestialNightData.java'
-    exclude '**/compatibility/jei/**'
     exclude '**/world/gen/GenLayerSRPStar.java'
     exclude '**/world/biome/BiomeParasiteDecorator.java'
     exclude '**/world/ExtremeSnowData.java'
@@ -112,7 +111,18 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
+repositories {
+    // JEI
+    maven {
+        name = 'Jared maven'
+        url = 'https://maven.blamejared.com/'
+    }
+}
+
 dependencies {
+    compileOnly 'mezz.jei:jei-1.21.1-common-api:19.57.0.447'
+    compileOnly 'mezz.jei:jei-1.21.1-neoforge-api:19.57.0.447'
+    runtimeOnly 'mezz.jei:jei-1.21.1-neoforge:19.57.0.447'
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

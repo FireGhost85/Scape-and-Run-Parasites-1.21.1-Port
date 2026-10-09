@@ -1,13 +1,20 @@
 package com.dhanantry.scapeandrunparasites.compatibility.jei;
 
-import com.dhanantry.scapeandrunparasites.compatibility.jei.InfuserFurnaceJEICategory;
-import com.dhanantry.scapeandrunparasites.compatibility.jei.InfuserFurnaceJEIRecipe;
-import com.dhanantry.scapeandrunparasites.compatibility.jei.SRPBrewingCategory;
-import com.dhanantry.scapeandrunparasites.compatibility.jei.SRPBrewingJEIRecipe;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
+import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
+import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.recipes.InfuserFurnaceRecipe;
 import com.dhanantry.scapeandrunparasites.recipes.InfuserFurnaceRecipes;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -15,100 +22,86 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.alchemy.Potions;
 
-@JEIPlugin
-public class SRPJEIPlugin
-implements IModPlugin {
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        registry.addRecipeCategories(new IRecipeCategory[]{new InfuserFurnaceJEICategory(registry.getJeiHelpers().getGuiHelper())});
-        registry.addRecipeCategories(new IRecipeCategory[]{new SRPBrewingCategory(registry.getJeiHelpers().getGuiHelper())});
+/** JEI: the infuser furnace recipes, the brewing recipes of the mod, and the hidden advancement icon items. */
+@JeiPlugin
+public class SRPJEIPlugin implements IModPlugin {
+    private static final String[] HIDDEN_ICONS = {"dark_days_icon", "adapted_icon", "primitive_icon", "crude_icon", "pure_icon", "hunt_season_icon",
+            "guerilla_icon", "ecstasy_icon", "enemy_of_enemy_icon", "fog_nullifier_icon", "self_destruct_icon", "potion_columbus_icon",
+            "potion_stolas_icon", "hellfire_chemical_warfare_icon", "cosmic_structural_failure_icon", "roots_icon"};
+
+    @Override
+    public ResourceLocation getPluginUid() {
+        return ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "jei");
     }
 
-    public void register(IModRegistry registry) {
-        ItemStack awkwardPotion;
-        ItemStack waterPotion;
-        ItemStack infuserStack;
-        ArrayList<InfuserFurnaceJEIRecipe> jeiRecipes = new ArrayList<InfuserFurnaceJEIRecipe>();
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registry) {
+        registry.addRecipeCategories(new InfuserFurnaceJEICategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new SRPBrewingCategory(registry.getJeiHelpers().getGuiHelper()));
+    }
+
+    private static Item item(String name) {
+        return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, name));
+    }
+
+    private static ItemStack potion(Item base, Holder<Potion> potion) {
+        return PotionContents.createItemStack(base, potion);
+    }
+
+    @Override
+    public void registerRecipes(IRecipeRegistration registry) {
+        List<InfuserFurnaceJEIRecipe> infuser = new ArrayList<>();
         for (InfuserFurnaceRecipe r : InfuserFurnaceRecipes.all()) {
-            jeiRecipes.add(new InfuserFurnaceJEIRecipe(r));
+            infuser.add(new InfuserFurnaceJEIRecipe(r));
         }
-        registry.addRecipes(jeiRecipes, "srparasites.infuser_furnace");
-        Block infuser = (Block)BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("srparasites", "infuser_furnace"));
-        if (infuser != null && infuser != Blocks.AIR && !(infuserStack = new ItemStack(infuser)).isEmpty()) {
-            registry.addRecipeCatalyst(infuserStack, new String[]{"srparasites.infuser_furnace"});
+        registry.addRecipes(InfuserFurnaceJEICategory.TYPE, infuser);
+
+        Item alveolar = item("alveolar_fluid");
+        Item diseasedSponge = item("diseased_sponge");
+        Item deadblood = item("deadblood_fluid");
+        Item thornshadeBerry = item("thornshade_berry");
+        Item thornshadeDecanter = item("thornshade_decanter");
+        Holder<Potion> fear = SRPPotions.FEAR_P;
+        List<SRPBrewingJEIRecipe> brewing = new ArrayList<>();
+        if (alveolar != Items.AIR) {
+            ItemStack fearBottle = potion(Items.POTION, fear);
+            ItemStack fearSplash = potion(Items.SPLASH_POTION, fear);
+            brewing.add(new SRPBrewingJEIRecipe(List.of(new ItemStack(alveolar)), List.of(new ItemStack(Items.FLINT)), fearBottle));
+            brewing.add(new SRPBrewingJEIRecipe(List.of(fearBottle), List.of(new ItemStack(Items.GUNPOWDER)), fearSplash));
+            brewing.add(new SRPBrewingJEIRecipe(List.of(fearSplash), List.of(new ItemStack(Items.DRAGON_BREATH)), potion(Items.LINGERING_POTION, fear)));
         }
-        String MODID = "srparasites";
-        Item alveolar = (Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "alveolar_fluid"));
-        Item diseasedSponge = (Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "diseased_sponge"));
-        Item deadblood = (Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "deadblood_fluid"));
-        Item thornshadeBerry = (Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "thornshade_berry"));
-        Item thornshadeDecanter = (Item)ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "thornshade_decanter"));
-        Potion FEAR = (Potion)ForgeRegistries.POTION_TYPES.getValue(ResourceLocation.fromNamespaceAndPath("srparasites", "fear"));
-        Potion WATER = (Potion)ForgeRegistries.POTION_TYPES.getValue(ResourceLocation.fromNamespaceAndPath("minecraft", "water"));
-        Potion AWKWARD = (Potion)ForgeRegistries.POTION_TYPES.getValue(ResourceLocation.fromNamespaceAndPath("minecraft", "awkward"));
-        ArrayList<SRPBrewingJEIRecipe> brewing = new ArrayList<SRPBrewingJEIRecipe>();
-        if (alveolar != null && FEAR != null) {
-            brewing.add(new SRPBrewingJEIRecipe(Arrays.asList(new ItemStack(alveolar)), Arrays.asList(new ItemStack(Items.FLINT)), PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)FEAR)));
-            brewing.add(new SRPBrewingJEIRecipe(Arrays.asList(PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)FEAR)), Arrays.asList(new ItemStack(Items.GUNPOWDER)), PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.SPLASH_POTION), (Potion)FEAR)));
-            brewing.add(new SRPBrewingJEIRecipe(Arrays.asList(PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.SPLASH_POTION), (Potion)FEAR)), Arrays.asList(new ItemStack(Items.DRAGON_BREATH)), PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.LINGERING_POTION), (Potion)FEAR)));
+        ItemStack water = potion(Items.POTION, Potions.WATER);
+        ItemStack awkward = potion(Items.POTION, Potions.AWKWARD);
+        if (diseasedSponge != Items.AIR && deadblood != Items.AIR) {
+            brewing.add(new SRPBrewingJEIRecipe(List.of(water, awkward), List.of(new ItemStack(diseasedSponge)), new ItemStack(deadblood)));
         }
-        if (diseasedSponge != null && deadblood != null && WATER != null && AWKWARD != null) {
-            waterPotion = PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)WATER);
-            awkwardPotion = PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)AWKWARD);
-            brewing.add(new SRPBrewingJEIRecipe(Arrays.asList(waterPotion, awkwardPotion), Arrays.asList(new ItemStack(diseasedSponge)), new ItemStack(deadblood)));
-        }
-        if (thornshadeBerry != null && thornshadeDecanter != null && WATER != null && AWKWARD != null) {
-            waterPotion = PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)WATER);
-            awkwardPotion = PotionContents.addPotionToItemStack((ItemStack)new ItemStack((Item)Items.POTIONITEM), (Potion)AWKWARD);
-            brewing.add(new SRPBrewingJEIRecipe(Arrays.asList(waterPotion, awkwardPotion), Arrays.asList(new ItemStack(thornshadeBerry)), new ItemStack(thornshadeDecanter)));
+        if (thornshadeBerry != Items.AIR && thornshadeDecanter != Items.AIR) {
+            brewing.add(new SRPBrewingJEIRecipe(List.of(water, awkward), List.of(new ItemStack(thornshadeBerry)), new ItemStack(thornshadeDecanter)));
         }
         if (!brewing.isEmpty()) {
-            registry.addRecipes(brewing, "srparasites.srp_brewing");
-            ItemStack brewingStandStack = new ItemStack(Items.BREWING_STAND);
-            if (!brewingStandStack.isEmpty()) {
-                registry.addRecipeCatalyst(brewingStandStack, new String[]{"srparasites.srp_brewing"});
-            }
+            registry.addRecipes(SRPBrewingCategory.TYPE, brewing);
         }
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "dark_days_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "adapted_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "primitive_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "crude_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "pure_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "hunt_season_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "guerilla_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "ecstasy_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "enemy_of_enemy_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "fog_nullifier_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "self_destruct_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "potion_columbus_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "potion_stolas_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "hellfire_chemical_warfare_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "cosmic_structural_failure_icon");
-        SRPJEIPlugin.blacklistAdvancementIcon(registry, "roots_icon");
     }
 
-    private static void blacklistAdvancementIcon(IModRegistry registry, String itemName) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("srparasites", itemName);
-        Item item = (Item)ForgeRegistries.ITEMS.getValue(id);
-        if (item == null || item == Items.AIR) {
-            System.out.println("[SRP][JEI] Missing advancement icon item: " + id);
-            return;
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
+        registry.addRecipeCatalyst(new ItemStack(SRPBlocks.InfuserFurnace.get()), InfuserFurnaceJEICategory.TYPE);
+        registry.addRecipeCatalyst(new ItemStack(Items.BREWING_STAND), SRPBrewingCategory.TYPE);
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime runtime) {
+        List<ItemStack> hidden = new ArrayList<>();
+        for (String name : HIDDEN_ICONS) {
+            Item item = item(name);
+            if (item != Items.AIR) {
+                hidden.add(new ItemStack(item));
+            }
         }
-        ItemStack stack = new ItemStack(item);
-        if (stack.isEmpty()) {
-            System.out.println("[SRP][JEI] Empty advancement icon stack: " + id);
-            return;
-        }
-        try {
-            registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(stack);
-            System.out.println("[SRP][JEI] Blacklisted advancement icon: " + id);
-        }
-        catch (Throwable t) {
-            System.out.println("[SRP][JEI] Failed to blacklist advancement icon: " + id);
-            t.printStackTrace();
+        if (!hidden.isEmpty()) {
+            runtime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, hidden);
         }
     }
 }
-

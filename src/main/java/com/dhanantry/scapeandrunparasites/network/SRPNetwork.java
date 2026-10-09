@@ -29,6 +29,7 @@ public final class SRPNetwork {
         registrar.playToClient(BestiarySyncPayload.TYPE, BestiarySyncPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.bestiarySync(msg, ctx));
         registrar.playToServer(BestiaryRequestPayload.TYPE, BestiaryRequestPayload.CODEC, (msg, ctx) -> BestiaryRequestPayload.handle(msg, ctx));
         registrar.playToServer(BestiarySeenCelestialPayload.TYPE, BestiarySeenCelestialPayload.CODEC, (msg, ctx) -> BestiarySeenCelestialPayload.handle(msg, ctx));
+        registrar.playToClient(FogPayload.TYPE, FogPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.fog(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);
