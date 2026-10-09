@@ -216,18 +216,83 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
     protected ConfigurationScreen.ConfigurationSectionScreen rebuild() {
         if (this.query.isBlank()) {
             this.searching = false;
-            return super.rebuild();
+            this.rebuildNormal();
+            return this;
         }
         if (this.list == null) {
             return this;
         }
         this.searching = true;
-        fillSearchResults(this.list, this.font, this.options, List.of(this), this.query);
+        fillSearchResults(this.list, this.font, this.options, this.width, List.of(this), this.query);
         return this;
     }
 
+    /**
+     * A row label that reaches to the left of its normal place, so the long setting names are not cut off: the list puts the label at the left
+     * column (150 wide) and the control at the right column; the label keeps its right edge and takes the free room on its left.
+     */
+    static final class WideLabel extends StringWidget {
+        private final int extra;
+
+        WideLabel(int screenWidth, Component text, Font font) {
+            this(text, font, Math.max(0, Math.min(200, screenWidth / 2 - 155 - 8)));
+        }
+
+        private WideLabel(Component text, Font font, int extra) {
+            super(Button.DEFAULT_WIDTH + extra, Button.DEFAULT_HEIGHT, text, font);
+            this.extra = extra;
+            this.alignLeft();
+        }
+
+        @Override
+        public void setX(int x) {
+            super.setX(x - this.extra);
+        }
+    }
+
+    /** The row building of NeoForge's section screen (it cannot be reused for the labels), with the wide labels. */
+    private void rebuildNormal() {
+        if (this.list == null) {
+            return;
+        }
+        this.list.children().clear();
+        boolean hasUndoableElements = false;
+        List<Element> elements = new ArrayList<>();
+        for (Entry entry : this.context.entries()) {
+            String key = entry.getKey();
+            Object raw = entry.getRawValue();
+            if (raw instanceof ConfigValue<?>) {
+                elements.add(this.elementFor(entry));
+            } else if (raw instanceof UnmodifiableConfig subsection && this.context.valueSpecs().get(key) instanceof UnmodifiableConfig subconfig) {
+                elements.add(this.createSection(key, subconfig, subsection));
+            } else {
+                elements.add(this.context.filter().filterEntry(this.context, key, this.createOtherSection(key, raw)));
+            }
+        }
+        elements.addAll(this.createSyntheticValues());
+        for (Element element : elements) {
+            if (element == null) {
+                continue;
+            }
+            if (element.name() == null) {
+                this.list.addSmall(new StringWidget(Button.DEFAULT_WIDTH, Button.DEFAULT_HEIGHT, Component.empty(), this.font), element.getWidget(this.options));
+            } else {
+                StringWidget label = new WideLabel(this.width, element.name(), this.font);
+                if (element.tooltip() != null) {
+                    label.setTooltip(Tooltip.create(element.tooltip()));
+                }
+                this.list.addSmall(label, element.getWidget(this.options));
+            }
+            hasUndoableElements |= element.undoable();
+        }
+        if (hasUndoableElements && this.undoButton == null) {
+            this.createUndoButton();
+            this.createResetButton();
+        }
+    }
+
     /** Lists the settings of the given top screens (and everything below them) that match the typed words. */
-    static void fillSearchResults(OptionsList list, Font font, Options options, List<SRPConfigSectionScreen> tops, String query) {
+    static void fillSearchResults(OptionsList list, Font font, Options options, int screenWidth, List<SRPConfigSectionScreen> tops, String query) {
         list.children().clear();
         String[] tokens = query.toLowerCase(Locale.ROOT).trim().split("\\s+");
         List<Result> results = new ArrayList<>();
@@ -247,7 +312,7 @@ public class SRPConfigSectionScreen extends ConfigurationScreen.ConfigurationSec
             if (element.tooltip() != null) {
                 tip.append(element.tooltip());
             }
-            StringWidget label = new StringWidget(Button.DEFAULT_WIDTH, Button.DEFAULT_HEIGHT, element.name(), font).alignLeft();
+            StringWidget label = new WideLabel(screenWidth, element.name(), font);
             label.setTooltip(Tooltip.create(tip));
             list.addSmall(label, element.getWidget(options));
             ++shown;

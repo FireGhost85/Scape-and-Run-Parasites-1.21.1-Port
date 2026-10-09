@@ -123,7 +123,7 @@ public class SRPConfigRootScreen extends OptionsSubScreen {
             return;
         }
         if (!this.query.isBlank()) {
-            SRPConfigSectionScreen.fillSearchResults(this.list, this.font, this.options, this.tops, this.query);
+            SRPConfigSectionScreen.fillSearchResults(this.list, this.font, this.options, this.width, this.tops, this.query);
             return;
         }
         this.list.children().clear();
