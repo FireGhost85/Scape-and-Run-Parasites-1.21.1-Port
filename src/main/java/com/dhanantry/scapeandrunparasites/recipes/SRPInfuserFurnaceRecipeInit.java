@@ -19,7 +19,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
  * make a semiorganic ingot; dead blood bottle plus infested sand makes infested glass; sixteen-block swaps are listed as in the
  * original (the counts there never mattered).
  */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SRPInfuserFurnaceRecipeInit {
     private SRPInfuserFurnaceRecipeInit() {
     }

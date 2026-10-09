@@ -122,7 +122,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
  * {@link #regVariants}. The two slab halves of the original (half and double block) are one block with the vanilla slab type.
  * The registration order is the order of the original, because stairs and walls copy the properties of their model block.
  */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SRPBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ScapeAndRunParasites.MODID);
     public static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(ScapeAndRunParasites.MODID);

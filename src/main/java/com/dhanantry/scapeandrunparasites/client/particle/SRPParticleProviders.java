@@ -8,7 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 /** Registers the sprite-set providers of the particle types (the 1.10.9 ParticleSpawner switch). */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT)
 public final class SRPParticleProviders {
     private SRPParticleProviders() {
     }

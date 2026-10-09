@@ -20,3 +20,17 @@ Rules:
 - Keep chat replies brief: what changed and what is left. No large code blocks in chat. Do not commit unless I ask. Ask before any download.
 
 Start by reading the md file, then give me a short plan for the parasite port (tier order, shared base classes, registry) and ask only the questions that block your work.
+
+---
+## Status update (latest session, 2026-10-08)
+
+**Working / done:** mod compiles and runs (client + dedicated server); 159 entity types register, tick, render (missing-renderer crash fixed, `RenderNothing` safety net), die and spawn without exceptions; blockstates, item models, lang JSON (31 languages), spawn eggs (config `Vanilla Mob Eggs`), creative tab, effect names and icons, `sounds.json` loads; transparent block models have cutout/translucent render types; secondary handlers ported (thornshade, snow grass, bonemeal, rage sound, bottles, fishing, sign, sound eater, escape feature, debug items); commands `/srpevolution /srpvectors /srpnodes /srpcolonies /srparasites /srpdislodgment /srpgeneration /srpudevelopment /srp_summon_nidus /srphelp`; phase music (client); all network sends go through `network/SRPSend`.
+Tools: `porting/tools/gen_blockstates.py`, `gen_lang.py`, `gen_renderers.py`, `datagen/SRPRegistryDump` (`gradlew runData`). Dev: `-PquickPlay=host:port`, server runs in `run-server/`, config in `run/config/srparasites/*.toml`.
+
+**Important gameplay note (not a bug):** the special abilities, sprinting and water leaps of the parasites are gated by the *Generation* of the dimension (0-5, `/srpgeneration`), not by the evolution phase. With the default config specials (`generationSpecialM*`) start at generation 4, sprinting at 2, water leap at 3, faster attacks at 3-5. A fresh world is generation 0, so parasites look slow and without their special attacks even at phase 6. Test with `/srpgeneration setgeneration 4` (or 5). The generation grows with time (`generationTime1..`).
+
+**Fixed this session:** Beckon stages I/III/IV were bright green (glow textures had RGB in transparent pixels; cleaned), enderman parasites ignored all damage, parasite food theft took any item, deprecated `EventBusSubscriber.Bus` arguments removed.
+
+**Open bugs:** Yelloweye (Emana) acid box (`EntityNade`, damage = father attack damage 3.5, applied by `selfExplode`) reportedly does no damage: not diagnosed; enderman parasites reportedly not despawning/hard hitting: not diagnosed; structure NBT walls use the old wall format; `damage` entity not summonable; a few textures missing in the original jar.
+
+**Not done (deferred):** JEI integration, loot tables, infected-player armor layer (SRPLayerBipedArmor/SRPModelBiped), vanilla music suppression and parasite biome music, bestiary and field guide (+ `/srpguide`, `/srpguideclear`, `/srpbestiarystats`), parasite biomes (worldgen) and the Harlequin commands, celestial events and `/srp_celestial` (+ shrimp drops), Star biomes, report screens, fog, mouse reach, three block-entity renderers (relay controller, trophy, distorted sign), held-pearl glow, screen overlays, advancements, shaders, `/srpguidistortion`.

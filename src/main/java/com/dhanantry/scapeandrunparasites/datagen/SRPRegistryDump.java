@@ -19,7 +19,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
  * Development tool, only runs in the data run ({@code gradlew runData}): dumps the SRP blocks, items and entities with their
  * block state properties to {@code srp_registry_dump.json}, the input of {@code porting/tools/gen_assets.py} (blockstates, lang).
  */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SRPRegistryDump {
     private SRPRegistryDump() {}
 

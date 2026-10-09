@@ -14,7 +14,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 /** Blocks without hit and destroy particles: the relay controller and the relay node (1.12 {@code addHitEffects}/{@code addDestroyEffects} returned true). */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT)
 public final class SRPBlockClientExtensions {
     private SRPBlockClientExtensions() {
     }

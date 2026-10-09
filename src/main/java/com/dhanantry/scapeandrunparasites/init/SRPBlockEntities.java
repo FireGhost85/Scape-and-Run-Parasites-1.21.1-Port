@@ -29,7 +29,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
  * expose the item handler capability the way {@code TileEntityLockable} did in 1.12 (the unsided {@code InvWrapper}); the
  * infested furnace had none.
  */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SRPBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ScapeAndRunParasites.MODID);
 

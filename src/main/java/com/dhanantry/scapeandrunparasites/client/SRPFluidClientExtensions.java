@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 /** Textures of the dead blood fluid ({@code srparasites:blocks/deadblood_still} and {@code _flowing} in 1.12). */
-@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID, value = Dist.CLIENT)
 public final class SRPFluidClientExtensions {
     private static final ResourceLocation STILL = ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "block/deadblood_still");
     private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "block/deadblood_flowing");
