@@ -1,6 +1,7 @@
 {
- "parent": "minecraft:block/cross",
- "textures": {
-  "cross": "srparasites:block/stage2_ts"
- }
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "srparasites:block/stage2_ts"
+  },
+  "render_type": "minecraft:cutout"
 }

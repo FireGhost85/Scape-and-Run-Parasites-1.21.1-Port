@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/deadhead_grass_short2"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

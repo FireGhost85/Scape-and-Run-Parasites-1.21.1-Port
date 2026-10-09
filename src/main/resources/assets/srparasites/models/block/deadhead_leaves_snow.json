@@ -4,5 +4,6 @@
     "top": "srparasites:block/deadhead_leaves_snow_top",
     "side": "srparasites:block/deadhead_leaves_snow",
     "bottom": "srparasites:block/deadhead_leaves"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

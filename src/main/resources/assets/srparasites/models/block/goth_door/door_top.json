@@ -3,5 +3,6 @@
   "textures": {
     "bottom": "srparasites:block/goth_door_bottom",
     "top": "srparasites:block/goth_door_top"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

@@ -2,5 +2,6 @@
   "parent": "block/door_bottom_right_open",
   "textures": {
     "bottom": "srparasites:block/goth_door_bottom"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

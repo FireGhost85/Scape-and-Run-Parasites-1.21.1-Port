@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/web_three"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

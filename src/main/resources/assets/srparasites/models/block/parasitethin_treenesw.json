@@ -2,5 +2,6 @@
   "parent": "srparasites:block/parasitethin_nesw",
   "textures": {
     "texture": "srparasites:block/parasitethin_treenesw"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

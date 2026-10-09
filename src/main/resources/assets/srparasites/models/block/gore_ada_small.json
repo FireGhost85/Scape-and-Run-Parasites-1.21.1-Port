@@ -2,5 +2,6 @@
   "parent": "srparasites:block/gore_base",
   "textures": {
     "texture": "srparasites:block/parasitegore_ada_small"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

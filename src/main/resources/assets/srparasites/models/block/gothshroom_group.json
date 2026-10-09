@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/group_shroom"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

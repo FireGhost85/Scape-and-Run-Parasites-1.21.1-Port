@@ -2,5 +2,6 @@
   "parent": "block/tinted_cross",
   "textures": {
     "cross": "srparasites:block/parasitebush_decanterempty"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

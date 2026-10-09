@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/parasitebush_tendril_end"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

@@ -3,5 +3,6 @@
   "textures": {
     "bottom": "srparasites:block/consumed_door_bottom",
     "top": "srparasites:block/consumed_door_top"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

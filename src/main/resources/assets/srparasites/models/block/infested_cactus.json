@@ -5,5 +5,6 @@
     "side": "srparasites:block/infested_cactus",
     "top": "srparasites:block/infested_cactus_top",
     "bottom": "srparasites:block/infested_cactus_bottom"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

@@ -3,5 +3,6 @@
   "textures": {
     "flowerpot": "srparasites:block/assimilated_flower_pot",
     "dirt": "srparasites:block/infestedsand"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

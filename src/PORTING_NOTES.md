@@ -1,0 +1,1 @@
+- [CHG] 166 block models with transparent textures (remains/gore, bushes, plants, panes, ...) got `render_type` cutout/translucent: without it the transparent pixels rendered as solid colour (flat red planes). Script: the alpha check of the textures decides (binary alpha = cutout, only partial alpha = translucent).

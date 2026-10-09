@@ -2,5 +2,6 @@
   "parent": "block/cube_all",
   "textures": {
     "all": "srparasites:block/moody_glass"
-  }
+  },
+  "render_type": "minecraft:translucent"
 }

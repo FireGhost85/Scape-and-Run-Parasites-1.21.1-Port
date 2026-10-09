@@ -4,5 +4,6 @@
     "pane": "srparasites:block/sepia_glass",
     "edge": "srparasites:block/sepia_glass_pane",
     "particle": "srparasites:block/sepia_glass"
-  }
+  },
+  "render_type": "minecraft:translucent"
 }

@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/parasitebush_spine_end_node"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

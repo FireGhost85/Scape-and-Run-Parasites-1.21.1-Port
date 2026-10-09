@@ -1,6 +1,7 @@
 {
- "parent": "minecraft:block/cross",
- "textures": {
-  "cross": "srparasites:block/dead_ts"
- }
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "srparasites:block/dead_ts"
+  },
+  "render_type": "minecraft:cutout"
 }

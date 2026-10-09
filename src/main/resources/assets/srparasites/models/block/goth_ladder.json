@@ -2,5 +2,6 @@
   "parent": "block/ladder",
   "textures": {
     "texture": "srparasites:block/goth_ladder"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

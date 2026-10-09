@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/sapling_deadhead"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

@@ -3,5 +3,6 @@
   "textures": {
     "particle": "srparasites:block/bloody_ice",
     "all": "srparasites:block/bloody_ice"
-  }
+  },
+  "render_type": "minecraft:translucent"
 }

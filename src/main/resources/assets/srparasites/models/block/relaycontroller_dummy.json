@@ -2,5 +2,6 @@
   "parent": "block/cube_all",
   "textures": {
     "all": "srparasites:block/relaycontroller_dummy"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

@@ -8,5 +8,6 @@
     "west": "srparasites:block/parasite_fog",
     "north": "srparasites:block/parasite_fog",
     "south": "srparasites:block/parasite_fog"
-  }
+  },
+  "render_type": "minecraft:translucent"
 }

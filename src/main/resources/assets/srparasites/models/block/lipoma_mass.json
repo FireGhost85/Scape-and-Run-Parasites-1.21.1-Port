@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/underside_growth"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }

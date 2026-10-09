@@ -2,5 +2,6 @@
   "parent": "block/cross",
   "textures": {
     "cross": "srparasites:block/hair"
-  }
+  },
+  "render_type": "minecraft:cutout"
 }
