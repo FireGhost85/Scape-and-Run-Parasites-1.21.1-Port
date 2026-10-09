@@ -16,7 +16,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 
 /** GuiSRPWorldSettings of 1.10.9: difficulty preset, meteor infection and the star type of the world that is being created. */
 public class SRPWorldSettingsScreen extends Screen {
@@ -95,7 +94,7 @@ public class SRPWorldSettingsScreen extends Screen {
         }).bounds(left, top + 96, 176, 20).build());
         ModList.get().getModContainerById(ScapeAndRunParasites.MODID).ifPresent(container ->
                 this.addRenderableWidget(Button.builder(Component.translatable("gui.srparasites.worldsettings.config"), b ->
-                        this.minecraft.setScreen(new ConfigurationScreen(container, this))).bounds(left, top + 124, 176, 20).build()));
+                        this.minecraft.setScreen(SRPConfigSectionScreen.create(container, this))).bounds(left, top + 124, 176, 20).build()));
         this.addRenderableWidget(Button.builder(Component.translatable("gui.srparasites.worldsettings.done"), b -> {
             boolean cold = pendingStarType == 1;
             SRPStarWorldEvents.markCreatingWorld(pendingStarType, cold && pendingMushroomTrees, cold && pendingFracturedTerrain);

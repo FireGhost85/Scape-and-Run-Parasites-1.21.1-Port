@@ -5186,13 +5186,16 @@
  "srparasites.configuration.EIV COTH Multiplier": "EIV COTH Multiplier",
  "srparasites.configuration.EIV Parasite Death Multiplier": "EIV Parasite Death Multiplier",
  "srparasites.configuration.EIV Kill Multiplier": "EIV Kill Multiplier",
- "srparasites.configuration.section.srparasites.srparasites.toml": "General",
+ "srparasites.configuration.section.srparasites.srparasites.toml": "General settings",
  "srparasites.configuration.section.srparasites.srparasites.toml.title": "%s - General Settings",
- "srparasites.configuration.section.srparasites.srparasitesmobs.toml": "Mobs",
+ "srparasites.configuration.section.srparasites.srparasitesmobs.toml": "Mobs settings",
  "srparasites.configuration.section.srparasites.srparasitesmobs.toml.title": "%s - Mobs Settings",
- "srparasites.configuration.section.srparasites.srparasitessystems.toml": "Systems",
+ "srparasites.configuration.section.srparasites.srparasitessystems.toml": "Systems settings",
  "srparasites.configuration.section.srparasites.srparasitessystems.toml.title": "%s - Systems Settings",
- "srparasites.configuration.section.srparasites.srparasitesworld.toml": "World",
+ "srparasites.configuration.section.srparasites.srparasitesworld.toml": "World settings",
  "srparasites.configuration.section.srparasites.srparasitesworld.toml.title": "%s - World Settings",
- "srparasites.configuration.title": "%s Configuration"
+ "srparasites.configuration.title": "%s Configuration",
+ "srparasites.configuration.search": "Search settings",
+ "srparasites.configuration.search.hint": "Search this category and everything below it...",
+ "srparasites.configuration.search.none": "No settings match your search."
 }
