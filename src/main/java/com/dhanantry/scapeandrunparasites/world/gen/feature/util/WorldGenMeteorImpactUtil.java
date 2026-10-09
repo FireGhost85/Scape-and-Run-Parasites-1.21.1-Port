@@ -104,6 +104,30 @@ public final class WorldGenMeteorImpactUtil {
         return false;
     }
 
+    /**
+     * 1.12 {@code World.getTopSolidOrLiquidBlock}: the position above the highest block of the column that is solid or a liquid and is not
+     * a leaf block (trees are skipped to their trunk, the canopy is not touched). The 1.21 heightmap MOTION_BLOCKING_NO_LEAVES only knows the
+     * vanilla {@code LeavesBlock}, so the deadhead leaves of the mod counted as ground.
+     */
+    public static BlockPos topSolidOrLiquid(Level world, BlockPos pos) {
+        BlockPos.MutableBlockPos p = world.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, pos).mutable();
+        int min = world.getMinBuildHeight();
+        while (p.getY() > min) {
+            BlockState state = world.getBlockState(p.below());
+            LegacyMaterial m = LegacyMaterial.of(state);
+            if ((m.isSolid() || m.isLiquid()) && !isLeafBlock(state)) {
+                break;
+            }
+            p.move(0, -1, 0);
+        }
+        return p.immutable();
+    }
+
+    private static boolean isLeafBlock(BlockState state) {
+        return state.is(net.minecraft.tags.BlockTags.LEAVES) || state.getBlock() instanceof net.minecraft.world.level.block.LeavesBlock
+                || state.getBlock() instanceof com.dhanantry.scapeandrunparasites.block.ILeavesDecay;
+    }
+
     /** The impact leaves water as it is: a column whose top block is a fluid is not carved and gets no stain, rubble or rim. */
     private static boolean isFluidTop(Level world, BlockPos top) {
         return !world.getBlockState(top).getFluidState().isEmpty();
@@ -121,7 +145,7 @@ public final class WorldGenMeteorImpactUtil {
                 int dz = z;
                 int d2 = dx * dx + dz * dz;
                 if (d2 > radius * radius) continue;
-                BlockPos colTop = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z));
+                BlockPos colTop = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(world, BlockPos.containing(cx + x, surface.getY(), cz + z));
                 if (world.hasChunkAt(colTop.below()) && isFluidTop(world, colTop.below())) continue;
                 int topY = colTop.getY();
                 double dist = Math.sqrt(d2);
@@ -135,7 +159,7 @@ public final class WorldGenMeteorImpactUtil {
                     if (m == LegacyMaterial.air || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
-                BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
+                BlockPos top = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(world, BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
                 if (!world.hasChunkAt(top) || isFluidTop(world, top)) continue;
                 if (d2 <= coreRR) {
                     if (rand.nextInt(3) == 0) {
@@ -166,7 +190,7 @@ public final class WorldGenMeteorImpactUtil {
                 int dx = x;
                 int dz = z;
                 int d2 = dx * dx + dz * dz;
-                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below()) || isFluidTop(world, top)) continue;
+                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(world, BlockPos.containing(cx + x, surface.getY(), cz + z)).below()) || isFluidTop(world, top)) continue;
                 world.setBlock(top, stain, 2);
             }
         }
@@ -184,7 +208,7 @@ public final class WorldGenMeteorImpactUtil {
             double pz = dirZ * dist + dirX * dist * spread;
             int x = cx + (int)Math.round(px);
             int z = cz + (int)Math.round(pz);
-            BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x, surface.getY(), z)).below();
+            BlockPos top = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(world, BlockPos.containing(x, surface.getY(), z)).below();
             if (!world.hasChunkAt(top) || isFluidTop(world, top)) continue;
             if (rand.nextInt(5) == 0) {
                 world.setBlock(top, stain, 2);
@@ -211,7 +235,7 @@ public final class WorldGenMeteorImpactUtil {
                 for (int z = -r; z <= r; ++z) {
                     BlockPos top;
                     int d2 = x * x + z * z;
-                    if (d2 > rr || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || isFluidTop(world, top) || rand.nextInt(3) != 0) continue;
+                    if (d2 > rr || !world.hasChunkAt(top = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(world, BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || isFluidTop(world, top) || rand.nextInt(3) != 0) continue;
                     world.setBlock(top, stain, 2);
                 }
             }

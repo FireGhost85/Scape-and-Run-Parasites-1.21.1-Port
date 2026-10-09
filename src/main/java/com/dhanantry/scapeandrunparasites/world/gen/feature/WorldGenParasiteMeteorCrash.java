@@ -38,7 +38,7 @@ extends WorldGenParasiteColonyBase {
         int openNeeded;
         int baseDepth;
         BlockPos og = posss;
-        BlockPos impactCenter = worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, posss).below();
+        BlockPos impactCenter = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(worldIn, posss).below();
         if (this.type != 5) {
             String out = "meteor_fragment_large1";
             switch (worldIn.random.nextInt(9)) {
@@ -86,7 +86,7 @@ extends WorldGenParasiteColonyBase {
                 BlockPos top;
                 int dz;
                 int dx = rand.nextInt(fireRadius * 2 + 1) - fireRadius;
-                if (dx * dx + (dz = rand.nextInt(fireRadius * 2 + 1) - fireRadius) * dz > fireRadius * fireRadius || (top = worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, surface.offset(dx, 0, dz)).below()).getY() <= 5 || !worldIn.hasChunkAt(firePos = top.above()) || LegacyMaterial.of(below = worldIn.getBlockState(top)) == LegacyMaterial.air || LegacyMaterial.of(below) == LegacyMaterial.water || LegacyMaterial.of(below) == LegacyMaterial.lava || LegacyMaterial.of(at = worldIn.getBlockState(firePos)) != LegacyMaterial.air) continue;
+                if (dx * dx + (dz = rand.nextInt(fireRadius * 2 + 1) - fireRadius) * dz > fireRadius * fireRadius || (top = com.dhanantry.scapeandrunparasites.world.gen.feature.util.WorldGenMeteorImpactUtil.topSolidOrLiquid(worldIn, surface.offset(dx, 0, dz)).below()).getY() <= 5 || !worldIn.hasChunkAt(firePos = top.above()) || LegacyMaterial.of(below = worldIn.getBlockState(top)) == LegacyMaterial.air || LegacyMaterial.of(below) == LegacyMaterial.water || LegacyMaterial.of(below) == LegacyMaterial.lava || LegacyMaterial.of(at = worldIn.getBlockState(firePos)) != LegacyMaterial.air) continue;
                 worldIn.setBlock(firePos, Blocks.FIRE.defaultBlockState(), 2);
             }
             return true;
