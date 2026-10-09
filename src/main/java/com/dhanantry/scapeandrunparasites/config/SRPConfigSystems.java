@@ -1899,6 +1899,7 @@ public class SRPConfigSystems {
         c60(b);
         c61(b);
         c62(b);
+        cLure(b);
         SPEC = b.build();
     }
 
@@ -1974,6 +1975,71 @@ public class SRPConfigSystems {
         return s * 20;
     }
 
+    private static void cLure(ModConfigSpec.Builder b) {
+        b.comment("Lure Blocks: cooldown added to the parasites, points they lose and the Scent level that spawns, for each Phase.");
+        b.push(List.of("lure_block"));
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k161 = b.defineInRange(List.of("Phase 1 Lure Block Cooldown Value"), 10, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k162 = b.defineInRange(List.of("Phase 1 Carcass Value"), 10, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k170 = b.defineInRange(List.of("Phase 1 Lure Scent Level Desploy"), 1, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k191 = b.defineInRange(List.of("Phase 2 Lure Block Cooldown Value"), 20, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k192 = b.defineInRange(List.of("Phase 2 Carcass Value"), 20, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k200 = b.defineInRange(List.of("Phase 2 Lure Scent Level Desploy"), 1, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k221 = b.defineInRange(List.of("Phase 3 Lure Block Cooldown Value"), 50, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k222 = b.defineInRange(List.of("Phase 3 Carcass Value"), 50, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k230 = b.defineInRange(List.of("Phase 3 Lure Scent Level Desploy"), 1, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k251 = b.defineInRange(List.of("Phase 4 Lure Block Cooldown Value"), 250, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k252 = b.defineInRange(List.of("Phase 4 Carcass Value"), 500, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k260 = b.defineInRange(List.of("Phase 4 Lure Scent Level Desploy"), 2, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k281 = b.defineInRange(List.of("Phase 5 Lure Block Cooldown Value"), 300, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k282 = b.defineInRange(List.of("Phase 5 Carcass Value"), 4000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k290 = b.defineInRange(List.of("Phase 5 Lure Scent Level Desploy"), 3, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k311 = b.defineInRange(List.of("Phase 6 Lure Block Cooldown Value"), 600, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k312 = b.defineInRange(List.of("Phase 6 Carcass Value"), 80000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k320 = b.defineInRange(List.of("Phase 6 Lure Scent Level Desploy"), 4, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k341 = b.defineInRange(List.of("Phase 7 Lure Block Cooldown Value"), 600, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k342 = b.defineInRange(List.of("Phase 7 Carcass Value"), 350000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k350 = b.defineInRange(List.of("Phase 7 Lure Scent Level Desploy"), 5, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k371 = b.defineInRange(List.of("Phase 8 Lure Block Cooldown Value"), 1200, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k372 = b.defineInRange(List.of("Phase 8 Carcass Value"), 6250000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k380 = b.defineInRange(List.of("Phase 8 Lure Scent Level Desploy"), 6, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k401 = b.defineInRange(List.of("Phase 9 Lure Block Cooldown Value"), 1200, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k402 = b.defineInRange(List.of("Phase 9 Carcass Value"), 50000000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k410 = b.defineInRange(List.of("Phase 9 Lure Scent Level Desploy"), 7, 1, 8);
+        b.comment("Cooldown added ot the parasites when using a Lure Block.");
+        k430 = b.defineInRange(List.of("Phase 10 Lure Block Cooldown Value"), 1200, 0, 2147483640);
+        b.comment("Number of Points the parasites will lose when a Lure Block of this Phase is used successfully (called Carcass Value in the original).");
+        k431 = b.defineInRange(List.of("Phase 10 Carcass Value"), 72000000, 0, 2147483640);
+        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
+        k439 = b.defineInRange(List.of("Phase 10 Lure Scent Level Desploy"), 8, 1, 8);
+        b.pop();
+    }
     private static void c0(ModConfigSpec.Builder b) {
         b.comment("System configuration \nVersion:1.10.9\n \nPotions IDs \nsrparasites:coth \nsrparasites:fear \nsrparasites:antimall \nsrparasites:bleed \nsrparasites:corrosive \nsrparasites:viral \nsrparasites:rage \nsrparasites:repel \nsrparasites:senses \nsrparasites:prey \nsrparasites:debar \nsrparasites:needler \nsrparasites:foster \nsrparasites:link \n ");
         b.push(List.of("configuration_systems"));
@@ -2331,10 +2397,6 @@ public class SRPConfigSystems {
         k159 = b.defineInRange(List.of("Phase 1 Mob Spawn With COTH"), 0.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k160 = b.defineInRange(List.of("Phase 1 Crop Grow Stunned"), 0.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k161 = b.defineInRange(List.of("Phase 1 Lure Block Cooldown Value"), 10, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k162 = b.defineInRange(List.of("Phase 1 Carcass Value"), 10, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k163 = b.define(List.of("Phase 1 Warning Message"), "One");
         b.comment("Number of Points gained when skipping the night.");
@@ -2349,8 +2411,6 @@ public class SRPConfigSystems {
         k168 = b.defineInRange(List.of("Phase 1 Residue"), 0, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 1. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k169 = b.defineListAllowEmpty(List.of("Phase 1 Spawn Entity List"), List.of("srparasites:buglin;2;6;30", "srparasites:rupter;3;6;30", "srparasites:carrier_light;1;1;1", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k170 = b.defineInRange(List.of("Phase 1 Lure Scent Level Desploy"), 1, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k171 = b.defineInRange(List.of("Phase 1 Emerging Infestation Vector Cap"), 2, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2395,10 +2455,6 @@ public class SRPConfigSystems {
         k189 = b.defineInRange(List.of("Phase 2 Mob Spawn With COTH"), 0.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k190 = b.defineInRange(List.of("Phase 2 Crop Grow Stunned"), 0.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k191 = b.defineInRange(List.of("Phase 2 Lure Block Cooldown Value"), 20, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k192 = b.defineInRange(List.of("Phase 2 Carcass Value"), 20, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k193 = b.define(List.of("Phase 2 Warning Message"), "Two");
         b.comment("Number of Points gained when skipping the night.");
@@ -2413,8 +2469,6 @@ public class SRPConfigSystems {
         k198 = b.defineInRange(List.of("Phase 2 Residue"), 0, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 2. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k199 = b.defineListAllowEmpty(List.of("Phase 2 Spawn Entity List"), List.of("srparasites:buglin;2;6;30", "srparasites:rupter;3;6;30", "srparasites:carrier_light;1;1;2", "srparasites:carrier_heavy;1;1;1", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k200 = b.defineInRange(List.of("Phase 2 Lure Scent Level Desploy"), 1, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k201 = b.defineInRange(List.of("Phase 2 Emerging Infestation Vector Cap"), 2, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2459,10 +2513,6 @@ public class SRPConfigSystems {
         k219 = b.defineInRange(List.of("Phase 3 Mob Spawn With COTH"), 0.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k220 = b.defineInRange(List.of("Phase 3 Crop Grow Stunned"), 0.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k221 = b.defineInRange(List.of("Phase 3 Lure Block Cooldown Value"), 50, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k222 = b.defineInRange(List.of("Phase 3 Carcass Value"), 50, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k223 = b.define(List.of("Phase 3 Warning Message"), "Three");
         b.comment("Number of Points gained when skipping the night.");
@@ -2477,8 +2527,6 @@ public class SRPConfigSystems {
         k228 = b.defineInRange(List.of("Phase 3 Residue"), 5500, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 3. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k229 = b.defineListAllowEmpty(List.of("Phase 3 Spawn Entity List"), List.of("srparasites:rupter;3;6;30", "srparasites:lice;1;4;20", "srparasites:carrier_flying;1;2;15", "srparasites:carrier_light;1;2;5", "srparasites:carrier_heavy;1;1;2", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:host;1;2;5", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k230 = b.defineInRange(List.of("Phase 3 Lure Scent Level Desploy"), 1, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k231 = b.defineInRange(List.of("Phase 3 Emerging Infestation Vector Cap"), 3, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2523,10 +2571,6 @@ public class SRPConfigSystems {
         k249 = b.defineInRange(List.of("Phase 4 Mob Spawn With COTH"), 0.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k250 = b.defineInRange(List.of("Phase 4 Crop Grow Stunned"), 0.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k251 = b.defineInRange(List.of("Phase 4 Lure Block Cooldown Value"), 250, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k252 = b.defineInRange(List.of("Phase 4 Carcass Value"), 500, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k253 = b.define(List.of("Phase 4 Warning Message"), "Four");
         b.comment("Number of Points gained when skipping the night.");
@@ -2541,8 +2585,6 @@ public class SRPConfigSystems {
         k258 = b.defineInRange(List.of("Phase 4 Residue"), 4000, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 4. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k259 = b.defineListAllowEmpty(List.of("Phase 4 Spawn Entity List"), List.of("srparasites:rupter;3;6;30", "srparasites:lice;1;4;20", "srparasites:carrier_flying;1;2;15", "srparasites:carrier_light;1;2;5", "srparasites:carrier_heavy;1;1;2", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:host;1;2;5", "srparasites:heed;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k260 = b.defineInRange(List.of("Phase 4 Lure Scent Level Desploy"), 2, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k261 = b.defineInRange(List.of("Phase 4 Emerging Infestation Vector Cap"), 3, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2587,10 +2629,6 @@ public class SRPConfigSystems {
         k279 = b.defineInRange(List.of("Phase 5 Mob Spawn With COTH"), 0.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k280 = b.defineInRange(List.of("Phase 5 Crop Grow Stunned"), 0.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k281 = b.defineInRange(List.of("Phase 5 Lure Block Cooldown Value"), 300, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k282 = b.defineInRange(List.of("Phase 5 Carcass Value"), 4000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k283 = b.define(List.of("Phase 5 Warning Message"), "Five");
         b.comment("Number of Points gained when skipping the night.");
@@ -2605,8 +2643,6 @@ public class SRPConfigSystems {
         k288 = b.defineInRange(List.of("Phase 5 Residue"), 1000, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 5. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k289 = b.defineListAllowEmpty(List.of("Phase 5 Spawn Entity List"), List.of("srparasites:rupter;3;6;30", "srparasites:lice;1;4;20", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:host;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k290 = b.defineInRange(List.of("Phase 5 Lure Scent Level Desploy"), 3, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k291 = b.defineInRange(List.of("Phase 5 Emerging Infestation Vector Cap"), 4, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2651,10 +2687,6 @@ public class SRPConfigSystems {
         k309 = b.defineInRange(List.of("Phase 6 Mob Spawn With COTH"), 0.2, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k310 = b.defineInRange(List.of("Phase 6 Crop Grow Stunned"), 0.1, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k311 = b.defineInRange(List.of("Phase 6 Lure Block Cooldown Value"), 600, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k312 = b.defineInRange(List.of("Phase 6 Carcass Value"), 80000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k313 = b.define(List.of("Phase 6 Warning Message"), "Six");
         b.comment("Number of Points gained when skipping the night.");
@@ -2669,8 +2701,6 @@ public class SRPConfigSystems {
         k318 = b.defineInRange(List.of("Phase 6 Residue"), 500, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 6. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k319 = b.defineListAllowEmpty(List.of("Phase 6 Spawn Entity List"), List.of("srparasites:rupter;3;6;30", "srparasites:lice;1;4;20", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:host;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:abo_bodies;1;2;5", "srparasites:mangler;3;6;30", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k320 = b.defineInRange(List.of("Phase 6 Lure Scent Level Desploy"), 4, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k321 = b.defineInRange(List.of("Phase 6 Emerging Infestation Vector Cap"), 4, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2715,10 +2745,6 @@ public class SRPConfigSystems {
         k339 = b.defineInRange(List.of("Phase 7 Mob Spawn With COTH"), 0.4, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k340 = b.defineInRange(List.of("Phase 7 Crop Grow Stunned"), 0.3, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k341 = b.defineInRange(List.of("Phase 7 Lure Block Cooldown Value"), 600, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k342 = b.defineInRange(List.of("Phase 7 Carcass Value"), 350000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k343 = b.define(List.of("Phase 7 Warning Message"), "Seven");
         b.comment("Number of Points gained when skipping the night.");
@@ -2733,8 +2759,6 @@ public class SRPConfigSystems {
         k348 = b.defineInRange(List.of("Phase 7 Residue"), 400, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 7. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k349 = b.defineListAllowEmpty(List.of("Phase 7 Spawn Entity List"), List.of("srparasites:rupter;3;6;30", "srparasites:lice;1;4;20", "srparasites:sim_squid;1;2;15", "srparasites:sim_bigspider;3;5;25", "srparasites:sim_human;3;5;25", "srparasites:sim_cow;3;5;25", "srparasites:sim_sheep;3;5;25", "srparasites:sim_wolf;3;5;25", "srparasites:sim_pig;3;5;25", "srparasites:sim_villager;3;5;25", "srparasites:sim_adventurer;3;5;25", "srparasites:sim_horse;3;5;25", "srparasites:sim_bear;3;5;25", "srparasites:sim_enderman;1;1;1", "srparasites:host;1;2;5", "srparasites:hostii;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:airscrew;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:abo_bodies;1;2;5", "srparasites:mangler;3;6;30", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k350 = b.defineInRange(List.of("Phase 7 Lure Scent Level Desploy"), 5, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k351 = b.defineInRange(List.of("Phase 7 Emerging Infestation Vector Cap"), 4, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2779,10 +2803,6 @@ public class SRPConfigSystems {
         k369 = b.defineInRange(List.of("Phase 8 Mob Spawn With COTH"), 0.8, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k370 = b.defineInRange(List.of("Phase 8 Crop Grow Stunned"), 0.6, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k371 = b.defineInRange(List.of("Phase 8 Lure Block Cooldown Value"), 1200, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k372 = b.defineInRange(List.of("Phase 8 Carcass Value"), 6250000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k373 = b.define(List.of("Phase 8 Warning Message"), "Eight");
         b.comment("Number of Points gained when skipping the night.");
@@ -2797,8 +2817,6 @@ public class SRPConfigSystems {
         k378 = b.defineInRange(List.of("Phase 8 Residue"), 300, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 8. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k379 = b.defineListAllowEmpty(List.of("Phase 8 Spawn Entity List"), List.of("srparasites:lice;1;4;20", "srparasites:fer_human;4;5;25", "srparasites:fer_cow;3;6;25", "srparasites:fer_sheep;4;5;25", "srparasites:fer_wolf;3;6;25", "srparasites:fer_pig;3;5;25", "srparasites:fer_villager;3;5;25", "srparasites:fer_horse;3;5;25", "srparasites:fer_enderman;3;5;25", "srparasites:hostii;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:airscrew;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:abo_bodies;1;2;5", "srparasites:mangler;3;6;30", "srparasites:bomber_light;1;1;5", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k380 = b.defineInRange(List.of("Phase 8 Lure Scent Level Desploy"), 6, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k381 = b.defineInRange(List.of("Phase 8 Emerging Infestation Vector Cap"), 5, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2843,10 +2861,6 @@ public class SRPConfigSystems {
         k399 = b.defineInRange(List.of("Phase 9 Mob Spawn With COTH"), 0.9, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k400 = b.defineInRange(List.of("Phase 9 Crop Grow Stunned"), 1.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k401 = b.defineInRange(List.of("Phase 9 Lure Block Cooldown Value"), 1200, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k402 = b.defineInRange(List.of("Phase 9 Carcass Value"), 50000000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k403 = b.define(List.of("Phase 9 Warning Message"), "Nine");
         b.comment("Number of Points gained when skipping the night.");
@@ -2861,8 +2875,6 @@ public class SRPConfigSystems {
         k408 = b.defineInRange(List.of("Phase 9 Residue"), 250, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 8. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k409 = b.defineListAllowEmpty(List.of("Phase 9 Spawn Entity List"), List.of("srparasites:lice;1;4;20", "srparasites:sim_dragone;1;1;1", "srparasites:fer_human;4;5;25", "srparasites:fer_cow;3;6;25", "srparasites:fer_sheep;4;5;25", "srparasites:fer_wolf;3;6;25", "srparasites:fer_pig;3;5;25", "srparasites:fer_villager;3;5;25", "srparasites:fer_horse;3;5;25", "srparasites:fer_enderman;3;5;25", "srparasites:hostii;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:airscrew;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:abo_bodies;1;2;5", "srparasites:mangler;3;6;30", "srparasites:bomber_light;1;1;5", "srparasites:worker;1;1;5", "srparasites:architect;1;1;5", "srparasites:bomber_heavy;1;2;5", "srparasites:wraith;1;2;5", "srparasites:bogle;1;2;5", "srparasites:haunter;1;2;5", "srparasites:carrier_colony;1;2;5", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k410 = b.defineInRange(List.of("Phase 9 Lure Scent Level Desploy"), 7, 1, 8);
         b.comment("Total number of EIVs in this Phase.");
         k411 = b.defineInRange(List.of("Phase 9 Emerging Infestation Vector Cap"), 5, 0, 2147483640);
         b.comment("Bonus size growth to Vectors in this Phase.");
@@ -2905,10 +2917,6 @@ public class SRPConfigSystems {
         k428 = b.defineInRange(List.of("Phase 10 Mob Spawn With COTH"), 1.0, 0.0, 1.0);
         b.comment("Chance (1=100%) for crop grow to be stunned.");
         k429 = b.defineInRange(List.of("Phase 10 Crop Grow Stunned"), 1.0, 0.0, 1.0);
-        b.comment("Cooldown added ot the parasites when using a Lure Block.");
-        k430 = b.defineInRange(List.of("Phase 10 Lure Block Cooldown Value"), 1200, 0, 2147483640);
-        b.comment("Number of Points the parasites will lose when using a Carcass");
-        k431 = b.defineInRange(List.of("Phase 10 Carcass Value"), 72000000, 0, 2147483640);
         b.comment("Message sent to all players in the current world when parasites reach this Phase");
         k432 = b.define(List.of("Phase 10 Warning Message"), "Ten");
         b.comment("Number of Points gained when skipping the night.");
@@ -2923,8 +2931,6 @@ public class SRPConfigSystems {
         k437 = b.defineInRange(List.of("Phase 10 Residue"), 150, 0, 2147483640);
         b.comment("Entity List that will spawn at phase 8. Ex. \"minecraft:zombie;1;3;90;0\"  Where: \n \"minecraft:zombie\" is the entity, \n \"1\" is the minimum group count. \n \"3\" is the maximum group count. \n \"90\" is spawn wten. \n");
         k438 = b.defineListAllowEmpty(List.of("Phase 10 Spawn Entity List"), List.of("srparasites:lice;1;4;20", "srparasites:sim_dragone;1;1;1", "srparasites:fer_human;4;5;25", "srparasites:fer_cow;3;6;25", "srparasites:fer_sheep;4;5;25", "srparasites:fer_wolf;3;6;25", "srparasites:fer_pig;3;5;25", "srparasites:fer_villager;3;5;25", "srparasites:fer_horse;3;5;25", "srparasites:fer_enderman;3;5;25", "srparasites:hostii;1;2;5", "srparasites:heed;1;2;5", "srparasites:crux;1;2;5", "srparasites:dredge;1;2;5", "srparasites:airscrew;1;2;5", "srparasites:mar_human;1;1;1", "srparasites:mar_cow;1;1;1", "srparasites:mar_sheep;1;1;1", "srparasites:mar_villager;1;1;1", "srparasites:mar_bear;1;1;1", "srparasites:mar_enderman;1;1;1", "srparasites:abo_bodies;1;2;5", "srparasites:mangler;3;6;30", "srparasites:bomber_light;1;1;5", "srparasites:worker;1;1;5", "srparasites:bomber_heavy;1;1;1", "srparasites:wraith;1;1;1", "srparasites:bogle;1;1;1", "srparasites:haunter;1;1;1", "srparasites:carrier_colony;1;1;1", "srparasites:kirin;1;1;1", "srparasites:draconite;1;1;1"), () -> "", o -> o instanceof String);
-        b.comment("Level that the Scent will have when it spawns from a Lure Block of this Phase.");
-        k439 = b.defineInRange(List.of("Phase 10 Lure Scent Level Desploy"), 8, 1, 8);
         b.comment("Parasites can't earn more points than this.");
         k440 = b.defineInRange(List.of("Phase 10 Total Points"), 2100000000, 0, 2147483640);
         b.comment("Total number of EIVs in this Phase.");
