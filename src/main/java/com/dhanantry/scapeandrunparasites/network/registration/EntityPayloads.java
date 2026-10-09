@@ -23,10 +23,10 @@ public final class EntityPayloads {
     }
 
     public static void register(PayloadRegistrar r) {
-        r.playToClient(EntityBodyDeadPayload.TYPE, EntityBodyDeadPayload.CODEC, EntityPayloads::handleBodyDead);
-        r.playToClient(QlipShakePayload.TYPE, QlipShakePayload.CODEC, EntityPayloads::handleQlipShake);
-        r.playToClient(ClockPayload.TYPE, ClockPayload.CODEC, EntityPayloads::handleClock);
-        r.playToClient(CompassPayload.TYPE, CompassPayload.CODEC, EntityPayloads::handleCompass);
+        r.playToClient(EntityBodyDeadPayload.TYPE, EntityBodyDeadPayload.CODEC, (msg, ctx) -> EntityPayloads.handleBodyDead(msg, ctx));
+        r.playToClient(QlipShakePayload.TYPE, QlipShakePayload.CODEC, (msg, ctx) -> EntityPayloads.handleQlipShake(msg, ctx));
+        r.playToClient(ClockPayload.TYPE, ClockPayload.CODEC, (msg, ctx) -> EntityPayloads.handleClock(msg, ctx));
+        r.playToClient(CompassPayload.TYPE, CompassPayload.CODEC, (msg, ctx) -> EntityPayloads.handleCompass(msg, ctx));
     }
 
     private static void handleBodyDead(EntityBodyDeadPayload msg, IPayloadContext ctx) {

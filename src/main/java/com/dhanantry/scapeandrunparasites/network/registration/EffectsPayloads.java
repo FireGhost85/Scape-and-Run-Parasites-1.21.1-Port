@@ -13,9 +13,9 @@ public final class EffectsPayloads {
     }
 
     public static void register(PayloadRegistrar r) {
-        r.playToClient(ParticlePayload.TYPE, ParticlePayload.CODEC, EffectsClientHandlers::particle);
-        r.playToClient(PureParticlesPayload.TYPE, PureParticlesPayload.CODEC, EffectsClientHandlers::pureParticles);
-        r.playToClient(VengeanceFxPayload.TYPE, VengeanceFxPayload.CODEC, EffectsClientHandlers::vengeanceFx);
-        r.playToClient(ExtremeSnowPayload.TYPE, ExtremeSnowPayload.CODEC, EffectsClientHandlers::extremeSnow);
+        r.playToClient(ParticlePayload.TYPE, ParticlePayload.CODEC, (msg, ctx) -> EffectsClientHandlers.particle(msg, ctx));
+        r.playToClient(PureParticlesPayload.TYPE, PureParticlesPayload.CODEC, (msg, ctx) -> EffectsClientHandlers.pureParticles(msg, ctx));
+        r.playToClient(VengeanceFxPayload.TYPE, VengeanceFxPayload.CODEC, (msg, ctx) -> EffectsClientHandlers.vengeanceFx(msg, ctx));
+        r.playToClient(ExtremeSnowPayload.TYPE, ExtremeSnowPayload.CODEC, (msg, ctx) -> EffectsClientHandlers.extremeSnow(msg, ctx));
     }
 }

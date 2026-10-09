@@ -232,6 +232,9 @@ public final class BlockIds {
             };
             return state.setValue(RotatedPillarBlock.AXIS, axis);
         }
+        if (block instanceof com.dhanantry.scapeandrunparasites.block.BlockInfestedRemain) {
+            return state.setValue(com.dhanantry.scapeandrunparasites.block.BlockInfestedRemain.SOURCE, meta & 1);
+        }
         return meta == 0 ? state : null;
     }
 
@@ -251,6 +254,9 @@ public final class BlockIds {
         }
         if (block instanceof SlabBlock && state.hasProperty(SlabBlock.TYPE) && state.getValue(SlabBlock.TYPE) == SlabType.TOP) {
             return 8;
+        }
+        if (block instanceof com.dhanantry.scapeandrunparasites.block.BlockInfestedRemain) {
+            return state.getValue(com.dhanantry.scapeandrunparasites.block.BlockInfestedRemain.SOURCE);
         }
         return 0;
     }

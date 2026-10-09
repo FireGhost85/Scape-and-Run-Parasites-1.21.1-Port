@@ -8,31 +8,31 @@
       "predicate": {
         "level": 0
       },
-      "model": "SRParasites:item/levelclock0"
+      "model": "srparasites:item/levelclock0"
     },
     {
       "predicate": {
         "level": 1
       },
-      "model": "SRParasites:item/levelclock1"
+      "model": "srparasites:item/levelclock1"
     },
     {
       "predicate": {
         "level": 2
       },
-      "model": "SRParasites:item/levelclock2"
+      "model": "srparasites:item/levelclock2"
     },
     {
       "predicate": {
         "level": 3
       },
-      "model": "SRParasites:item/levelclock3"
+      "model": "srparasites:item/levelclock3"
     },
     {
       "predicate": {
         "level": 4
       },
-      "model": "SRParasites:item/levelclock4"
+      "model": "srparasites:item/levelclock4"
     }
   ]
 }

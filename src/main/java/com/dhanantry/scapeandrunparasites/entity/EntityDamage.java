@@ -78,7 +78,9 @@ extends Entity {
     }
 
     protected void readAdditionalSaveData(CompoundTag compound) {
-        this.casterUuid = compound.getUUID("OwnerUUID");
+        if (compound.hasUUID("OwnerUUID")) {
+            this.casterUuid = compound.getUUID("OwnerUUID");
+        }
     }
 
     protected void addAdditionalSaveData(CompoundTag compound) {

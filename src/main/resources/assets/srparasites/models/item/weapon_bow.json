@@ -9,21 +9,21 @@
       "predicate": {
         "pulling": 1
       },
-      "model": "SRParasites:item/weapon_bow_pulling_0"
+      "model": "srparasites:item/weapon_bow_pulling_0"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.4
       },
-      "model": "SRParasites:item/weapon_bow_pulling_1"
+      "model": "srparasites:item/weapon_bow_pulling_1"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.9
       },
-      "model": "SRParasites:item/weapon_bow_pulling_2"
+      "model": "srparasites:item/weapon_bow_pulling_2"
     }
   ],
   "display": {

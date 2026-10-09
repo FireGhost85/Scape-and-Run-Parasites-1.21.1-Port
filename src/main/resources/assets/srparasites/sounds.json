@@ -1827,7 +1827,7 @@
     "category": "hostile",
     "subtitle": "subtitles.bogledeath",
     "sounds": [
-      "srparasites:elviaDeath"
+      "srparasites:elvia_death"
     ]
   },
   "elvia.growl": {

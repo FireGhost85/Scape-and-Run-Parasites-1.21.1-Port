@@ -3,6 +3,7 @@ package com.dhanantry.scapeandrunparasites.init;
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.entity.EntityDamage;
+import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbBoom;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbScary;
 import com.dhanantry.scapeandrunparasites.entity.EntityOrbVoid;
@@ -378,6 +379,11 @@ public final class SRPEntities {
 
     /** Registers the attribute suppliers of all living parasite entities. */
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(BIOMASS.get(), EntityBiomass.createAttributes().build());
+        event.put(TENDRIL.get(), EntityParasiteBase.createAttributes().build());
+        event.put(WAVE.get(), EntityWave.createAttributes().build());
+        event.put(WAVESHOCK.get(), EntityWaveShock.createAttributes().build());
+        event.put(HOMMING.get(), net.minecraft.world.entity.monster.Vex.createAttributes().build());
         event.put(SIM_BIGSPIDER.get(), EntityDorpa.createAttributes().build());
         event.put(SIM_SQUID.get(), EntityInfSquid.createAttributes().build());
         event.put(SIM_HUMAN.get(), EntityInfHuman.createAttributes().build());

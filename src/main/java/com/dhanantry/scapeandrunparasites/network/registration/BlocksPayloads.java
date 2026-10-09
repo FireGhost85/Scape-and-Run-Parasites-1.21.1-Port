@@ -20,7 +20,7 @@ public final class BlocksPayloads {
     }
 
     public static void register(PayloadRegistrar registrar) {
-        registrar.playToClient(Flash.TYPE, Flash.CODEC, BlocksPayloads::handleFlash);
+        registrar.playToClient(Flash.TYPE, Flash.CODEC, (msg, ctx) -> BlocksPayloads.handleFlash(msg, ctx));
     }
 
     private static void handleFlash(Flash msg, IPayloadContext ctx) {

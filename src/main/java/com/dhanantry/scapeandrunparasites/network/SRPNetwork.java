@@ -20,9 +20,9 @@ public final class SRPNetwork {
     @SubscribeEvent
     static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(VERSION);
-        registrar.playToClient(MovingSoundPayload.TYPE, MovingSoundPayload.CODEC, ClientPayloadHandlers::movingSound);
-        registrar.playToClient(EvoPhaseCancelPayload.TYPE, EvoPhaseCancelPayload.CODEC, ClientPayloadHandlers::evoPhaseCancel);
-        registrar.playToClient(UpdateEvoPhasePayload.TYPE, UpdateEvoPhasePayload.CODEC, ClientPayloadHandlers::updateEvoPhase);
+        registrar.playToClient(MovingSoundPayload.TYPE, MovingSoundPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.movingSound(msg, ctx));
+        registrar.playToClient(EvoPhaseCancelPayload.TYPE, EvoPhaseCancelPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.evoPhaseCancel(msg, ctx));
+        registrar.playToClient(UpdateEvoPhasePayload.TYPE, UpdateEvoPhasePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.updateEvoPhase(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);
