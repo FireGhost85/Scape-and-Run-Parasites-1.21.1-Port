@@ -2,18 +2,42 @@
   "effect.rage": {
     "category": "hostile",
     "sounds": [
-      {"name":"srparasites:misc/rage1"},
-      {"name":"srparasites:misc/rage2"},
-      {"name":"srparasites:misc/rage3"},
-      {"name":"srparasites:misc/rage1","pitch":0.95},
-      {"name":"srparasites:misc/rage2","pitch":0.95},
-      {"name":"srparasites:misc/rage3","pitch":0.95},
-      {"name":"srparasites:misc/rage1","pitch":1.05},
-      {"name":"srparasites:misc/rage2","pitch":1.05},
-      {"name":"srparasites:misc/rage3","pitch":1.05}
- ]
+      {
+        "name": "srparasites:misc/rage1"
+      },
+      {
+        "name": "srparasites:misc/rage2"
+      },
+      {
+        "name": "srparasites:misc/rage3"
+      },
+      {
+        "name": "srparasites:misc/rage1",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/rage2",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/rage3",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/rage1",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:misc/rage2",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:misc/rage3",
+        "pitch": 1.05
+      }
+    ]
   },
-    "celestial.dark_days.start": {
+  "celestial.dark_days.start": {
     "category": "ambient",
     "sounds": [
       "srparasites:celestial/dark_days_start"
@@ -47,16 +71,40 @@
     "category": "hostile",
     "subtitle": "subtitles.summoner.resurrect",
     "sounds": [
-      {"name":"srparasites:misc/resurrect1"},
-      {"name":"srparasites:misc/resurrect2"},
-      {"name":"srparasites:misc/resurrect3"},
-      {"name":"srparasites:misc/resurrect1","pitch":0.95},
-      {"name":"srparasites:misc/resurrect2","pitch":0.95},
-      {"name":"srparasites:misc/resurrect3","pitch":0.95},
-      {"name":"srparasites:misc/resurrect1","pitch":1.05},
-      {"name":"srparasites:misc/resurrect2","pitch":1.05},
-      {"name":"srparasites:misc/resurrect3","pitch":1.05}
- ]
+      {
+        "name": "srparasites:misc/resurrect1"
+      },
+      {
+        "name": "srparasites:misc/resurrect2"
+      },
+      {
+        "name": "srparasites:misc/resurrect3"
+      },
+      {
+        "name": "srparasites:misc/resurrect1",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/resurrect2",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/resurrect3",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:misc/resurrect1",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:misc/resurrect2",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:misc/resurrect3",
+        "pitch": 1.05
+      }
+    ]
   },
   "compendium.unlock.item": {
     "category": "player",
@@ -133,32 +181,41 @@
     "subtitle": "subtitles.shrimp.eat",
     "sounds": [
       {
-        "name": "srparasites:item/shrimp_eat1","pitch": 1
+        "name": "srparasites:item/shrimp_eat1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:item/shrimp_eat2","pitch": 1
+      {
+        "name": "srparasites:item/shrimp_eat2",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:item/shrimp_eat3","pitch": 1
+      {
+        "name": "srparasites:item/shrimp_eat3",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:item/shrimp_eat1","pitch": 1.1
-   },
       {
-        "name": "srparasites:item/shrimp_eat2","pitch": 1.1
-   },
+        "name": "srparasites:item/shrimp_eat1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:item/shrimp_eat3","pitch": 1.1
-   },
+        "name": "srparasites:item/shrimp_eat2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:item/shrimp_eat1","pitch": 0.9
-   },
+        "name": "srparasites:item/shrimp_eat3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:item/shrimp_eat2","pitch": 0.9
-   },
+        "name": "srparasites:item/shrimp_eat1",
+        "pitch": 0.9
+      },
       {
-        "name": "srparasites:item/shrimp_eat3","pitch": 0.9
-   }
+        "name": "srparasites:item/shrimp_eat2",
+        "pitch": 0.9
+      },
+      {
+        "name": "srparasites:item/shrimp_eat3",
+        "pitch": 0.9
+      }
     ]
   },
   "vengeance.attack.impact": {
@@ -1834,43 +1891,43 @@
     "category": "hostile",
     "subtitle": "subtitles.bogleliving",
     "sounds": [
-      "srparasites:elviaLiving1",
-      "srparasites:elviaLiving2",
-      "srparasites:elviaLiving3"
+      "srparasites:elvialiving1",
+      "srparasites:elvialiving2",
+      "srparasites:elvialiving3"
     ]
   },
   "elvia.hurt": {
     "category": "hostile",
     "subtitle": "subtitles.boglehurt",
     "sounds": [
-      "srparasites:elviaHurt1",
-      "srparasites:elviaHurt2",
-      "srparasites:elviaHurt3"
+      "srparasites:elviahurt1",
+      "srparasites:elviahurt2",
+      "srparasites:elviahurt3"
     ]
   },
   "lencia.death": {
     "category": "hostile",
     "subtitle": "subtitles.bogledeath",
     "sounds": [
-      "srparasites:lenciaDeath"
+      "srparasites:lenciadeath"
     ]
   },
   "lencia.growl": {
     "category": "hostile",
     "subtitle": "subtitles.bogleliving",
     "sounds": [
-      "srparasites:lenciaLiving1",
-      "srparasites:lenciaLiving2",
-      "srparasites:lenciaLiving3"
+      "srparasites:lencialiving1",
+      "srparasites:lencialiving2",
+      "srparasites:lencialiving3"
     ]
   },
   "lencia.hurt": {
     "category": "hostile",
     "subtitle": "subtitles.boglehurt",
     "sounds": [
-      "srparasites:lenciaHurt1",
-      "srparasites:lenciaHurt2",
-      "srparasites:lenciaHurt3"
+      "srparasites:lenciahurt1",
+      "srparasites:lenciahurt2",
+      "srparasites:lenciahurt3"
     ]
   },
   "jinjo.death": {
@@ -1976,8 +2033,7 @@
   "bodies.death": {
     "subtitle": "subtitles.abobodies.death",
     "category": "hostile",
-    "sounds": [
-    ]
+    "sounds": []
   },
   "bodies.growl": {
     "category": "hostile",
@@ -1992,50 +2048,65 @@
     "category": "hostile",
     "sounds": [
       {
-        "name": "srparasites:assimilatedsheephurt1","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedsheephurt1",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedsheephurt2","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedsheephurt2",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedsheephurt3","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedsheephurt3",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedcowhurt1","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedcowhurt1",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedcowhurt2","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedcowhurt2",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedcowhurt3","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedcowhurt3",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedpighurt1","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedpighurt1",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedpighurt2","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedpighurt2",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedpighurt3","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedpighurt3",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedhorsehurt1","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedhorsehurt1",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedhorsehurt2","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedhorsehurt2",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedhorsehurt3","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedhorsehurt3",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedwolfhurt1","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedwolfhurt1",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedwolfhurt2","pitch": 0.4
-   },
+        "name": "srparasites:assimilatedwolfhurt2",
+        "pitch": 0.4
+      },
       {
-        "name": "srparasites:assimilatedwolfhurt3","pitch": 0.4
-   }
+        "name": "srparasites:assimilatedwolfhurt3",
+        "pitch": 0.4
+      }
     ]
   },
   "oronco.death": {
@@ -2492,14 +2563,12 @@
   "rof.spit_out": {
     "category": "hostile",
     "subtitle": "subtitles.rof.spitout",
-    "sounds": [
-    ]
+    "sounds": []
   },
   "rof.emerge": {
     "category": "hostile",
     "subtitle": "subtitles.rof.emerge",
-    "sounds": [
-    ]
+    "sounds": []
   },
   "ancient.mob": {
     "category": "hostile",
@@ -2623,7 +2692,7 @@
     "category": "hostile",
     "subtitle": "subtitles.biomeheart",
     "sounds": [
-      "srparasites:misc/biome_heart"
+      "srparasites:biome_heart"
     ]
   },
   "evolution.phaseone": {
@@ -3387,101 +3456,127 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:mob/step/heavy/step1","pitch": 1
+        "name": "srparasites:mob/step/heavy/step1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/step2","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/step2",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/step3","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/step3",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/step4","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/step4",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/step5","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/step5",
+        "pitch": 1
       }
- ]
+    ]
   },
   "step.heavy_two": {
     "category": "block",
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:mob/step/heavy/two_steps1","pitch": 1
+        "name": "srparasites:mob/step/heavy/two_steps1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/two_steps2","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/two_steps2",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/two_steps3","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/two_steps3",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/two_steps4","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/two_steps4",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy/two_steps5","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy/two_steps5",
+        "pitch": 1
       }
- ]
+    ]
   },
   "step.heavy_multiple": {
     "category": "block",
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:mob/step/heavy_multiple/step1","pitch": 1
+        "name": "srparasites:mob/step/heavy_multiple/step1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy_multiple/step2","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy_multiple/step2",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy_multiple/step3","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy_multiple/step3",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:mob/step/heavy_multiple/step4","pitch": 1
+      {
+        "name": "srparasites:mob/step/heavy_multiple/step4",
+        "pitch": 1
       }
- ]
+    ]
   },
   "block.flesh.dig": {
     "category": "block",
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh.step": {
@@ -3489,50 +3584,65 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh.place": {
@@ -3540,41 +3650,53 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh.hit": {
@@ -3582,50 +3704,65 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh.fall": {
@@ -3633,50 +3770,65 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/step5","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/step5",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh_light.dig": {
@@ -3684,41 +3836,53 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh_light.step": {
@@ -3726,59 +3890,77 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh_light.place": {
@@ -3786,41 +3968,53 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/light/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh_light.hit": {
@@ -3828,59 +4022,77 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.3
+      }
     ]
   },
   "block.flesh_light.fall": {
@@ -3888,59 +4100,77 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/light/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/light/step6","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/light/step6",
+        "pitch": 1.3
+      }
     ]
   },
   "block.heart.dig": {
@@ -3948,14 +4178,17 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/heart/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/dig1","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/heart/dig1",
+        "pitch": 1.3
+      }
     ]
   },
   "block.heart.hit": {
@@ -3963,59 +4196,77 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/flesh/heart/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/heart/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/heart/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/heart/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/heart/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/heart/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/heart/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/heart/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/heart/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/flesh/heart/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/flesh/heart/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/flesh/heart/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/flesh/heart/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/flesh/heart/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/flesh/heart/step6","pitch": 1.3
-   }
+        "name": "srparasites:block/flesh/heart/step6",
+        "pitch": 1.3
+      }
     ]
   },
   "block.purifier.dig": {
@@ -4023,32 +4274,41 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/dig1","pitch": 1.15
-   },
+        "name": "srparasites:block/purifier/dig1",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/purifier/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/dig1","pitch": 1.25
-   },
+        "name": "srparasites:block/purifier/dig1",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/purifier/dig2","pitch": 1.15
-   },
+        "name": "srparasites:block/purifier/dig2",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/purifier/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/dig2","pitch": 1.25
-   },
+        "name": "srparasites:block/purifier/dig2",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/purifier/dig3","pitch": 1.15
-   },
+        "name": "srparasites:block/purifier/dig3",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/purifier/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/dig3","pitch": 1.25
-   }
+        "name": "srparasites:block/purifier/dig3",
+        "pitch": 1.25
+      }
     ]
   },
   "block.purifier.step": {
@@ -4056,41 +4316,53 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.purifier.place": {
@@ -4098,32 +4370,41 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/place1","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/place1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/place1","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/place1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/place1","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/place1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/place2","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/place2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/place2","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/place2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/place2","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/place2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/place3","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/place3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/place3","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/place3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/place3","pitch": 1.3
-   }
+        "name": "srparasites:block/purifier/place3",
+        "pitch": 1.3
+      }
     ]
   },
   "block.purifier.hit": {
@@ -4131,41 +4412,53 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.purifier.fall": {
@@ -4173,41 +4466,53 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/purifier/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/purifier/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/purifier/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.purifier.use": {
@@ -4215,41 +4520,53 @@
     "subtitle": "subtitles.purifier.use",
     "sounds": [
       {
-        "name": "srparasites:block/purifier/use1","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/purifier/use1","pitch": 1
+        "name": "srparasites:block/purifier/use1",
+        "pitch": 1.05
       },
-   {
-        "name": "srparasites:block/purifier/use1","pitch": 0.95
-   },
       {
-        "name": "srparasites:block/purifier/use2","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/purifier/use2","pitch": 1
+        "name": "srparasites:block/purifier/use1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:block/purifier/use2","pitch": 0.95
-   },
       {
-        "name": "srparasites:block/purifier/use3","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/purifier/use3","pitch": 1
+        "name": "srparasites:block/purifier/use1",
+        "pitch": 0.95
       },
-   {
-        "name": "srparasites:block/purifier/use3","pitch": 0.95
-   },
       {
-        "name": "srparasites:block/purifier/use4","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/purifier/use4","pitch": 1
+        "name": "srparasites:block/purifier/use2",
+        "pitch": 1.05
       },
-   {
-        "name": "srparasites:block/purifier/use4","pitch": 0.95
-   }
+      {
+        "name": "srparasites:block/purifier/use2",
+        "pitch": 1
+      },
+      {
+        "name": "srparasites:block/purifier/use2",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:block/purifier/use3",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:block/purifier/use3",
+        "pitch": 1
+      },
+      {
+        "name": "srparasites:block/purifier/use3",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:block/purifier/use4",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:block/purifier/use4",
+        "pitch": 1
+      },
+      {
+        "name": "srparasites:block/purifier/use4",
+        "pitch": 0.95
+      }
     ]
   },
   "block.lure.dig": {
@@ -4257,41 +4574,53 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/lure/dig1","pitch": 1.15
-   },
+        "name": "srparasites:block/lure/dig1",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/lure/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/dig1","pitch": 1.25
-   },
+        "name": "srparasites:block/lure/dig1",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/lure/dig2","pitch": 1.15
-   },
+        "name": "srparasites:block/lure/dig2",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/lure/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/dig2","pitch": 1.25
-   },
+        "name": "srparasites:block/lure/dig2",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/lure/dig3","pitch": 1.15
-   },
+        "name": "srparasites:block/lure/dig3",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/lure/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/dig3","pitch": 1.25
-   },
+        "name": "srparasites:block/lure/dig3",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/lure/dig4","pitch": 1.15
-   },
+        "name": "srparasites:block/lure/dig4",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/lure/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/dig4","pitch": 1.25
-   }
+        "name": "srparasites:block/lure/dig4",
+        "pitch": 1.25
+      }
     ]
   },
   "block.lure.step": {
@@ -4299,41 +4628,53 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.lure.place": {
@@ -4341,41 +4682,53 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/lure/place1","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/place1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/place1","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/place1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/place1","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/place1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/place2","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/place2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/place2","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/place2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/place2","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/place2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/place3","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/place3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/place3","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/place3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/place3","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/place3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/place4","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/place4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/place4","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/place4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/place4","pitch": 1.3
-   }
+        "name": "srparasites:block/lure/place4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.lure.hit": {
@@ -4383,41 +4736,53 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.lure.fall": {
@@ -4425,41 +4790,53 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/lure/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/lure/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/lure/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.lure.use": {
@@ -4467,23 +4844,29 @@
     "subtitle": "subtitles.lure.use",
     "sounds": [
       {
-        "name": "srparasites:block/lure/use1","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/lure/use1","pitch": 1
+        "name": "srparasites:block/lure/use1",
+        "pitch": 1.05
       },
-   {
-        "name": "srparasites:block/lure/use1","pitch": 0.95
-   },
       {
-        "name": "srparasites:block/lure/use2","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/lure/use2","pitch": 1
+        "name": "srparasites:block/lure/use1",
+        "pitch": 1
       },
-   {
-        "name": "srparasites:block/lure/use2","pitch": 0.95
-   }
+      {
+        "name": "srparasites:block/lure/use1",
+        "pitch": 0.95
+      },
+      {
+        "name": "srparasites:block/lure/use2",
+        "pitch": 1.05
+      },
+      {
+        "name": "srparasites:block/lure/use2",
+        "pitch": 1
+      },
+      {
+        "name": "srparasites:block/lure/use2",
+        "pitch": 0.95
+      }
     ]
   },
   "block.carcass.use": {
@@ -4491,14 +4874,17 @@
     "subtitle": "subtitles.carcass.use",
     "sounds": [
       {
-        "name": "srparasites:block/lure/carcass","pitch": 1.05
-   },
-      {
-        "name": "srparasites:block/lure/carcass","pitch": 1
+        "name": "srparasites:block/lure/carcass",
+        "pitch": 1.05
       },
-   {
-        "name": "srparasites:block/lure/carcass","pitch": 0.95
-   }
+      {
+        "name": "srparasites:block/lure/carcass",
+        "pitch": 1
+      },
+      {
+        "name": "srparasites:block/lure/carcass",
+        "pitch": 0.95
+      }
     ]
   },
   "block.beckon.dig": {
@@ -4506,76 +4892,94 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.3,
+        "volume": 1.5
       }
     ]
   },
@@ -4584,76 +4988,94 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.3,
+        "volume": 1.5
       }
     ]
   },
@@ -4662,76 +5084,94 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig1","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig1",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig2","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig2",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig3","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig3",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig4","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig4",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig5","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig5",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/dig6","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/dig6",
+        "pitch": 1.3,
+        "volume": 1.5
       }
     ]
   },
@@ -4740,76 +5180,94 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step1","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step2","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step3","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step4","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step5","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.3,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.1,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.1,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.2,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.2,
+        "volume": 1.5
       },
       {
-        "name": "srparasites:block/beckon/step6","pitch": 1.3,
-    "volume": 1.5
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.3,
+        "volume": 1.5
       }
     ]
   },
@@ -4817,24 +5275,96 @@
     "category": "block",
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
-      {"name": "srparasites:block/beckon/step1","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step1","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step1","pitch": 1.3,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step2","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step2","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step2","pitch": 1.3,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step3","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step3","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step3","pitch": 1.3,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step4","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step4","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step4","pitch": 1.3,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step5","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step5","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step5","pitch": 1.3,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step6","pitch": 1.1,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step6","pitch": 1.2,"volume": 1.5},
-      {"name": "srparasites:block/beckon/step6","pitch": 1.3,"volume": 1.5}
+      {
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step1",
+        "pitch": 1.3,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step2",
+        "pitch": 1.3,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step3",
+        "pitch": 1.3,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step4",
+        "pitch": 1.3,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step5",
+        "pitch": 1.3,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.1,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.2,
+        "volume": 1.5
+      },
+      {
+        "name": "srparasites:block/beckon/step6",
+        "pitch": 1.3,
+        "volume": 1.5
+      }
     ]
   },
   "block.soil.dig": {
@@ -4842,41 +5372,53 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.soil.step": {
@@ -4884,68 +5426,89 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.3
-   }
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.3
+      }
     ]
   },
   "block.soil.place": {
@@ -4953,41 +5516,53 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/soil/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.soil.hit": {
@@ -4995,68 +5570,89 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.3
-   }
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.3
+      }
     ]
   },
   "block.soil.fall": {
@@ -5064,68 +5660,89 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step4","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step4",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step5","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step5",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step6","pitch": 1.3
-   },
+        "name": "srparasites:block/soil/step6",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.1
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.2
-   },
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/soil/step7","pitch": 1.3
-   }
+        "name": "srparasites:block/soil/step7",
+        "pitch": 1.3
+      }
     ]
   },
   "block.vomit.dig": {
@@ -5133,41 +5750,53 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.15
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.25
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.15
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.25
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.15
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.25
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.25
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.15
-   },
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.15
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.25
-   }
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.25
+      }
     ]
   },
   "block.vomit.step": {
@@ -5175,52 +5804,64 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.1,
-    "volume": 4
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.1,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.2,
-    "volume": 4
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.2,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.3,
-    "volume": 4
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.3,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.1,
-    "volume": 4
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.1,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.2,
-    "volume": 4
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.2,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.3,
-    "volume": 4
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.3,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.1,
-    "volume": 4
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.1,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.2,
-    "volume": 4
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.2,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.3,
-    "volume": 4
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.3,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.1,
-    "volume": 4
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.1,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.2,
-    "volume": 4
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.2,
+        "volume": 4
       },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.3,
-    "volume": 4
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.3,
+        "volume": 4
       }
     ]
   },
@@ -5229,41 +5870,53 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig1","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/dig1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig2","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/dig2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig3","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/dig3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/dig4","pitch": 1.3
-   }
+        "name": "srparasites:block/vomit/dig4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.vomit.hit": {
@@ -5271,29 +5924,53 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.1},
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.2},
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.3},
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.1},
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.2},
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.3},
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.1},
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.2},
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.3},
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.1},
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.2},
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.3}
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.vomit.fall": {
@@ -5301,70 +5978,136 @@
     "subtitle": "subtitles.block.generic.fall",
     "sounds": [
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step1","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/step1",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step2","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/step2",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step3","pitch": 1.3
-   },
+        "name": "srparasites:block/vomit/step3",
+        "pitch": 1.3
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.1
-   },
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.1
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.2
-   },
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.2
+      },
       {
-        "name": "srparasites:block/vomit/step4","pitch": 1.3
-   }
+        "name": "srparasites:block/vomit/step4",
+        "pitch": 1.3
+      }
     ]
   },
   "block.fog": {
     "category": "block",
     "sounds": [
-      {"name": "srparasites:block/fog/fog1","pitch": 1.1},
-      {"name": "srparasites:block/fog/fog2","pitch": 1.2},
-      {"name": "srparasites:block/fog/fog3","pitch": 1.3},
-      {"name": "srparasites:block/fog/fog1","pitch": 1.1},
-      {"name": "srparasites:block/fog/fog2","pitch": 1.2},
-      {"name": "srparasites:block/fog/fog3","pitch": 1.3},
-      {"name": "srparasites:block/fog/fog1","pitch": 1.1},
-      {"name": "srparasites:block/fog/fog2","pitch": 1.2},
-      {"name": "srparasites:block/fog/fog3","pitch": 1.3}
- ]
+      {
+        "name": "srparasites:block/fog/fog1",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/fog/fog2",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/fog/fog3",
+        "pitch": 1.3
+      },
+      {
+        "name": "srparasites:block/fog/fog1",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/fog/fog2",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/fog/fog3",
+        "pitch": 1.3
+      },
+      {
+        "name": "srparasites:block/fog/fog1",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/fog/fog2",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/fog/fog3",
+        "pitch": 1.3
+      }
+    ]
   },
   "block.tunnel.dig": {
     "category": "block",
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
-      {"name": "srparasites:block/tunnel/dig1","pitch": 1.1},
-      {"name": "srparasites:block/tunnel/dig1","pitch": 1.2},
-      {"name": "srparasites:block/tunnel/dig1","pitch": 1.3},
-      {"name": "srparasites:block/tunnel/dig2","pitch": 1.1},
-      {"name": "srparasites:block/tunnel/dig2","pitch": 1.2},
-      {"name": "srparasites:block/tunnel/dig2","pitch": 1.3},
-      {"name": "srparasites:block/tunnel/dig3","pitch": 1.1},
-      {"name": "srparasites:block/tunnel/dig3","pitch": 1.2},
-      {"name": "srparasites:block/tunnel/dig3","pitch": 1.3}
+      {
+        "name": "srparasites:block/tunnel/dig1",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/tunnel/dig1",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/tunnel/dig1",
+        "pitch": 1.3
+      },
+      {
+        "name": "srparasites:block/tunnel/dig2",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/tunnel/dig2",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/tunnel/dig2",
+        "pitch": 1.3
+      },
+      {
+        "name": "srparasites:block/tunnel/dig3",
+        "pitch": 1.1
+      },
+      {
+        "name": "srparasites:block/tunnel/dig3",
+        "pitch": 1.2
+      },
+      {
+        "name": "srparasites:block/tunnel/dig3",
+        "pitch": 1.3
+      }
     ]
   }
 }

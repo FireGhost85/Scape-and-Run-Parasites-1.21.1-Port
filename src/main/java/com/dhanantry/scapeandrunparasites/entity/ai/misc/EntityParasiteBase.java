@@ -952,7 +952,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
             return false;
         }
         for (int i = 0; i < player.getInventory().items.size(); ++i) {
-            if (!(((ItemStack)player.getInventory().items.get(i)).getItem() instanceof Item)) continue;
+            if (player.getInventory().items.get(i).isEmpty() || !player.getInventory().items.get(i).has(net.minecraft.core.component.DataComponents.FOOD)) continue; // 1.12: instanceof ItemFood
             int amm = this.getRandom().nextInt(foodnumber) + 1;
             ((ItemStack)player.getInventory().items.get(i)).shrink(amm);
             ItemStack stack = new ItemStack(SRPItems.infected_drop.get(), amm);
@@ -961,7 +961,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
             this.level().addFreshEntity((Entity)entityitem);
             return true;
         }
-        if (player.getItemBySlot(EquipmentSlot.OFFHAND).getItem() instanceof Item) {
+        if (!player.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty() && player.getItemBySlot(EquipmentSlot.OFFHAND).has(net.minecraft.core.component.DataComponents.FOOD)) { // 1.12: instanceof ItemFood
             int amm = this.getRandom().nextInt(foodnumber) + 1;
             player.getItemBySlot(EquipmentSlot.OFFHAND).shrink(amm);
             ItemStack stack = new ItemStack(SRPItems.infected_drop.get(), amm);
