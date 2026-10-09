@@ -111,7 +111,9 @@ public final class CelestialSkyRenderer {
         float partialTicks = e.getPartialTick().getGameTimeDeltaPartialTick(false);
         long totalTime = world.getDayTime();
         long dayTime = totalTime % 24000L;
-        Matrix4f modelView = new Matrix4f(e.getModelViewMatrix());
+        // LevelRenderer already multiplied the camera rotation into the global model view matrix that the shader applies on top of the
+        // vertices; using the event matrix as well would rotate the sky twice and make the objects swing across the screen with the camera.
+        Matrix4f modelView = RenderSystem.getModelViewMatrix().equals(new Matrix4f(), 1.0E-3f) ? new Matrix4f(e.getModelViewMatrix()) : new Matrix4f();
         if (BlackSkyClient.isBlackSkyActive()) {
             CelestialSkyRenderer.recordSeenOnce(mc, "dark_days");
             CelestialSkyRenderer.renderBlackSkyDome(mc, modelView);

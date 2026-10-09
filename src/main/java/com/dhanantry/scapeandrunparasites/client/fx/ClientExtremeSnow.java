@@ -111,7 +111,7 @@ public final class ClientExtremeSnow {
         for (int i = 0; i < count; ++i) {
             int z;
             int x = (int) (p.getX() + w.random.nextGaussian() * radius);
-            BlockPos ground = w.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, (int) p.getY(), z = (int) (p.getZ() + w.random.nextGaussian() * radius)));
+            BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z = (int) (p.getZ() + w.random.nextGaussian() * radius)));
             if (!w.canSeeSky(ground) || !forceAnywhere && !w.getBiome(ground).value().shouldSnow(w, ground)) continue;
             double spawnY = Math.max((double) (ground.getY() + 16 + w.random.nextInt(8)), p.getY() + 16.0 + (double) w.random.nextInt(8));
             double sx = (double) x + 0.5 + (w.random.nextDouble() - 0.5);
@@ -124,10 +124,11 @@ public final class ClientExtremeSnow {
         }
     }
 
+    // WORLD_SURFACE, not MOTION_BLOCKING: a snow layer of height 8 does not count as motion blocking, the sampled position was then inside the snow, where the sky light is 0, and the storm switched itself off
     private static boolean isOutdoors(Level w, LocalPlayer p) {
         BlockPos[] samples;
         for (BlockPos s : samples = new BlockPos[]{BlockPos.containing(p.getX(), p.getY(), p.getZ()), BlockPos.containing(p.getX() + 4.0, p.getY(), p.getZ()), BlockPos.containing(p.getX() - 4.0, p.getY(), p.getZ()), BlockPos.containing(p.getX(), p.getY(), p.getZ() + 4.0), BlockPos.containing(p.getX(), p.getY(), p.getZ() - 4.0)}) {
-            BlockPos h = w.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, s);
+            BlockPos h = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, s);
             if (!w.canSeeSky(h)) continue;
             return true;
         }
