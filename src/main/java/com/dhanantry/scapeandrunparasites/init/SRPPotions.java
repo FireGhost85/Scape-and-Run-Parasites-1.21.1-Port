@@ -54,7 +54,7 @@ public final class SRPPotions {
     }
 
     private static DeferredHolder<Potion, Potion> potion(String registryName, String potionName, DeferredHolder<MobEffect, MobEffect> effect, int duration) {
-        return POTIONS.register(registryName, () -> new Potion(ScapeAndRunParasites.MODID + ":" + potionName, new MobEffectInstance(effect, duration)));
+        return POTIONS.register(registryName, () -> new Potion(ScapeAndRunParasites.MODID + "." + potionName, new MobEffectInstance(effect, duration)));
     }
 
     public static final DeferredHolder<MobEffect, MobEffect> COTH_E = effect("coth", () -> new PotionCOTH("coth", false, 5046283));
