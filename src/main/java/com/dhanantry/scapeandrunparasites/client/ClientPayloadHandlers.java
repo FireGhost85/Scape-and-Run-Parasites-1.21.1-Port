@@ -30,6 +30,10 @@ public final class ClientPayloadHandlers {
         });
     }
 
+    public static void bestiarySync(com.dhanantry.scapeandrunparasites.network.BestiarySyncPayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.BestiaryClient.applySync(msg.progress()));
+    }
+
     public static void evoPhaseCancel(EvoPhaseCancelPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             stopMusic();

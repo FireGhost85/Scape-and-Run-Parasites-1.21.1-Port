@@ -23,7 +23,10 @@ public final class SRPCommands {
                 new GenerationCommand(),
                 new UDevelopmentCommand(),
                 new SummonNidusCommand(),
-                new HelpCommand());
+                new HelpCommand(),
+                new GuideCommand(),
+                new GuideClearCommand(),
+                new BestiaryStatsCommand());
         for (ArgCommand command : commands) {
             command.register(event.getDispatcher());
         }

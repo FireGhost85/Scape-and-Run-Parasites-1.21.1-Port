@@ -25,6 +25,8 @@ public class ScapeAndRunParasites {
     public ScapeAndRunParasites(IEventBus modEventBus, ModContainer modContainer) {
         Config.register(modContainer);
         SRPSounds.SOUNDS.register(modEventBus);
+        modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(com.dhanantry.scapeandrunparasites.bestiary.SRPBestiaryRegistry::registerDefaults));
+        com.dhanantry.scapeandrunparasites.bestiary.cap.BestiaryCapability.ATTACHMENTS.register(modEventBus);
         SRPPotions.register(modEventBus);
         SRPParticles.register(modEventBus);
         SRPFluids.register(modEventBus);

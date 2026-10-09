@@ -26,6 +26,9 @@ public final class SRPNetwork {
         registrar.playToClient(EscapeOfferPayload.TYPE, EscapeOfferPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.escapeOffer(msg, ctx));
         registrar.playToServer(RequestEscapePayload.TYPE, RequestEscapePayload.CODEC, (msg, ctx) -> com.dhanantry.scapeandrunparasites.feature.EscapeOnDeathHandler.requestEscape(msg, ctx));
         registrar.playToServer(RequestEvoPhasePayload.TYPE, RequestEvoPhasePayload.CODEC, (msg, ctx) -> RequestEvoPhasePayload.handle(msg, ctx));
+        registrar.playToClient(BestiarySyncPayload.TYPE, BestiarySyncPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.bestiarySync(msg, ctx));
+        registrar.playToServer(BestiaryRequestPayload.TYPE, BestiaryRequestPayload.CODEC, (msg, ctx) -> BestiaryRequestPayload.handle(msg, ctx));
+        registrar.playToServer(BestiarySeenCelestialPayload.TYPE, BestiarySeenCelestialPayload.CODEC, (msg, ctx) -> BestiarySeenCelestialPayload.handle(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);

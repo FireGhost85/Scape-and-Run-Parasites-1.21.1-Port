@@ -24,6 +24,6 @@ final class ClientScreens {
     }
 
     static void useFieldGuide(Player player) {
-        ScapeAndRunParasites.LOGGER.debug("bestiary screen: not ported yet");
+        com.dhanantry.scapeandrunparasites.client.gui.BestiaryScreen.open();
     }
 }
