@@ -32,6 +32,11 @@ sourceSets.main.java {
     exclude '**/world/ExtremeSnowServer.java'
     // secondary features, ported after the parasites run (docs/PROGRESS_AND_REMAINING.md section 8)
     exclude '**/api/SRPBestiaryApi.java'
+    // bestiary pages that need the celestial events / the progress snapshot network (deferred)
+    exclude '**/bestiary/client/gui/CelestialEventsPage.java'
+    exclude '**/bestiary/client/gui/GuiCurrentProgress.java'
+    exclude '**/bestiary/client/gui/GuiPhaseReport.java'
+    exclude '**/bestiary/client/gui/CurrentProgressClientCache.java'
 }
 
 neoForge {

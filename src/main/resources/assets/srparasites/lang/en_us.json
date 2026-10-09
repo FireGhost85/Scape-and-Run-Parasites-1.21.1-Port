@@ -1501,6 +1501,7 @@
  "subtitles.draconite.parry": "Distorted Energy deflected",
  "subtitles.draconite.bell_chargeup": "Distorted Engine tolls",
  "item.srparasites.srp_field_guide": "Compendium",
+ "item.srparasites.srp_field_guide.name": "Compendium",
  "lore.srparasites.compendium": "Compendium",
  "bestiary.tier.assimilated": "Assimilated",
  "bestiary.tier.walking_head": "Walking Head",

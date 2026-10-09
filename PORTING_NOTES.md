@@ -129,3 +129,8 @@ Details and file list in `porting/notes/blocks.md`.
 ## JEI, fog, join fix
 - [ADD] JEI integration (`compatibility/jei`, JEI 19 API): infuser furnace and brewing categories (fear potion chain, dead blood, thornshade decanter), catalysts, hidden advancement icon items. `build.gradle`: Jared maven, `compileOnly` common/neoforge API 19.57.0.447, `runtimeOnly` JEI neoforge.
 - [CHG] "Internal server error" when joining a world: the server sent `FogPayload` (parasite fog around the player) but the payload was never registered. Registered, plus the client fog (`ClientFog`: `ViewportEvent.RenderFog` / `ComputeFogColor`, exponential 1.12 density approximated by a far plane of 3/density blocks; the parasite blood fluid fog is not ported).
+
+## Compendium GUI (2026-10-09)
+- [CHG] The simplified `BestiaryScreen` is replaced by a faithful port of the 1.12.2 compendium (`bestiary/client/gui`: GuiBestiary, ParasitesPage, BlocksPage, StatusEffectsPage, SystemsPage, StatsPage, GearBackground, GuiDistortionHelper), run on a 1.12 GUI shim (`client/legacy/gui`: GuiScreen, Gui, GuiButton, GuiTextField, FontRenderer, GL11 scissor, entity preview helper).
+- [FLAG] Celestial Events and Current Progress buttons are inert (pages not ported; their systems are not in the port yet). Drops box shows "(No drops found in config)" until bestiary drop configs are ported.
+- [ADD] Client command `/srpcompendium` opens the compendium without the field guide (dev convenience).

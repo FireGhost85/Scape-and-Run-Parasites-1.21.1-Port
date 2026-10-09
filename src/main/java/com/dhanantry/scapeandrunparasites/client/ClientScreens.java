@@ -24,6 +24,6 @@ final class ClientScreens {
     }
 
     static void useFieldGuide(Player player) {
-        com.dhanantry.scapeandrunparasites.client.gui.BestiaryScreen.open();
+        net.minecraft.client.Minecraft.getInstance().setScreen(new com.dhanantry.scapeandrunparasites.bestiary.client.gui.GuiBestiary(net.minecraft.client.Minecraft.getInstance().player));
     }
 }
