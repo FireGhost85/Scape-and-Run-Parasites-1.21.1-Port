@@ -12,22 +12,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public final class WorldGenMeteorImpactUtil {
     private static final int MIN_CARVE_Y = 5;
-    private static final Map<Integer, List<PendingStructure>> PENDING = new HashMap<Integer, List<PendingStructure>>();
-    private static final Map<Integer, Set<Long>> MAIN_METEOR_CENTERS = new HashMap<Integer, Set<Long>>();
+    private static final Map<String, List<PendingStructure>> PENDING = new HashMap<String, List<PendingStructure>>();
+    private static final Map<String, Set<Long>> MAIN_METEOR_CENTERS = new HashMap<String, Set<Long>>();
 
     private WorldGenMeteorImpactUtil() {
     }
 
     public static void tickPendingStructures(Level world) {
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         List<PendingStructure> list = PENDING.get(dim);
         if (list == null || list.isEmpty()) {
             return;
@@ -47,7 +51,7 @@ public final class WorldGenMeteorImpactUtil {
     }
 
     public static void scheduleDelayedStructure(Level world, RandomSource rand, String name, BlockPos origin, int offX, int offY, int offZ, int delayTicks) {
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         List<PendingStructure> list = PENDING.get(dim);
         if (list == null) {
             list = new ArrayList<PendingStructure>();
@@ -61,8 +65,8 @@ public final class WorldGenMeteorImpactUtil {
      * WARNING - Removed try catching itself - possible behaviour change.
      */
     public static void markMainMeteor(Level world, BlockPos center) {
-        int dim = DimKeys.of(world);
-        Map<Integer, Set<Long>> map = MAIN_METEOR_CENTERS;
+        String dim = DimKeys.of(world);
+        Map<String, Set<Long>> map = MAIN_METEOR_CENTERS;
         synchronized (map) {
             Set<Long> set = MAIN_METEOR_CENTERS.get(dim);
             if (set == null) {
@@ -81,8 +85,8 @@ public final class WorldGenMeteorImpactUtil {
      */
     public static boolean isNearMainMeteor(Level world, BlockPos pos, int minDist) {
         Set<Long> set;
-        int dim = DimKeys.of(world);
-        Map<Integer, Set<Long>> map = MAIN_METEOR_CENTERS;
+        String dim = DimKeys.of(world);
+        Map<String, Set<Long>> map = MAIN_METEOR_CENTERS;
         synchronized (map) {
             set = MAIN_METEOR_CENTERS.get(dim);
         }
@@ -92,7 +96,7 @@ public final class WorldGenMeteorImpactUtil {
         int minDistSq = minDist * minDist;
         for (Long l : set) {
             int dz;
-            BlockPos c = BlockPos.fromLong((long)l);
+            BlockPos c = BlockPos.of((long)l);
             int dx = c.getX() - pos.getX();
             if (dx * dx + (dz = c.getZ() - pos.getZ()) * dz > minDistSq) continue;
             return true;
@@ -112,7 +116,7 @@ public final class WorldGenMeteorImpactUtil {
                 int dz = z;
                 int d2 = dx * dx + dz * dz;
                 if (d2 > radius * radius) continue;
-                BlockPos colTop = world.getTopSolidOrLiquidBlock(BlockPos.containing(cx + x, surface.getY(), cz + z));
+                BlockPos colTop = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z));
                 int topY = colTop.getY();
                 double dist = Math.sqrt(d2);
                 double t = dist / (double)radius;
@@ -125,7 +129,7 @@ public final class WorldGenMeteorImpactUtil {
                     if (m == LegacyMaterial.air || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
-                BlockPos top = world.getTopSolidOrLiquidBlock(BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
+                BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
                 if (!world.hasChunkAt(top)) continue;
                 if (d2 <= coreRR) {
                     if (rand.nextInt(3) == 0) {
@@ -156,7 +160,7 @@ public final class WorldGenMeteorImpactUtil {
                 int dx = x;
                 int dz = z;
                 int d2 = dx * dx + dz * dz;
-                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = world.getTopSolidOrLiquidBlock(BlockPos.containing(cx + x, surface.getY(), cz + z)).below())) continue;
+                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below())) continue;
                 world.setBlock(top, stain, 2);
             }
         }
@@ -174,7 +178,7 @@ public final class WorldGenMeteorImpactUtil {
             double pz = dirZ * dist + dirX * dist * spread;
             int x = cx + (int)Math.round(px);
             int z = cz + (int)Math.round(pz);
-            BlockPos top = world.getTopSolidOrLiquidBlock(BlockPos.containing(x, surface.getY(), z)).below();
+            BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x, surface.getY(), z)).below();
             if (!world.hasChunkAt(top)) continue;
             if (rand.nextInt(5) == 0) {
                 world.setBlock(top, stain, 2);
@@ -201,7 +205,7 @@ public final class WorldGenMeteorImpactUtil {
                 for (int z = -r; z <= r; ++z) {
                     BlockPos top;
                     int d2 = x * x + z * z;
-                    if (d2 > rr || !world.hasChunkAt(top = world.getTopSolidOrLiquidBlock(BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || rand.nextInt(3) != 0) continue;
+                    if (d2 > rr || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || rand.nextInt(3) != 0) continue;
                     world.setBlock(top, stain, 2);
                 }
             }
@@ -260,7 +264,7 @@ public final class WorldGenMeteorImpactUtil {
                 for (int y = yMin; y <= yMax; ++y) {
                     BlockState s;
                     BlockPos p = BlockPos.containing(ax, y, az);
-                    if (!world.hasChunkAt(p) || (s = world.getBlockState(p)).getMaterial() == LegacyMaterial.air || !WorldGenMeteorImpactUtil.isVegetation(s) || p.getY() <= 5) continue;
+                    if (!world.hasChunkAt(p) || LegacyMaterial.of(s = world.getBlockState(p)) == LegacyMaterial.air || !WorldGenMeteorImpactUtil.isVegetation(s) || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
             }
@@ -283,7 +287,7 @@ public final class WorldGenMeteorImpactUtil {
                     BlockState s;
                     BlockPos p;
                     int d2 = x * x + y * y + z * z;
-                    if (d2 > rr || !world.hasChunkAt(p = BlockPos.containing(cx + x, cy + y, cz + z)) || (s = world.getBlockState(p)).getMaterial() == LegacyMaterial.air || p.getY() <= 5) continue;
+                    if (d2 > rr || !world.hasChunkAt(p = BlockPos.containing(cx + x, cy + y, cz + z)) || LegacyMaterial.of(s = world.getBlockState(p)) == LegacyMaterial.air || p.getY() <= 5) continue;
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                     if (!any) {
                         any = true;
@@ -310,19 +314,19 @@ public final class WorldGenMeteorImpactUtil {
         if (m == LegacyMaterial.leaves || m == LegacyMaterial.wood || m == LegacyMaterial.vine) {
             return true;
         }
-        if (b == Blocks.OAK_LEAVES || b == Blocks.ACACIA_LEAVES || b == Blocks.OAK_LOG || b == Blocks.ACACIA_LOG || b == Blocks.VINE || b == Blocks.TORCH || b == Blocks.REDSTONE_TORCH || b == Blocks.UNLIT_REDSTONE_TORCH || b == Blocks.SNOW || b == Blocks.ICE || b == Blocks.PACKED_ICE || b == Blocks.FROSTED_ICE || b == Blocks.FIRE || b == Blocks.SHORT_GRASS || b == Blocks.DEAD_BUSH || b == Blocks.DANDELION || b == Blocks.POPPY || b == Blocks.BROWN_MUSHROOM || b == Blocks.RED_MUSHROOM || b == Blocks.TALL_GRASS) {
+        if (b == Blocks.OAK_LEAVES || b == Blocks.ACACIA_LEAVES || b == Blocks.OAK_LOG || b == Blocks.ACACIA_LOG || b == Blocks.VINE || b == Blocks.TORCH || b == Blocks.REDSTONE_TORCH || b == Blocks.SNOW || b == Blocks.ICE || b == Blocks.PACKED_ICE || b == Blocks.FROSTED_ICE || b == Blocks.FIRE || b == Blocks.SHORT_GRASS || b == Blocks.DEAD_BUSH || b == Blocks.DANDELION || b == Blocks.POPPY || b == Blocks.BROWN_MUSHROOM || b == Blocks.RED_MUSHROOM || b == Blocks.TALL_GRASS) {
             return true;
         }
-        if (b instanceof BlockOldLeaf || b instanceof BlockNewLeaf) {
+        if (b instanceof LeavesBlock) {
             return true;
         }
-        if (b instanceof BlockOldLog || b instanceof BlockNewLog) {
+        if (b.defaultBlockState().is(BlockTags.LOGS)) {
             return true;
         }
-        if (b instanceof BlockLog) {
+        if (b.defaultBlockState().is(BlockTags.LOGS)) {
             return true;
         }
-        return b instanceof BlockVine;
+        return b instanceof VineBlock;
     }
 
     public static void updateWaterAfterImpact(Level world, BlockPos surface, int radius, int depth) {
@@ -338,8 +342,8 @@ public final class WorldGenMeteorImpactUtil {
         if ((yMax = cy + 24) > 255) {
             yMax = 255;
         }
-        BlockStaticLiquid still = Blocks.WATER;
-        BlockDynamicLiquid flowing = Blocks.WATER;
+        Block still = Blocks.WATER;
+        Block flowing = Blocks.WATER;
         for (int x = -r; x <= r; ++x) {
             for (int z = -r; z <= r; ++z) {
                 for (int y = yMin; y <= yMax; ++y) {
@@ -348,8 +352,8 @@ public final class WorldGenMeteorImpactUtil {
                     BlockState s = world.getBlockState(p);
                     Block b = s.getBlock();
                     if (b == still || b == flowing) {
-                        world.scheduleUpdate(p, b, 1);
-                        world.notifyNeighborsOfStateChange(p, b, true);
+                        world.scheduleTick(p, b, 1);
+                        world.updateNeighborsAt(p, b);
                         continue;
                     }
                     if (LegacyMaterial.of(s) != LegacyMaterial.air) continue;
@@ -357,28 +361,28 @@ public final class WorldGenMeteorImpactUtil {
                     BlockState s2 = world.getBlockState(p2);
                     Block b2 = s2.getBlock();
                     if (b2 == still || b2 == flowing) {
-                        world.scheduleUpdate(p2, b2, 1);
-                        world.notifyNeighborsOfStateChange(p2, b2, true);
+                        world.scheduleTick(p2, b2, 1);
+                        world.updateNeighborsAt(p2, b2);
                     }
                     if ((b2 = (s2 = world.getBlockState(p2 = p.below())).getBlock()) == still || b2 == flowing) {
-                        world.scheduleUpdate(p2, b2, 1);
-                        world.notifyNeighborsOfStateChange(p2, b2, true);
+                        world.scheduleTick(p2, b2, 1);
+                        world.updateNeighborsAt(p2, b2);
                     }
                     if ((b2 = (s2 = world.getBlockState(p2 = p.north())).getBlock()) == still || b2 == flowing) {
-                        world.scheduleUpdate(p2, b2, 1);
-                        world.notifyNeighborsOfStateChange(p2, b2, true);
+                        world.scheduleTick(p2, b2, 1);
+                        world.updateNeighborsAt(p2, b2);
                     }
                     if ((b2 = (s2 = world.getBlockState(p2 = p.south())).getBlock()) == still || b2 == flowing) {
-                        world.scheduleUpdate(p2, b2, 1);
-                        world.notifyNeighborsOfStateChange(p2, b2, true);
+                        world.scheduleTick(p2, b2, 1);
+                        world.updateNeighborsAt(p2, b2);
                     }
                     if ((b2 = (s2 = world.getBlockState(p2 = p.west())).getBlock()) == still || b2 == flowing) {
-                        world.scheduleUpdate(p2, b2, 1);
-                        world.notifyNeighborsOfStateChange(p2, b2, true);
+                        world.scheduleTick(p2, b2, 1);
+                        world.updateNeighborsAt(p2, b2);
                     }
                     if ((b2 = (s2 = world.getBlockState(p2 = p.east())).getBlock()) != still && b2 != flowing) continue;
-                    world.scheduleUpdate(p2, b2, 1);
-                    world.notifyNeighborsOfStateChange(p2, b2, true);
+                    world.scheduleTick(p2, b2, 1);
+                    world.updateNeighborsAt(p2, b2);
                 }
             }
         }

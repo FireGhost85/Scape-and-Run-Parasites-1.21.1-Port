@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.block.BlockThornshade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.MobDespawnEvent;
 import net.neoforged.neoforge.event.entity.player.BonemealEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class ThornshadeBonemealBlocker {
     @SubscribeEvent
     public static void onBonemeal(BonemealEvent event) {

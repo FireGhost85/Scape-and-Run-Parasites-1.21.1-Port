@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.init.SRPSounds;
@@ -26,7 +27,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.MobDespawnEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class ThornshadeThornsHandler {
     private static final String TAG_ROOT = "srp_thornshade_thorns";
     private static final String TAG_USES = "Uses";

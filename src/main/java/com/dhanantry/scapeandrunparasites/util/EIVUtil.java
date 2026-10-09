@@ -1,6 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util;
 
-import com.dhanantry.scapeandrunparasites.SRPMain;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventEntity;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldData;
@@ -40,7 +40,7 @@ public class EIVUtil {
         }
         double horizontalDistance = Math.sqrt(dx * dx + dz * dz);
         double trueDistance = Math.sqrt(player.distanceToSqr((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()));
-        SRPMain.logger.debug("[EIV DEBUG] RANDOM_ORIGIN result. Player={} playerPos={} originPos={} dx={} dz={} horizontalDistance={} trueDistance={} min={} max={} health={} radius={} resultKey={} totalOrigins={}", new Object[]{player.getName().getString(), player.blockPosition(), pos, dx, dz, String.format("%.2f", horizontalDistance), String.format("%.2f", trueDistance), min, max, SRPConfigWorld.originHealth, SRPConfigWorld.originRadius, key, data.getorigins("x").size()});
+        ScapeAndRunParasites.LOGGER.debug("[EIV DEBUG] RANDOM_ORIGIN result. Player={} playerPos={} originPos={} dx={} dz={} horizontalDistance={} trueDistance={} min={} max={} health={} radius={} resultKey={} totalOrigins={}", new Object[]{player.getName().getString(), player.blockPosition(), pos, dx, dz, String.format("%.2f", horizontalDistance), String.format("%.2f", trueDistance), min, max, SRPConfigWorld.originHealth, SRPConfigWorld.originRadius, key, data.getorigins("x").size()});
     }
 }
 

@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.world.celestial;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectDefinition;
 import com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectRegistry;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
@@ -18,7 +19,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class CelestialEventManager {
     private static final Random RAND = new Random();
     public static final int DARK_DAYS_DURATION_TICKS = 6000;
@@ -32,7 +33,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return false;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData.DimState s = CelestialNightData.get(world).getState(dim);
         if (s == null) {
             return false;
@@ -44,7 +45,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         if (enabled) {
@@ -82,7 +83,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         s.forced.clear();
@@ -102,7 +103,7 @@ public class CelestialEventManager {
             return;
         }
         CelestialEventManager.clearWeatherForDarkDays(world);
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         s.active.clear();
@@ -123,7 +124,7 @@ public class CelestialEventManager {
         if (!world.dimensionType().isSurfaceWorld()) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         boolean bl = active = s.forced.contains("dark_days") || s.active.contains("dark_days");
@@ -165,7 +166,7 @@ public class CelestialEventManager {
         if (!world.dimensionType().isSurfaceWorld()) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         long nightIndex = world.getDayTime() / 24000L;
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
@@ -201,7 +202,7 @@ public class CelestialEventManager {
         if (!world.dimensionType().isSurfaceWorld()) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         long now = world.getDayTime();
@@ -247,7 +248,7 @@ public class CelestialEventManager {
         if (world == null || sound == null || world.getMinecraftServer() == null) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         for (ServerPlayer p : world.getMinecraftServer().getPlayerList().getPlayerList()) {
             if (DimKeys.of(p.level()) != dim) continue;
             p.level().playSound(null, p.getX(), p.getY(), p.getZ(), sound, SoundSource.AMBIENT, 10000.0f, pitch);
@@ -262,7 +263,7 @@ public class CelestialEventManager {
         if (!world.dimensionType().isSurfaceWorld()) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
         boolean bl = activeOrQueued = s.forced.contains("dark_days") || s.active.contains("dark_days") || s.darkDaysStartTime > 0L || s.darkDaysEndTime > 0L;
@@ -322,7 +323,7 @@ public class CelestialEventManager {
         if (adv == null) {
             return;
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         for (ServerPlayer p : world.getMinecraftServer().getPlayerList().getPlayerList()) {
             AdvancementProgress progress;
             if (DimKeys.of(p.level()) != dim || (progress = p.getAdvancements().getProgress(adv)).isDone()) continue;

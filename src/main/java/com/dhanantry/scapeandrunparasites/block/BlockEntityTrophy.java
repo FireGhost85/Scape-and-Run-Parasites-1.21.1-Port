@@ -1,9 +1,12 @@
 package com.dhanantry.scapeandrunparasites.block;
 
 import com.dhanantry.scapeandrunparasites.entity.tile.TileEntityTrophy;
+import com.mojang.serialization.MapCodec;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -14,9 +17,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.InteractionResult;
-import com.mojang.serialization.MapCodec;
-import javax.annotation.Nullable;
 
 /** Trophy block: renders a mob (block entity renderer) and plays its living sound when used. */
 public class BlockEntityTrophy extends Block implements EntityBlock {

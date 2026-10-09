@@ -2,13 +2,13 @@ package com.dhanantry.scapeandrunparasites.util;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.block.AbstractGlassBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CactusBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SpongeBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,7 +38,7 @@ public enum LegacyMaterial {
         if (s.is(Blocks.SNOW)) return snow;
         if (s.is(Blocks.PACKED_ICE)) return packedIce;
         if (s.is(BlockTags.ICE)) return ice;
-        if (s.getBlock() instanceof AbstractGlassBlock || s.getBlock() instanceof IronBarsBlock && s.is(BlockTags.IMPERMEABLE)) return glass;
+        if (s.getBlock() instanceof TransparentBlock || s.getBlock() instanceof IronBarsBlock && s.is(BlockTags.IMPERMEABLE)) return glass;
         if (s.getBlock() instanceof VineBlock) return vine;
         if (s.getBlock() instanceof CactusBlock) return cactus;
         if (s.getBlock() instanceof SpongeBlock) return sponge;
@@ -56,6 +56,14 @@ public enum LegacyMaterial {
         if (s.is(Blocks.PISTON) || s.is(Blocks.STICKY_PISTON) || s.is(Blocks.PISTON_HEAD)) return piston;
         if (s.is(BlockTags.MINEABLE_WITH_SHOVEL)) return ground;
         return rock;
+    }
+
+    /** 1.12 LegacyMaterial.isSolid: everything that is not air, liquid, a plant-like or a non-colliding material. */
+    public boolean isSolid() {
+        return switch (this) {
+            case air, water, lava, plants, vine, fire, circuits, carpet, snow, portal, web, structureVoid -> false;
+            default -> true;
+        };
     }
 
     public boolean isLiquid() {

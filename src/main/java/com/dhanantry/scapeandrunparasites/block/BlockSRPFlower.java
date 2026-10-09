@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.property.Properties;
 
 /** Assimilated blossom: grows on grass, ground, sand and clay materials. */
 public class BlockSRPFlower extends BushBlock {

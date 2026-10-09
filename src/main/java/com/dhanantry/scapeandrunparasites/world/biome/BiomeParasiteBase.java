@@ -126,7 +126,7 @@ public abstract class BiomeParasiteBase {
             this.spawnGenRoofParasite(worldIn, helper.below(), rand);
             return 1;
         }
-        if (lookingBlock instanceof net.minecraft.world.level.block.SandBlock) {
+        if (lookingState.is(BlockTags.SAND)) {
             blockList = this.getSand().split(":");
             one = BlockIds.parseBlock(blockList[0] + ":" + blockList[1]);
             worldIn.setBlockAndUpdate(helper, BlockIds.parse(blockList[0] + ":" + blockList[1] + ":" + blockList[2]));

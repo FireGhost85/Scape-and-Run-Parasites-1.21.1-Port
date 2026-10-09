@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-/** Glass block with an infestation stage (1.12 {@code BlockGlass} with {@code ignoreSimilarity = true}: all faces render). */
+/** Glass block with an infestation stage (1.12 {@code AbstractGlassBlock} with {@code ignoreSimilarity = true}: all faces render). */
 public class BlockAshenGlass extends Block implements IStagedBlock {
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 5);
 

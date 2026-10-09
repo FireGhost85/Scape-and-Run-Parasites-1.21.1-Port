@@ -8,13 +8,13 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
 /** SRPPacketClock: server to client, refreshes the values shown by the evolution / development clocks. */
-public record ClockPayload(int cooldown, int phase, int development, int type) implements CustomPacketPayload {
+public record ClockPayload(int cooldown, int phase, int development, int kind) implements CustomPacketPayload {
     public static final Type<ClockPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "clock"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ClockPayload> CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, ClockPayload::cooldown,
             ByteBufCodecs.INT, ClockPayload::phase,
             ByteBufCodecs.INT, ClockPayload::development,
-            ByteBufCodecs.INT, ClockPayload::type,
+            ByteBufCodecs.INT, ClockPayload::kind,
             ClockPayload::new);
 
     @Override

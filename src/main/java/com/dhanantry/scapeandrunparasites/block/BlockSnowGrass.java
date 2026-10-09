@@ -23,6 +23,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.property.Properties;
 
 /**
  * Snow-covered short and tall grass. Turns the grass block below into snow covered grass and back. The box (0.1..0.9, height 1 or

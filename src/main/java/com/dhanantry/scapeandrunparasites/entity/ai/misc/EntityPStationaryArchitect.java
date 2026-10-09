@@ -2,6 +2,7 @@ package com.dhanantry.scapeandrunparasites.entity.ai.misc;
 
 import com.dhanantry.scapeandrunparasites.block.BlockInfestedStain;
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteFog;
+import com.dhanantry.scapeandrunparasites.block.SRPBlockLinks;
 import com.dhanantry.scapeandrunparasites.client.particle.ParticleSpawner;
 import com.dhanantry.scapeandrunparasites.client.particle.SRPEnumParticle;
 import com.dhanantry.scapeandrunparasites.config.SRPConfig;
@@ -14,7 +15,6 @@ import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import com.dhanantry.scapeandrunparasites.init.SRPEntities;
 import com.dhanantry.scapeandrunparasites.init.SRPItems;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventEntity;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
 import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -227,7 +227,7 @@ implements EntityCanSummon {
 
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        if (this.level().getBiome(this.blockPosition()).value() instanceof BiomeParasiteBase) {
+        if (SRPBlockLinks.isParasiteBiome(this.level(), this.blockPosition())) {
             return true;
         }
         return super.removeWhenFarAway(0.0);

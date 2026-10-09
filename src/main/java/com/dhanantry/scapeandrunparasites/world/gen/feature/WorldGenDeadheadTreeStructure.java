@@ -8,19 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 public class WorldGenDeadheadTreeStructure
 extends WorldGenerator {
@@ -55,32 +54,27 @@ extends WorldGenerator {
             return false;
         }
         ServerLevel worldServer = (ServerLevel)worldIn;
-        MinecraftServer server = worldServer.getMinecraftServer();
-        if (server == null) {
-            return false;
-        }
         boolean stackingOnDeadheadLeaves = this.mushroomMode && this.isDeadheadLeaves(worldIn.getBlockState(position));
         TreeTemplate selected = TREES[rand.nextInt(TREES.length)];
         Rotation rotation = Rotation.values()[rand.nextInt(Rotation.values().length)];
-        TemplateManager templateManager = worldServer.getStructureTemplateManager();
-        Template template = templateManager.getTemplate(server, ResourceLocation.fromNamespaceAndPath("srparasites", selected.name));
+        StructureTemplate template = worldServer.getServer().getStructureManager().get(ResourceLocation.fromNamespaceAndPath("srparasites", selected.name)).orElse(null);
         if (template == null) {
             return false;
         }
-        PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(true).setIgnoreStructureBlock(true);
-        BlockPos transformedAnchor = Template.transformedBlockPos((PlacementSettings)settings, (BlockPos)selected.saplingAnchor);
-        BlockPos origin = position.subtract((Vec3i)transformedAnchor);
+        StructurePlaceSettings settings = new StructurePlaceSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(true).addProcessor(net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor.STRUCTURE_BLOCK);
+        BlockPos transformedAnchor = StructureTemplate.calculateRelativePosition(settings, (BlockPos)selected.saplingAnchor);
+        BlockPos origin = position.subtract(transformedAnchor);
         BlockPos[] bounds = this.getTransformedBounds(template, settings, origin);
         BlockPos min = bounds[0];
         BlockPos max = bounds[1];
         if (min.getY() < 0 || max.getY() >= worldIn.getHeight()) {
             return false;
         }
-        if (!worldIn.isAreaLoaded(min, max)) {
+        if (!worldIn.hasChunksAt(min, max)) {
             return false;
         }
         List<PreservedBlock> preservedIce = this.capturePreservedIce(worldIn, min, max);
-        template.addBlocksToWorld(worldIn, origin, settings, 3);
+        template.placeInWorld(worldServer, origin, origin, settings, rand, 3);
         this.restorePreservedIce(worldIn, preservedIce);
         if (this.rootMode && !this.mushroomMode) {
             this.growFloatingRoots(worldIn, rand, min, max);
@@ -191,7 +185,7 @@ extends WorldGenerator {
         if (state.is(BlockTags.LEAVES)) {
             return false;
         }
-        return world.isEmptyBlock(pos) || state.getBlock().isReplaceable((BlockGetter)world, pos);
+        return world.isEmptyBlock(pos) || state.canBeReplaced();
     }
 
     private boolean isRootGround(Level world, BlockPos pos) {
@@ -205,7 +199,7 @@ extends WorldGenerator {
         if (state.is(BlockTags.LEAVES)) {
             return false;
         }
-        if (world.isEmptyBlock(pos) || state.getBlock().isReplaceable((BlockGetter)world, pos)) {
+        if (world.isEmptyBlock(pos) || state.canBeReplaced()) {
             return false;
         }
         return LegacyMaterial.of(state).isSolid() || LegacyMaterial.of(state).isLiquid();
@@ -222,7 +216,7 @@ extends WorldGenerator {
         if (state.is(BlockTags.LEAVES)) {
             return true;
         }
-        return state.getBlock().isReplaceable((BlockGetter)world, pos);
+        return state.canBeReplaced();
     }
 
     private void placeRootTrunk(Level world, BlockPos pos) {
@@ -339,7 +333,7 @@ extends WorldGenerator {
     private boolean canCarveConnection(Level world, List<BlockPos> path, BlockPos targetTrunk) {
         for (BlockPos pos : path) {
             BlockState state = world.getBlockState(pos);
-            if (pos.equals(targetTrunk) || this.isDeadheadTrunk(state) || world.isEmptyBlock(pos) || state.is(BlockTags.LEAVES) || state.getBlock().isReplaceable((BlockGetter)world, pos)) continue;
+            if (pos.equals(targetTrunk) || this.isDeadheadTrunk(state) || world.isEmptyBlock(pos) || state.is(BlockTags.LEAVES) || state.canBeReplaced()) continue;
             return false;
         }
         return true;
@@ -363,8 +357,8 @@ extends WorldGenerator {
         return SRPBlocks.ParasiteTrunk.get().defaultBlockState().setValue(BlockParasiteTrunk.VARIANT, (BlockParasiteTrunk.EnumType.DEADHEAD)).setValue((Property)BlockParasiteTrunk.AXIS, Direction.Axis.Y);
     }
 
-    private BlockPos[] getTransformedBounds(Template template, PlacementSettings settings, BlockPos origin) {
-        BlockPos size = template.getSize();
+    private BlockPos[] getTransformedBounds(StructureTemplate template, StructurePlaceSettings settings, BlockPos origin) {
+        net.minecraft.core.Vec3i size = template.getSize();
         int x1 = Math.max(0, size.getX() - 1);
         int y1 = Math.max(0, size.getY() - 1);
         int z1 = Math.max(0, size.getZ() - 1);
@@ -376,7 +370,7 @@ extends WorldGenerator {
         int maxY = Integer.MIN_VALUE;
         int maxZ = Integer.MIN_VALUE;
         for (BlockPos corner : corners) {
-            BlockPos transformed = Template.transformedBlockPos((PlacementSettings)settings, (BlockPos)corner).offset((Vec3i)origin);
+            BlockPos transformed = StructureTemplate.calculateRelativePosition(settings, (BlockPos)corner).offset(origin);
             minX = Math.min(minX, transformed.getX());
             minY = Math.min(minY, transformed.getY());
             minZ = Math.min(minZ, transformed.getZ());

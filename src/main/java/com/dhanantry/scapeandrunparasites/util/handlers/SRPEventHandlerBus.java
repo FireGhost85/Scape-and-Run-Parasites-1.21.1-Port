@@ -375,7 +375,7 @@ public class SRPEventHandlerBus {
         if (entity == null || entity.level().isClientSide) {
             return;
         }
-        if (entity.level().getBiome(entity.blockPosition()).value() instanceof BiomeParasiteBase) {
+        if (SRPBlockLinks.isParasiteBiome(entity.level(), entity.blockPosition())) {
             float penaltyH;
             switch (ParasiteEventWorld.canBiomeStillExistType(entity.level(), entity.blockPosition(), true)) {
                 case 2: {
@@ -398,17 +398,17 @@ public class SRPEventHandlerBus {
                 return;
             }
             if (entity instanceof Player) {
-                event.setNewDamage(event.getNewDamage() * penaltyH);
+                event.setAmount(event.getAmount() * penaltyH);
             } else {
                 boolean flag = ParasiteEventEntity.checkName(BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString(), SRPConfigWorld.biomeHealPenaltyBlackList, SRPConfigWorld.biomeHealPenaltyBlackListWhite);
                 if (flag) {
                     return;
                 }
-                event.setNewDamage(event.getNewDamage() * penaltyH);
+                event.setAmount(event.getAmount() * penaltyH);
             }
         }
         if (SRPConfigSystems.useEvolution && SRPSaveData.get(entity.level()).getEvolutionPhase(DimKeys.of(entity.level())) >= SRPConfigSystems.evolutionNoParasiteHealing) {
-            event.setNewDamage(event.getNewDamage() * SRPConfigSystems.evolutionNoParasiteHealingValue);
+            event.setAmount(event.getAmount() * SRPConfigSystems.evolutionNoParasiteHealingValue);
         }
     }
 
@@ -429,7 +429,6 @@ public class SRPEventHandlerBus {
         if (entity.hasEffect(SRPPotions.OVERHEATING_E) && (event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.IN_FIRE))) {
             amp = entity.getEffect(SRPPotions.OVERHEATING_E).getAmplifier() + 1;
             damage = event.getNewDamage();
-            event.getSource().setDamageIsAbsolute();
             event.setNewDamage(damage + damage * (amp * 1.0f));
         }
         if (event.getSource().getEntity() instanceof LivingEntity && (mob = (LivingEntity)event.getSource().getEntity()).hasEffect(SRPPotions.MUSCLEOUT_E)) {
@@ -1054,8 +1053,8 @@ public class SRPEventHandlerBus {
         if (counerW > SRPConfig.dayTickValue && (SRPConfigWorld.nodesActivated || SRPConfigWorld.coloniesActivated || SRPConfigSystems.useEvolution || SRPConfigWorld.originActivated)) {
             MinecraftServer ser = event.getServer();
             SRPSaveData dat = SRPSaveData.get(ser);
-            dat.addUpdateNumber(1);
-            worldsChecked = new ArrayList();
+            dat.addUpdateNumber(1, ser);
+            worldsChecked = new ArrayList<>();
             counerW = -150;
         }
     }
@@ -1081,7 +1080,7 @@ public class SRPEventHandlerBus {
                 if (meteor > SRPConfigWorld.meteorTick) {
                     SRPWorldData data;
                     meteor = 0;
-                    if (event.getLevel().random.nextDouble() < SRPConfigWorld.meteorChance && SRPConfig.spawnDays <= (int)event.getLevel().getGameTime() && (data = SRPWorldData.get(event.getLevel())).getTriggerMet() && SRPSaveData.get(event.getLevel(), -549).getEvolutionPhase(DimKeys.of(event.getLevel())) >= 0) {
+                    if (event.getLevel().random.nextDouble() < SRPConfigWorld.meteorChance && SRPConfig.spawnDays <= (int)event.getLevel().getGameTime() && (data = SRPWorldData.get(event.getLevel())).getTriggerMet() && SRPSaveData.get(event.getLevel()).getEvolutionPhase(DimKeys.of(event.getLevel())) >= 0) {
                         if (SRPConfigWorld.meteorVectorless) {
                             if (data.getorigins("x").isEmpty()) {
                                 spawningMet(event.getLevel());
@@ -1790,7 +1789,7 @@ public class SRPEventHandlerBus {
         fogRed = 0.0f;
         fogGreen = 0.0f;
         fogBlue = 0.0f;
-        RICARDO_DEATH_RULE_RESTORE = new HashMap<Integer, Long>();
+        RICARDO_DEATH_RULE_RESTORE = new HashMap<String, Long>();
         srpSoakGuard = false;
     }
 

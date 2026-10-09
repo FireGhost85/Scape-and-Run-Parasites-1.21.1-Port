@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:infestedore_eme"
+  },
+  "result": {
+    "id": "minecraft:emerald",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

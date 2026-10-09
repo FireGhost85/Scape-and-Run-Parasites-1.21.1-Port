@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:infestedore_lap"
+  },
+  "result": {
+    "id": "minecraft:lapis_lazuli",
+    "count": 9
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

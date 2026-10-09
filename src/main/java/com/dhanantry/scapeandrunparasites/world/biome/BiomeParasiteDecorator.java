@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class BiomeParasiteDecorator
 extends BiomeDecorator {
@@ -34,21 +35,21 @@ extends BiomeDecorator {
             for (int i = 0; i < this.sandPerChunk2; ++i) {
                 int j = random.nextInt(16) + 8;
                 int k = random.nextInt(16) + 8;
-                this.sandGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.offset(j, 0, k)));
+                this.sandGen.generate(worldIn, random, worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, this.chunkPos.offset(j, 0, k)));
             }
         }
         if (TerrainGen.decorate((Level)worldIn, (RandomSource)random, (ChunkPos)forgeChunkPos, (DecorateBiomeEvent.Decorate.EventType)DecorateBiomeEvent.Decorate.EventType.CLAY)) {
             for (int i1 = 0; i1 < this.clayPerChunk; ++i1) {
                 int l1 = random.nextInt(16) + 8;
                 int i6 = random.nextInt(16) + 8;
-                this.clayGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.offset(l1, 0, i6)));
+                this.clayGen.generate(worldIn, random, worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, this.chunkPos.offset(l1, 0, i6)));
             }
         }
         if (TerrainGen.decorate((Level)worldIn, (RandomSource)random, (ChunkPos)forgeChunkPos, (DecorateBiomeEvent.Decorate.EventType)DecorateBiomeEvent.Decorate.EventType.SAND_PASS2)) {
             for (int j1 = 0; j1 < this.sandPerChunk; ++j1) {
                 int i2 = random.nextInt(16) + 8;
                 int j6 = random.nextInt(16) + 8;
-                this.gravelAsSandGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.offset(i2, 0, j6)));
+                this.gravelAsSandGen.generate(worldIn, random, worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, this.chunkPos.offset(i2, 0, j6)));
             }
         }
         int k1 = this.treesPerChunk;

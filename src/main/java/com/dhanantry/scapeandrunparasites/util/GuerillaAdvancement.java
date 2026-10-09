@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class GuerillaAdvancement {
     private static final ResourceLocation ADV_ID = ResourceLocation.fromNamespaceAndPath("srparasites", "guerilla");
     private static final String CRITERION = "kill_fear_splashed";

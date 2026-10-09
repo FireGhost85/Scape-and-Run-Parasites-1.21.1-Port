@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:infestedore_red"
+  },
+  "result": {
+    "id": "minecraft:redstone",
+    "count": 7
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

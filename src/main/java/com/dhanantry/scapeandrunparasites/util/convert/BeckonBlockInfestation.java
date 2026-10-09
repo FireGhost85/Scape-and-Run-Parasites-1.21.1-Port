@@ -46,10 +46,13 @@ import net.minecraft.world.level.block.FurnaceBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.ticks.TickPriority;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BeckonBlockInfestation {
     private static final Logger INFEST_LOG = LogManager.getLogger((String)"SRP-Infest");
@@ -472,7 +475,7 @@ public class BeckonBlockInfestation {
     }
 
     private static boolean isGlassBlock(Block b, BlockState s) {
-        if (b instanceof AbstractGlassBlock) {
+        if (b instanceof TransparentBlock) {
             return true;
         }
         if (LegacyMaterial.of(s) == LegacyMaterial.glass && !(b instanceof IronBarsBlock)) {
@@ -528,12 +531,12 @@ public class BeckonBlockInfestation {
 
     private static BlockState copyCommonProps(BlockState from, BlockState to) {
         BlockState out = to;
-        for (Property propTo : to.getPropertyNames()) {
-            if (!from.getPropertyNames().contains(propTo)) continue;
+        for (Property propTo : to.getProperties()) {
+            if (!from.getProperties().contains(propTo)) continue;
             try {
                 Property raw = propTo;
                 Comparable val = from.getValue(raw);
-                if (val == null || !raw.getAllowedValues().contains(val)) continue;
+                if (val == null || !raw.getPossibleValues().contains(val)) continue;
                 out = out.setValue(raw, val);
             }
             catch (Exception exception) {}

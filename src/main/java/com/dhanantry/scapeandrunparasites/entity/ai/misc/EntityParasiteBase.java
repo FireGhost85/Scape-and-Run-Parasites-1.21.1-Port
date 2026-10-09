@@ -1,6 +1,7 @@
 package com.dhanantry.scapeandrunparasites.entity.ai.misc;
 
 import com.dhanantry.scapeandrunparasites.block.IMetaName;
+import com.dhanantry.scapeandrunparasites.block.SRPBlockLinks;
 import com.dhanantry.scapeandrunparasites.client.particle.ParticleSpawner;
 import com.dhanantry.scapeandrunparasites.client.particle.SRPEnumParticle;
 import com.dhanantry.scapeandrunparasites.config.SRPConfig;
@@ -31,7 +32,6 @@ import com.dhanantry.scapeandrunparasites.util.SRPAttributes;
 import com.dhanantry.scapeandrunparasites.util.SRPEntityUtil;
 import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldData;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -1509,7 +1509,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
      * Lifted jumps to return sites
      */
     protected boolean isValidLightLevelOne() {
-        if (this.level().getBiome(this.blockPosition()).value() instanceof BiomeParasiteBase) {
+        if (SRPBlockLinks.isParasiteBiome(this.level(), this.blockPosition())) {
             return this.isValidLightLevelTwo();
         }
         BlockPos blockpos = BlockPos.containing(this.getX(), this.getBoundingBox().minY, this.getZ());
@@ -1551,7 +1551,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
     }
 
     private boolean isInParasiteBiome() {
-        return this.getRandom().nextInt(8) == 0 && this.level().getBiome(this.blockPosition()).value() instanceof BiomeParasiteBase;
+        return this.getRandom().nextInt(8) == 0 && SRPBlockLinks.isParasiteBiome(this.level(), this.blockPosition());
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData livingdata) {

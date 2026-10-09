@@ -1,11 +1,9 @@
 package com.dhanantry.scapeandrunparasites.util.convert;
 
 import com.dhanantry.scapeandrunparasites.util.LegacyMaterial;
-import java.util.Collection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,7 +17,7 @@ public final class HarlequinBlockConverter {
         if (mat == LegacyMaterial.air || mat == LegacyMaterial.water || mat == LegacyMaterial.lava) {
             return null;
         }
-        if (b instanceof BlockLeaves) {
+        if (b instanceof net.minecraft.world.level.block.LeavesBlock) {
             BlockPos below;
             world.setBlock(pos, cfg.ALVEOLI.defaultBlockState(), 2);
             if (rand.nextInt(100) < 30 && world.isEmptyBlock(below = pos.below())) {
@@ -81,41 +79,39 @@ public final class HarlequinBlockConverter {
     }
 
     private static boolean isAnySand(BlockState s) {
-        return s.getBlock() instanceof BlockSand;
+        return s.is(net.minecraft.tags.BlockTags.SAND);
     }
 
     private static boolean isAnySandstone(BlockState s) {
-        return s.getBlock() instanceof SandstoneBlock || s.getBlock() == Blocks.RED_SANDSTONE;
+        return s.getBlock().builtInRegistryHolder().key().location().getPath().contains("sandstone");
     }
 
     private static boolean canSustain(Level world, BlockState ground, BlockPos pos, Block plant) {
-        if (!(plant instanceof IPlantable)) {
+        if (!(plant instanceof net.minecraft.world.level.block.BushBlock)) {
             return true;
         }
         try {
-            return ground.getBlock().canSustainPlant(ground, (BlockGetter)world, pos, Direction.UP, (IPlantable)plant);
+            return plant.defaultBlockState().canSurvive(world, pos);
         }
         catch (Throwable t) {
             return true;
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static BlockState setFacingIfPresent(BlockState state, Direction face) {
-        Collection props = state.getPropertyNames();
-        for (Property p : props) {
-            Property pf;
-            if (!p.getName().equalsIgnoreCase("facing") || p.getValueClass() != Direction.class || !(pf = p).getAllowedValues().contains(face)) continue;
-            return state.setValue(pf, face);
+        for (Property<?> p : state.getProperties()) {
+            if (!p.getName().equalsIgnoreCase("facing") || p.getValueClass() != Direction.class || !((Property<Direction>) p).getPossibleValues().contains(face)) continue;
+            return state.setValue((Property<Direction>) p, face);
         }
         return state;
     }
 
     private static void placeDoublePlant(Level world, BlockPos pos, Block plant) {
         try {
-            if (plant instanceof BlockDoublePlant) {
-                BlockDoublePlant bdp = (BlockDoublePlant)plant;
-                world.setBlock(pos, bdp.defaultBlockState().setValue((Property)BlockDoublePlant.HALF, BlockDoublePlant.EnumBlockHalf.LOWER), 2);
-                world.setBlock(pos.above(), bdp.defaultBlockState().setValue((Property)BlockDoublePlant.HALF, BlockDoublePlant.EnumBlockHalf.UPPER), 2);
+            if (plant instanceof net.minecraft.world.level.block.DoublePlantBlock bdp) {
+                world.setBlock(pos, bdp.defaultBlockState().setValue(net.minecraft.world.level.block.DoublePlantBlock.HALF, net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER), 2);
+                world.setBlock(pos.above(), bdp.defaultBlockState().setValue(net.minecraft.world.level.block.DoublePlantBlock.HALF, net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER), 2);
             } else {
                 world.setBlock(pos, plant.defaultBlockState(), 2);
             }

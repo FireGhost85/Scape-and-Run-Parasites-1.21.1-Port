@@ -3,6 +3,7 @@ package com.dhanantry.scapeandrunparasites.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.neoforged.neoforge.common.property.Properties;
 
 /** Bookshelf with enchanting power bonus 1 (block tag {@code minecraft:enchantment_power_provider}). */
 public class BlockSRPBookshelf extends Block {

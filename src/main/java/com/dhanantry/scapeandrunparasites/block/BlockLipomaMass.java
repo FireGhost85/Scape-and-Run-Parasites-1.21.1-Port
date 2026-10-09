@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.property.Properties;
 
 /** Lipoma mass: hangs from the underside of an SRP block. */
 public class BlockLipomaMass extends BushBlock {

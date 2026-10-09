@@ -23,8 +23,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BlockItemStateProperties;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -131,43 +131,43 @@ public class BlockEvolutionLure extends BlockBase implements IVariantBlock<Block
                 }
                 switch (state.getValue(VARIANT)) {
                     case EIGHT:
-                        data.addCooldown(SRPConfigSystems.luredValueEight, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueEight, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case FIVE:
-                        data.addCooldown(SRPConfigSystems.luredValueFive, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueFive, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case FOUR:
-                        data.addCooldown(SRPConfigSystems.luredValueFour, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueFour, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case ONE:
-                        data.addCooldown(SRPConfigSystems.luredValueOne, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueOne, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case SEVEN:
-                        data.addCooldown(SRPConfigSystems.luredValueSeven, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueSeven, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case SIX:
-                        data.addCooldown(SRPConfigSystems.luredValueSix, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueSix, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case THREE:
-                        data.addCooldown(SRPConfigSystems.luredValueThree, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueThree, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case TWO:
-                        data.addCooldown(SRPConfigSystems.luredValueTwo, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueTwo, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case NINE:
-                        data.addCooldown(SRPConfigSystems.luredValueNine, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueNine, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                     case TEN:
-                        data.addCooldown(SRPConfigSystems.luredValueTen, level, dim, true);
+                        data.setCooldown(SRPConfigSystems.luredValueTen, level, dim, true);
                         player.displayClientMessage(Component.translatable("message.srparasites.lureb"), true);
                         break;
                 }

@@ -1,6 +1,6 @@
 package com.dhanantry.scapeandrunparasites.world.gen.feature;
 
-import com.dhanantry.scapeandrunparasites.SRPMain;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.block.BlockBase;
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteBush;
 import com.dhanantry.scapeandrunparasites.block.BlockParasiteLoot;
@@ -14,12 +14,16 @@ import com.dhanantry.scapeandrunparasites.world.gen.feature.WorldGenParasiteGenA
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -227,7 +231,7 @@ extends WorldGenParasiteGenAbstract {
     protected void genFloorFloor(Level worldIn, BlockPos position, int range, boolean fill) {
         if (fill) {
             BlockPos filler = position;
-            while ((worldIn.getBlockState(filler).getBlock() == Blocks.AIR || worldIn.getBlockState(filler).getBlock() == SRPBlocks.ParasiteBush.get() || worldIn.getBlockState(filler).getBlock() instanceof BlockLeaves || worldIn.getBlockState(filler).getBlock() instanceof BushBlock) && range > 0) {
+            while ((worldIn.getBlockState(filler).getBlock() == Blocks.AIR || worldIn.getBlockState(filler).getBlock() == SRPBlocks.ParasiteBush.get() || worldIn.getBlockState(filler).getBlock() instanceof LeavesBlock || worldIn.getBlockState(filler).getBlock() instanceof BushBlock) && range > 0) {
                 this.placeReplacement(worldIn, filler, this.floor);
                 filler = filler.below();
                 --range;
@@ -368,9 +372,12 @@ extends WorldGenParasiteGenAbstract {
         BlockEntity tileentity = world.getBlockEntity(pos);
         if (tileentity instanceof TileEntityParasiteLoot) {
             TileEntityParasiteLoot cyst = (TileEntityParasiteLoot)tileentity;
-            for (int i = 0; i < cyst.getSizeInventory(); ++i) {
+            for (int i = 0; i < cyst.getContainerSize(); ++i) {
                 if (world.random.nextInt(2) == 0) continue;
-                cyst.setInventorySlotContents(i, new ItemStack(this.loot(world.random, list)));
+                Item looted = this.loot(world.random, list);
+                if (looted != null) {
+                    cyst.setItem(i, new ItemStack(looted));
+                }
             }
         }
     }
@@ -378,12 +385,12 @@ extends WorldGenParasiteGenAbstract {
     private Item loot(RandomSource rand, String[] drop) {
         try {
             Item item;
-            if (drop.length != 0 && (item = Item.getByNameOrId((String)drop[rand.nextInt(drop.length)])) != null) {
+            if (drop.length != 0 && (item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(drop[rand.nextInt(drop.length)]))) != Items.AIR) {
                 return item;
             }
         }
         catch (Exception e) {
-            SRPMain.logger.log(Level.ERROR, "Problem with loot event", (Throwable)e);
+            ScapeAndRunParasites.LOGGER.error("Problem with loot event", e);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.block;
 
+import com.dhanantry.scapeandrunparasites.init.SRPSoundTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -7,7 +8,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import com.dhanantry.scapeandrunparasites.init.SRPSoundTypes;
 
 /**
  * Slab of the SRP building blocks. The 1.12 half and double slab blocks are one block with the vanilla {@code type}

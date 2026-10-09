@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.block.BlockPottedSRPFlower;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import net.minecraft.core.Direction;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class PottedFlowerHooks {
     @SubscribeEvent
     public static void onRightClick(PlayerInteractEvent.RightClickBlock e) {

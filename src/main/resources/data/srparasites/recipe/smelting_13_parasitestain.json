@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:parasitestain_flesh"
+  },
+  "result": {
+    "id": "srparasites:cooked_flesh"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

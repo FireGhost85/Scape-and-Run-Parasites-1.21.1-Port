@@ -6,6 +6,7 @@ import com.dhanantry.scapeandrunparasites.init.SRPDamageTypes;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.init.SRPSoundTypes;
 import com.dhanantry.scapeandrunparasites.init.SRPSounds;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import javax.annotation.Nullable;
 
 /** Dod nexus block: pushes and damages players that touch it; its tile entity spawns the Dod. */
 public class BlockDod extends BlockBase implements EntityBlock {

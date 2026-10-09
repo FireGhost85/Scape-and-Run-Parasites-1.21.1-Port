@@ -97,28 +97,29 @@ def result(res):
     return out
 
 
-os.makedirs(OUT, exist_ok=True)
-done = 0
-for f in sorted(glob.glob(os.path.join(JAR, '*.json'))):
-    d = json.load(open(f, encoding='utf8'))
-    errors.clear()
-    typ = d['type'].split(':')[1]
-    out = {}
-    if typ in ('crafting_shaped', 'ore_shaped'):
-        out['type'] = 'minecraft:crafting_shaped'
-        if 'group' in d:
-            out['group'] = d['group']
-        out['pattern'] = d['pattern']
-        out['key'] = {k: resolve(v) for k, v in d['key'].items()}
-    else:
-        out['type'] = 'minecraft:crafting_shapeless'
-        if 'group' in d:
-            out['group'] = d['group']
-        out['ingredients'] = [resolve(i) for i in d['ingredients']]
-    out['result'] = result(d['result'])
-    if errors:
-        print(os.path.basename(f), errors)
-        continue
-    json.dump(out, open(os.path.join(OUT, os.path.basename(f)), 'w', encoding='utf8'), indent=2)
-    done += 1
-print('written', done)
+if __name__ == '__main__':
+    os.makedirs(OUT, exist_ok=True)
+    done = 0
+    for f in sorted(glob.glob(os.path.join(JAR, '*.json'))):
+        d = json.load(open(f, encoding='utf8'))
+        errors.clear()
+        typ = d['type'].split(':')[1]
+        out = {}
+        if typ in ('crafting_shaped', 'ore_shaped'):
+            out['type'] = 'minecraft:crafting_shaped'
+            if 'group' in d:
+                out['group'] = d['group']
+            out['pattern'] = d['pattern']
+            out['key'] = {k: resolve(v) for k, v in d['key'].items()}
+        else:
+            out['type'] = 'minecraft:crafting_shapeless'
+            if 'group' in d:
+                out['group'] = d['group']
+            out['ingredients'] = [resolve(i) for i in d['ingredients']]
+        out['result'] = result(d['result'])
+        if errors:
+            print(os.path.basename(f), errors)
+            continue
+        json.dump(out, open(os.path.join(OUT, os.path.basename(f)), 'w', encoding='utf8'), indent=2)
+        done += 1
+    print('written', done)

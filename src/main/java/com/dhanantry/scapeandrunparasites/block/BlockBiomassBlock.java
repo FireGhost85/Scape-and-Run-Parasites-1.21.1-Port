@@ -1,9 +1,9 @@
 package com.dhanantry.scapeandrunparasites.block;
 
+import com.dhanantry.scapeandrunparasites.client.particle.SRPEnumParticle;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.init.SRPDamageTypes;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
-import com.dhanantry.scapeandrunparasites.init.SRPSoundTypes;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import com.dhanantry.scapeandrunparasites.client.particle.SRPEnumParticle;
 
 /** Biomass block: damages and poisons any non-parasite creature standing in it. */
 public class BlockBiomassBlock extends Block {

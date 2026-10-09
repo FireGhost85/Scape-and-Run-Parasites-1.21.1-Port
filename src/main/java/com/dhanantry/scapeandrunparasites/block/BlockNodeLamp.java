@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import java.util.List;
 
 /**
  * Node redstone lamp: powers on while a Dod (any of the four tiers) is within 250 blocks and shows the distance tier in

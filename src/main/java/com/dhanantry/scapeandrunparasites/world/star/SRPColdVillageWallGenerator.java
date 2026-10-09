@@ -273,7 +273,7 @@ public final class SRPColdVillageWallGenerator {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         LegacyMaterial material = LegacyMaterial.of(state);
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || block == Blocks.OAK_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.OAK_LOG || block == Blocks.ACACIA_LOG || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.leaves || material == LegacyMaterial.snow || state.canBeReplaced();
     }
 
     private static boolean shouldFillSupport(Level world, BlockPos pos) {

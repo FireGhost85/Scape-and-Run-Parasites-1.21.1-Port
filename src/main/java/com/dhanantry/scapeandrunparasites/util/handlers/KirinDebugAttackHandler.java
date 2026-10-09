@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.entity.monster.derived.EntityKirin;
 import java.util.List;
@@ -14,7 +15,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class KirinDebugAttackHandler {
     private static final ResourceLocation DEBUG_ITEM_ID = ResourceLocation.fromNamespaceAndPath("srparasites", "itemmobspawner_kirin");
     public static boolean DEBUG_FORCE_ENABLE_KIRIN_ITEM = false;

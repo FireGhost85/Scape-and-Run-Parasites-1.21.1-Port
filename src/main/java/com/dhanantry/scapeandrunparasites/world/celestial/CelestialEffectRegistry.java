@@ -31,7 +31,7 @@ public final class CelestialEffectRegistry {
         if (world == null || world.isClientSide) {
             return Collections.emptySet();
         }
-        int dim = DimKeys.of(world);
+        String dim = DimKeys.of(world);
         CelestialNightData night = CelestialNightData.get(world);
         CelestialNightData.DimState s = night.getState(dim);
         if (s == null) {

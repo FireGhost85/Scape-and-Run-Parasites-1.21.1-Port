@@ -129,6 +129,31 @@ RULES = [
     (r'ChatFormatting\.getTextWithoutFormattingCodes\(\(String\)([^;]*?)\);', r'ChatFormatting.stripFormatting(\1);'),
     (r'\b(super|this)\.(rotateCorpse|doRender|bindEntityTexture|renderModel|preRenderCallback|getEntityTexture|isVisible|setBrightness|getColorMultiplier|shouldRender|handleRotationFloat|interpolateRotation)\(\((?:LivingEntity|Mob|Entity|PathfinderMob)\)', r'\1.\2('),
     (r'\.thePlayer\b', '.player'),
+    (r'\bint dim = DimKeys\.of\(', 'String dim = DimKeys.of('),
+    (r'BlockPos\.fromLong\(', 'BlockPos.of('),
+    (r'(\w+)\.scheduleUpdate\(', r'\1.scheduleTick('),
+    (r'(\w+)\.notifyNeighborsOfStateChange\((\w+), (\w+), true\)', r'\1.updateNeighborsAt(\2, \3)'),
+    (r'(\(\w+ = [^()]*(?:\([^()]*\))*[^()]*\))\.getMaterial\(\) ([=!]=) LegacyMaterial\.(\w+)', r'LegacyMaterial.of\1 \2 LegacyMaterial.\3'),
+    (r'(\w+) instanceof BlockOldLeaf \|\| \1 instanceof BlockNewLeaf', r'\1 instanceof LeavesBlock'),
+    (r'(\w+) instanceof BlockOldLog \|\| \1 instanceof BlockNewLog', r'\1.defaultBlockState().is(BlockTags.LOGS)'),
+    (r'(\w+) instanceof BlockLog\b', r'\1.defaultBlockState().is(BlockTags.LOGS)'),
+    (r'\bBlockVine\b', 'VineBlock'),
+    (r'\bBlockLeaves\b', 'LeavesBlock'),
+    (r'(\w+)\.getBlock\(\)\.isReplaceable\(\(BlockGetter\)\w+, \w+\)', r'\1.canBeReplaced()'),
+    (r'\bBlocks\.UNLIT_REDSTONE_TORCH \|\| ', ''),
+    (r'(\S+?)\.getBiome\(([^()]+(?:\(\))?)\)\.value\(\) instanceof BiomeParasiteBase', r'SRPBlockLinks.isParasiteBiome(\1, \2)'),
+    (r'\bAbstractGlassBlock\b', 'TransparentBlock'),
+    (r'lookingBlock instanceof net\.minecraft\.world\.level\.block\.SandBlock', 'lookingState.is(BlockTags.SAND)'),
+    (r'\.getPropertyNames\(\)', '.getProperties()'),
+    (r'\.getAllowedValues\(\)', '.getPossibleValues()'),
+    (r'SRPMain\.logger\.(info|debug|error|warn)\(', r'ScapeAndRunParasites.LOGGER.\1('),
+    (r'import com\.dhanantry\.scapeandrunparasites\.SRPMain;', 'import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;'),
+    (r'Loader\.isModLoaded\(\(String\)("[^"]*")\)', r'ModList.get().isLoaded(\1)'),
+    (r'for \(int i : (SRPConfig\w*\.\w+)\) \{\s*if \(i != DimKeys\.of\(([\w.()]+)\)\) continue;', r'for (String i : \1) {\n            if (!DimKeys.normalize(i).equals(DimKeys.of(\2))) continue;'),
+    (r'@Mod\.EventBusSubscriber\(modid ?= ?"srparasites"\)', '@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)'),
+    (r'\bEntityJoinWorldEvent\b', 'EntityJoinLevelEvent'),
+    (r'\.toImmutable\(\)', '.immutable()'),
+    (r'SRPSaveData\.get\(([\w.()]+), -\d+\)', r'SRPSaveData.get(\1)'),
     (r'\.getResourcePath\(\)', '.getPath()'),
     (r'\.getResourceDomain\(\)', '.getNamespace()'),
     (r'(\w+)\.getLightFor\(LightLayer\.BLOCK, ', r'\1.getBrightness(LightLayer.BLOCK, '),
@@ -288,6 +313,12 @@ def fix_calls(text):
                 return 'PacketDistributor.sendToPlayer((ServerPlayer)%s, new %sPayload(%s))' % (re.sub(r'^\(ServerPlayer\)', '', args[1].strip()), mm.group(1), mm.group(2))
         return None
     text = rewrite_calls(text, r'SRPNetwork\.CHANNEL\.sendTo\(', net)
+
+    def tsl(m, args):
+        if len(args) == 1:
+            return '%s.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, %s)' % (m.group(1), args[0])
+        return None
+    text = rewrite_calls(text, RECV + r'\.getTopSolidOrLiquidBlock\(', tsl)
 
     def lbright(m, args):
         if len(args) == 1:
@@ -452,6 +483,8 @@ SET_SIZE_LIVING = SET_SIZE.replace('public net.minecraft.world.entity.EntityDime
 
 
 def fix_set_size(text, living=False):
+    if 'extends Particle' in text or 'extends TextureSheetParticle' in text or 'extends LegacyParticle' in text or 'extends Simple' in text and 'Particle' in text:
+        return text
     if not re.search(r'\bthis\.setSize\(', text) or 'void setSize(' in text:
         return text
     i = text.rstrip().rfind('}')

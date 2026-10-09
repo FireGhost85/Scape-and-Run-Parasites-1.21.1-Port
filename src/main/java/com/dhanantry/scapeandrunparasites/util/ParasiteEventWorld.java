@@ -19,7 +19,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +43,7 @@ public class ParasiteEventWorld {
         if (ParasiteEventEntity.checkName(block.builtInRegistryHolder().key().location().toString(), list, invert)) {
             return true;
         }
-        return block instanceof HalfTransparentBlock || block instanceof BaseEntityBlock || block instanceof DropExperienceBlock || block instanceof HorizontalDirectionalBlock || block instanceof TntBlock || block.isPassable((BlockGetter)worldIn, pos) || block instanceof IPlantable || !state.isFullCube();
+        return block instanceof HalfTransparentBlock || block instanceof BaseEntityBlock || block instanceof DropExperienceBlock || block instanceof HorizontalDirectionalBlock || block instanceof TntBlock || block.defaultBlockState().getCollisionShape(worldIn, pos).isEmpty() || block instanceof net.minecraft.world.level.block.BushBlock || !state.isCollisionShapeFullBlock(worldIn, pos);
     }
 
     public static int canBiomeStillExist(Level worldIn, BlockPos pos, boolean spread) {
@@ -240,7 +239,7 @@ public class ParasiteEventWorld {
             return 3;
         }
         SRPWorldData data = SRPWorldData.get(worldIn);
-        int key = data.setOrigin(worldIn, pos.getX(), pos.getY(), pos.getZ(), health *= PhaseConfig.getVectorHealthBonus(SRPSaveData.get(worldIn, -421).getEvolutionPhase(DimKeys.of(worldIn))), radius);
+        int key = data.setOrigin(worldIn, pos.getX(), pos.getY(), pos.getZ(), health *= PhaseConfig.getVectorHealthBonus(SRPSaveData.get(worldIn).getEvolutionPhase(DimKeys.of(worldIn))), radius);
         Player nearestPlayer = worldIn.getNearestPlayer((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), -1.0, false);
         if (nearestPlayer != null) {
             double horizontalDistance = Math.sqrt(Math.pow((double)pos.getX() - nearestPlayer.getX(), 2.0) + Math.pow((double)pos.getZ() - nearestPlayer.getZ(), 2.0));
@@ -295,7 +294,7 @@ public class ParasiteEventWorld {
     }
 
     public static void setDisloWorldPhase(Level world, ArrayList<Byte> disloEvent, double chance, int cothCheck, BlockPos pos) {
-        int dim;
+        String dim;
         byte phase;
         byte[] disloEve;
         if (world.isClientSide) {

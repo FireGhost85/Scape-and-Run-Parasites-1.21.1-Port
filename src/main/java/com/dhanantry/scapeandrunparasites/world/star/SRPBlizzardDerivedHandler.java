@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.world.star;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityPDerived;
 import com.dhanantry.scapeandrunparasites.entity.monster.derived.EntityHeblu;
 import com.dhanantry.scapeandrunparasites.entity.monster.derived.EntityKirin;
@@ -16,7 +17,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SRPBlizzardDerivedHandler {
     private static final double RANGE = 100.0;
     private static final double RANGE_SQ = 10000.0;

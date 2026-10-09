@@ -2,6 +2,7 @@ package com.dhanantry.scapeandrunparasites.potion;
 
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
 import com.dhanantry.scapeandrunparasites.entity.EntityParasiticScent;
+import com.dhanantry.scapeandrunparasites.init.SRPEntities;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
 import com.dhanantry.scapeandrunparasites.util.ParasiteEventEntity;
 import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
@@ -37,7 +38,7 @@ public class PotionPrey extends SRPEffectBase {
                 return true;
             }
             byte phase = SRPSaveData.get(level).getEvolutionPhase(DimKeys.of(level));
-            EntityParasiticScent nut = new EntityParasiticScent(level, 1, entity);
+            EntityParasiticScent nut = new EntityParasiticScent(SRPEntities.SCENT.get(), level, 1, entity);
             nut.copyPosition(entity);
             nut.setScentLife(SRPConfigSystems.scentLifeObserver * 20);
             nut.increaseDanger(ParasiteEventEntity.getScentBonus(phase), true);

@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.entity.ai;
 
+import com.dhanantry.scapeandrunparasites.block.SRPBlockLinks;
 import com.dhanantry.scapeandrunparasites.config.SRPConfig;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityPRooter;
@@ -21,7 +22,6 @@ import com.dhanantry.scapeandrunparasites.util.ParasiteEventWorld;
 import com.dhanantry.scapeandrunparasites.util.SRPEntityUtil;
 import com.dhanantry.scapeandrunparasites.util.spawn.ParasiteSummon;
 import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
 import java.util.List;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -101,7 +101,7 @@ extends Goal {
     }
 
     public void tick() {
-        if (this.venkrolCurrentStage == 3 && this.parent.level().getBiome(this.parent.blockPosition()).value() instanceof BiomeParasiteBase) {
+        if (this.venkrolCurrentStage == 3 && SRPBlockLinks.isParasiteBiome(this.parent.level(), this.parent.blockPosition())) {
             this.tickss = 20000.0;
         } else {
             int j = this.parent.getActualT();

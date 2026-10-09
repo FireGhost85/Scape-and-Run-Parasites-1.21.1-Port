@@ -9,16 +9,16 @@ import net.minecraft.world.level.Level;
 public class MobCaps {
     Set<MobCap> mobCaps = new HashSet<MobCap>();
 
-    public int getMobCapForDimension(int dimensionId) {
+    public int getMobCapForDimension(String dimensionId) {
         for (MobCap mobCap : this.mobCaps) {
-            if (mobCap.getDimensionId() != dimensionId) continue;
+            if (!mobCap.getDimensionId().equals(dimensionId)) continue;
             return mobCap.getMobCap();
         }
         return SRPConfig.worldMobCap;
     }
 
-    public void initializeMobCaps(Set<Integer> dimensionIds) {
-        for (int dimensionId : dimensionIds) {
+    public void initializeMobCaps(Set<String> dimensionIds) {
+        for (String dimensionId : dimensionIds) {
             this.mobCaps.add(new MobCap(SRPConfig.worldMobCap, dimensionId));
         }
     }
@@ -29,9 +29,9 @@ public class MobCaps {
         }
     }
 
-    public void updateMobCapForDimension(int dimensionId, Level world) {
+    public void updateMobCapForDimension(String dimensionId, Level world) {
         for (MobCap mobCap : this.mobCaps) {
-            if (mobCap.getDimensionId() != dimensionId) continue;
+            if (!mobCap.getDimensionId().equals(dimensionId)) continue;
             mobCap.updateMobCap(world);
             return;
         }
@@ -48,9 +48,9 @@ public class MobCaps {
 
     public static class MobCap {
         private int mobCap;
-        private int dimensionId;
+        private String dimensionId;
 
-        public MobCap(int mobCap, int dimensionId) {
+        public MobCap(int mobCap, String dimensionId) {
             this.mobCap = mobCap;
             this.dimensionId = dimensionId;
         }
@@ -60,11 +60,11 @@ public class MobCaps {
             this.setMobCap(SRPConfig.worldMobCap + playerCount * SRPConfig.worldMobCapPlusPlayer);
         }
 
-        public int getDimensionId() {
+        public String getDimensionId() {
             return this.dimensionId;
         }
 
-        public void setDimensionId(int dimensionId) {
+        public void setDimensionId(String dimensionId) {
             this.dimensionId = dimensionId;
         }
 

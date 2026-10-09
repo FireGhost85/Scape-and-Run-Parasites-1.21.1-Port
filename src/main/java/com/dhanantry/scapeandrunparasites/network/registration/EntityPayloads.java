@@ -57,7 +57,7 @@ public final class EntityPayloads {
     private static void handleCompass(CompassPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             BlockPos pos = new BlockPos(msg.x(), msg.y(), msg.z());
-            switch (msg.type()) {
+            switch (msg.kind()) {
                 case 1 -> CompassNode.orig = pos;
                 case 2 -> CompassColony.orig = pos;
                 case 3 -> CompassOrigin.orig = pos;

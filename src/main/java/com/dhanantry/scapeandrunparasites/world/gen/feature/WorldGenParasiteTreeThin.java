@@ -56,10 +56,10 @@ extends WorldGenParasiteTreeAbstract {
         }
         current = position;
         current = this.placeColumn(worldIn, current, 3, rand, 0.0, 4);
-        this.inflate(worldIn, current.north(), rand, 1);
-        this.inflate(worldIn, current.east(), rand, 2);
-        this.inflate(worldIn, current.south(), rand, 3);
-        this.inflate(worldIn, current.west(), rand, 4);
+        this.grow(worldIn, current.north(), rand, 1);
+        this.grow(worldIn, current.east(), rand, 2);
+        this.grow(worldIn, current.south(), rand, 3);
+        this.grow(worldIn, current.west(), rand, 4);
         return true;
     }
 

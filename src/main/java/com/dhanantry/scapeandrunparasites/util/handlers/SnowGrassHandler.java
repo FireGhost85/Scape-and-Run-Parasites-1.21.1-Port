@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.init.SRPBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -8,10 +9,11 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class SnowGrassHandler {
     private static final int NATURAL_CHECK_RADIUS = 32;
     private static final int NATURAL_CHECKS_PER_PLAYER = 96;
@@ -65,7 +67,7 @@ public class SnowGrassHandler {
             int z;
             int x = centerX + world.random.nextInt(65) - 32;
             BlockPos column = BlockPos.containing(x, 0, z = centerZ + world.random.nextInt(65) - 32);
-            if (!world.hasChunkAt(column) || !world.hasChunkAt(pos = world.getTopSolidOrLiquidBlock(column)) || !SnowGrassHandler.isShortGrass(state = world.getBlockState(pos)) && !SnowGrassHandler.isTallGrass(state) || !SnowGrassHandler.canSnowHere(world, pos)) continue;
+            if (!world.hasChunkAt(column) || !world.hasChunkAt(pos = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column)) || !SnowGrassHandler.isShortGrass(state = world.getBlockState(pos)) && !SnowGrassHandler.isTallGrass(state) || !SnowGrassHandler.canSnowHere(world, pos)) continue;
             if (SnowGrassHandler.isShortGrass(state)) {
                 world.setBlock(pos, SRPBlocks.SnowShortGrass.get().defaultBlockState(), 3);
                 continue;

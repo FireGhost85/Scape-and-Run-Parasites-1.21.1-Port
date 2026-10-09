@@ -12,7 +12,7 @@ for dp, _, fs in os.walk(CLIENT):
         if not f.endswith('.java'):
             continue
         p = os.path.join(dp, f)
-        if os.sep + 'legacy' in dp:
+        if os.sep + 'legacy' in dp or (os.sep + 'model' not in dp and os.sep + 'renderer' not in dp):
             continue
         s = open(p, encoding='utf8').read()
         t = s

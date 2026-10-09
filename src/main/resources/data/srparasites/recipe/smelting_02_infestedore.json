@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:infestedore_dia"
+  },
+  "result": {
+    "id": "minecraft:diamond",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -6,6 +6,7 @@ import com.dhanantry.scapeandrunparasites.world.celestial.ICelestialEventEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
 public class CelestialEffectHooks {
     private static boolean isNight(Level world) {
@@ -14,7 +15,7 @@ public class CelestialEffectHooks {
     }
 
     @SubscribeEvent
-    public void onEntityJoinWorld(EntityJoinWorldEvent e) {
+    public void onEntityJoinWorld(EntityJoinLevelEvent e) {
         Level world = e.getLevel();
         if (world == null || world.isClientSide) {
             return;

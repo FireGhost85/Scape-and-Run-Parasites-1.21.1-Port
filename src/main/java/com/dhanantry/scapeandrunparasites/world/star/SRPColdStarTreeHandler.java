@@ -99,7 +99,7 @@ public class SRPColdStarTreeHandler {
                     this.repairOrphanedDoublePlant(world, snowPos);
                     continue;
                 }
-                if (!world.isEmptyBlock(snowPos) && !at.getBlock().isReplaceable((BlockGetter)world, snowPos) || !Blocks.SNOW.canPlaceBlockAt(world, snowPos)) continue;
+                if (!world.isEmptyBlock(snowPos) && !at.canBeReplaced() || !Blocks.SNOW.canPlaceBlockAt(world, snowPos)) continue;
                 world.setBlock(snowPos, Blocks.SNOW.defaultBlockState(), 2);
             }
         }
@@ -168,7 +168,7 @@ public class SRPColdStarTreeHandler {
         for (int y = maxY; y >= minY; --y) {
             BlockPos pos = BlockPos.containing(x, y, z);
             BlockState state = world.getBlockState(pos);
-            if (world.isEmptyBlock(pos) || state.getBlock().isReplaceable((BlockGetter)world, pos) || this.isTreeOrLeaves(state, world, pos)) continue;
+            if (world.isEmptyBlock(pos) || state.canBeReplaced() || this.isTreeOrLeaves(state, world, pos)) continue;
             if (this.isForbiddenSurface(state)) {
                 return null;
             }
@@ -205,7 +205,7 @@ public class SRPColdStarTreeHandler {
         }
         BlockPos treePos = cursor.above();
         BlockState atTreePos = world.getBlockState(treePos);
-        if (!world.isEmptyBlock(treePos) && !atTreePos.getBlock().isReplaceable((BlockGetter)world, treePos)) {
+        if (!world.isEmptyBlock(treePos) && !atTreePos.canBeReplaced()) {
             return null;
         }
         return treePos;

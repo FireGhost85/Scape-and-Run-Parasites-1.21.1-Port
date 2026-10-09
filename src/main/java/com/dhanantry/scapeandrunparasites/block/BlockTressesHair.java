@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.property.Properties;
 
 /** Tresses hair: two block tall plant that grows on any SRP block. */
 public class BlockTressesHair extends DoublePlantBlock {

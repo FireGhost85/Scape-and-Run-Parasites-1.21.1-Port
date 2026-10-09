@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "srparasites:infestedore_iro"
+  },
+  "result": {
+    "id": "minecraft:iron_ingot",
+    "count": 2
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

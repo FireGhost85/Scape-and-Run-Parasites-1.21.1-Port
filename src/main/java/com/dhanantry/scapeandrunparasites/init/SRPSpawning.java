@@ -1,6 +1,7 @@
 package com.dhanantry.scapeandrunparasites.init;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
+import com.dhanantry.scapeandrunparasites.block.SRPBlockLinks;
 import com.dhanantry.scapeandrunparasites.config.SRPConfig;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigSystems;
@@ -17,7 +18,6 @@ import com.dhanantry.scapeandrunparasites.phase.DimKeys;
 import com.dhanantry.scapeandrunparasites.util.SRPEntityUtil;
 import com.dhanantry.scapeandrunparasites.world.SRPSaveData;
 import com.dhanantry.scapeandrunparasites.world.SRPWorldData;
-import com.dhanantry.scapeandrunparasites.world.biome.BiomeParasiteBase;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -385,7 +385,7 @@ public class SRPSpawning {
                             if (!(entity instanceof EntityParasiteBase)) continue;
                             list.add((EntityParasiteBase)entity);
                         }
-                        list.sort(Comparator.comparingDouble(e -> e.getBbWidth() + e.getBbHeight()).thenComparingInt(e -> e.tickCount));
+                        list.sort(Comparator.<EntityParasiteBase>comparingDouble(e -> e.getBbWidth() + e.getBbHeight()).thenComparingInt(e -> e.tickCount));
                         for (Entity entity : serverList) {
                             if (!(entity instanceof EntityParasiteBase)) continue;
                             entity.discard();
@@ -417,13 +417,13 @@ public class SRPSpawning {
                     if (SRPConfig.blackListedDimensionsWhite) {
                         inv = true;
                     }
-                    for (int i : SRPConfig.blackListedDimensions) {
+                    for (String i : SRPConfig.blackListedDimensions) {
                         if (SRPConfig.blackListedDimensionsWhite) {
-                            if (i != DimKeys.of(event.getLevel())) continue;
+                            if (!DimKeys.normalize(i).equals(DimKeys.of(event.getLevel().getLevel()))) continue;
                             flagI = true;
                             break;
                         }
-                        if (i != DimKeys.of(event.getLevel())) continue;
+                        if (!DimKeys.normalize(i).equals(DimKeys.of(event.getLevel().getLevel()))) continue;
                         event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
                         return;
                     }
@@ -462,10 +462,10 @@ public class SRPSpawning {
                     }
                 }
             } else if (event.getEntity() instanceof LivingEntity) {
-                if (SRPConfigSystems.useEvolution && SRPSaveData.get(event.getLevel()).getEvolutionPhase(DimKeys.of(event.getLevel())) >= SRPConfigSystems.evolutionNoParasiteSpawnDenied) {
+                if (SRPConfigSystems.useEvolution && SRPSaveData.get(event.getLevel().getLevel()).getEvolutionPhase(DimKeys.of(event.getLevel().getLevel())) >= SRPConfigSystems.evolutionNoParasiteSpawnDenied) {
                     event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
                 }
-                if (SRPConfigWorld.coloniesActivated && SRPWorldData.get(event.getLevel()).nearestColonyPosition(event.getEntity().blockPosition(), false) != null) {
+                if (SRPConfigWorld.coloniesActivated && SRPWorldData.get(event.getLevel().getLevel()).nearestColonyPosition(event.getEntity().blockPosition(), false) != null) {
                     event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
                 }
             }
@@ -553,7 +553,7 @@ public class SRPSpawning {
                 here = SRPConfigWorld.preeValues[i].split(";");
                 id = Integer.parseInt(here[0]);
                 if (id != in) continue;
-                if (parasite.level().getBiome(parasite.blockPosition()).value() instanceof BiomeParasiteBase) {
+                if (SRPBlockLinks.isParasiteBiome(parasite.level(), parasite.blockPosition())) {
                     return SRPConfigWorld.preeValuesBiome;
                 }
                 req = Integer.parseInt(here[1]);

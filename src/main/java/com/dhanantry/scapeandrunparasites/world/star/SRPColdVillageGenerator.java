@@ -591,7 +591,7 @@ implements IWorldGenerator {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         LegacyMaterial material = LegacyMaterial.of(state);
-        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.snow || state.getBlock().isReplaceable((BlockGetter)world, pos);
+        return block == Blocks.AIR || block == Blocks.SNOW || block == Blocks.SHORT_GRASS || block == Blocks.DEAD_BUSH || material == LegacyMaterial.plants || material == LegacyMaterial.vine || material == LegacyMaterial.snow || state.canBeReplaced();
     }
 
     private void spawnVillagers(Level world, RandomSource random, BlockPos center, int count) {

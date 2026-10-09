@@ -19,7 +19,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class WorldGenParasiteMeteorCrash
 extends WorldGenParasiteColonyBase {
@@ -36,7 +38,7 @@ extends WorldGenParasiteColonyBase {
         int openNeeded;
         int baseDepth;
         BlockPos og = posss;
-        BlockPos impactCenter = worldIn.getTopSolidOrLiquidBlock(posss).below();
+        BlockPos impactCenter = worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, posss).below();
         if (this.type != 5) {
             String out = "meteor_fragment_large1";
             switch (worldIn.random.nextInt(9)) {
@@ -84,7 +86,7 @@ extends WorldGenParasiteColonyBase {
                 BlockPos top;
                 int dz;
                 int dx = rand.nextInt(fireRadius * 2 + 1) - fireRadius;
-                if (dx * dx + (dz = rand.nextInt(fireRadius * 2 + 1) - fireRadius) * dz > fireRadius * fireRadius || (top = worldIn.getTopSolidOrLiquidBlock(surface.offset(dx, 0, dz)).below()).getY() <= 5 || !worldIn.hasChunkAt(firePos = top.above()) || (below = worldIn.getBlockState(top)).getMaterial() == LegacyMaterial.air || LegacyMaterial.of(below) == LegacyMaterial.water || LegacyMaterial.of(below) == LegacyMaterial.lava || (at = worldIn.getBlockState(firePos)).getMaterial() != LegacyMaterial.air) continue;
+                if (dx * dx + (dz = rand.nextInt(fireRadius * 2 + 1) - fireRadius) * dz > fireRadius * fireRadius || (top = worldIn.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, surface.offset(dx, 0, dz)).below()).getY() <= 5 || !worldIn.hasChunkAt(firePos = top.above()) || LegacyMaterial.of(below = worldIn.getBlockState(top)) == LegacyMaterial.air || LegacyMaterial.of(below) == LegacyMaterial.water || LegacyMaterial.of(below) == LegacyMaterial.lava || LegacyMaterial.of(at = worldIn.getBlockState(firePos)) != LegacyMaterial.air) continue;
                 worldIn.setBlock(firePos, Blocks.FIRE.defaultBlockState(), 2);
             }
             return true;
@@ -145,7 +147,7 @@ extends WorldGenParasiteColonyBase {
                 for (int y = bottomY2; y <= topY2; ++y) {
                     BlockState s;
                     BlockPos p = BlockPos.containing(craterSurface.getX() + x, y, craterSurface.getZ() + z);
-                    if (!worldIn.hasChunkAt(p) || (s = worldIn.getBlockState(p)).getMaterial() != LegacyMaterial.air) continue;
+                    if (!worldIn.hasChunkAt(p) || LegacyMaterial.of(s = worldIn.getBlockState(p)) != LegacyMaterial.air) continue;
                     worldIn.setBlock(p, SRPBlocks.DeadBlood.get().defaultBlockState(), 2);
                 }
             }
@@ -167,7 +169,7 @@ extends WorldGenParasiteColonyBase {
                     BlockPos blockpos = BlockPos.containing(i3, k, l);
                     BlockState iblockstate = worldIn.getBlockState(blockpos);
                     Block block = iblockstate.getBlock();
-                    if (block == Blocks.GLASS || block == Blocks.WHITE_STAINED_GLASS || block == Blocks.GLASS_PANE || block == Blocks.WHITE_STAINED_GLASS_PANE || block instanceof AbstractGlassBlock || block instanceof IronBarsBlock && LegacyMaterial.of(iblockstate) == LegacyMaterial.glass) {
+                    if (block == Blocks.GLASS || block == Blocks.WHITE_STAINED_GLASS || block == Blocks.GLASS_PANE || block == Blocks.WHITE_STAINED_GLASS_PANE || block instanceof TransparentBlock || block instanceof IronBarsBlock && LegacyMaterial.of(iblockstate) == LegacyMaterial.glass) {
                         worldIn.setBlock(blockpos, BlockIds.legacyState(SRPBlocks.ParasiteStain.get(), 2), 2);
                         continue;
                     }
