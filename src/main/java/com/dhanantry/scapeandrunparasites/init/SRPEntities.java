@@ -394,6 +394,16 @@ public final class SRPEntities {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static void refreshAttributes() {
+        // Attribute instances that other mods' entity types also hold (a mod that copies or caches suppliers shares them) must not be
+        // written: the player ended up with 15 base armor in a modpack. They are skipped and reported once.
+        java.util.Set<Object> foreign = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+        for (EntityType<?> type : net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE) {
+            if (ATTRIBUTE_BUILDERS.containsKey(type) || !net.minecraft.world.entity.ai.attributes.DefaultAttributes.hasSupplier((EntityType)type)) {
+                continue;
+            }
+            foreign.addAll(net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier((EntityType)type).instances.values());
+        }
+        int shared = 0;
         for (var entry : ATTRIBUTE_BUILDERS.entrySet()) {
             net.minecraft.world.entity.ai.attributes.AttributeSupplier live = net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier((EntityType)entry.getKey());
             if (live == null) {
@@ -402,10 +412,18 @@ public final class SRPEntities {
             net.minecraft.world.entity.ai.attributes.AttributeSupplier fresh = entry.getValue().get().build();
             for (var attr : fresh.instances.entrySet()) {
                 var target = live.instances.get(attr.getKey());
-                if (target != null) {
-                    target.baseValue = attr.getValue().getBaseValue();
+                if (target == null) {
+                    continue;
                 }
+                if (foreign.contains(target)) {
+                    ++shared;
+                    continue;
+                }
+                target.baseValue = attr.getValue().getBaseValue();
             }
+        }
+        if (shared > 0) {
+            ScapeAndRunParasites.LOGGER.warn("{} parasite attribute instances are shared with other mods' entity types and were left unchanged", shared);
         }
     }
 
