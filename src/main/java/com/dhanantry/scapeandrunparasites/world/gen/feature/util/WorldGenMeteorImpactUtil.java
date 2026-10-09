@@ -104,6 +104,11 @@ public final class WorldGenMeteorImpactUtil {
         return false;
     }
 
+    /** The impact leaves water as it is: a column whose top block is a fluid is not carved and gets no stain, rubble or rim. */
+    private static boolean isFluidTop(Level world, BlockPos top) {
+        return !world.getBlockState(top).getFluidState().isEmpty();
+    }
+
     public static void carveCraterBowl(Level world, RandomSource rand, BlockPos surface, int radius, int depth, float steepness, BlockState rim, BlockState stain, BlockState cooked) {
         int cx = surface.getX();
         int cz = surface.getZ();
@@ -117,6 +122,7 @@ public final class WorldGenMeteorImpactUtil {
                 int d2 = dx * dx + dz * dz;
                 if (d2 > radius * radius) continue;
                 BlockPos colTop = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z));
+                if (world.hasChunkAt(colTop.below()) && isFluidTop(world, colTop.below())) continue;
                 int topY = colTop.getY();
                 double dist = Math.sqrt(d2);
                 double t = dist / (double)radius;
@@ -130,7 +136,7 @@ public final class WorldGenMeteorImpactUtil {
                     world.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
                 }
                 BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below();
-                if (!world.hasChunkAt(top)) continue;
+                if (!world.hasChunkAt(top) || isFluidTop(world, top)) continue;
                 if (d2 <= coreRR) {
                     if (rand.nextInt(3) == 0) {
                         world.setBlock(top, stain, 2);
@@ -160,7 +166,7 @@ public final class WorldGenMeteorImpactUtil {
                 int dx = x;
                 int dz = z;
                 int d2 = dx * dx + dz * dz;
-                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below())) continue;
+                if (d2 < ring1 * ring1 || d2 > ring2 * ring2 || rand.nextInt(3) != 0 || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(cx + x, surface.getY(), cz + z)).below()) || isFluidTop(world, top)) continue;
                 world.setBlock(top, stain, 2);
             }
         }
@@ -179,7 +185,7 @@ public final class WorldGenMeteorImpactUtil {
             int x = cx + (int)Math.round(px);
             int z = cz + (int)Math.round(pz);
             BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x, surface.getY(), z)).below();
-            if (!world.hasChunkAt(top)) continue;
+            if (!world.hasChunkAt(top) || isFluidTop(world, top)) continue;
             if (rand.nextInt(5) == 0) {
                 world.setBlock(top, stain, 2);
                 continue;
@@ -205,7 +211,7 @@ public final class WorldGenMeteorImpactUtil {
                 for (int z = -r; z <= r; ++z) {
                     BlockPos top;
                     int d2 = x * x + z * z;
-                    if (d2 > rr || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || rand.nextInt(3) != 0) continue;
+                    if (d2 > rr || !world.hasChunkAt(top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(x0 + x, surface.getY(), z0 + z)).below()) || isFluidTop(world, top) || rand.nextInt(3) != 0) continue;
                     world.setBlock(top, stain, 2);
                 }
             }
