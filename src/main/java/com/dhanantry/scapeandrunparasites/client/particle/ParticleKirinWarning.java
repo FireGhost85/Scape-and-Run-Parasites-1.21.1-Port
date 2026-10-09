@@ -1,9 +1,9 @@
 package com.dhanantry.scapeandrunparasites.client.particle;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
+import com.dhanantry.scapeandrunparasites.client.legacy.Tessellator;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -29,7 +29,7 @@ public class ParticleKirinWarning extends Particle {
     private static final ParticleRenderType ADDITIVE = new ParticleRenderType() {
         @Nullable
         @Override
-        public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+        public Tessellator.BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
             RenderSystem.depthMask(true);
             RenderSystem.setShader(GameRenderer::getParticleShader);
             RenderSystem.setShaderTexture(0, TEX);

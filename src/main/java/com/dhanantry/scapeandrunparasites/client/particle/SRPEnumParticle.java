@@ -1,7 +1,6 @@
 package com.dhanantry.scapeandrunparasites.client.particle;
 
 import com.dhanantry.scapeandrunparasites.init.SRPParticles;
-import com.google.common.collect.Maps;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
