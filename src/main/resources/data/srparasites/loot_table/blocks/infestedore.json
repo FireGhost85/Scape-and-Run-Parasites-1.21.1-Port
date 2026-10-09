@@ -1,0 +1,120 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_co",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "co"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_dia",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "dia"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_eme",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "eme"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_gol",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "gol"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_iro",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "iro"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_lap",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "lap"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_red",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "red"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedore_un",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedore",
+       "properties": {
+        "variant": "un"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

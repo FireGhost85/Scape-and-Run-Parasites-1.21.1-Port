@@ -1,0 +1,68 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitecanister_sac",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitecanister",
+       "properties": {
+        "variant": "sac"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitecanister_cyst",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitecanister",
+       "properties": {
+        "variant": "cyst"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitecanister_lump",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitecanister",
+       "properties": {
+        "variant": "lump"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitecanister_bag",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitecanister",
+       "properties": {
+        "variant": "bag"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

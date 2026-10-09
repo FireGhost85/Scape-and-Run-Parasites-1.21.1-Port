@@ -1,0 +1,248 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_flesh",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "flesh"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_bone",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "bone"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_stone",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "stone"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_stonedebris",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "stonedebris"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_wood",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "wood"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_bricks",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "bricks"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_metal",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "metal"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasiterubbleslabhalf_obsidian",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasiterubbleslabhalf",
+       "properties": {
+        "variant": "obsidian"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasiterubbleslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

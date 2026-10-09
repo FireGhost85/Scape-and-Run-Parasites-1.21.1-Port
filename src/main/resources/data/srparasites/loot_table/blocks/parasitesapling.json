@@ -1,0 +1,94 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_tree",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "tree"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_treethin",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "treethin"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_flowertall",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "flowertall"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_consumed",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "consumed"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_deadhead",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "deadhead"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitesapling_infested",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitesapling",
+       "properties": {
+        "variant": "infested"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_infected",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "infected"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_grass1",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "grass1"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_flower1",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "flower1"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_spine",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "spine"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_vine",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "vine"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:infestedbush_arc",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:infestedbush",
+       "properties": {
+        "variant": "arc"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

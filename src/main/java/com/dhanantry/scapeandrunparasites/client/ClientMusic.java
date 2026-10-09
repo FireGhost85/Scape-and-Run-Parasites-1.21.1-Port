@@ -26,7 +26,19 @@ public final class ClientMusic {
 
     private ClientMusic() {}
 
+    private static boolean inParasiteBiome() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.level == null) {
+            return false;
+        }
+        var biome = mc.level.getBiome(mc.player.blockPosition());
+        return biome.is(com.dhanantry.scapeandrunparasites.block.SRPBlockLinks.BIOME_SHROUDED) || biome.is(com.dhanantry.scapeandrunparasites.block.SRPBlockLinks.BIOME_HARLEQUIN);
+    }
+
     private static Music phaseMusic() {
+        if (inParasiteBiome()) {
+            return SRPMusic.BIOME_MUSIC;
+        }
         return switch (SRPClientState.clientCurrentEvoPhase) {
             case 1 -> SRPMusic.EVPHASE_1_MUSIC;
             case 2 -> SRPMusic.EVPHASE_2_MUSIC;
@@ -40,6 +52,21 @@ public final class ClientMusic {
             case 10 -> SRPMusic.EVPHASE_10_MUSIC;
             default -> null;
         };
+    }
+
+    /** soundTwo of 1.12: while the parasite music plays (phase above 0 and inside a vector, scent, or in a parasite biome) other music is removed. */
+    @SubscribeEvent
+    static void onPlaySound(net.neoforged.neoforge.client.event.sound.PlaySoundEvent event) {
+        var sound = event.getSound();
+        if (!SRPConfig.musicTrue || sound == null || sound.getSource() != SoundSource.MUSIC || ScapeAndRunParasites.MODID.equals(sound.getLocation().getNamespace())) {
+            return;
+        }
+        boolean parasiteAtmosphere = SRPClientState.clientScent > 0
+                || (SRPClientState.clientCurrentEvoPhase > 0 && (SRPClientState.clientVector > 0 || !SRPConfigWorld.originActivated))
+                || inParasiteBiome();
+        if (parasiteAtmosphere) {
+            event.setSound(null);
+        }
     }
 
     @SubscribeEvent

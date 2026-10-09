@@ -1,0 +1,81 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitetrunk_ball",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitetrunk",
+       "properties": {
+        "variant": "ball"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitetrunk_tree",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitetrunk",
+       "properties": {
+        "variant": "tree"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitetrunk_plant",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitetrunk",
+       "properties": {
+        "variant": "plant"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitetrunk_circle",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitetrunk",
+       "properties": {
+        "variant": "circle"
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitetrunk_deadhead",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitetrunk",
+       "properties": {
+        "variant": "deadhead"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

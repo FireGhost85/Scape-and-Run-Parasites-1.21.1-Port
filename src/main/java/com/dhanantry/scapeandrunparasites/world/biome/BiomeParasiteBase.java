@@ -31,6 +31,10 @@ public abstract class BiomeParasiteBase {
         return INSTANCES.computeIfAbsent(key, k -> k.equals(com.dhanantry.scapeandrunparasites.block.SRPBlockLinks.BIOME_HARLEQUIN) ? new BiomeParasiteHarlequin() : new BiomeParasiteShrouded());
     }
 
+    public abstract com.dhanantry.scapeandrunparasites.world.gen.WorldGenAbstractTree genBigTreeChance(net.minecraft.util.RandomSource rand);
+
+    public abstract com.dhanantry.scapeandrunparasites.world.gen.WorldGenerator getRandomWorldGenForGrass(net.minecraft.util.RandomSource rand);
+
     public abstract float getRedValue();
 
     public abstract float getGreenValue();

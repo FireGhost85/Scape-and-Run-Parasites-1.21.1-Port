@@ -1,0 +1,219 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "bonus_rolls": 0,
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ],
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_dirt",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "dirt"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_mud",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "mud"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_sflesh",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "sflesh"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_feeler",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "feeler"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_spore",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "spore"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_red",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "red"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "srparasites:parasitestainslabhalf_sackflesh",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "srparasites:parasitestainslabhalf",
+       "properties": {
+        "variant": "sackflesh"
+       }
+      }
+     ],
+     "functions": [
+      {
+       "function": "minecraft:set_count",
+       "count": 2,
+       "add": false,
+       "conditions": [
+        {
+         "condition": "minecraft:block_state_property",
+         "block": "srparasites:parasitestainslabhalf",
+         "properties": {
+          "type": "double"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

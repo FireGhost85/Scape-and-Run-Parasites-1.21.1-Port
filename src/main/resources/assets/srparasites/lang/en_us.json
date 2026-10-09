@@ -2537,5 +2537,7 @@
  "effect.srparasites.conta": "§7Conta",
  "effect.srparasites.muscleout": "§eMuscle Out",
  "effect.srparasites.effectpos": "§ePositive",
- "effect.srparasites.effectneg": "§eNegative"
+ "effect.srparasites.effectneg": "§eNegative",
+ "biome.srparasites.biomeparasite_shrouded": "Parasite Biome Shrouded",
+ "biome.srparasites.biomeparasite_harlequin": "Parasite Biome Harlequin"
 }
