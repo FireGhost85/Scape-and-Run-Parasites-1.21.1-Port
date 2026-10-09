@@ -57,9 +57,9 @@ public class RootCommand extends ArgCommand {
                 int z;
                 int rad;
                 try {
-                    x = Integer.parseInt(args[1]);
-                    y = Integer.parseInt(args[2]);
-                    z = Integer.parseInt(args[3]);
+                    x = coordinate(args[1], src.getPosition().x);
+                    y = coordinate(args[2], src.getPosition().y);
+                    z = coordinate(args[3], src.getPosition().z);
                     rad = Integer.parseInt(args[4]);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException nfe) {
                     msg(src, "Invalid/Missing argument");
@@ -109,5 +109,14 @@ public class RootCommand extends ArgCommand {
             default -> {
             }
         }
+    }
+
+    /** A coordinate argument: a number, or ~ / ~N relative to the position of the command source (like vanilla commands). */
+    private static int coordinate(String arg, double origin) {
+        if (arg.startsWith("~")) {
+            double offset = arg.length() > 1 ? Double.parseDouble(arg.substring(1)) : 0.0;
+            return (int) Math.floor(origin + offset);
+        }
+        return Integer.parseInt(arg);
     }
 }
