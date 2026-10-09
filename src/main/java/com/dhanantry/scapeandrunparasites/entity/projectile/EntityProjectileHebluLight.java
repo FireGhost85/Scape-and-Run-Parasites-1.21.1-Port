@@ -298,7 +298,7 @@ extends Entity {
     }
 
     private LivingEntity findParryTarget(Entity attacker) {
-        AABB box = this.getBoundingBox().expandTowards(32.0, 18.0, 32.0);
+        AABB box = this.getBoundingBox().inflate(32.0, 18.0, 32.0);
         List<? extends LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, box);
         LivingEntity best = null;
         double bestDist = Double.MAX_VALUE;
@@ -336,7 +336,7 @@ extends Entity {
     private void parryNearbyLights(LivingEntity attacker, EntityProjectileHebluLight mainLight) {
         double radiusXZ = 6.0;
         double radiusY = 4.0;
-        AABB box = mainLight.getBoundingBox().expandTowards(radiusXZ, radiusY, radiusXZ);
+        AABB box = mainLight.getBoundingBox().inflate(radiusXZ, radiusY, radiusXZ);
         List<? extends EntityProjectileHebluLight> nearby = this.level().getEntitiesOfClass(EntityProjectileHebluLight.class, box);
         boolean playedEffects = false;
         for (EntityProjectileHebluLight light : nearby) {

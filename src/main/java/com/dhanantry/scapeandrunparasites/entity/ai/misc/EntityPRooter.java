@@ -61,7 +61,7 @@ extends EntityPStationaryArchitect {
             }
             if (this.srpTicks == 10 && this.leemCooldown <= 0) {
                 this.leemCooldown = this.leemCooldownReset;
-                AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards((double)this.leemRangeEffect, (double)this.leemRangeEffect, (double)this.leemRangeEffect);
+                AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate((double)this.leemRangeEffect, (double)this.leemRangeEffect, (double)this.leemRangeEffect);
                 List<? extends EntityParasiteBase> moblist = this.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
                 for (EntityParasiteBase mob : moblist) {
                     if (mob == this || !mob.isAlive() || mob instanceof EntityPRooter || mob.getParasiteIDRegister() == 314) continue;
@@ -87,7 +87,7 @@ extends EntityPStationaryArchitect {
         if (this.level().isClientSide) {
             return false;
         }
-        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards((double)(this.leemRange + 1), (double)this.leemRange, (double)(this.leemRange + 1));
+        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate((double)(this.leemRange + 1), (double)this.leemRange, (double)(this.leemRange + 1));
         List<? extends EntityLeemB> moblist = this.level().getEntitiesOfClass(EntityLeemB.class, axisalignedbb);
         if (moblist.size() > 0) {
             float part = amount / (float)moblist.size();

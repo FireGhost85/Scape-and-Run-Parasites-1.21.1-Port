@@ -442,7 +442,7 @@ EntityBodyParts {
             if (this.border % 7 == 0) {
                 this.playSound(SRPSounds.SWIPE.get(), 5.0f, 1.0f);
             }
-            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(6.0, 3.0, 6.0);
+            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(6.0, 3.0, 6.0);
             List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
             for (LivingEntity mob : moblist) {
                 if (mob == this || mob instanceof EntityParasiteBase || !this.hasLineOfSight((Entity)mob)) continue;
@@ -455,7 +455,7 @@ EntityBodyParts {
             this.setParasiteStatus(0);
             this.miniCapA = false;
             this.border = 0;
-            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(24.0, 5.0, 24.0);
+            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(24.0, 5.0, 24.0);
             List<? extends EntityParasiteBase> moblist2 = this.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
             for (EntityParasiteBase mob : moblist2) {
                 if (mob == this || !this.hasLineOfSight((Entity)mob) || !SRPConfigSystems.rageEnable) continue;

@@ -126,10 +126,10 @@ EntityCutomAttack {
 
     @Override
     public boolean attackEntityAsMobAOE(Entity entityIn) {
-        AABB axisalignedbb = new AABB(entityIn.getX(), entityIn.getY(), entityIn.getZ(), entityIn.getX() + 1.0, entityIn.getY() + 1.0, entityIn.getZ() + 1.0).expandTowards(5.0, 2.0, 5.0);
+        AABB axisalignedbb = new AABB(entityIn.getX(), entityIn.getY(), entityIn.getZ(), entityIn.getX() + 1.0, entityIn.getY() + 1.0, entityIn.getZ() + 1.0).inflate(5.0, 2.0, 5.0);
         List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
         if (moblist.size() > 4) {
-            axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(5.0, 3.0, 5.0);
+            axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(5.0, 3.0, 5.0);
             moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
             float luck = (float)(SRPAttributes.TERLA_ATTACK_DAMAGE * 2.0);
             for (LivingEntity mob : moblist) {

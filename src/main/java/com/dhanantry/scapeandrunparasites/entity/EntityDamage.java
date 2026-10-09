@@ -134,7 +134,7 @@ extends Entity {
                     }
                 }
             } else {
-                for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(0.3, 0.0, 0.2))) {
+                for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.3, 0.0, 0.2))) {
                     this.damage(entitylivingbase);
                 }
                 if (--this.lifeTicks < 0) {

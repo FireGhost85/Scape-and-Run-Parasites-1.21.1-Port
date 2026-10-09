@@ -46,7 +46,7 @@ extends Goal {
     }
 
     public boolean canUse() {
-        List<T> list = this.entity.level().getEntitiesOfClass(this.classToAvoid, this.entity.getBoundingBox().expandTowards((double)this.avoidDistance, 3.0, (double)this.avoidDistance), e -> EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(e) && this.canBeSeenSelector.test(e) && this.avoidTargetSelector.test(e));
+        List<T> list = this.entity.level().getEntitiesOfClass(this.classToAvoid, this.entity.getBoundingBox().inflate((double)this.avoidDistance, 3.0, (double)this.avoidDistance), e -> EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(e) && this.canBeSeenSelector.test(e) && this.avoidTargetSelector.test(e));
         if (list.isEmpty() || this.entity.shouldWorkTask()) {
             return false;
         }

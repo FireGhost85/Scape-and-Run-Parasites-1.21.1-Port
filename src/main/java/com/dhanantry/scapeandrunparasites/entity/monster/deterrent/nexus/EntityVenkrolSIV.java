@@ -157,7 +157,7 @@ implements EntityBodyParts {
     private boolean upgradeParasites() {
         int count = 3;
         int current = 0;
-        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(48.0, 34.0, 48.0);
+        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(48.0, 34.0, 48.0);
         List<? extends EntityParasiteBase> moblist = this.level().getEntitiesOfClass(EntityPInfected.class, axisalignedbb);
         for (EntityParasiteBase mob : moblist) {
             if (!(mob instanceof EntityPStationaryArchitect) || mob.getParasiteIDRegister() != 16 && mob.getParasiteIDRegister() != 18 && mob.getParasiteIDRegister() != 19) continue;

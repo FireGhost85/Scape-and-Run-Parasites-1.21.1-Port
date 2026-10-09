@@ -89,7 +89,7 @@ public class ItemBookOfVengeance extends Item {
         ws.playSound(null, player.getX(), player.getY(), player.getZ(), SRPSounds.VENGEANCE_CHAIN_IMPACT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
         ws.playSound(null, player.getX(), player.getY(), player.getZ(), SRPSounds.VENGEANCE_IMPACT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
         spawnPinkBurst(ws, new Vec3(player.getX(), player.getY() + 0.9, player.getZ()), 26);
-        AABB box = player.getBoundingBox().expandTowards(KB_RADIUS, 1.5, KB_RADIUS);
+        AABB box = player.getBoundingBox().inflate(KB_RADIUS, 1.5, KB_RADIUS);
         for (LivingEntity ent : ws.getEntitiesOfClass(LivingEntity.class, box)) {
             if (ent == null || ent.isRemoved() || ent == player) continue;
             double dx = ent.getX() - player.getX();

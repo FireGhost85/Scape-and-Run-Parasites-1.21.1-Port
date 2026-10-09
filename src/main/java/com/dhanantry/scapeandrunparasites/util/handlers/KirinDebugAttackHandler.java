@@ -98,7 +98,7 @@ public class KirinDebugAttackHandler {
     }
 
     private static EntityKirin findClosestKirin(Player player) {
-        AABB box = player.getBoundingBox().expandTowards(48.0, 32.0, 48.0);
+        AABB box = player.getBoundingBox().inflate(48.0, 32.0, 48.0);
         List<? extends EntityKirin> list = player.level().getEntitiesOfClass(EntityKirin.class, box);
         EntityKirin closest = null;
         double closestDist = Double.MAX_VALUE;
@@ -112,7 +112,7 @@ public class KirinDebugAttackHandler {
     }
 
     private static LivingEntity findClosestValidTarget(EntityKirin kirin, Player playerUsingItem) {
-        AABB box = kirin.getBoundingBox().expandTowards(48.0, 32.0, 48.0);
+        AABB box = kirin.getBoundingBox().inflate(48.0, 32.0, 48.0);
         List<? extends LivingEntity> list = kirin.level().getEntitiesOfClass(LivingEntity.class, box);
         LivingEntity closest = null;
         double closestDist = Double.MAX_VALUE;

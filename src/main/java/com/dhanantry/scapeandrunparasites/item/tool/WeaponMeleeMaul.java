@@ -117,7 +117,7 @@ public class WeaponMeleeMaul extends WeaponToolMeleeBase {
     }
 
     private void doMaulSlam(Level world, Player player, ItemStack stack) {
-        AABB bb = player.getBoundingBox().expandTowards(SLAM_RADIUS, 1.5, SLAM_RADIUS);
+        AABB bb = player.getBoundingBox().inflate(SLAM_RADIUS, 1.5, SLAM_RADIUS);
         List<LivingEntity> list = world.getEntitiesOfClass(LivingEntity.class, bb);
         float base = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
         for (LivingEntity e : list) {

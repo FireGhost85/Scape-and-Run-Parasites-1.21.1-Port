@@ -234,7 +234,7 @@ extends Entity {
             return;
         }
         float currentLength = Math.max(1.0f, this.maxLength * growth);
-        AABB searchBox = this.getBoundingBox().expandTowards((double)currentLength, Math.max(4.0, (double)currentLength * 0.25), (double)currentLength);
+        AABB searchBox = this.getBoundingBox().inflate((double)currentLength, Math.max(4.0, (double)currentLength * 0.25), (double)currentLength);
         List<? extends LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, searchBox);
         Vec3 start = new Vec3(this.startX, this.startY, this.startZ);
         Vec3 dir = this.getSlashDirection();
@@ -243,7 +243,7 @@ extends Entity {
         for (LivingEntity living : list) {
             AABB hitBox;
             Player player;
-            if (living == null || living.isRemoved() || living == this.owner || this.hitEntities.contains(living.getId()) || EntityProjectileKirinSlash.isSRParasitesMob(living) || living instanceof Player && (player = (Player)living).isSpectator() || (hitBox = living.getBoundingBox().expandTowards(0.35, 0.25, 0.35)).clip(a, b) == null && !hitBox.contains(a) && !hitBox.contains(b)) continue;
+            if (living == null || living.isRemoved() || living == this.owner || this.hitEntities.contains(living.getId()) || EntityProjectileKirinSlash.isSRParasitesMob(living) || living instanceof Player && (player = (Player)living).isSpectator() || (hitBox = living.getBoundingBox().inflate(0.35, 0.25, 0.35)).clip(a, b) == null && !hitBox.contains(a) && !hitBox.contains(b)) continue;
             this.onSliceTouched(living);
             return;
         }

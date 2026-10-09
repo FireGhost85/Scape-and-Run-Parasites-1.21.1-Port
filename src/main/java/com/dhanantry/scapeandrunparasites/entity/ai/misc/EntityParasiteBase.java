@@ -2152,7 +2152,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
             if (this.attacking > 2 && this.onGround()) {
                 if (this.jumpR != 0) {
                     float damage = (float)this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue();
-                    AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards((double)this.jumpR, 2.0, (double)this.jumpR);
+                    AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate((double)this.jumpR, 2.0, (double)this.jumpR);
                     List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
                     for (LivingEntity mob : moblist) {
                         if (mob == this || mob instanceof EntityParasiteBase) continue;

@@ -120,7 +120,7 @@ extends EntityParasiteBase {
             this.skillBreakBlocks();
             float f = this.getBbWidth() / 2.0f;
             float f1 = this.getBbHeight();
-            AABB axisalignedbb = new AABB(this.getX() - (double)f, this.getY(), this.getZ() - (double)f, this.getX() + (double)f, this.getY() + (double)f1, this.getZ() + (double)f).expandTowards(1.5, 0.2, 1.5);
+            AABB axisalignedbb = new AABB(this.getX() - (double)f, this.getY(), this.getZ() - (double)f, this.getX() + (double)f, this.getY() + (double)f1, this.getZ() + (double)f).inflate(1.5, 0.2, 1.5);
             List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
             for (LivingEntity mob : moblist) {
                 if (mob instanceof EntityParasiteBase) continue;

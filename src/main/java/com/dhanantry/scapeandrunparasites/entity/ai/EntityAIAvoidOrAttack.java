@@ -40,7 +40,7 @@ extends Goal {
         }
         if (this.parent.getLightLevelDependentMagicValue() >= this.light) {
             boolean flag = true;
-            AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).expandTowards((double)this.rangexz, (double)this.rangey, (double)this.rangexz);
+            AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).inflate((double)this.rangexz, (double)this.rangey, (double)this.rangexz);
             List<? extends EntityParasiteBase> moblist = this.parent.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
             for (EntityParasiteBase mob : moblist) {
                 if (mob == this.parent || !this.parent.hasLineOfSight((Entity)mob) || !mob.isAlive()) continue;

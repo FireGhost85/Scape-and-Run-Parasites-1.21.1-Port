@@ -98,7 +98,7 @@ extends PartEntity<EntityParasiteBase> {
     }
 
     public void collideWithNearbyEntities() {
-        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().expandTowards(1.0, 1.0, 1.0));
+        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(1.0, 1.0, 1.0));
         double d0 = (this.getBoundingBox().minX + this.getBoundingBox().maxX) / 2.0;
         double d1 = (this.getBoundingBox().minZ + this.getBoundingBox().maxZ) / 2.0;
         for (Entity entity : entities) {

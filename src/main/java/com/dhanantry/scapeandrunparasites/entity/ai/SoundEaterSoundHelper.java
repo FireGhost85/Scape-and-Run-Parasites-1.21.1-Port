@@ -11,7 +11,7 @@ public class SoundEaterSoundHelper {
         if (world == null || world.isClientSide) {
             return;
         }
-        AABB box = new AABB(pos).expandTowards(radius, radius, radius);
+        AABB box = new AABB(pos).inflate(radius, radius, radius);
         List<? extends EntityInfHuman> list = world.getEntitiesOfClass(EntityInfHuman.class, box);
         for (EntityInfHuman human : list) {
             if (human.getSkin() != 111) continue;

@@ -109,7 +109,7 @@ extends EntityParasiteBase {
             if (this.srpTicks == 10 && this.leemCooldown <= 0) {
                 this.leemCooldown = this.leemCooldownReset;
                 this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 3, false, false));
-                AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards((double)this.leemRangeEffect, (double)this.leemRangeEffect, (double)this.leemRangeEffect);
+                AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate((double)this.leemRangeEffect, (double)this.leemRangeEffect, (double)this.leemRangeEffect);
                 List<? extends EntityParasiteBase> moblist = this.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
                 for (EntityParasiteBase mob : moblist) {
                     if (mob == this || !mob.isAlive() || mob instanceof EntityPRooter || mob.getParasiteIDRegister() == 314) continue;

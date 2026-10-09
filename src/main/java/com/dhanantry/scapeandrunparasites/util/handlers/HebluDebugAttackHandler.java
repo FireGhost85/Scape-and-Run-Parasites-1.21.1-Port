@@ -77,7 +77,7 @@ public class HebluDebugAttackHandler {
     }
 
     private static EntityHeblu findClosestHeblu(Player player) {
-        AABB box = player.getBoundingBox().expandTowards(48.0, 32.0, 48.0);
+        AABB box = player.getBoundingBox().inflate(48.0, 32.0, 48.0);
         List<? extends EntityHeblu> list = player.level().getEntitiesOfClass(EntityHeblu.class, box);
         EntityHeblu closest = null;
         double closestDist = Double.MAX_VALUE;
@@ -91,7 +91,7 @@ public class HebluDebugAttackHandler {
     }
 
     private static LivingEntity findClosestValidTarget(EntityHeblu heblu, Player playerUsingItem) {
-        AABB box = heblu.getBoundingBox().expandTowards(48.0, 32.0, 48.0);
+        AABB box = heblu.getBoundingBox().inflate(48.0, 32.0, 48.0);
         List<? extends LivingEntity> list = heblu.level().getEntitiesOfClass(LivingEntity.class, box);
         LivingEntity closest = null;
         double closestDist = Double.MAX_VALUE;

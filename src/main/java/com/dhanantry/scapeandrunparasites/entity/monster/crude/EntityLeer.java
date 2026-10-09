@@ -461,7 +461,7 @@ implements EntityCanPullMobs {
         }
         this.shootEntityRed(this.getTarget());
         int count = 2;
-        AABB axisalignedbb = new AABB(this.getTarget().blockPosition().below(2)).expandTowards(18.0, 8.0, 18.0);
+        AABB axisalignedbb = new AABB(this.getTarget().blockPosition().below(2)).inflate(18.0, 8.0, 18.0);
         List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
         for (LivingEntity mob : moblist) {
             if (count < 0 || mob == this || !mob.isAlive() || mob instanceof EntityParasiteBase) continue;

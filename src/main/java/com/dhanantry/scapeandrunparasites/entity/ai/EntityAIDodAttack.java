@@ -425,7 +425,7 @@ extends Goal {
     }
 
     private boolean checkNak() {
-        AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).expandTowards(7.0, 5.0, 7.0);
+        AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).inflate(7.0, 5.0, 7.0);
         List moblist = this.parent.level().getEntitiesOfClass(EntityNak.class, axisalignedbb);
         return moblist.isEmpty();
     }

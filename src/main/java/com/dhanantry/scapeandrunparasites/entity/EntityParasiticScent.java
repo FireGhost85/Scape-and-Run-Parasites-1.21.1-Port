@@ -511,7 +511,7 @@ extends Entity {
             if (this.level().getBrightness(LightLayer.BLOCK, poss) > 4) {
                 return false;
             }
-            AABB axisalignedbb = new AABB((double)tryX, (double)tryY, (double)tryZ, (double)(tryX + 1), (double)(tryY + 1), (double)(tryZ + 1)).expandTowards((double)minDist, 5.0, (double)minDist);
+            AABB axisalignedbb = new AABB((double)tryX, (double)tryY, (double)tryZ, (double)(tryX + 1), (double)(tryY + 1), (double)(tryZ + 1)).inflate((double)minDist, 5.0, (double)minDist);
             List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
             for (LivingEntity mob : moblist) {
                 if (mob instanceof EntityParasiteBase) continue;
@@ -545,7 +545,7 @@ extends Entity {
         if (Math.sqrt(this.distanceToSqr(poss.getX(), poss.getY(), poss.getZ())) < (double)minDist || Math.sqrt(this.distanceToSqr(poss.getX(), poss.getY(), poss.getZ())) > (double)SRPConfigSystems.oneMinRangeCap) {
             return 0;
         }
-        AABB axisalignedbb = new AABB((double)poss.getX(), (double)poss.getY(), (double)poss.getZ(), (double)(poss.getX() + 1), (double)(poss.getY() + 1), (double)(poss.getZ() + 1)).expandTowards((double)maxDist, 16.0, (double)maxDist);
+        AABB axisalignedbb = new AABB((double)poss.getX(), (double)poss.getY(), (double)poss.getZ(), (double)(poss.getX() + 1), (double)(poss.getY() + 1), (double)(poss.getZ() + 1)).inflate((double)maxDist, 16.0, (double)maxDist);
         List moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
         int living = moblist.size();
         moblist = this.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
@@ -562,7 +562,7 @@ extends Entity {
         if (living == moblist.size()) {
             return 0;
         }
-        axisalignedbb = new AABB((double)poss.getX(), (double)poss.getY(), (double)poss.getZ(), (double)(poss.getX() + 1), (double)(poss.getY() + 1), (double)(poss.getZ() + 1)).expandTowards((double)minDist, 5.0, (double)minDist);
+        axisalignedbb = new AABB((double)poss.getX(), (double)poss.getY(), (double)poss.getZ(), (double)(poss.getX() + 1), (double)(poss.getY() + 1), (double)(poss.getZ() + 1)).inflate((double)minDist, 5.0, (double)minDist);
         moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
         this.updateScentOLevel();
         ParasiteEventEntity.spawnUnitFromRof(this.level(), this.getTargetToKill(), poss, this.getMob(), this.minmob, this.maxmob);

@@ -257,7 +257,7 @@ extends Goal {
     }
 
     private void pushApartSlightly(double tnx, double tnz) {
-        AABB bb = this.mob.getBoundingBox().expandTowards(0.6, 0.2, 0.6);
+        AABB bb = this.mob.getBoundingBox().inflate(0.6, 0.2, 0.6);
         List<? extends Entity> crowd = this.mob.level().getEntities((Entity)this.mob, bb);
         for (Entity e : crowd) {
             if (!(e instanceof LivingEntity)) continue;

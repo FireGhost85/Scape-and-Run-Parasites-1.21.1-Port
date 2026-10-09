@@ -938,7 +938,7 @@ public class ParasiteEventEntity {
             BlockPos floor = ParasiteEventEntity.getFloor(world, BlockPos.containing(entityin.getX() + randomx, entityin.getY(), entityin.getZ() + randomz), 5);
             if (floor != null && world.getBlockState(floor.below()).getBlock() == SRPBlocks.InfestedStain.get()) {
                 int flag2 = 0;
-                AABB axisalignedbb = new AABB((double)floor.getX(), (double)floor.getY(), (double)floor.getZ(), (double)(floor.getX() + 1), (double)(floor.getY() + 1), (double)(floor.getZ() + 1)).expandTowards(42.0, 5.0, 42.0);
+                AABB axisalignedbb = new AABB((double)floor.getX(), (double)floor.getY(), (double)floor.getZ(), (double)(floor.getX() + 1), (double)(floor.getY() + 1), (double)(floor.getZ() + 1)).inflate(42.0, 5.0, 42.0);
                 List<? extends EntityParasiteBase> moblist = world.getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
                 for (EntityParasiteBase mob : moblist) {
                     if (!mob.isAlive() || mob.getParasiteType() != 40) continue;

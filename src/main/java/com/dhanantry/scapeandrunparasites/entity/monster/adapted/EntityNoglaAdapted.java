@@ -395,7 +395,7 @@ implements EntityBodyParts {
             this.getNavigation().moveTo(this.targetX, this.targetY, this.targetZ, 3.0);
         }
         if (this.attacking >= 20) {
-            for (LivingEntity mob : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(2.0, 0.0, 2.0))) {
+            for (LivingEntity mob : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.0, 0.0, 2.0))) {
                 if (mob == this || mob instanceof EntityParasiteBase) continue;
                 float f = (float)Mth.atan2((double)(mob.getZ() - this.getZ()), (double)(mob.getX() - this.getX()));
                 EntityDamage damage = new EntityDamage(this.level(), mob.getX(), mob.getY(), mob.getZ(), f, (LivingEntity)this, 1.0f, false, 0.5f);

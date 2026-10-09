@@ -23,7 +23,7 @@ extends Goal {
     }
 
     public void tick() {
-        AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).expandTowards((double)this.searchRange, 2.0, (double)this.searchRange);
+        AABB axisalignedbb = new AABB(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getX() + 1.0, this.parent.getY() + 1.0, this.parent.getZ() + 1.0).inflate((double)this.searchRange, 2.0, (double)this.searchRange);
         List<? extends EntityParasiteBase> moblist = this.parent.level().getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
         block0 : switch (this.version) {
             case 1: {

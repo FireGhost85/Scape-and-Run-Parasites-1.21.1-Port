@@ -110,7 +110,7 @@ extends EntityPAncient {
             this.moveControl.setWantedPosition(this.getX(), this.getY() + 5.0, this.getZ(), 0.5);
         }
         if (!this.level().isClientSide && this.getTarget() != null && this.tickCount % 30 == 0) {
-            for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(3.0, 3.0, 3.0))) {
+            for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.0, 3.0, 3.0))) {
                 if (entitylivingbase == this || entitylivingbase instanceof EntityParasiteBase) continue;
                 float f = (float)Mth.atan2((double)(entitylivingbase.getZ() - this.getZ()), (double)(entitylivingbase.getX() - this.getX()));
                 EntityDamage damage = new EntityDamage(this.level(), entitylivingbase.getX(), entitylivingbase.getY(), entitylivingbase.getZ(), f, (LivingEntity)this, 1.0f, false, 2.5f);

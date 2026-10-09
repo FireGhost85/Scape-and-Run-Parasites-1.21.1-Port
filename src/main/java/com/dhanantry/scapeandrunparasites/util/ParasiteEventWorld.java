@@ -315,7 +315,7 @@ public class ParasiteEventWorld {
         }
         if (cothCheck > 1 && pos != null) {
             int coth = 0;
-            List<? extends LivingEntity> moblist = world.getEntitiesOfClass(LivingEntity.class, new AABB(pos).expandTowards(5.0, 3.0, 5.0));
+            List<? extends LivingEntity> moblist = world.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(5.0, 3.0, 5.0));
             for (LivingEntity mob : moblist) {
                 if (!mob.hasEffect(SRPPotions.COTH_E)) continue;
                 ++coth;

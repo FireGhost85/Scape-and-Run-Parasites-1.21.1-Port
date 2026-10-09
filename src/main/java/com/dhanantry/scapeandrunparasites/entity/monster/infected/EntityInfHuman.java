@@ -169,7 +169,7 @@ implements EntityCanMelt {
         if (this.getSkin() == 111) {
             this.tickSoundMemory();
             if (this.getHeardSoundPos() == null) {
-                AABB scanBox = this.getBoundingBox().expandTowards(16.0, 4.0, 16.0);
+                AABB scanBox = this.getBoundingBox().inflate(16.0, 4.0, 16.0);
                 List<? extends Player> nearby = this.level().getEntitiesOfClass(Player.class, scanBox, p -> !p.isSpectator() && !p.getAbilities().instabuild && p.isAlive());
                 Player loudest = null;
                 double loudestSpeedSq = 0.0;
@@ -235,7 +235,7 @@ implements EntityCanMelt {
                 if (this.onGround() && this._shoveTicks == 8) {
                     Mot.addY(this, 0.05);
                 }
-                List<? extends LivingEntity> crowd = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(0.6, 0.2, 0.6), e -> e != this);
+                List<? extends LivingEntity> crowd = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.6, 0.2, 0.6), e -> e != this);
                 for (LivingEntity e2 : crowd) {
                     double ex = e2.getX() - this.getX();
                     double ez = e2.getZ() - this.getZ();

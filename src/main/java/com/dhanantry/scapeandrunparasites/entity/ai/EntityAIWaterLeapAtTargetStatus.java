@@ -74,7 +74,7 @@ extends Goal {
             if (this.attacking >= 3 && this.leaper.onGround()) {
                 if (this.jumpR != 0) {
                     float damage = (float)this.leaper.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue();
-                    AABB axisalignedbb = new AABB(this.leaper.getX(), this.leaper.getY(), this.leaper.getZ(), this.leaper.getX() + 1.0, this.leaper.getY() + 1.0, this.leaper.getZ() + 1.0).expandTowards((double)this.jumpR, 2.0, (double)this.jumpR);
+                    AABB axisalignedbb = new AABB(this.leaper.getX(), this.leaper.getY(), this.leaper.getZ(), this.leaper.getX() + 1.0, this.leaper.getY() + 1.0, this.leaper.getZ() + 1.0).inflate((double)this.jumpR, 2.0, (double)this.jumpR);
                     List<? extends LivingEntity> moblist = this.leaper.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
                     for (LivingEntity mob : moblist) {
                         if (mob == this.leaper || mob instanceof EntityParasiteBase) continue;

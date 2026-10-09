@@ -88,7 +88,7 @@ public class BeckonBlockInfestation {
                 rangeY = SRPConfigMobs.venkrolsiiiRangeY;
             }
         }
-        AABB axisalignedbb = new AABB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 1), (double)(pos.getZ() + 1)).expandTowards((double)range, (double)rangeY, (double)range);
+        AABB axisalignedbb = new AABB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 1), (double)(pos.getZ() + 1)).inflate((double)range, (double)rangeY, (double)range);
         List<? extends EntityParasiteBase> moblist = worldIn.getEntitiesOfClass(EntityParasiteBase.class, axisalignedbb);
         if (fromVenkrol) {
             if (moblist.isEmpty() && stage < 4) {

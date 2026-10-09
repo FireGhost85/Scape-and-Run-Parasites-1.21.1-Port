@@ -150,7 +150,7 @@ extends Goal {
     }
 
     protected AABB getTargetableArea(double targetDistance) {
-        return this.taskOwner.getBoundingBox().expandTowards(targetDistance, 4.0, targetDistance);
+        return this.taskOwner.getBoundingBox().inflate(targetDistance, 4.0, targetDistance);
     }
 
     public void start() {

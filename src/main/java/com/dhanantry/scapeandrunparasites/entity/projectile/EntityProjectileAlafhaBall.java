@@ -39,7 +39,7 @@ extends EntitySRPProjectile {
     protected void onHit(HitResult result) {
         if (!this.level().isClientSide) {
             DamageSource damagesource = this.getOwner() == null ? this.damageSources().thrown((Entity)this, (Entity)this) : this.damageSources().thrown((Entity)this, (Entity)this.getOwner());
-            for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(3.0, 3.0, 3.0))) {
+            for (LivingEntity entitylivingbase : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.0, 3.0, 3.0))) {
                 if (entitylivingbase instanceof EntityParasiteBase) continue;
                 SRPPotions.applyStackPotion(SRPPotions.DLER_E, entitylivingbase, 300, 0);
                 entitylivingbase.hurt(damagesource, SRPAttributes.ALAFHA_ATTACK_DAMAGE);

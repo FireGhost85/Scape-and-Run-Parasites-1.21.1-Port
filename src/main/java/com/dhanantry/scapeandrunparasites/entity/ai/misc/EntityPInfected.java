@@ -170,7 +170,7 @@ implements EntityCanSpawn {
             this.timer = -1;
             return;
         }
-        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(10.0, 5.0, 10.0);
+        AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(10.0, 5.0, 10.0);
         List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
         boolean flag = true;
         for (LivingEntity mob : moblist) {

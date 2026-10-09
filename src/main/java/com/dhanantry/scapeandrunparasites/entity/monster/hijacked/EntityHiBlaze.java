@@ -106,7 +106,7 @@ EntityCanFly {
             if ((this.level().getBlockState(this.blockPosition().below(1)).getBlock() != Blocks.AIR || this.level().getBlockState(this.blockPosition().below(2)).getBlock() != Blocks.AIR) && this.getTarget() != null) {
                 Mot.setY(this, 0.1);
             }
-            List<? extends EntityParasiteBase> moblist = this.level().getEntitiesOfClass(EntityParasiteBase.class, new AABB(this.blockPosition()).expandTowards(7.0, 3.0, 7.0));
+            List<? extends EntityParasiteBase> moblist = this.level().getEntitiesOfClass(EntityParasiteBase.class, new AABB(this.blockPosition()).inflate(7.0, 3.0, 7.0));
             for (EntityParasiteBase mob : moblist) {
                 mob.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 60, 0, false, true));
             }

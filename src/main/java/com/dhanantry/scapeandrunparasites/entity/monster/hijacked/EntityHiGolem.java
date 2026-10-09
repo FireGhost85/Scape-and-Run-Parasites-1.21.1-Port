@@ -272,7 +272,7 @@ implements EntityBodyParts {
         this.miniCapA = true;
         if (this.positi != null) {
             this.chargeMoving();
-            for (LivingEntity mob : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(2.0, 0.0, 2.0))) {
+            for (LivingEntity mob : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.0, 0.0, 2.0))) {
                 if (mob == this || mob instanceof EntityParasiteBase || mob == this.getTarget()) continue;
                 float f = (float)Mth.atan2((double)(mob.getZ() - this.getZ()), (double)(mob.getX() - this.getX()));
                 EntityDamage damage = new EntityDamage(this.level(), mob.getX(), mob.getY(), mob.getZ(), f, (LivingEntity)this, 1.0f, false, 0.5f);

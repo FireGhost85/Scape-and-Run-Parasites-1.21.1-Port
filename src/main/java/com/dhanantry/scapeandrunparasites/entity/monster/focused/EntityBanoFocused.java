@@ -329,7 +329,7 @@ EntityBodyParts {
             if (this.border % 7 == 0) {
                 this.playSound(SRPSounds.SWIPE.get(), 5.0f, 1.0f);
             }
-            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).expandTowards(7.0, 3.0, 7.0);
+            AABB axisalignedbb = new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1.0, this.getY() + 1.0, this.getZ() + 1.0).inflate(7.0, 3.0, 7.0);
             List<? extends LivingEntity> moblist = this.level().getEntitiesOfClass(LivingEntity.class, axisalignedbb);
             for (LivingEntity mob : moblist) {
                 if (mob == this || mob instanceof EntityParasiteBase || !this.hasLineOfSight((Entity)mob)) continue;
