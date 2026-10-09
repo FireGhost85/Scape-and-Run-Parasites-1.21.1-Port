@@ -126,8 +126,35 @@ public final class Tessellator {
             return true;
         }
 
+        /** 1.12 screens draw textured quads with the "bound" texture of the GUI layer (rotated / scaled by the matrix stack, animated sprites, ...). */
+        private boolean drawGuiTextured() {
+            if (!com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.rendering || com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.g == null
+                    || GlContext.pose == null || com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.texture == null || this.mode != 7
+                    || this.format != VertexFormat.POSITION_TEX && this.format != VertexFormat.POSITION_TEX_COLOR) {
+                return false;
+            }
+            boolean colored = this.format == VertexFormat.POSITION_TEX_COLOR;
+            com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.g.flush();
+            com.mojang.blaze3d.systems.RenderSystem.setShader(net.minecraft.client.renderer.GameRenderer::getPositionTexColorShader);
+            com.mojang.blaze3d.systems.RenderSystem.setShaderTexture(0, com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.texture);
+            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc();
+            com.mojang.blaze3d.vertex.BufferBuilder bb = com.mojang.blaze3d.vertex.Tesselator.getInstance().begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_TEX_COLOR);
+            org.joml.Matrix4f m = GlContext.pose.last().pose();
+            for (float[] v : this.vertices) {
+                float cr = colored ? v[5] * GlContext.r : GlContext.r;
+                float cg = colored ? v[6] * GlContext.g : GlContext.g;
+                float cb = colored ? v[7] * GlContext.b : GlContext.b;
+                float ca = colored ? v[8] * GlContext.a : GlContext.a;
+                bb.addVertex(m, v[0], v[1], v[2]).setUv(v[3], v[4]).setColor(cr, cg, cb, ca);
+            }
+            this.vertices.clear();
+            com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(bb.buildOrThrow());
+            return true;
+        }
+
         public void draw() {
-            if (this.drawGuiColor()) {
+            if (this.drawGuiColor() || this.drawGuiTextured()) {
                 return;
             }
             if (GlContext.active() && !this.vertices.isEmpty() && (this.mode == 7 || this.mode == 4)) {

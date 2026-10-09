@@ -151,6 +151,9 @@ extends GuiScreen {
         this.isJumbled = GuiDistortionHelper.isDistortionActive(this.mc);
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(1, 10, 10, 60, 20, this.distort("< " + GuiContext.fmt((String)"bestiary.celestial.home", (Object[])new Object[0]))));
+        // the list buttons are lost whenever the screen is initialised again (resize, coming back from another page)
+        this.syncDiscovered();
+        this.rebuildListButtons();
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.dhanantry.scapeandrunparasites.network.BestiaryRequestPayload());
     }
 
