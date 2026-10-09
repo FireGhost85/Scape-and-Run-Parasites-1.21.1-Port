@@ -293,7 +293,7 @@ extends EntityPInfected {
         if (this.isInvulnerableTo(source)) {
             return false;
         }
-        if (source instanceof DamageSource) {
+        if (source.getDirectEntity() != null && source.getDirectEntity() != source.getEntity()) { // EntityDamageSourceIndirect: arrows, fireballs, thrown potions
             for (int i = 0; i < 64; ++i) {
                 if (!this.teleportRandomly()) continue;
                 return true;
