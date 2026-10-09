@@ -208,6 +208,12 @@ extends EntityPPrimitive {
 
     static class AITentaclePull
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         private final EntityBano parentEntity;
 
         public AITentaclePull(EntityBano ghast) {

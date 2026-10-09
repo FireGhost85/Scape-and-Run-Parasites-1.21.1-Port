@@ -386,6 +386,12 @@ extends EntityParasiteBase {
 
     static class EntityAILeshCombine
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         private final EntityLesh parent;
 
         public EntityAILeshCombine(EntityLesh animal, double speedIn) {

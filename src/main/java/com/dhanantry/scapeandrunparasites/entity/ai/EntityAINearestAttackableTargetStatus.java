@@ -25,6 +25,12 @@ import net.minecraft.world.scores.Team;
 
 public class EntityAINearestAttackableTargetStatus<T extends LivingEntity>
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     protected Class<T> targetClass;
     protected final EntityParasiteBase taskOwner;
     private int targetChance;

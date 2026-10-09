@@ -548,6 +548,12 @@ EntityBodyParts {
 
     static class AIFireballAttack
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         private final EntityInfDragonE parentEntity;
         public int attackTimer;
 
@@ -610,6 +616,12 @@ EntityBodyParts {
 
     class AIMoveRandom
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public AIMoveRandom() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }

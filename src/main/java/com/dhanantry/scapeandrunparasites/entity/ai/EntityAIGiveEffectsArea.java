@@ -11,6 +11,12 @@ import net.minecraft.world.phys.AABB;
 
 public class EntityAIGiveEffectsArea
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     EntityParasiteBase parent;
     private int attackTimer = 0;
     private int bRange;

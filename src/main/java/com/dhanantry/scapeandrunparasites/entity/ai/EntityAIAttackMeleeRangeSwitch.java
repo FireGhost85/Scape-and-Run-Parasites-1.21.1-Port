@@ -7,6 +7,12 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 public class EntityAIAttackMeleeRangeSwitch
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private EntityParasiteBase parent;
     private float distance;
     private boolean generation;

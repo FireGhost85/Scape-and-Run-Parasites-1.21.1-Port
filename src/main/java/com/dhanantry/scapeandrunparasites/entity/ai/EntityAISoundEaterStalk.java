@@ -10,6 +10,12 @@ import net.minecraft.world.entity.player.Player;
 
 public class EntityAISoundEaterStalk
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private final EntityInfHuman mob;
     private final double hearingRangeSq;
     private int ticksSinceNoise = 0;

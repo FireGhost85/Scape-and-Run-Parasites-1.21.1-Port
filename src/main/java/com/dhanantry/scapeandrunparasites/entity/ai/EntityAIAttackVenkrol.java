@@ -12,6 +12,12 @@ import net.minecraft.world.level.pathfinder.Path;
 
 public class EntityAIAttackVenkrol
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     Level world;
     protected EntityParasiteBase attacker;
     protected int attackTick;

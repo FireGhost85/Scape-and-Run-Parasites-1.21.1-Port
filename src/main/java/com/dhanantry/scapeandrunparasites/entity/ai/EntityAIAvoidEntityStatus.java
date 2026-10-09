@@ -16,6 +16,12 @@ import net.minecraft.world.phys.Vec3;
 
 public class EntityAIAvoidEntityStatus<T extends Entity>
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private final Predicate<Entity> canBeSeenSelector = new Predicate<Entity>(){
 
         public boolean test(@Nullable Entity p_apply_1_) {

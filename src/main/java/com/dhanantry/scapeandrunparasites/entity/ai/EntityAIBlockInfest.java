@@ -9,6 +9,12 @@ import net.minecraft.world.level.block.Block;
 
 public class EntityAIBlockInfest
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private final EntityParasiteBase parentEntity;
     private int ticks = 0;
     private int stage;

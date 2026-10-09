@@ -13,6 +13,12 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 
 public class EntityAIAttackRangedStatus
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private final EntityParasiteBase entityHost;
     private final RangedAttackMob rangedAttackEntityHost;
     private LivingEntity attackTarget;

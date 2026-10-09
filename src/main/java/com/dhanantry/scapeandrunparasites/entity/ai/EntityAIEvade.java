@@ -9,6 +9,12 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 public class EntityAIEvade
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private final EntityParasiteBase parent;
     private int eCooldown;
     private int cooldown;

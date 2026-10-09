@@ -154,6 +154,12 @@ extends EntityPPure {
 
     class AIBomb
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         private final EntityParasiteBase parent;
         private int ccc;
 
@@ -193,6 +199,12 @@ extends EntityPPure {
 
     class AIChargeAttack
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public AIChargeAttack() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }
@@ -238,6 +250,12 @@ extends EntityPPure {
 
     class AIMoveRandom
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public AIMoveRandom() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }

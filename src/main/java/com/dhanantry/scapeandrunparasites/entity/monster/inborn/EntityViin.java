@@ -212,6 +212,12 @@ implements EntityCanFly {
 
     class AIChargeAttack
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public AIChargeAttack() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }
@@ -257,6 +263,12 @@ implements EntityCanFly {
 
     class AIMoveRandom
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public AIMoveRandom() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }

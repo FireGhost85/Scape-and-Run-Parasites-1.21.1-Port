@@ -156,6 +156,12 @@ implements EntityCanColony {
 
     public class EntityAIFindingSpotBlock
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         protected final EntityParasiteBase entity;
         private int building;
         private int defence;

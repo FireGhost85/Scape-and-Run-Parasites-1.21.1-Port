@@ -2233,6 +2233,12 @@ implements IHitboxedEntity, IDislodgmentTarget {
 
     public static class EntityAIJumping
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         private final Mob parent;
         private int secs;
 
@@ -2277,6 +2283,12 @@ implements IHitboxedEntity, IDislodgmentTarget {
 
     class EntityAIWait
     extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
         public EntityAIWait() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
         }

@@ -23,6 +23,12 @@ import net.neoforged.neoforge.event.EventHooks;
 
 public class AIDisableBeaconIki
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     private static final double SCAN_RADIUS_D = 64.0;
     private static final int PICKUP_RADIUS = 6;
     private static final int RESCAN_TICKS = 100;

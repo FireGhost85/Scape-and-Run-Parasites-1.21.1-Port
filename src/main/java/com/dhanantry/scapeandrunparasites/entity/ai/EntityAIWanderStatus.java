@@ -12,6 +12,12 @@ import net.minecraft.world.phys.Vec3;
 
 public class EntityAIWanderStatus
 extends Goal {
+    /** 1.12 ticked running tasks every tick; 1.21 only every second tick unless this is set. */
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     protected final EntityParasiteBase entity;
     protected double x;
     protected double y;
