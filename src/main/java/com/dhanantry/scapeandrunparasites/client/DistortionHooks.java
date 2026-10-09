@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -177,6 +178,44 @@ public final class DistortionHooks {
         if (alpha > 0) {
             g.fill(x - 2, y - 2, x + w + 2, y + mc.font.lineHeight + 2, mc.options.getBackgroundColor(0));
             g.drawString(mc.font, name, x, y, 16777215 + (alpha << 24));
+        }
+    }
+
+    private static boolean effectsPushed = false;
+
+    /**
+     * The potion icons of the HUD. The 1.10.9 jar has the setting (GUI Distortion Affects Potion HUD) and the check in the helper but
+     * nothing that uses it, so the effect is this port's: the icons shake and jump around their corner while the distortion is active.
+     */
+    @SubscribeEvent
+    public static void onEffectsPre(RenderGuiLayerEvent.Pre event) {
+        if (!event.getName().equals(VanillaGuiLayers.EFFECTS)) {
+            return;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.level == null || !GuiDistortionHelper.shouldDistortPotionHud(mc)) {
+            return;
+        }
+        GuiGraphics g = event.getGuiGraphics();
+        float t = (float) mc.level.getGameTime() + event.getPartialTick().getGameTimeDeltaPartialTick(false);
+        // a smooth wobble plus a jump every few ticks
+        long step = mc.level.getGameTime() / 4L;
+        java.util.Random jump = new java.util.Random(step * 7919L);
+        float dx = Mth.sin(t * 0.9f) * 2.0f + (jump.nextFloat() - 0.5f) * 8.0f;
+        float dy = Mth.cos(t * 1.3f) * 2.0f + (jump.nextFloat() - 0.5f) * 6.0f;
+        float angle = Mth.sin(t * 0.55f) * 4.0f + (jump.nextFloat() - 0.5f) * 10.0f;
+        g.pose().pushPose();
+        g.pose().translate((float) g.guiWidth(), 0.0f, 0.0f);
+        g.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(angle));
+        g.pose().translate(dx - (float) g.guiWidth(), dy, 0.0f);
+        effectsPushed = true;
+    }
+
+    @SubscribeEvent
+    public static void onEffectsPost(RenderGuiLayerEvent.Post event) {
+        if (effectsPushed && event.getName().equals(VanillaGuiLayers.EFFECTS)) {
+            event.getGuiGraphics().pose().popPose();
+            effectsPushed = false;
         }
     }
 }

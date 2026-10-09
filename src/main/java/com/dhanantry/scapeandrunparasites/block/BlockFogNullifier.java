@@ -9,6 +9,9 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -31,7 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
  * Fog nullifier: clears the whole connected parasite fog next to it (up to 500000 blocks) when placed, used or updated by a
  * neighbour, and spends one use per clearing. The remaining uses travel on the item ({@code UsesRemaining} in the custom
  * data); a spent nullifier breaks and drops nothing. Hardness 2, resistance 10, pickaxe 0. The smoke particles of the original
- * were spawned with the client-only {@code World.spawnParticle} on the server and never appeared, so they are not ported.
+ * never appeared (client-only call on the server); they are sent to the clients here (see spawnDispelParticles).
  */
 public class BlockFogNullifier extends BlockBase implements EntityBlock {
     private static final String TAG_USES = "UsesRemaining";
@@ -117,6 +120,7 @@ public class BlockFogNullifier extends BlockBase implements EntityBlock {
             if (!this.isParasiteFog(level, p)) {
                 continue;
             }
+            this.spawnDispelParticles(level, p, cleared);
             level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
             ++cleared;
             for (Direction f : Direction.values()) {
@@ -129,6 +133,27 @@ public class BlockFogNullifier extends BlockBase implements EntityBlock {
             }
         }
         return cleared;
+    }
+
+    /**
+     * The smoke of 1.10.9 (4 puffs inside the block, now and then 3 to 5 more anywhere in it). The original called the client-only
+     * World.spawnParticle on the server, so it never showed; here it is sent to the clients. A big fog is up to 500000 blocks, so the first
+     * 600 blocks get all of it and after that one block in 16, to keep the packets down.
+     */
+    private void spawnDispelParticles(Level level, BlockPos p, int index) {
+        if (!(level instanceof ServerLevel server) || index >= 600 && index % 16 != 0) {
+            return;
+        }
+        RandomSource r = level.random;
+        for (int i = 0; i < 4; ++i) {
+            server.sendParticles(ParticleTypes.SMOKE, p.getX() + 0.2 + r.nextDouble() * 0.6, p.getY() + 0.2 + r.nextDouble() * 0.6, p.getZ() + 0.2 + r.nextDouble() * 0.6, 0, 0.0, 0.0, 0.0, 0.0);
+        }
+        if (r.nextFloat() < 0.3f) {
+            int extra = 3 + r.nextInt(3);
+            for (int i = 0; i < extra; ++i) {
+                server.sendParticles(ParticleTypes.SMOKE, p.getX() + r.nextDouble(), p.getY() + r.nextDouble(), p.getZ() + r.nextDouble(), 0, 0.0, 0.0, 0.0, 0.0);
+            }
+        }
     }
 
     private boolean isParasiteFog(Level level, BlockPos p) {

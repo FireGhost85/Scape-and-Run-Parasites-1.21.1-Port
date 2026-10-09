@@ -46,7 +46,7 @@ public class SRPWorldSettingsScreen extends Screen {
     }
 
     private Component starLabel() {
-        return Component.translatable("gui.srparasites.worldsettings.star").append(": ").append(Component.translatable(pendingStarType == 1 ? "gui.srparasites.worldsettings.star.cold" : "gui.srparasites.worldsettings.star.normal"));
+        return Component.translatable("gui.srparasites.worldsettings.star").append(": ").append(Component.translatable(pendingStarType == 1 ? "gui.srparasites.worldsettings.star.cold" : pendingStarType == 2 ? "gui.srparasites.worldsettings.star.warm" : "gui.srparasites.worldsettings.star.normal"));
     }
 
     private static Component onOff(String key, boolean on) {
@@ -65,7 +65,7 @@ public class SRPWorldSettingsScreen extends Screen {
 
     @Override
     protected void init() {
-        pendingStarType = SRPWorldEntitySpawner.starType == 1 ? 1 : 0;
+        pendingStarType = SRPWorldEntitySpawner.starType == 1 || SRPWorldEntitySpawner.starType == 2 ? SRPWorldEntitySpawner.starType : 0;
         int cx = this.width / 2;
         int left = cx - 88;
         int top = 60;
@@ -78,7 +78,7 @@ public class SRPWorldSettingsScreen extends Screen {
             this.refresh();
         }).bounds(left, top + 24, 176, 20).build());
         this.starBtn = this.addRenderableWidget(Button.builder(this.starLabel(), b -> {
-            pendingStarType = (pendingStarType + 1) % 2;
+            pendingStarType = (pendingStarType + 1) % 3;
             if (pendingStarType != 1) {
                 pendingFracturedTerrain = false;
             }
@@ -112,7 +112,7 @@ public class SRPWorldSettingsScreen extends Screen {
         if (this.difficultyBtn.isMouseOver(mouseX, mouseY)) {
             tip.add(Component.translatable("gui.srparasites.worldsettings.tooltip.difficulty." + DIFFICULTY[Math.max(0, Math.min(3, SRPPace.choiceNUMBER))]));
         } else if (this.starBtn.isMouseOver(mouseX, mouseY)) {
-            String k = pendingStarType == 1 ? "cold" : "normal";
+            String k = pendingStarType == 1 ? "cold" : pendingStarType == 2 ? "warm" : "normal";
             for (int i = 1; i <= 3; ++i) {
                 String key = "gui.srparasites.worldsettings.tooltip.star." + k + "." + i;
                 if (net.minecraft.client.resources.language.I18n.exists(key)) {
