@@ -11,13 +11,18 @@ public final class ParticleSprites {
     private ParticleSprites() {
     }
 
+    /** The particle atlas is owned by the particle engine, not by the model manager's atlas set (Minecraft#getTextureAtlas only knows the block, item, ... atlases). */
+    private static TextureAtlas atlas() {
+        return (TextureAtlas) Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_PARTICLES);
+    }
+
     /** Sprite of textures/particle/&lt;path&gt;.png of this mod. */
     public static TextureAtlasSprite mod(String path) {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_PARTICLES).apply(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, path));
+        return atlas().getSprite(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, path));
     }
 
     /** Sprite of textures/particle/&lt;path&gt;.png of the base game. */
     public static TextureAtlasSprite vanilla(String path) {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_PARTICLES).apply(ResourceLocation.withDefaultNamespace(path));
+        return atlas().getSprite(ResourceLocation.withDefaultNamespace(path));
     }
 }
