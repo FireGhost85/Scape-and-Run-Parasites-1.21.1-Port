@@ -30,6 +30,11 @@ public final class SRPNetwork {
         registrar.playToServer(BestiaryRequestPayload.TYPE, BestiaryRequestPayload.CODEC, (msg, ctx) -> BestiaryRequestPayload.handle(msg, ctx));
         registrar.playToServer(BestiarySeenCelestialPayload.TYPE, BestiarySeenCelestialPayload.CODEC, (msg, ctx) -> BestiarySeenCelestialPayload.handle(msg, ctx));
         registrar.playToClient(FogPayload.TYPE, FogPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.fog(msg, ctx));
+        registrar.playToClient(CelestialNightStatePayload.TYPE, CelestialNightStatePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.celestialState(msg, ctx));
+        registrar.playToServer(RequestProgressSnapshotPayload.TYPE, RequestProgressSnapshotPayload.CODEC, (msg, ctx) -> RequestProgressSnapshotPayload.handle(msg, ctx));
+        registrar.playToServer(ReconfigureProgressUnlockPayload.TYPE, ReconfigureProgressUnlockPayload.CODEC, (msg, ctx) -> ReconfigureProgressUnlockPayload.handle(msg, ctx));
+        registrar.playToClient(SyncProgressSnapshotPayload.TYPE, SyncProgressSnapshotPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.progressSnapshot(msg, ctx));
+        registrar.playToServer(RequestScanPayload.TYPE, RequestScanPayload.CODEC, (msg, ctx) -> RequestScanPayload.handle(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);

@@ -13,6 +13,8 @@ public final class GuiContext {
     public static GuiGraphics g;
     public static ResourceLocation texture;
     public static boolean scissor;
+    /** True while a legacy screen is inside render() (the GUI polygon path of the Tessellator shim). */
+    public static boolean rendering;
     private static boolean scissorActive;
     private static int scx;
     private static int scy;

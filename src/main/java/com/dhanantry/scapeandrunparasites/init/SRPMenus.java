@@ -19,6 +19,9 @@ public final class SRPMenus {
     public static final DeferredHolder<MenuType<?>, MenuType<ContainerParasiteLoot>> PARASITE_LOOT = MENUS.register("parasite_loot",
             () -> new MenuType<>(ContainerParasiteLoot::new, FeatureFlags.DEFAULT_FLAGS));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<com.dhanantry.scapeandrunparasites.container.ScannerContainer>> SCANNER = MENUS.register("scanner",
+            () -> net.neoforged.neoforge.common.extensions.IMenuTypeExtension.create(com.dhanantry.scapeandrunparasites.container.ScannerContainer::new));
+
     private SRPMenus() {
     }
 

@@ -169,6 +169,9 @@ public final class ClientRenderers {
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers e) {
+        e.registerBlockEntityRenderer(com.dhanantry.scapeandrunparasites.init.SRPBlockEntities.RELAY_CONTROLLER.get(), com.dhanantry.scapeandrunparasites.client.renderer.RenderRelayController::new);
+        e.registerBlockEntityRenderer(com.dhanantry.scapeandrunparasites.init.SRPBlockEntities.TROPHY.get(), com.dhanantry.scapeandrunparasites.client.renderer.RenderTrophyTESR::new);
+        e.registerBlockEntityRenderer(net.minecraft.world.level.block.entity.BlockEntityType.SIGN, com.dhanantry.scapeandrunparasites.client.renderer.RenderDistortedSign::new);
         e.registerEntityRenderer(SRPEntities.KIRIN.get(), ctx -> new RenderKirin(new RenderManager(ctx)));
         e.registerEntityRenderer(SRPEntities.DRACONITE.get(), ctx -> new RenderHeblu(new RenderManager(ctx)));
         e.registerEntityRenderer(SRPEntities.CARRIER_HEAVY.get(), ctx -> new RenderRathol(new RenderManager(ctx)));

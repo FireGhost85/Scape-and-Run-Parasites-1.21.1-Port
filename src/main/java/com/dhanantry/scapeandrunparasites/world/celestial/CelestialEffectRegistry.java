@@ -1,8 +1,6 @@
 package com.dhanantry.scapeandrunparasites.world.celestial;
 
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
-import com.dhanantry.scapeandrunparasites.world.celestial.CelestialNightData;
-import com.dhanantry.scapeandrunparasites.world.celestial.ICelestialEventEffect;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,9 +29,8 @@ public final class CelestialEffectRegistry {
         if (world == null || world.isClientSide) {
             return Collections.emptySet();
         }
-        String dim = DimKeys.of(world);
         CelestialNightData night = CelestialNightData.get(world);
-        CelestialNightData.DimState s = night.getState(dim);
+        CelestialNightData.DimState s = night.getState(DimKeys.of(world));
         if (s == null) {
             return Collections.emptySet();
         }
@@ -48,4 +45,3 @@ public final class CelestialEffectRegistry {
         return out;
     }
 }
-

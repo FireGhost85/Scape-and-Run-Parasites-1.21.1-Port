@@ -34,6 +34,14 @@ public final class ClientPayloadHandlers {
         ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.BestiaryClient.applySync(msg.progress()));
     }
 
+    public static void celestialState(com.dhanantry.scapeandrunparasites.network.CelestialNightStatePayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.client.celestial.CelestialPhaseClient.setServerNightState(msg.dim(), msg.phase(), msg.nightIndex(), msg.activeSet(), msg.forcedSet()));
+    }
+
+    public static void progressSnapshot(com.dhanantry.scapeandrunparasites.network.SyncProgressSnapshotPayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> com.dhanantry.scapeandrunparasites.bestiary.client.gui.CurrentProgressClientCache.read(msg.tag()));
+    }
+
     public static void fog(com.dhanantry.scapeandrunparasites.network.FogPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             SRPClientState.fog = msg.fog();

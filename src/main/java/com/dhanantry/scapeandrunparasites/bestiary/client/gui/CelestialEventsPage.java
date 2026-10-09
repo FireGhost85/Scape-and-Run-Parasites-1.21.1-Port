@@ -90,7 +90,7 @@ extends GuiScreen {
         if (this.mc == null || this.mc.level == null) {
             return false;
         }
-        if (!this.mc.level.dimensionType().isSurfaceWorld()) {
+        if (!this.mc.level.dimensionType().natural()) {
             return false;
         }
         String dim = DimKeys.of(this.mc.level);
@@ -617,7 +617,7 @@ extends GuiScreen {
         if (def == null || this.mc == null || this.mc.level == null) {
             return false;
         }
-        if (!this.mc.level.dimensionType().isSurfaceWorld()) {
+        if (!this.mc.level.dimensionType().natural()) {
             return false;
         }
         String dim = DimKeys.of(this.mc.level);

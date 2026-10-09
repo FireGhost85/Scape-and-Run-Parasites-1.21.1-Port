@@ -15,7 +15,7 @@ public final class SRPBestiaryApi {
         if (player == null || celestialId == null || celestialId.isEmpty()) {
             return false;
         }
-        IBestiaryProgress progress = (IBestiaryProgress)player.getCapability(BestiaryCapability.CAP, null);
+        IBestiaryProgress progress = BestiaryCapability.get(player);
         return progress != null && progress.hasSeenCelestial(celestialId);
     }
 
@@ -23,7 +23,7 @@ public final class SRPBestiaryApi {
         if (player == null) {
             return Collections.emptySet();
         }
-        IBestiaryProgress progress = (IBestiaryProgress)player.getCapability(BestiaryCapability.CAP, null);
+        IBestiaryProgress progress = BestiaryCapability.get(player);
         if (progress == null || progress.getSeenCelestials() == null) {
             return Collections.emptySet();
         }

@@ -896,6 +896,7 @@
  "block.srparasites.infested_furnace_lit": "Infested Furnace",
  "block.srparasites.infuser_furnace": "Metallurgical Infuser Furnace",
  "container.infuser_furnace": "Metallurgical Infuser Furnace",
+ "container.srparasites.scanner": "Relay Scanner",
  "block.srparasites.relay_base": "Relay Terminal §l|§r §oBottom",
  "block.srparasites.relay_middle": "Relay Structure §l|§r §oMiddle",
  "block.srparasites.relay_roof": "Relay Antennas §l|§r §oTop",

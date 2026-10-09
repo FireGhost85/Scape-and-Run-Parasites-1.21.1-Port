@@ -6,13 +6,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 public interface ICelestialEventEffect {
-    default public void onNightStart(Level world, int dim, int phase, long nightIndex) {
+    default void onNightStart(Level world, String dim, int phase, long nightIndex) {
     }
 
-    default public void onNightEnd(Level world, int dim, int phase, long nightIndex) {
+    default void onNightEnd(Level world, String dim, int phase, long nightIndex) {
     }
 
-    default public void onParasiteSpawn(EntityParasiteBase parasite, @Nullable LivingEntity spawner) {
+    default void onParasiteSpawn(EntityParasiteBase parasite, @Nullable LivingEntity spawner) {
     }
 }
-

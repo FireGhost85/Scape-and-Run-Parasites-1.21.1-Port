@@ -28,6 +28,7 @@ public record BestiarySeenCelestialPayload(String id) implements CustomPacketPay
 
     public static void handle(BestiarySeenCelestialPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
+            ScapeAndRunParasites.LOGGER.info("[SRP] seen celestial packet {}", msg.id());
             if (ctx.player() instanceof ServerPlayer p && msg.id() != null && !msg.id().isEmpty()) {
                 IBestiaryProgress prog = BestiaryCapability.get(p);
                 if (!prog.hasSeenCelestial(msg.id())) {

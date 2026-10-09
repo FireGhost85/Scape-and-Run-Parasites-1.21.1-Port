@@ -1,26 +1,24 @@
 package com.dhanantry.scapeandrunparasites.client;
 
-import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Opens the SRP screens. The screens themselves (phase report, vector map, dislodgement report, bestiary) are ported with
- * the rest of the GUI in the client milestone; until then the calls only log.
+ * Opens the SRP screens (phase report, vector map, dislodgement report, compendium).
  */
 final class ClientScreens {
     private ClientScreens() {}
 
     static void openPhaseReport(ItemStack stack) {
-        ScapeAndRunParasites.LOGGER.debug("phase report screen: not ported yet");
+        net.minecraft.client.Minecraft.getInstance().setScreen(new com.dhanantry.scapeandrunparasites.bestiary.client.gui.GuiPhaseReport(stack));
     }
 
     static void openVectorMap(ItemStack stack) {
-        ScapeAndRunParasites.LOGGER.debug("vector map screen: not ported yet");
+        net.minecraft.client.Minecraft.getInstance().setScreen(new com.dhanantry.scapeandrunparasites.client.gui.GuiVectorMapReport(stack));
     }
 
     static void openDislodgementReport(ItemStack stack) {
-        ScapeAndRunParasites.LOGGER.debug("dislodgement report screen: not ported yet");
+        net.minecraft.client.Minecraft.getInstance().setScreen(new com.dhanantry.scapeandrunparasites.client.gui.GuiDislodgementReport(stack));
     }
 
     static void useFieldGuide(Player player) {

@@ -59,7 +59,7 @@ extends GuiScreen {
     private int cooldown;
     private boolean canGain;
     private boolean canLoss;
-    private int dimension;
+    private String dimension = "";
     private int mobcap;
     private int generation;
     private int genTicks;
@@ -221,7 +221,7 @@ extends GuiScreen {
     }
 
     private void drawPieSection() {
-        CompoundTag tag = this.stack.getTagPlaceholder();
+        CompoundTag tag = com.dhanantry.scapeandrunparasites.item.ReportData.read(this.stack);
         if (tag == null || !tag.contains("PhaseValue")) {
             return;
         }
@@ -329,7 +329,7 @@ extends GuiScreen {
     }
 
     private void readNBT() {
-        CompoundTag tag = this.stack.getTagPlaceholder();
+        CompoundTag tag = com.dhanantry.scapeandrunparasites.item.ReportData.read(this.stack);
         if (tag == null || !tag.contains("PhaseValue")) {
             this.lines.clear();
             this.lines.add(GuiContext.fmt((String)"gui.srparasites.phase_report.no_data", (Object[])new Object[0]));
@@ -337,7 +337,7 @@ extends GuiScreen {
             this.lines.add(GuiContext.fmt((String)"gui.srparasites.phase_report.no_data_hint", (Object[])new Object[0]));
             return;
         }
-        this.dimension = tag.getInt("PhaseDimension");
+        this.dimension = tag.getString("PhaseDimension");
         this.phase = tag.getInt("PhaseValue");
         this.totalPoints = tag.getInt("PhaseTotalPoints");
         this.nextPoints = tag.getInt("PhasePointsNext");
@@ -450,14 +450,8 @@ extends GuiScreen {
             if (!this.visible) {
                 return;
             }
-            GuiContext.bind(buttonTextures);
-            GlStateManager.color((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
             this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-            int hoverState = this.getHoverState(this.hovered);
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate((int)770, (int)771, (int)1, (int)0);
-            this.drawTexturedModalRect(this.x, this.y, 0, 46 + hoverState * 20, this.width / 2, this.height);
-            this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + hoverState * 20, this.width / 2, this.height);
+            GuiContext.g.blitSprite(!this.enabled ? net.minecraft.resources.ResourceLocation.withDefaultNamespace("widget/button_disabled") : (this.hovered ? net.minecraft.resources.ResourceLocation.withDefaultNamespace("widget/button_highlighted") : net.minecraft.resources.ResourceLocation.withDefaultNamespace("widget/button")), this.x, this.y, this.width, this.height);
             int textColor = -15066598;
             if (!this.enabled) {
                 textColor = -8947849;

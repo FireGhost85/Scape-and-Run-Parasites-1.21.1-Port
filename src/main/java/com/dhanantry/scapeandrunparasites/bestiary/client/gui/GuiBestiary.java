@@ -248,7 +248,7 @@ extends GuiScreen {
                     return;
                 }
                 if (button.id == 12) {
-                    GuiContext.click();
+                    this.mc.setScreen((GuiScreen)new CelestialEventsPage(this.player, this));
                     return;
                 }
                 if (button.id == 13) {
@@ -264,7 +264,7 @@ extends GuiScreen {
                     return;
                 }
                 if (button.id != 16) break;
-                GuiContext.click();
+                this.mc.setScreen((GuiScreen)new GuiCurrentProgress(this.player, this));
                 return;
             }
         }

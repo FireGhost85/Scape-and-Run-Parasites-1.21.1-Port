@@ -47,7 +47,8 @@ public class BlockRelayController extends BaseEntityBlock {
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        // the tower is drawn by RenderRelayController
+        return RenderShape.INVISIBLE;
     }
 
     @Override
@@ -64,6 +65,12 @@ public class BlockRelayController extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new TileEntityRelayController(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(Level level, BlockState state, net.minecraft.world.level.block.entity.BlockEntityType<T> type) {
+        return level.isClientSide ? null : createTickerHelper(type, com.dhanantry.scapeandrunparasites.init.SRPBlockEntities.RELAY_CONTROLLER.get(), TileEntityRelayController::serverTick);
     }
 
     private static void spawnBreakSmoke(Level level, BlockPos pos) {
@@ -103,7 +110,9 @@ public class BlockRelayController extends BaseEntityBlock {
         if (level.isClientSide) {
             return net.minecraft.world.InteractionResult.SUCCESS;
         }
-        // The scanner menu (gui id 0 of the original) is ported with the Relay (M6).
+        if (level.getBlockEntity(pos) instanceof TileEntityRelayController ctrlTe) {
+            player.openMenu(new net.minecraft.world.SimpleMenuProvider((id, inv, p) -> new com.dhanantry.scapeandrunparasites.container.ScannerContainer(id, inv, ctrlTe), net.minecraft.network.chat.Component.translatable("container.srparasites.scanner")), ctrlTe.getBlockPos());
+        }
         return net.minecraft.world.InteractionResult.SUCCESS;
     }
 

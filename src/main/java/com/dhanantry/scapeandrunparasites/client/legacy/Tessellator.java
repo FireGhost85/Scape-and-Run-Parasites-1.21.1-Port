@@ -83,7 +83,53 @@ public final class Tessellator {
             this.cur = newVertex();
         }
 
+        /** 2D screen shapes (GUI circles / rings): the vertex colours are drawn untextured with the gui render type. */
+        private boolean drawGuiColor() {
+            if (!com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.rendering || GlContext.pose == null
+                    || this.format != VertexFormat.POSITION_COLOR || !(this.mode == 4 || this.mode == 5 || this.mode == 6 || this.mode == 7)) {
+                return false;
+            }
+            if (GlStateManager.isTexture2DEnabled()) {
+                return false;
+            }
+            VertexConsumer consumer = com.dhanantry.scapeandrunparasites.client.legacy.gui.GuiContext.g.bufferSource().getBuffer(net.minecraft.client.renderer.RenderType.gui());
+            org.joml.Matrix4f m = GlContext.pose.last().pose();
+            int n = this.vertices.size();
+            java.util.List<int[]> tris = new ArrayList<>();
+            switch (this.mode) {
+                case 4 -> {
+                    for (int i = 0; i + 2 < n; i += 3) tris.add(new int[]{i, i + 1, i + 2});
+                }
+                case 5 -> {
+                    for (int i = 0; i + 2 < n; ++i) tris.add(new int[]{i, i + 1, i + 2});
+                }
+                case 6 -> {
+                    for (int i = 1; i + 1 < n; ++i) tris.add(new int[]{0, i, i + 1});
+                }
+                default -> {
+                    for (int i = 0; i + 3 < n; i += 4) {
+                        tris.add(new int[]{i, i + 1, i + 2});
+                        tris.add(new int[]{i, i + 2, i + 3});
+                    }
+                }
+            }
+            for (int[] t : tris) {
+                for (int pass = 0; pass < 2; ++pass) {
+                    int[] o = pass == 0 ? new int[]{t[0], t[1], t[2], t[2]} : new int[]{t[0], t[2], t[1], t[1]};
+                    for (int idx : o) {
+                        float[] v = this.vertices.get(idx);
+                        consumer.addVertex(m, v[0], v[1], v[2]).setColor(v[5] * GlContext.r, v[6] * GlContext.g, v[7] * GlContext.b, v[8] * GlContext.a);
+                    }
+                }
+            }
+            this.vertices.clear();
+            return true;
+        }
+
         public void draw() {
+            if (this.drawGuiColor()) {
+                return;
+            }
             if (GlContext.active() && !this.vertices.isEmpty() && (this.mode == 7 || this.mode == 4)) {
                 VertexConsumer consumer = GlContext.consumer();
                 PoseStack.Pose pose = GlContext.pose.last();

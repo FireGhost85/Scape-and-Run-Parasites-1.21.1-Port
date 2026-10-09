@@ -55,7 +55,9 @@ public class BlockNodeRelay extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         if (level.getBlockEntity(pos) instanceof TileEntityNodeRelay node && node.getControllerPos() != null) {
-            // The scanner menu (gui id 0 of the original) is ported with the Relay (M6).
+            if (level.getBlockEntity(node.getControllerPos()) instanceof TileEntityRelayController ctrlTe) {
+                player.openMenu(new net.minecraft.world.SimpleMenuProvider((id, inv, p) -> new com.dhanantry.scapeandrunparasites.container.ScannerContainer(id, inv, ctrlTe), net.minecraft.network.chat.Component.translatable("container.srparasites.scanner")), ctrlTe.getBlockPos());
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

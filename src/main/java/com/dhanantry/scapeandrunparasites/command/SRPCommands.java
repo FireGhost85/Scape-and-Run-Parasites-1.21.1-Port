@@ -26,7 +26,8 @@ public final class SRPCommands {
                 new HelpCommand(),
                 new GuideCommand(),
                 new GuideClearCommand(),
-                new BestiaryStatsCommand());
+                new BestiaryStatsCommand(),
+                new CelestialCommand());
         for (ArgCommand command : commands) {
             command.register(event.getDispatcher());
         }

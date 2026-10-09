@@ -1134,6 +1134,116 @@ public class SRPEventHandlerBus {
         }
     }
 
+    /** Loot table config of a parasite by its register id (null = none). */
+    public static String[] lootConfigFor(int id) {
+        switch (id) {
+            case 1: return SRPConfigMobs.shycoLoot;
+            case 51: return SRPConfigMobs.shycoadaptedloot;
+            case 10: return SRPConfigMobs.noglaLoot;
+            case 54: return SRPConfigMobs.noglaadaptedloot;
+            case 4: return SRPConfigMobs.emanaLoot;
+            case 55: return SRPConfigMobs.emanaadaptedloot;
+            case 7: return SRPConfigMobs.hullLoot;
+            case 52: return SRPConfigMobs.hulladaptedloot;
+            case 8: return SRPConfigMobs.canraLoot;
+            case 53: return SRPConfigMobs.canraadaptedloot;
+            case 38: return SRPConfigMobs.arachnidaLoot;
+            case 58: return SRPConfigMobs.arachnidaadaptedloot;
+            case 37: return SRPConfigMobs.shycoLoot;
+            case 57: return SRPConfigMobs.shycoLoot;
+            case 66: return SRPConfigMobs.lumLoot;
+            case 81: return SRPConfigMobs.lumadaptedloot;
+            case 17: return SRPConfigMobs.zetmoLoot;
+            case 56: return SRPConfigMobs.zetmoadaptedloot;
+            case 2: return SRPConfigMobs.dorpaLoot;
+            case 49: return SRPConfigMobs.infbearLoot;
+            case 13: return SRPConfigMobs.infcowLoot;
+            case 28: return SRPConfigMobs.infcowheadLoot;
+            case 64: return SRPConfigMobs.infdragoneLoot;
+            case 70: return SRPConfigMobs.infdragoneheadLoot;
+            case 59: return SRPConfigMobs.infendermanLoot;
+            case 69: return SRPConfigMobs.infendermanheadLoot;
+            case 44: return SRPConfigMobs.infhorseLoot;
+            case 45: return SRPConfigMobs.infhorseheadLoot;
+            case 6: return SRPConfigMobs.infhumanLoot;
+            case 46: return SRPConfigMobs.infhumanheadLoot;
+            case 26: return SRPConfigMobs.infpigLoot;
+            case 31: return SRPConfigMobs.infpigheadLoot;
+            case 40: return SRPConfigMobs.infadventurerLoot;
+            case 71: return SRPConfigMobs.infadventurerheadLoot;
+            case 14: return SRPConfigMobs.infsheepLoot;
+            case 22: return SRPConfigMobs.infsheepheadLoot;
+            case 27: return SRPConfigMobs.infvillagerLoot;
+            case 32: return SRPConfigMobs.infvillagerheadLoot;
+            case 15: return SRPConfigMobs.infwolfLoot;
+            case 21: return SRPConfigMobs.infwolfheadLoot;
+            case 306: return SRPConfigMobs.ferbearLoot;
+            case 93: return SRPConfigMobs.fercowLoot;
+            case 94: return SRPConfigMobs.ferendermanLoot;
+            case 95: return SRPConfigMobs.ferhorseLoot;
+            case 96: return SRPConfigMobs.ferhumanLoot;
+            case 97: return SRPConfigMobs.ferpigLoot;
+            case 98: return SRPConfigMobs.fersheepLoot;
+            case 99: return SRPConfigMobs.fervillagerLoot;
+            case 300: return SRPConfigMobs.ferwolfLoot;
+            case 324: return SRPConfigMobs.marhumanLoot;
+            case 330: return SRPConfigMobs.marbearLoot;
+            case 322: return SRPConfigMobs.marcowLoot;
+            case 329: return SRPConfigMobs.marsheepLoot;
+            case 321: return SRPConfigMobs.marendermanLoot;
+            case 323: return SRPConfigMobs.marvillagerLoot;
+            case 302: return SRPConfigMobs.hiblazeLoot;
+            case 301: return SRPConfigMobs.higolemLoot;
+            case 303: return SRPConfigMobs.hiskeletonLoot;
+            case 9: return SRPConfigMobs.alafhaLoot;
+            case 25: return SRPConfigMobs.angedLoot;
+            case 50: return SRPConfigMobs.esorLoot;
+            case 60: return SRPConfigMobs.flogLoot;
+            case 33: return SRPConfigMobs.ganroLoot;
+            case 47: return SRPConfigMobs.ombooLoot;
+            case 82: return SRPConfigMobs.ombooLoot;
+            case 65: return SRPConfigMobs.jinjoLoot;
+            case 85: return SRPConfigMobs.elviaLoot;
+            case 86: return SRPConfigMobs.lenciaLoot;
+            case 88: return SRPConfigMobs.vestaLoot;
+            case 87: return SRPConfigMobs.pheonLoot;
+            case 11: return SRPConfigMobs.butholLoot;
+            case 36: return SRPConfigMobs.kolLoot;
+            case 23: return SRPConfigMobs.kolLoot;
+            case 5: return SRPConfigMobs.LodoLoot;
+            case 12: return SRPConfigMobs.mudoLoot;
+            case 76: return SRPConfigMobs.nuuhLoot;
+            case 3: return SRPConfigMobs.ratholLoot;
+            case 91: return SRPConfigMobs.ataLoot;
+            case 334: return SRPConfigMobs.viinLoot;
+            case 74: return SRPConfigMobs.ratholLoot;
+            case 72: return SRPConfigMobs.nakLoot;
+            case 29: return SRPConfigMobs.tonroLoot;
+            case 30: return SRPConfigMobs.unvoLoot;
+            case 16: return SRPConfigMobs.venkrolLoot;
+            case 18: return SRPConfigMobs.venkrolsiiLoot;
+            case 19: return SRPConfigMobs.venkrolsiiiLoot;
+            case 41: return SRPConfigMobs.venkrolsivLoot;
+            case 73: return SRPConfigMobs.dodsiLoot;
+            case 77: return SRPConfigMobs.dodsiiLoot;
+            case 78: return SRPConfigMobs.dodsiiiLoot;
+            case 79: return SRPConfigMobs.dodsivLoot;
+            case 62: return SRPConfigMobs.cruxaLoot;
+            case 63: return SRPConfigMobs.heedLoot;
+            case 48: return SRPConfigMobs.hostLoot;
+            case 75: return SRPConfigMobs.herdLoot;
+            case 39: return SRPConfigMobs.inhooSLoot;
+            case 43: return SRPConfigMobs.inhooMLoot;
+            case 80: return SRPConfigMobs.thrallLoot;
+            case 24: return SRPConfigMobs.oroncoLoot;
+            case 20: return SRPConfigMobs.terlaLoot;
+            case 309: return SRPConfigMobs.hebluLoot;
+            case 67: return SRPConfigMobs.kirinLoot;
+            case 34: return SRPConfigMobs.pod1Loot;
+            default: return null;
+        }
+    }
+
     @SubscribeEvent
     public static void setLoot(LivingDropsEvent event) {
         if (event.getEntity() instanceof EntityParasiteBase) {
@@ -1147,418 +1257,9 @@ public class SRPEventHandlerBus {
             if (mob.disloNumberEighteen && SRPSaveData.get(event.getEntity().level()).getCurrentCode(DimKeys.of(event.getEntity().level()), 18) > 0) {
                 return;
             }
-            switch (mob.getParasiteIDRegister()) {
-                case 1: {
-                    loot(event, SRPConfigMobs.shycoLoot);
-                    return;
-                }
-                case 51: {
-                    loot(event, SRPConfigMobs.shycoadaptedloot);
-                    return;
-                }
-                case 10: {
-                    loot(event, SRPConfigMobs.noglaLoot);
-                    return;
-                }
-                case 54: {
-                    loot(event, SRPConfigMobs.noglaadaptedloot);
-                    return;
-                }
-                case 4: {
-                    loot(event, SRPConfigMobs.emanaLoot);
-                    return;
-                }
-                case 55: {
-                    loot(event, SRPConfigMobs.emanaadaptedloot);
-                    return;
-                }
-                case 7: {
-                    loot(event, SRPConfigMobs.hullLoot);
-                    return;
-                }
-                case 52: {
-                    loot(event, SRPConfigMobs.hulladaptedloot);
-                    return;
-                }
-                case 8: {
-                    loot(event, SRPConfigMobs.canraLoot);
-                    return;
-                }
-                case 53: {
-                    loot(event, SRPConfigMobs.canraadaptedloot);
-                    return;
-                }
-                case 38: {
-                    loot(event, SRPConfigMobs.arachnidaLoot);
-                    return;
-                }
-                case 58: {
-                    loot(event, SRPConfigMobs.arachnidaadaptedloot);
-                    return;
-                }
-                case 37: {
-                    loot(event, SRPConfigMobs.shycoLoot);
-                    return;
-                }
-                case 57: {
-                    loot(event, SRPConfigMobs.shycoLoot);
-                    return;
-                }
-                case 66: {
-                    loot(event, SRPConfigMobs.lumLoot);
-                    return;
-                }
-                case 81: {
-                    loot(event, SRPConfigMobs.lumadaptedloot);
-                    return;
-                }
-                case 17: {
-                    loot(event, SRPConfigMobs.zetmoLoot);
-                    return;
-                }
-                case 56: {
-                    loot(event, SRPConfigMobs.zetmoadaptedloot);
-                    return;
-                }
-                case 2: {
-                    loot(event, SRPConfigMobs.dorpaLoot);
-                    return;
-                }
-                case 49: {
-                    loot(event, SRPConfigMobs.infbearLoot);
-                    return;
-                }
-                case 13: {
-                    loot(event, SRPConfigMobs.infcowLoot);
-                    return;
-                }
-                case 28: {
-                    loot(event, SRPConfigMobs.infcowheadLoot);
-                    return;
-                }
-                case 64: {
-                    loot(event, SRPConfigMobs.infdragoneLoot);
-                    return;
-                }
-                case 70: {
-                    loot(event, SRPConfigMobs.infdragoneheadLoot);
-                    return;
-                }
-                case 59: {
-                    loot(event, SRPConfigMobs.infendermanLoot);
-                    return;
-                }
-                case 69: {
-                    loot(event, SRPConfigMobs.infendermanheadLoot);
-                    return;
-                }
-                case 44: {
-                    loot(event, SRPConfigMobs.infhorseLoot);
-                    return;
-                }
-                case 45: {
-                    loot(event, SRPConfigMobs.infhorseheadLoot);
-                    return;
-                }
-                case 6: {
-                    loot(event, SRPConfigMobs.infhumanLoot);
-                    return;
-                }
-                case 46: {
-                    loot(event, SRPConfigMobs.infhumanheadLoot);
-                    return;
-                }
-                case 26: {
-                    loot(event, SRPConfigMobs.infpigLoot);
-                    return;
-                }
-                case 31: {
-                    loot(event, SRPConfigMobs.infpigheadLoot);
-                    return;
-                }
-                case 40: {
-                    loot(event, SRPConfigMobs.infadventurerLoot);
-                    return;
-                }
-                case 71: {
-                    loot(event, SRPConfigMobs.infadventurerheadLoot);
-                    return;
-                }
-                case 14: {
-                    loot(event, SRPConfigMobs.infsheepLoot);
-                    return;
-                }
-                case 22: {
-                    loot(event, SRPConfigMobs.infsheepheadLoot);
-                    return;
-                }
-                case 27: {
-                    loot(event, SRPConfigMobs.infvillagerLoot);
-                    return;
-                }
-                case 32: {
-                    loot(event, SRPConfigMobs.infvillagerheadLoot);
-                    return;
-                }
-                case 15: {
-                    loot(event, SRPConfigMobs.infwolfLoot);
-                    return;
-                }
-                case 21: {
-                    loot(event, SRPConfigMobs.infwolfheadLoot);
-                    return;
-                }
-                case 306: {
-                    loot(event, SRPConfigMobs.ferbearLoot);
-                    return;
-                }
-                case 93: {
-                    loot(event, SRPConfigMobs.fercowLoot);
-                    return;
-                }
-                case 94: {
-                    loot(event, SRPConfigMobs.ferendermanLoot);
-                    return;
-                }
-                case 95: {
-                    loot(event, SRPConfigMobs.ferhorseLoot);
-                    return;
-                }
-                case 96: {
-                    loot(event, SRPConfigMobs.ferhumanLoot);
-                    return;
-                }
-                case 97: {
-                    loot(event, SRPConfigMobs.ferpigLoot);
-                    return;
-                }
-                case 98: {
-                    loot(event, SRPConfigMobs.fersheepLoot);
-                    return;
-                }
-                case 99: {
-                    loot(event, SRPConfigMobs.fervillagerLoot);
-                    return;
-                }
-                case 300: {
-                    loot(event, SRPConfigMobs.ferwolfLoot);
-                    return;
-                }
-                case 324: {
-                    loot(event, SRPConfigMobs.marhumanLoot);
-                    return;
-                }
-                case 330: {
-                    loot(event, SRPConfigMobs.marbearLoot);
-                    return;
-                }
-                case 322: {
-                    loot(event, SRPConfigMobs.marcowLoot);
-                    return;
-                }
-                case 329: {
-                    loot(event, SRPConfigMobs.marsheepLoot);
-                    return;
-                }
-                case 321: {
-                    loot(event, SRPConfigMobs.marendermanLoot);
-                    return;
-                }
-                case 323: {
-                    loot(event, SRPConfigMobs.marvillagerLoot);
-                    return;
-                }
-                case 302: {
-                    loot(event, SRPConfigMobs.hiblazeLoot);
-                    return;
-                }
-                case 301: {
-                    loot(event, SRPConfigMobs.higolemLoot);
-                    return;
-                }
-                case 303: {
-                    loot(event, SRPConfigMobs.hiskeletonLoot);
-                    return;
-                }
-                case 9: {
-                    loot(event, SRPConfigMobs.alafhaLoot);
-                    return;
-                }
-                case 25: {
-                    loot(event, SRPConfigMobs.angedLoot);
-                    return;
-                }
-                case 50: {
-                    loot(event, SRPConfigMobs.esorLoot);
-                    return;
-                }
-                case 60: {
-                    loot(event, SRPConfigMobs.flogLoot);
-                    return;
-                }
-                case 33: {
-                    loot(event, SRPConfigMobs.ganroLoot);
-                    return;
-                }
-                case 47: {
-                    loot(event, SRPConfigMobs.ombooLoot);
-                    return;
-                }
-                case 82: {
-                    loot(event, SRPConfigMobs.ombooLoot);
-                    return;
-                }
-                case 65: {
-                    loot(event, SRPConfigMobs.jinjoLoot);
-                    return;
-                }
-                case 85: {
-                    loot(event, SRPConfigMobs.elviaLoot);
-                    return;
-                }
-                case 86: {
-                    loot(event, SRPConfigMobs.lenciaLoot);
-                    return;
-                }
-                case 88: {
-                    loot(event, SRPConfigMobs.vestaLoot);
-                    return;
-                }
-                case 87: {
-                    loot(event, SRPConfigMobs.pheonLoot);
-                    return;
-                }
-                case 11: {
-                    loot(event, SRPConfigMobs.butholLoot);
-                    return;
-                }
-                case 36: {
-                    loot(event, SRPConfigMobs.kolLoot);
-                    return;
-                }
-                case 23: {
-                    loot(event, SRPConfigMobs.kolLoot);
-                    return;
-                }
-                case 5: {
-                    loot(event, SRPConfigMobs.LodoLoot);
-                    return;
-                }
-                case 12: {
-                    loot(event, SRPConfigMobs.mudoLoot);
-                    return;
-                }
-                case 76: {
-                    loot(event, SRPConfigMobs.nuuhLoot);
-                    return;
-                }
-                case 3: {
-                    loot(event, SRPConfigMobs.ratholLoot);
-                    return;
-                }
-                case 91: {
-                    loot(event, SRPConfigMobs.ataLoot);
-                    return;
-                }
-                case 334: {
-                    loot(event, SRPConfigMobs.viinLoot);
-                    return;
-                }
-                case 74: {
-                    loot(event, SRPConfigMobs.ratholLoot);
-                    return;
-                }
-                case 72: {
-                    loot(event, SRPConfigMobs.nakLoot);
-                    return;
-                }
-                case 29: {
-                    loot(event, SRPConfigMobs.tonroLoot);
-                    return;
-                }
-                case 30: {
-                    loot(event, SRPConfigMobs.unvoLoot);
-                    return;
-                }
-                case 16: {
-                    loot(event, SRPConfigMobs.venkrolLoot);
-                    return;
-                }
-                case 18: {
-                    loot(event, SRPConfigMobs.venkrolsiiLoot);
-                    return;
-                }
-                case 19: {
-                    loot(event, SRPConfigMobs.venkrolsiiiLoot);
-                    return;
-                }
-                case 41: {
-                    loot(event, SRPConfigMobs.venkrolsivLoot);
-                    return;
-                }
-                case 73: {
-                    loot(event, SRPConfigMobs.dodsiLoot);
-                    return;
-                }
-                case 77: {
-                    loot(event, SRPConfigMobs.dodsiiLoot);
-                    return;
-                }
-                case 78: {
-                    loot(event, SRPConfigMobs.dodsiiiLoot);
-                    return;
-                }
-                case 79: {
-                    loot(event, SRPConfigMobs.dodsivLoot);
-                    return;
-                }
-                case 62: {
-                    loot(event, SRPConfigMobs.cruxaLoot);
-                    return;
-                }
-                case 63: {
-                    loot(event, SRPConfigMobs.heedLoot);
-                    return;
-                }
-                case 48: {
-                    loot(event, SRPConfigMobs.hostLoot);
-                    return;
-                }
-                case 75: {
-                    loot(event, SRPConfigMobs.herdLoot);
-                    return;
-                }
-                case 39: {
-                    loot(event, SRPConfigMobs.inhooSLoot);
-                    return;
-                }
-                case 43: {
-                    loot(event, SRPConfigMobs.inhooMLoot);
-                    return;
-                }
-                case 80: {
-                    loot(event, SRPConfigMobs.thrallLoot);
-                    return;
-                }
-                case 24: {
-                    loot(event, SRPConfigMobs.oroncoLoot);
-                    return;
-                }
-                case 20: {
-                    loot(event, SRPConfigMobs.terlaLoot);
-                    return;
-                }
-                case 309: {
-                    loot(event, SRPConfigMobs.hebluLoot);
-                    return;
-                }
-                case 67: {
-                    loot(event, SRPConfigMobs.kirinLoot);
-                    return;
-                }
-                case 34: {
-                    loot(event, SRPConfigMobs.pod1Loot);
-                }
+            String[] lootCfg = lootConfigFor(mob.getParasiteIDRegister());
+            if (lootCfg != null) {
+                loot(event, lootCfg);
             }
         } else if (event.getEntity() instanceof LivingEntity && !(event.getEntity() instanceof Player) && SRPConfigSystems.cothActive) {
             if (event.getSource().getEntity() instanceof EntityParasiteBase && SRPConfig.mobsKilledDropLoot) {

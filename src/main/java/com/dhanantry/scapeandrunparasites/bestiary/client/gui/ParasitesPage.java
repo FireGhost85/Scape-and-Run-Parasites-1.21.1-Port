@@ -684,7 +684,7 @@ extends GuiScreen {
                     break;
                 }
                 if (button.id == 12) {
-                    GuiContext.click();
+                    this.mc.setScreen((GuiScreen)new CelestialEventsPage(this.player, this));
                     break;
                 }
                 if (button.id == 13) {
@@ -1553,13 +1553,29 @@ extends GuiScreen {
     }
 
     private List<DropEntry> getDropsForMob(String mobId) {
-        this.loadDropCacheIfNeeded();
-        String cat = this.resolveCfgCategoryForMob(mobId);
-        if (cat == null) {
-            return Collections.emptyList();
+        List<DropEntry> cached = this.dropsByCategory.get(mobId);
+        if (cached != null) {
+            return cached;
         }
-        List<DropEntry> drops = this.dropsByCategory.get(cat);
-        return drops != null ? drops : Collections.emptyList();
+        ArrayList<DropEntry> out = new ArrayList<DropEntry>();
+        try {
+            Entity created = SRPEntityUtil.create((ResourceLocation)ResourceLocation.parse(mobId), (Level)this.player.level());
+            if (created instanceof com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase) {
+                String[] cfg = com.dhanantry.scapeandrunparasites.util.handlers.SRPEventHandlerBus.lootConfigFor(((com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase)created).getParasiteIDRegister());
+                if (cfg != null) {
+                    for (String line : cfg) {
+                        String[] parts = line.split(";");
+                        if (parts.length < 4 || parts[0].trim().isEmpty()) continue;
+                        out.add(new DropEntry(parts[0].trim(), ParasitesPage.parseIntSafe(parts[1], 0), ParasitesPage.parseIntSafe(parts[2], 1), "true".equalsIgnoreCase(parts[3].trim())));
+                    }
+                }
+            }
+        }
+        catch (Throwable ex) {
+            System.out.println("[SRP][BESTIARY][DROPS] " + ex);
+        }
+        this.dropsByCategory.put(mobId, out);
+        return out;
     }
 
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
@@ -1977,7 +1993,14 @@ extends GuiScreen {
                 this.suppressPoseFieldUpdates = false;
             }
         }
+        boolean clipModel = !this.isBgScreenActive();
+        if (clipModel) {
+            this.enableScissor(modelLeft, contentTop, modelW, modelH);
+        }
         this.renderEntityPreviewDetail(e.mobId, cx, cy, zoomW, zoomH, yaw, pitch);
+        if (clipModel) {
+            this.disableScissor();
+        }
         if (!this.isBgScreenActive()) {
             float a2 = this.page == BestiaryPage.MOB_DETAIL ? ParasitesPage.smoothstep(this.mobDetailAnim) : 1.0f;
             int warnH = 18;

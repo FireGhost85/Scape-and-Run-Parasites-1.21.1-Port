@@ -15,6 +15,7 @@ public final class ClientHooks {
 
     public static void enableBreathe(int ticks) {
         breatheTicks = Math.max(breatheTicks, ticks);
+        com.dhanantry.scapeandrunparasites.client.shader.BreatheShaderManager.enableFor(ticks);
     }
 
     /** The local player (client only), or null. */

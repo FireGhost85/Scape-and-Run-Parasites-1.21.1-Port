@@ -1,6 +1,7 @@
 package com.dhanantry.scapeandrunparasites.client.legacy.gui;
 
 import com.dhanantry.scapeandrunparasites.client.legacy.GlContext;
+import com.dhanantry.scapeandrunparasites.client.legacy.GlStateManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,7 @@ public class GuiScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         GuiContext.g = g;
+        GuiContext.rendering = true;
         com.mojang.blaze3d.vertex.PoseStack pose = g.pose();
         pose.pushPose();
         GlContext.begin(pose, g.bufferSource(), 15728880);
@@ -117,6 +119,8 @@ public class GuiScreen extends Screen {
             pose.popPose();
             GuiContext.resetColor();
             g.flush();
+            GlStateManager.enableTexture2D();
+            GuiContext.rendering = false;
         }
     }
 

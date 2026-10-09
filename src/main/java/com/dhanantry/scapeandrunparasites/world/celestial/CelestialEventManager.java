@@ -5,19 +5,21 @@ import com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectDefini
 import com.dhanantry.scapeandrunparasites.client.celestial.CelestialObjectRegistry;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigWorld;
 import com.dhanantry.scapeandrunparasites.init.SRPSounds;
-import com.dhanantry.scapeandrunparasites.network.SRPNetwork;
+import com.dhanantry.scapeandrunparasites.network.CelestialNightStatePayload;
+import com.dhanantry.scapeandrunparasites.network.SRPSend;
 import com.dhanantry.scapeandrunparasites.phase.DimKeys;
-import com.dhanantry.scapeandrunparasites.world.celestial.CelestialNightData;
-import com.dhanantry.scapeandrunparasites.world.celestial.PacketCelestialNightState;
 import java.util.Random;
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class CelestialEventManager {
@@ -29,12 +31,16 @@ public class CelestialEventManager {
     public static final long DARK_DAYS_ROLL_TIME = 800L;
     public static final long DARK_DAYS_ACTIVATION_TIME = 1000L;
 
+    /** 1.12 WorldProvider.isSurfaceWorld: a natural dimension with sky light and no ceiling. */
+    public static boolean isSurface(Level world) {
+        return world.dimensionType().natural() && world.dimensionType().hasSkyLight() && !world.dimensionType().hasCeiling();
+    }
+
     public static boolean isActive(Level world, String id) {
         if (world == null || world.isClientSide) {
             return false;
         }
-        String dim = DimKeys.of(world);
-        CelestialNightData.DimState s = CelestialNightData.get(world).getState(dim);
+        CelestialNightData.DimState s = CelestialNightData.get(world).getState(DimKeys.of(world));
         if (s == null) {
             return false;
         }
@@ -69,14 +75,9 @@ public class CelestialEventManager {
     }
 
     private static void clearWeatherForDarkDays(Level world) {
-        if (world == null) {
-            return;
+        if (world instanceof ServerLevel server) {
+            server.setWeatherParameters(6400, 0, false, false);
         }
-        world.getWorldInfo().setRaining(false);
-        world.getWorldInfo().setThundering(false);
-        world.getWorldInfo().setRainTime(0);
-        world.getWorldInfo().setThunderTime(0);
-        world.getWorldInfo().setCleanWeatherTime(6400);
     }
 
     public static void clearForced(Level world) {
@@ -99,7 +100,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        if (!world.dimensionType().isSurfaceWorld()) {
+        if (!CelestialEventManager.isSurface(world)) {
             return;
         }
         CelestialEventManager.clearWeatherForDarkDays(world);
@@ -121,13 +122,13 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        if (!world.dimensionType().isSurfaceWorld()) {
+        if (!CelestialEventManager.isSurface(world)) {
             return;
         }
         String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
-        boolean bl = active = s.forced.contains("dark_days") || s.active.contains("dark_days");
+        active = s.forced.contains("dark_days") || s.active.contains("dark_days");
         if (!active) {
             s.darkDaysStartTime = -1L;
             s.darkDaysEndTime = -1L;
@@ -144,18 +145,18 @@ public class CelestialEventManager {
         CelestialEventManager.playToDimension(world, SRPSounds.DARK_DAYS_ENDING.get(), 1.0f);
     }
 
-    public static void syncDim(Level world, int dim) {
-        if (world == null || world.isClientSide) {
+    public static void syncDim(Level world, String dim) {
+        if (world == null || world.isClientSide || world.getServer() == null) {
             return;
         }
         CelestialNightData.DimState s = CelestialNightData.get(world).getState(dim);
         if (s == null) {
             return;
         }
-        PacketCelestialNightState pkt = new PacketCelestialNightState(dim, s.phase, s.nightIndex, s.active, s.forced);
-        for (ServerPlayer p : world.getMinecraftServer().getPlayerList().getPlayerList()) {
-            if (DimKeys.of(p.level()) != dim) continue;
-            SRPNetwork.CHANNEL.sendTo((IMessage)pkt, p);
+        CelestialNightStatePayload pkt = CelestialNightStatePayload.of(dim, s.phase, s.nightIndex, s.active, s.forced);
+        for (ServerPlayer p : world.getServer().getPlayerList().getPlayers()) {
+            if (!DimKeys.of(p.level()).equals(dim)) continue;
+            SRPSend.sendToPlayer(p, pkt);
         }
     }
 
@@ -163,7 +164,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        if (!world.dimensionType().isSurfaceWorld()) {
+        if (!CelestialEventManager.isSurface(world)) {
             return;
         }
         String dim = DimKeys.of(world);
@@ -178,7 +179,7 @@ public class CelestialEventManager {
         }
         s.nightIndex = nightIndex;
         s.active.clear();
-        long baseSeed = world.getSeed() ^ nightIndex * 918273L;
+        long baseSeed = ((ServerLevel)world).getSeed() ^ nightIndex * 918273L;
         for (CelestialObjectDefinition def : CelestialObjectRegistry.getObjects()) {
             if ("dark_days".equals(def.id) || SRPConfigWorld.isCelestialEventBlacklisted(def.id) || !def.isPhaseAllowed(s.phase)) continue;
             long seed = baseSeed + (long)def.id.hashCode() * 31L;
@@ -199,7 +200,7 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        if (!world.dimensionType().isSurfaceWorld()) {
+        if (!CelestialEventManager.isSurface(world)) {
             return;
         }
         String dim = DimKeys.of(world);
@@ -216,7 +217,7 @@ public class CelestialEventManager {
             data.markDirty();
             CelestialEventManager.syncDim(world, dim);
         }
-        boolean bl = active = s.forced.contains("dark_days") || s.active.contains("dark_days");
+        active = s.forced.contains("dark_days") || s.active.contains("dark_days");
         if (!active) {
             return;
         }
@@ -245,12 +246,12 @@ public class CelestialEventManager {
     }
 
     private static void playToDimension(Level world, SoundEvent sound, float pitch) {
-        if (world == null || sound == null || world.getMinecraftServer() == null) {
+        if (world == null || sound == null || world.getServer() == null) {
             return;
         }
         String dim = DimKeys.of(world);
-        for (ServerPlayer p : world.getMinecraftServer().getPlayerList().getPlayerList()) {
-            if (DimKeys.of(p.level()) != dim) continue;
+        for (ServerPlayer p : world.getServer().getPlayerList().getPlayers()) {
+            if (!DimKeys.of(p.level()).equals(dim)) continue;
             p.level().playSound(null, p.getX(), p.getY(), p.getZ(), sound, SoundSource.AMBIENT, 10000.0f, pitch);
         }
     }
@@ -260,13 +261,13 @@ public class CelestialEventManager {
         if (world == null || world.isClientSide) {
             return;
         }
-        if (!world.dimensionType().isSurfaceWorld()) {
+        if (!CelestialEventManager.isSurface(world)) {
             return;
         }
         String dim = DimKeys.of(world);
         CelestialNightData data = CelestialNightData.get(world);
         CelestialNightData.DimState s = data.getOrCreate(dim);
-        boolean bl = activeOrQueued = s.forced.contains("dark_days") || s.active.contains("dark_days") || s.darkDaysStartTime > 0L || s.darkDaysEndTime > 0L;
+        activeOrQueued = s.forced.contains("dark_days") || s.active.contains("dark_days") || s.darkDaysStartTime > 0L || s.darkDaysEndTime > 0L;
         if (activeOrQueued) {
             return;
         }
@@ -286,7 +287,7 @@ public class CelestialEventManager {
             data.markDirty();
             return;
         }
-        long seed = world.getSeed() ^ day * 918273L ^ (long)"dark_days".hashCode() * 31L;
+        long seed = ((ServerLevel)world).getSeed() ^ day * 918273L ^ (long)"dark_days".hashCode() * 31L;
         RAND.setSeed(seed);
         if (RAND.nextFloat() <= def.chancePerNight) {
             s.active.clear();
@@ -302,11 +303,8 @@ public class CelestialEventManager {
     }
 
     @SubscribeEvent
-    public static void onWorldTick(TickEvent.WorldTickEvent e) {
-        if (e.phase != TickEvent.Phase.END) {
-            return;
-        }
-        Level w = e.world;
+    public static void onWorldTick(LevelTickEvent.Post e) {
+        Level w = e.getLevel();
         if (w == null || w.isClientSide) {
             return;
         }
@@ -316,21 +314,20 @@ public class CelestialEventManager {
     }
 
     private static void grantDarkDaysAdvancement(Level world) {
-        if (world == null || world.getMinecraftServer() == null) {
+        if (world == null || world.getServer() == null) {
             return;
         }
-        Advancement adv = world.getMinecraftServer().getAdvancementManager().getAdvancement(ResourceLocation.fromNamespaceAndPath("srparasites", "dark_days"));
+        AdvancementHolder adv = world.getServer().getAdvancements().get(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "dark_days"));
         if (adv == null) {
             return;
         }
         String dim = DimKeys.of(world);
-        for (ServerPlayer p : world.getMinecraftServer().getPlayerList().getPlayerList()) {
+        for (ServerPlayer p : world.getServer().getPlayerList().getPlayers()) {
             AdvancementProgress progress;
-            if (DimKeys.of(p.level()) != dim || (progress = p.getAdvancements().getProgress(adv)).isDone()) continue;
-            for (String criterion : progress.getRemaningCriteria()) {
-                p.getAdvancements().grantCriterion(adv, criterion);
+            if (!DimKeys.of(p.level()).equals(dim) || (progress = p.getAdvancements().getOrStartProgress(adv)).isDone()) continue;
+            for (String criterion : progress.getRemainingCriteria()) {
+                p.getAdvancements().award(adv, criterion);
             }
         }
     }
 }
-

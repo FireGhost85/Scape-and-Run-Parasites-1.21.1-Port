@@ -70,6 +70,9 @@ public final class BestiaryClient {
                 mc.player.playSound(com.dhanantry.scapeandrunparasites.init.SRPSounds.BOOK_UNLOCK_BLOCK.get(), 1.0f, 1.0f);
             }
         }
+        if (mc.screen instanceof com.dhanantry.scapeandrunparasites.bestiary.client.gui.CelestialEventsPage celestialPage) {
+            celestialPage.refreshFromCapability();
+        }
         if (mc.screen != null && mc.screen.getClass().getName().toLowerCase().contains("bestiary")) {
             mc.screen.resize(mc, mc.screen.width, mc.screen.height);
         }

@@ -14,8 +14,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 
 /**
  * Parasites drop 1 to 5 shrimp (25 percent) while the "arrow" celestial event is active on the surface dimension.
- * The celestial events ({@code world/celestial}, deferred) are not ported yet, so {@link #isArrowCelestialActive} is false
- * until they are.
  */
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class ShrimpDropHandler {
@@ -42,8 +40,12 @@ public class ShrimpDropHandler {
         event.getDrops().add(drop);
     }
 
-    /** PLACEHOLDER: needs {@code CelestialNightData} (deferred celestial events); see PORTING_NOTES.md. */
     private static boolean isArrowCelestialActive(LivingEntity entity) {
-        return false;
+        net.minecraft.world.level.Level level = entity.level();
+        if (level == null || level.isClientSide || !com.dhanantry.scapeandrunparasites.world.celestial.CelestialEventManager.isSurface(level)) {
+            return false;
+        }
+        com.dhanantry.scapeandrunparasites.world.celestial.CelestialNightData.DimState state = com.dhanantry.scapeandrunparasites.world.celestial.CelestialNightData.get(level).getOrCreate(com.dhanantry.scapeandrunparasites.phase.DimKeys.of(level));
+        return state.active.contains("arrow") || state.forced.contains("arrow");
     }
 }

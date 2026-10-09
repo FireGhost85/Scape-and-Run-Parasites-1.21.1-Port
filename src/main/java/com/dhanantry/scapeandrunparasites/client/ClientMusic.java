@@ -58,6 +58,10 @@ public final class ClientMusic {
     @SubscribeEvent
     static void onPlaySound(net.neoforged.neoforge.client.event.sound.PlaySoundEvent event) {
         var sound = event.getSound();
+        if (sound != null && sound.getSource() == SoundSource.MUSIC && com.dhanantry.scapeandrunparasites.client.celestial.BlackSkyClient.isDarkDaysActive()) {
+            event.setSound(null);
+            return;
+        }
         if (!SRPConfig.musicTrue || sound == null || sound.getSource() != SoundSource.MUSIC || ScapeAndRunParasites.MODID.equals(sound.getLocation().getNamespace())) {
             return;
         }

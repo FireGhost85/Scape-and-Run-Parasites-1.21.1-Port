@@ -119,10 +119,18 @@ public final class GlStateManager {
     public static void disableRescaleNormal() {
     }
 
+    private static boolean texture2D = true;
+
+    public static boolean isTexture2DEnabled() {
+        return texture2D;
+    }
+
     public static void enableTexture2D() {
+        texture2D = true;
     }
 
     public static void disableTexture2D() {
+        texture2D = false;
     }
 
     public static void enableColorMaterial() {

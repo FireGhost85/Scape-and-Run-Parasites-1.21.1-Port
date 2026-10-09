@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 
 public final class CurrentProgressClientCache {
     public static boolean hasData = false;
-    public static int dimension = 0;
+    public static String dimension = "";
     public static int phase = 0;
     public static int udl = 0;
     public static boolean phaseUnlocked = false;
@@ -40,7 +40,7 @@ public final class CurrentProgressClientCache {
         if (tag == null) {
             return;
         }
-        dimension = tag.getInt("dimension");
+        dimension = tag.getString("dimension");
         phase = tag.getInt("phase");
         udl = tag.getInt("udl");
         phaseUnlocked = tag.getBoolean("phaseUnlocked");

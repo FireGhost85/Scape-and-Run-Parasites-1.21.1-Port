@@ -7,8 +7,8 @@ import com.dhanantry.scapeandrunparasites.client.legacy.Tessellator;
 import com.dhanantry.scapeandrunparasites.bestiary.client.gui.CurrentProgressClientCache;
 import com.dhanantry.scapeandrunparasites.bestiary.client.gui.GuiDistortionHelper;
 import com.dhanantry.scapeandrunparasites.client.legacy.GlStateManager;
-import com.dhanantry.scapeandrunparasites.network.MsgReconfigureProgressUnlock;
-import com.dhanantry.scapeandrunparasites.network.MsgRequestProgressSnapshot;
+import com.dhanantry.scapeandrunparasites.network.ReconfigureProgressUnlockPayload;
+import com.dhanantry.scapeandrunparasites.network.RequestProgressSnapshotPayload;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ extends GuiScreen {
         super.initGui();
         this.isJumbled = GuiDistortionHelper.isDistortionActive(this.mc);
         CurrentProgressClientCache.hasData = false;
-        PacketDistributor.sendToServer(new MsgRequestProgressSnapshot());
+        PacketDistributor.sendToServer(new RequestProgressSnapshotPayload());
         int maxW = this.width - 24;
         int maxH = this.height - 24;
         float s = Math.min((float)maxW / 480.0f, (float)maxH / 300.0f);
@@ -188,7 +188,7 @@ extends GuiScreen {
         }
         if (button.id == 1) {
             CurrentProgressClientCache.hasData = false;
-            PacketDistributor.sendToServer(new MsgRequestProgressSnapshot());
+            PacketDistributor.sendToServer(new RequestProgressSnapshotPayload());
             this.scroll = 0;
             this.rebuildLines();
             this.updateButtonStates();
@@ -209,7 +209,7 @@ extends GuiScreen {
             return;
         }
         if (button.id == 2 && (this.phaseClockInserted || this.udClockInserted)) {
-            PacketDistributor.sendToServer(new MsgReconfigureProgressUnlock(this.phaseClockInserted, this.udClockInserted));
+            PacketDistributor.sendToServer(new ReconfigureProgressUnlockPayload(this.phaseClockInserted, this.udClockInserted));
             this.phaseClockInserted = false;
             this.udClockInserted = false;
             this.updateButtonStates();
@@ -239,7 +239,7 @@ extends GuiScreen {
     }
 
     private boolean playerHasItem(String itemId) {
-        Item wanted = Item.getByNameOrId((String)itemId);
+        Item wanted = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemId));
         if (wanted == null || this.player == null) {
             return false;
         }
@@ -368,7 +368,7 @@ extends GuiScreen {
         int slotFill = alreadyUnlocked ? 0x66557755 : (inserted ? 0x66775555 : (hasItem ? 0x66DDDDDD : 0x66444444));
         GuiCurrentProgress.drawRect((int)(slotX - 1), (int)(slotY - 1), (int)(slotX + 20), (int)(slotY + 20), (int)-1442840576);
         GuiCurrentProgress.drawRect((int)slotX, (int)slotY, (int)(slotX + 19), (int)(slotY + 19), (int)slotFill);
-        Item item = Item.getByNameOrId((String)itemId);
+        Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemId));
         if (item != null && (inserted || alreadyUnlocked)) {
             RenderHelper.enableGUIStandardItemLighting();
             GuiScreen.renderItem(new ItemStack(item), slotX + 2, slotY + 2);
@@ -653,15 +653,15 @@ extends GuiScreen {
         this.hoverWords.clear();
         ScaledResolution sr = new ScaledResolution(this.mc);
         int scale = sr.getScaleFactor();
-        int fbH = this.mc.getFramebuffer().framebufferHeight;
+        int fbH = this.mc.getMainRenderTarget().height;
         float guiX0 = (float)this.screenPanelX + (float)this.listX * this.uiScale;
         float guiY0 = (float)this.screenPanelY + (float)this.listY * this.uiScale;
         float guiW = (float)this.listW * this.uiScale;
         float guiH = (float)this.listH * this.uiScale;
-        int scX = Mth.floor_float((float)(guiX0 * (float)scale));
-        int scW = Mth.ceiling_float_int((float)(guiW * (float)scale));
-        int scYTop = Mth.floor_float((float)(guiY0 * (float)scale));
-        int scH = Mth.ceiling_float_int((float)(guiH * (float)scale));
+        int scX = Mth.floor((float)(guiX0 * (float)scale));
+        int scW = Mth.ceil((float)(guiW * (float)scale));
+        int scYTop = Mth.floor((float)(guiY0 * (float)scale));
+        int scH = Mth.ceil((float)(guiH * (float)scale));
         int scY = fbH - (scYTop + scH);
         int pad = Math.max(1, scale);
         GL11.glEnable((int)3089);
