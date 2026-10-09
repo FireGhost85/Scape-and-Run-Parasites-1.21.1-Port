@@ -2,13 +2,14 @@ package com.dhanantry.scapeandrunparasites.util;
 
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
@@ -21,16 +22,12 @@ public final class GuerillaAdvancement {
     private GuerillaAdvancement() {
     }
 
-    public static void register(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(GuerillaAdvancement.class);
-    }
-
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer)) {
             return;
         }
-        if (event.getEntity().level().isClientSide) {
+        if (event.getEntity().level().isClientSide()) {
             return;
         }
         Entity trueSrc = event.getSource().getEntity();
@@ -53,13 +50,13 @@ public final class GuerillaAdvancement {
         if (!victim.hasEffect(SRPPotions.FEAR_E)) {
             return;
         }
-        Advancement adv = killer.getServer().getAdvancementManager().getAdvancement(ADV_ID);
+        AdvancementHolder adv = killer.getServer().getAdvancements().get(ADV_ID);
         if (adv == null) {
             return;
         }
-        AdvancementProgress prog = killer.getAdvancements().getProgress(adv);
+        AdvancementProgress prog = killer.getAdvancements().getOrStartProgress(adv);
         if (!prog.isDone()) {
-            prog.grantCriterion(CRITERION);
+            killer.getAdvancements().award(adv, CRITERION);
         }
         tag.remove(TAG_APPLIER);
         tag.remove(TAG_UNTIL);

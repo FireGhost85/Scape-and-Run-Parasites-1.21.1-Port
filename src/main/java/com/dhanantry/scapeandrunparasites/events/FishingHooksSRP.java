@@ -8,16 +8,15 @@ import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class FishingHooksSRP {
-    public static void register() {
-        MinecraftForge.EVENT_BUS.register(new FishingHooksSRP());
-    }
-
     @SubscribeEvent
-    public void onItemFished(ItemFishedEvent e) {
+    public static void onItemFished(ItemFishedEvent e) {
         FishingHook hook = e.getHookEntity();
         if (hook == null) {
             return;
@@ -29,13 +28,13 @@ public class FishingHooksSRP {
         BlockPos pos = BlockPos.containing(hook.getX(), hook.getY(), hook.getZ());
         Biome biome = w.getBiome(pos).value();
         boolean inHarlequin = false;
-        ResourceLocation bn = (ResourceLocation)Biome.REGISTRY.getNameForObject(biome);
+        ResourceLocation bn = w.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME).getKey(biome);
         if (bn != null) {
             String path = bn.getPath();
             inHarlequin = path != null && path.toLowerCase(Locale.ROOT).contains("harlequin");
         }
         boolean inDeadblood = false;
-        ResourceLocation blockName = w.getBlockState(pos).getBlock().builtInRegistryHolder().key().location();
+        ResourceLocation blockName = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(w.getBlockState(pos).getBlock());
         if (blockName != null) {
             String bp = blockName.getPath();
             boolean bl = inDeadblood = bp != null && bp.toLowerCase(Locale.ROOT).contains("deadblood");

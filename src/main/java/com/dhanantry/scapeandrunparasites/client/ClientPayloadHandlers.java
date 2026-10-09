@@ -20,6 +20,16 @@ public final class ClientPayloadHandlers {
         ctx.enqueueWork(() -> playMovingSound(msg.evPhase(), msg.volume()));
     }
 
+    public static void escapeOffer(com.dhanantry.scapeandrunparasites.network.EscapeOfferPayload msg, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            EscapeClientState.OFFER = msg.offer();
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.screen instanceof net.minecraft.client.gui.screens.DeathScreen) {
+                mc.screen.resize(mc, mc.screen.width, mc.screen.height);
+            }
+        });
+    }
+
     public static void evoPhaseCancel(EvoPhaseCancelPayload msg, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             stopMusic();

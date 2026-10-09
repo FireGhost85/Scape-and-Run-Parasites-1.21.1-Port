@@ -4,29 +4,33 @@ import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.init.SRPPotions;
 import com.dhanantry.scapeandrunparasites.init.SRPSounds;
-import net.minecraft.advancements.Advancement;
+import com.dhanantry.scapeandrunparasites.world.SRPExplosion;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.MobDespawnEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+/**
+ * Thornshade thorns effect: limits how often it can be applied (two uses, a cooldown, no parasites, no big mobs), reflects part
+ * of the damage and makes a victim that reached the limit explode, infecting the ones around.
+ */
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class ThornshadeThornsHandler {
     private static final String TAG_ROOT = "srp_thornshade_thorns";
@@ -36,84 +40,89 @@ public class ThornshadeThornsHandler {
     private static final float MAX_HP_ALLOWED = 120.0f;
     private static final String TAG_HAS_EXPLODED = "HasExplodedOnce";
 
+    private static boolean isThorns(MobEffectInstance effect) {
+        return effect.getEffect().value() == SRPPotions.THORNSHADE_THORNS_E.get();
+    }
+
     @SubscribeEvent
-    public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event) {
+    public static void onPotionApplicable(MobEffectEvent.Applicable event) {
         LivingEntity living = event.getEntity();
-        if (living == null || living.level().isClientSide) {
+        if (living.level().isClientSide) {
             return;
         }
-        MobEffectInstance incoming = event.getPotionEffect();
-        if (incoming == null || incoming.getEffect() != SRPPotions.THORNSHADE_THORNS_E) {
+        MobEffectInstance incoming = event.getEffectInstance();
+        if (!isThorns(incoming)) {
             return;
         }
         if (living instanceof EntityParasiteBase) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
-        if (living.getMaxHealth() > 120.0f) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+        if (living.getMaxHealth() > MAX_HP_ALLOWED) {
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
         if (living.hasEffect(SRPPotions.THORNSHADE_THORNS_E)) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
-        if (ThornshadeThornsHandler.isInfiniteDuration(incoming)) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+        if (isInfiniteDuration(incoming)) {
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
         Level world = living.level();
         long now = world.getGameTime();
-        CompoundTag data = ThornshadeThornsHandler.getThornshadeData(living);
+        CompoundTag data = getThornshadeData(living);
         int uses = data.getInt(TAG_USES);
         if (uses >= 2) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             if (!data.contains(TAG_EXPLODE_DELAY)) {
-                ThornshadeThornsHandler.scheduleExplosion(living, data);
+                scheduleExplosion(living, data);
             }
-            ThornshadeThornsHandler.setThornshadeData(living, data);
+            setThornshadeData(living, data);
             return;
         }
         long cooldownUntil = data.getLong(TAG_COOLDOWN_UNTIL);
         if (cooldownUntil > now) {
-            event.setResult(MobDespawnEvent.Result.DENY);
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
         data.putInt(TAG_USES, ++uses);
         int durationTicks = incoming.getDuration();
         long extraCooldownTicks = (long)durationTicks / 2L;
         data.putLong(TAG_COOLDOWN_UNTIL, now + extraCooldownTicks);
-        ThornshadeThornsHandler.setThornshadeData(living, data);
-        event.setResult(Event.Result.DEFAULT);
+        setThornshadeData(living, data);
+        event.setResult(MobEffectEvent.Applicable.Result.DEFAULT);
     }
 
     @SubscribeEvent
-    public static void aiStep(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity living = event.getEntity();
-        if (living == null || living.level().isClientSide) {
+    public static void aiStep(EntityTickEvent.Post event) {
+        if (!(event.getEntity() instanceof LivingEntity living) || living.level().isClientSide) {
             return;
         }
-        CompoundTag data = ThornshadeThornsHandler.getThornshadeData(living);
+        if (!living.getPersistentData().contains(TAG_ROOT)) {
+            return;
+        }
+        CompoundTag data = getThornshadeData(living);
         if (!data.contains(TAG_EXPLODE_DELAY)) {
             return;
         }
         int delay = data.getInt(TAG_EXPLODE_DELAY);
         if (delay > 0) {
-            ThornshadeThornsHandler.spawnBloodParticles(living.level(), living, 15);
+            spawnBloodParticles(living.level(), living, 15);
             data.putInt(TAG_EXPLODE_DELAY, --delay);
-            ThornshadeThornsHandler.setThornshadeData(living, data);
+            setThornshadeData(living, data);
             return;
         }
         data.remove(TAG_EXPLODE_DELAY);
-        ThornshadeThornsHandler.setThornshadeData(living, data);
-        ThornshadeThornsHandler.doExplosion(living);
+        setThornshadeData(living, data);
+        doExplosion(living);
     }
 
     private static void spawnBloodParticles(Level world, LivingEntity entity, int count) {
-        if (!(world instanceof ServerLevel)) {
+        if (!(world instanceof ServerLevel ws)) {
             return;
         }
-        ServerLevel ws = (ServerLevel)world;
         double x = entity.getX();
         double y = entity.getY() + (double)entity.getBbHeight() * 0.5;
         double z = entity.getZ();
@@ -130,35 +139,31 @@ public class ThornshadeThornsHandler {
     }
 
     @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingDamageEvent.Pre event) {
         LivingEntity target = event.getEntity();
-        if (target == null || target.level().isClientSide) {
+        if (target.level().isClientSide) {
             return;
         }
         MobEffectInstance eff = target.getEffect(SRPPotions.THORNSHADE_THORNS_E);
-        if (eff == null) {
-            return;
-        }
-        if (ThornshadeThornsHandler.isInfiniteDuration(eff)) {
+        if (eff == null || isInfiniteDuration(eff)) {
             return;
         }
         Entity trueSourceEntity = event.getSource().getEntity();
-        if (!(trueSourceEntity instanceof LivingEntity)) {
+        if (!(trueSourceEntity instanceof LivingEntity attacker)) {
             return;
         }
-        LivingEntity attacker = (LivingEntity)trueSourceEntity;
-        float incoming = event.getAmount();
+        float incoming = event.getNewDamage();
         if (incoming <= 0.0f) {
             return;
         }
-        CompoundTag data = ThornshadeThornsHandler.getThornshadeData(target);
+        CompoundTag data = getThornshadeData(target);
         int uses = data.getInt(TAG_USES);
         float reflectFactor = uses <= 1 ? 0.25f : 0.5f;
         float reflected = incoming * reflectFactor;
         if (reflected <= 0.0f) {
             return;
         }
-        attacker.hurt(DamageSource.causeThornsDamage((Entity)target), reflected);
+        attacker.hurt(target.damageSources().thorns(target), reflected);
     }
 
     private static void scheduleExplosion(LivingEntity living, CompoundTag data) {
@@ -171,51 +176,51 @@ public class ThornshadeThornsHandler {
     }
 
     private static void doExplosion(LivingEntity center) {
-        double distSq;
-        ServerPlayer player;
-        Advancement adv;
         Level world = center.level();
         if (world.isClientSide) {
             return;
         }
-        CompoundTag centerData = ThornshadeThornsHandler.getThornshadeData(center);
+        CompoundTag centerData = getThornshadeData(center);
         centerData.putBoolean(TAG_HAS_EXPLODED, true);
-        if (center instanceof ServerPlayer && (adv = (player = (ServerPlayer)center).getServerForPlayer().getServer().getAdvancementManager().getAdvancement(ResourceLocation.fromNamespaceAndPath("srparasites", "thornshade_self_destruct"))) != null) {
-            player.getAdvancements().grantCriterion(adv, "exploded");
+        if (center instanceof ServerPlayer player) {
+            AdvancementHolder adv = player.getServer().getAdvancements().get(ResourceLocation.fromNamespaceAndPath("srparasites", "thornshade_self_destruct"));
+            if (adv != null) {
+                player.getAdvancements().award(adv, "exploded");
+            }
         }
-        ThornshadeThornsHandler.setThornshadeData(center, centerData);
+        setThornshadeData(center, centerData);
         double x = center.getX();
         double y = center.getY();
         double z = center.getZ();
         float innerRadius = 3.0f;
         float outerRadius = 10.0f;
-        AABB outerBox = new AABB(x - (double)outerRadius, y - (double)outerRadius, z - (double)outerRadius, x + (double)outerRadius, y + (double)outerRadius, z + (double)outerRadius);
-        Explosion explosion = new Explosion(world, null, x, y, z, 3.0f, false, false);
-        explosion.doExplosionA();
+        AABB outerBox = new AABB(x - outerRadius, y - outerRadius, z - outerRadius, x + outerRadius, y + outerRadius, z + outerRadius);
+        new SRPExplosion(world, null, x, y, z, 3.0f, false, false).doExplosionA();
         world.playSound(null, x, y, z, SRPSounds.BUTHOL_BOOM.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
-        ThornshadeThornsHandler.spawnRadialParticles(world, x, y + (double)center.getBbHeight() * 0.5, z, innerRadius, 50, ParticleTypes.CLOUD);
-        ThornshadeThornsHandler.spawnRadialParticles(world, x, y + (double)center.getBbHeight() * 0.5, z, outerRadius, 120, ParticleTypes.WITCH);
-        center.hurt(this.damageSources().magic().setDamageBypassesArmor().setDamageIsAbsolute(), Float.MAX_VALUE);
-        AABB innerBox = new AABB(x - (double)innerRadius, y - (double)innerRadius, z - (double)innerRadius, x + (double)innerRadius, y + (double)innerRadius, z + (double)innerRadius);
+        spawnRadialParticles(world, x, y + (double)center.getBbHeight() * 0.5, z, innerRadius, 50, ParticleTypes.CLOUD);
+        spawnRadialParticles(world, x, y + (double)center.getBbHeight() * 0.5, z, outerRadius, 120, ParticleTypes.WITCH);
+        center.hurt(world.damageSources().magic(), Float.MAX_VALUE);
+        AABB innerBox = new AABB(x - innerRadius, y - innerRadius, z - innerRadius, x + innerRadius, y + innerRadius, z + innerRadius);
         for (LivingEntity other : world.getEntitiesOfClass(LivingEntity.class, innerBox)) {
+            double distSq;
             CompoundTag data;
-            if (other == center || !other.isAlive() || other instanceof EntityParasiteBase || (distSq = other.distanceToSqr(x, y, z)) > (double)(innerRadius * innerRadius) || !other.hasEffect(SRPPotions.THORNSHADE_THORNS_E) || other.getMaxHealth() > 120.0f || (data = ThornshadeThornsHandler.getThornshadeData(other)).getBoolean(TAG_HAS_EXPLODED) || data.contains(TAG_EXPLODE_DELAY)) continue;
+            if (other == center || !other.isAlive() || other instanceof EntityParasiteBase || (distSq = other.distanceToSqr(x, y, z)) > (double)(innerRadius * innerRadius) || !other.hasEffect(SRPPotions.THORNSHADE_THORNS_E) || other.getMaxHealth() > MAX_HP_ALLOWED || (data = getThornshadeData(other)).getBoolean(TAG_HAS_EXPLODED) || data.contains(TAG_EXPLODE_DELAY)) continue;
             data.putInt(TAG_USES, Math.max(2, data.getInt(TAG_USES)));
-            ThornshadeThornsHandler.scheduleExplosion(other, data);
-            ThornshadeThornsHandler.setThornshadeData(other, data);
+            scheduleExplosion(other, data);
+            setThornshadeData(other, data);
         }
         for (LivingEntity other : world.getEntitiesOfClass(LivingEntity.class, outerBox)) {
-            if (other == center || !other.isAlive() || other instanceof EntityParasiteBase || (distSq = other.distanceToSqr(x, y, z)) <= (double)(innerRadius * innerRadius) || other.getMaxHealth() > 120.0f || other.hasEffect(SRPPotions.THORNSHADE_THORNS_E)) continue;
+            double distSq;
+            if (other == center || !other.isAlive() || other instanceof EntityParasiteBase || (distSq = other.distanceToSqr(x, y, z)) <= (double)(innerRadius * innerRadius) || other.getMaxHealth() > MAX_HP_ALLOWED || other.hasEffect(SRPPotions.THORNSHADE_THORNS_E)) continue;
             other.addEffect(new MobEffectInstance(SRPPotions.THORNSHADE_THORNS_E, 600, 0, false, true));
-            ThornshadeThornsHandler.spawnRadialParticles(world, other.getX(), other.getY() + (double)other.getBbHeight() * 0.5, other.getZ(), 1.0f, 20, ParticleTypes.WITCH);
+            spawnRadialParticles(world, other.getX(), other.getY() + (double)other.getBbHeight() * 0.5, other.getZ(), 1.0f, 20, ParticleTypes.WITCH);
         }
     }
 
     private static void spawnRadialParticles(Level world, double x, double y, double z, float radius, int count, ParticleOptions type) {
-        if (!(world instanceof ServerLevel)) {
+        if (!(world instanceof ServerLevel ws)) {
             return;
         }
-        ServerLevel ws = (ServerLevel)world;
         BlockState bloodStateId = Blocks.REDSTONE_BLOCK.defaultBlockState();
         for (int i = 0; i < count; ++i) {
             double angle = world.random.nextDouble() * 2.0 * Math.PI;
@@ -252,18 +257,17 @@ public class ThornshadeThornsHandler {
         CompoundTag root = entity.getPersistentData();
         if (!root.contains(TAG_ROOT, 10)) {
             CompoundTag data = new CompoundTag();
-            root.put(TAG_ROOT, (Tag)data);
+            root.put(TAG_ROOT, data);
             return data;
         }
         return root.getCompound(TAG_ROOT);
     }
 
     private static void setThornshadeData(LivingEntity entity, CompoundTag data) {
-        entity.getPersistentData().put(TAG_ROOT, (Tag)data);
+        entity.getPersistentData().put(TAG_ROOT, data);
     }
 
     private static boolean isInfiniteDuration(MobEffectInstance effect) {
-        return effect.getIsPotionDurationMax() || effect.getDuration() >= 72000 || effect.getDuration() == Integer.MAX_VALUE;
+        return effect.isInfiniteDuration() || effect.getDuration() >= 72000 || effect.getDuration() == Integer.MAX_VALUE;
     }
 }
-

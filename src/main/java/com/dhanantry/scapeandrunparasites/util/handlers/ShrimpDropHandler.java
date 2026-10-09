@@ -1,31 +1,34 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.entity.ai.misc.EntityParasiteBase;
 import com.dhanantry.scapeandrunparasites.init.SRPItems;
-import com.dhanantry.scapeandrunparasites.phase.DimKeys;
-import com.dhanantry.scapeandrunparasites.world.celestial.CelestialNightData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 
+/**
+ * Parasites drop 1 to 5 shrimp (25 percent) while the "arrow" celestial event is active on the surface dimension.
+ * The celestial events ({@code world/celestial}, deferred) are not ported yet, so {@link #isArrowCelestialActive} is false
+ * until they are.
+ */
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class ShrimpDropHandler {
     @SubscribeEvent
-    public void onLivingDrops(LivingDropsEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity)) {
-            return;
-        }
-        if (event.getEntity().level() == null || event.getEntity().level().isClientSide) {
-            return;
-        }
+    public static void onLivingDrops(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
-        if (!this.isSRPMob(entity)) {
+        if (entity.level().isClientSide) {
             return;
         }
-        if (!this.isArrowCelestialActive(entity)) {
+        if (!(entity instanceof EntityParasiteBase)) {
+            return;
+        }
+        if (!isArrowCelestialActive(entity)) {
             return;
         }
         RandomSource rand = entity.getRandom();
@@ -39,24 +42,8 @@ public class ShrimpDropHandler {
         event.getDrops().add(drop);
     }
 
-    private boolean isSRPMob(LivingEntity entity) {
-        return entity instanceof EntityParasiteBase;
-    }
-
-    private boolean isArrowCelestialActive(LivingEntity entity) {
-        if (entity == null || entity.level() == null || entity.level().isClientSide) {
-            return false;
-        }
-        if (!entity.level().dimensionType().isSurfaceWorld()) {
-            return false;
-        }
-        String dim = DimKeys.of(entity.level());
-        CelestialNightData nightData = CelestialNightData.get(entity.level());
-        if (nightData == null) {
-            return false;
-        }
-        CelestialNightData.DimState state = nightData.getOrCreate(dim);
-        return state.active.contains("arrow") || state.forced.contains("arrow");
+    /** PLACEHOLDER: needs {@code CelestialNightData} (deferred celestial events); see PORTING_NOTES.md. */
+    private static boolean isArrowCelestialActive(LivingEntity entity) {
+        return false;
     }
 }
-

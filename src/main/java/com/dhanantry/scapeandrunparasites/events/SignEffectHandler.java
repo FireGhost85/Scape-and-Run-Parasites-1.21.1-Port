@@ -7,24 +7,27 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-@Mod.EventBusSubscriber(modid="srparasites")
+@EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public final class SignEffectHandler {
     private static final int DURATION_TICKS = 40;
     private static final String CHARM_ID = "srparasites:the_sign_charm";
     private static Item SIGN_ITEM;
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || e.player.level().isClientSide) {
+    public static void onPlayerTick(PlayerTickEvent.Post e) {
+        if (e.getEntity().level().isClientSide) {
             return;
         }
-        Player p = e.player;
+        Player p = e.getEntity();
         if (SIGN_ITEM == null) {
             SIGN_ITEM = BuiltInRegistries.ITEM.get(ResourceLocation.parse(CHARM_ID));
         }
-        if (SIGN_ITEM == null) {
+        if (SIGN_ITEM == null || SIGN_ITEM == net.minecraft.world.item.Items.AIR) {
             return;
         }
         boolean hasCharm = SignEffectHandler.hasItemAnywhere(p, SIGN_ITEM);
@@ -38,7 +41,7 @@ public final class SignEffectHandler {
             if (s.isEmpty() || s.getItem() != item) continue;
             return true;
         }
-        for (ItemStack s : p.getInventory().offHandInventory) {
+        for (ItemStack s : p.getInventory().offhand) {
             if (s.isEmpty() || s.getItem() != item) continue;
             return true;
         }

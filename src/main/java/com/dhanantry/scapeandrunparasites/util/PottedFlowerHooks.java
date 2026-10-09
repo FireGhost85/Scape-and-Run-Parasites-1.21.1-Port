@@ -8,8 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
@@ -22,33 +22,26 @@ public final class PottedFlowerHooks {
         if (e.getLevel().getBlockState(e.getPos()).getBlock() != Blocks.FLOWER_POT) {
             return;
         }
-        BlockEntity te = e.getLevel().getBlockEntity(e.getPos());
-        if (!(te instanceof TileEntityFlowerPot)) {
-            return;
-        }
-        if (!((TileEntityFlowerPot)te).getFlowerItemStack().isEmpty()) {
-            return;
-        }
         ItemStack held = e.getItemStack();
         if (held.isEmpty()) {
             return;
         }
         Item item = held.getItem();
         BlockPottedSRPFlower potted = null;
-        if (item == Item.getItemFromBlock((Block)SRPBlocks.ASSIMILATED_BLOSSOM.get())) {
+        if (item == SRPBlocks.ASSIMILATED_BLOSSOM.get().asItem()) {
             potted = SRPBlocks.POTTED_ASSIMILATED_BLOSSOM.get();
         }
         if (potted == null) {
             return;
         }
-        if (!e.getLevel().isClientSide) {
+        if (!e.getLevel().isClientSide()) {
             e.getLevel().setBlock(e.getPos(), potted.defaultBlockState(), 3);
-            if (!e.getEntityPlayer().getAbilities().instabuild) {
+            if (!e.getEntity().getAbilities().instabuild) {
                 held.shrink(1);
             }
         }
         e.setCanceled(true);
-        e.setCancellationResult(EnumActionResult.SUCCESS);
+        e.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
     }
 }
 

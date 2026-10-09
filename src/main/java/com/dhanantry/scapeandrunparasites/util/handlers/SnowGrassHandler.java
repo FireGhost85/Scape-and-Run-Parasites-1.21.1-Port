@@ -7,43 +7,43 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
+/** Snow that falls (or is placed) on short and tall grass turns it into the snowy grass blocks of the mod. */
 @EventBusSubscriber(modid = ScapeAndRunParasites.MODID)
 public class SnowGrassHandler {
     private static final int NATURAL_CHECK_RADIUS = 32;
     private static final int NATURAL_CHECKS_PER_PLAYER = 96;
 
     @SubscribeEvent
-    public static void onSnowPlaced(BlockEvent.PlaceEvent event) {
-        Level world = event.getLevel();
-        if (world.isClientSide) {
+    public static void onSnowPlaced(BlockEvent.EntityPlaceEvent event) {
+        if (!(event.getLevel() instanceof Level world) || world.isClientSide) {
             return;
         }
         if (event.getPlacedBlock().getBlock() != Blocks.SNOW) {
             return;
         }
         BlockPos pos = event.getPos();
-        BlockState replaced = event.getBlockSnapshot().getReplacedBlock();
-        if (SnowGrassHandler.isShortGrass(replaced)) {
+        BlockState replaced = event.getBlockSnapshot().getState();
+        if (isShortGrass(replaced)) {
             world.setBlock(pos, SRPBlocks.SnowShortGrass.get().defaultBlockState(), 3);
             return;
         }
-        if (SnowGrassHandler.isTallGrass(replaced)) {
-            SnowGrassHandler.convertTallGrass(world, pos, replaced);
+        if (isTallGrass(replaced)) {
+            convertTallGrass(world, pos, replaced);
         }
     }
 
     @SubscribeEvent
-    public static void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) {
-            return;
-        }
-        Level world = event.world;
+    public static void onWorldTick(LevelTickEvent.Post event) {
+        Level world = event.getLevel();
         if (world.isClientSide) {
             return;
         }
@@ -54,25 +54,27 @@ public class SnowGrassHandler {
             return;
         }
         for (Player player : world.players()) {
-            SnowGrassHandler.checkNaturalSnowAroundPlayer(world, player);
+            checkNaturalSnowAroundPlayer(world, player);
         }
     }
 
     private static void checkNaturalSnowAroundPlayer(Level world, Player player) {
         int centerX = (int)Math.floor(player.getX());
         int centerZ = (int)Math.floor(player.getZ());
-        for (int i = 0; i < 96; ++i) {
-            BlockState state;
-            BlockPos pos;
-            int z;
-            int x = centerX + world.random.nextInt(65) - 32;
-            BlockPos column = BlockPos.containing(x, 0, z = centerZ + world.random.nextInt(65) - 32);
-            if (!world.hasChunkAt(column) || !world.hasChunkAt(pos = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column)) || !SnowGrassHandler.isShortGrass(state = world.getBlockState(pos)) && !SnowGrassHandler.isTallGrass(state) || !SnowGrassHandler.canSnowHere(world, pos)) continue;
-            if (SnowGrassHandler.isShortGrass(state)) {
+        for (int i = 0; i < NATURAL_CHECKS_PER_PLAYER; ++i) {
+            int x = centerX + world.random.nextInt(NATURAL_CHECK_RADIUS * 2 + 1) - NATURAL_CHECK_RADIUS;
+            int z = centerZ + world.random.nextInt(NATURAL_CHECK_RADIUS * 2 + 1) - NATURAL_CHECK_RADIUS;
+            BlockPos column = new BlockPos(x, 0, z);
+            if (!world.hasChunkAt(column)) continue;
+            BlockPos pos = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);
+            if (!world.hasChunkAt(pos)) continue;
+            BlockState state = world.getBlockState(pos);
+            if (!isShortGrass(state) && !isTallGrass(state) || !canSnowHere(world, pos)) continue;
+            if (isShortGrass(state)) {
                 world.setBlock(pos, SRPBlocks.SnowShortGrass.get().defaultBlockState(), 3);
                 continue;
             }
-            SnowGrassHandler.convertTallGrass(world, pos, state);
+            convertTallGrass(world, pos, state);
         }
     }
 
@@ -80,47 +82,31 @@ public class SnowGrassHandler {
         if (!world.canSeeSky(pos.above())) {
             return false;
         }
-        if (world.getBiome(pos).value().getFloatTemperature(pos) > 0.15f) {
+        if (!world.getBiome(pos).value().coldEnoughToSnow(pos)) {
             return false;
         }
-        if (world.getBrightness(LightLayer.BLOCK, pos) >= 10) {
-            return false;
-        }
-        return world.dimensionType().canDoRainSnowIce(world.getChunkFromBlockCoords(pos));
+        return world.getBrightness(LightLayer.BLOCK, pos) < 10;
     }
 
     private static boolean isShortGrass(BlockState state) {
-        return state.getBlock() == Blocks.SHORT_GRASS && state.getValue((Property)BlockTallGrass.TYPE) == BlockTallGrass.EnumType.GRASS;
+        return state.is(Blocks.SHORT_GRASS);
     }
 
     private static boolean isTallGrass(BlockState state) {
-        if (state.getBlock() != Blocks.TALL_GRASS) {
-            return false;
-        }
-        if (state.getValue((Property)BlockDoublePlant.HALF) == BlockDoublePlant.EnumBlockHalf.UPPER) {
-            return true;
-        }
-        return state.getValue((Property)BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS;
+        return state.is(Blocks.TALL_GRASS);
     }
 
     private static void convertTallGrass(Level world, BlockPos pos, BlockState state) {
         BlockPos lowerPos = pos;
         BlockState lowerState = state;
-        if (state.getValue((Property)BlockDoublePlant.HALF) == BlockDoublePlant.EnumBlockHalf.UPPER) {
+        if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER) {
             lowerPos = pos.below();
             lowerState = world.getBlockState(lowerPos);
         }
-        if (lowerState.getBlock() != Blocks.TALL_GRASS) {
-            return;
-        }
-        if (lowerState.getValue((Property)BlockDoublePlant.HALF) != BlockDoublePlant.EnumBlockHalf.LOWER) {
-            return;
-        }
-        if (lowerState.getValue((Property)BlockDoublePlant.VARIANT) != BlockDoublePlant.EnumPlantType.GRASS) {
+        if (!lowerState.is(Blocks.TALL_GRASS) || lowerState.getValue(DoublePlantBlock.HALF) != DoubleBlockHalf.LOWER) {
             return;
         }
         world.removeBlock(lowerPos.above(), false);
         world.setBlock(lowerPos, SRPBlocks.SnowTallGrass.get().defaultBlockState(), 3);
     }
 }
-

@@ -23,6 +23,8 @@ public final class SRPNetwork {
         registrar.playToClient(MovingSoundPayload.TYPE, MovingSoundPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.movingSound(msg, ctx));
         registrar.playToClient(EvoPhaseCancelPayload.TYPE, EvoPhaseCancelPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.evoPhaseCancel(msg, ctx));
         registrar.playToClient(UpdateEvoPhasePayload.TYPE, UpdateEvoPhasePayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.updateEvoPhase(msg, ctx));
+        registrar.playToClient(EscapeOfferPayload.TYPE, EscapeOfferPayload.CODEC, (msg, ctx) -> ClientPayloadHandlers.escapeOffer(msg, ctx));
+        registrar.playToServer(RequestEscapePayload.TYPE, RequestEscapePayload.CODEC, (msg, ctx) -> com.dhanantry.scapeandrunparasites.feature.EscapeOnDeathHandler.requestEscape(msg, ctx));
         EffectsPayloads.register(registrar);
         BlocksPayloads.register(registrar);
         EntityPayloads.register(registrar);

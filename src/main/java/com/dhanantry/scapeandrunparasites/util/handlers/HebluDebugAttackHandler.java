@@ -1,5 +1,6 @@
 package com.dhanantry.scapeandrunparasites.util.handlers;
 
+import net.neoforged.fml.common.EventBusSubscriber;
 import com.dhanantry.scapeandrunparasites.ScapeAndRunParasites;
 import com.dhanantry.scapeandrunparasites.config.SRPConfigMobs;
 import com.dhanantry.scapeandrunparasites.entity.monster.derived.EntityHeblu;
@@ -66,8 +67,13 @@ public class HebluDebugAttackHandler {
         }
         closestHeblu.spawnLightBarrage(target, true);
         closestHeblu.resetIdleTime();
-        event.setCanceled(true);
-        event.setCancellationResult(InteractionResult.SUCCESS);
+        if (event instanceof PlayerInteractEvent.RightClickItem ri) {
+            ri.setCanceled(true);
+            ri.setCancellationResult(InteractionResult.SUCCESS);
+        } else if (event instanceof PlayerInteractEvent.RightClickBlock rb) {
+            rb.setCanceled(true);
+            rb.setCancellationResult(InteractionResult.SUCCESS);
+        }
     }
 
     private static EntityHeblu findClosestHeblu(Player player) {
