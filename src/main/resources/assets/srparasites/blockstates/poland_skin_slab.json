@@ -1,0 +1,22 @@
+{
+ "variants": {
+  "type=top,waterlogged=true": {
+   "model": "srparasites:block/poland_skin_slab_top"
+  },
+  "type=top,waterlogged=false": {
+   "model": "srparasites:block/poland_skin_slab_top"
+  },
+  "type=bottom,waterlogged=true": {
+   "model": "srparasites:block/poland_skin_slab"
+  },
+  "type=bottom,waterlogged=false": {
+   "model": "srparasites:block/poland_skin_slab"
+  },
+  "type=double,waterlogged=true": {
+   "model": "srparasites:block/poland_skin_slab_double"
+  },
+  "type=double,waterlogged=false": {
+   "model": "srparasites:block/poland_skin_slab_double"
+  }
+ }
+}

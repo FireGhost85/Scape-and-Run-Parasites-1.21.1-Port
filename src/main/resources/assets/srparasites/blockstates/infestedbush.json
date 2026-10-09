@@ -1,0 +1,547 @@
+{
+ "variants": {
+  "end=true,node=true,variant=infected": [
+   {
+    "model": "srparasites:block/infestedbush_infected"
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=grass1": [
+   {
+    "model": "srparasites:block/infestedbush_grass1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=flower1": [
+   {
+    "model": "srparasites:block/infestedbush_flower1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=spine": [
+   {
+    "model": "srparasites:block/infestedbush_spine_end_node"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end_node",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end_node",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end_node",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=vine": [
+   {
+    "model": "srparasites:block/infestedbush_vine"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=arc": [
+   {
+    "model": "srparasites:block/infestedbush_arc"
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=infected": [
+   {
+    "model": "srparasites:block/infestedbush_infected"
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=grass1": [
+   {
+    "model": "srparasites:block/infestedbush_grass1_node"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1_node",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1_node",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1_node",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=flower1": [
+   {
+    "model": "srparasites:block/infestedbush_flower1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=spine": [
+   {
+    "model": "srparasites:block/infestedbush_spine_end"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_end",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=vine": [
+   {
+    "model": "srparasites:block/infestedbush_vine"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=arc": [
+   {
+    "model": "srparasites:block/infestedbush_arc"
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=infected": [
+   {
+    "model": "srparasites:block/infestedbush_infected"
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=grass1": [
+   {
+    "model": "srparasites:block/infestedbush_grass1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=flower1": [
+   {
+    "model": "srparasites:block/infestedbush_flower1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=spine": [
+   {
+    "model": "srparasites:block/infestedbush_spine_node"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_node",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_node",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine_node",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2_node"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2_node",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2_node",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2_node",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=vine": [
+   {
+    "model": "srparasites:block/infestedbush_vine"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=arc": [
+   {
+    "model": "srparasites:block/infestedbush_arc"
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=infected": [
+   {
+    "model": "srparasites:block/infestedbush_infected"
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_infected",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=grass1": [
+   {
+    "model": "srparasites:block/infestedbush_grass1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass1",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12"
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_grass12",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=flower1": [
+   {
+    "model": "srparasites:block/infestedbush_flower1"
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_flower1",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=spine": [
+   {
+    "model": "srparasites:block/infestedbush_spine"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2"
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_spine2",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=vine": [
+   {
+    "model": "srparasites:block/infestedbush_vine"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine",
+    "y": 270
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2"
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_vine2",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=arc": [
+   {
+    "model": "srparasites:block/infestedbush_arc"
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedbush_arc",
+    "y": 270
+   }
+  ]
+ }
+}

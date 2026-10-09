@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "active=true,depleted=true": {
+   "model": "srparasites:block/alveoli_active"
+  },
+  "active=true,depleted=false": {
+   "model": "srparasites:block/alveoli_active"
+  },
+  "active=false,depleted=true": {
+   "model": "srparasites:block/alveoli_inactive"
+  },
+  "active=false,depleted=false": {
+   "model": "srparasites:block/alveoli_inactive"
+  }
+ }
+}

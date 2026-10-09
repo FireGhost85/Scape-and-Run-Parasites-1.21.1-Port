@@ -1,0 +1,148 @@
+{
+ "variants": {
+  "type=top,variant=flesh,waterlogged=true": {
+   "model": "srparasites:block/slabflesh_top"
+  },
+  "type=top,variant=flesh,waterlogged=false": {
+   "model": "srparasites:block/slabflesh_top"
+  },
+  "type=top,variant=bone,waterlogged=true": {
+   "model": "srparasites:block/slabbone_top"
+  },
+  "type=top,variant=bone,waterlogged=false": {
+   "model": "srparasites:block/slabbone_top"
+  },
+  "type=top,variant=stone,waterlogged=true": {
+   "model": "srparasites:block/slabstone_top"
+  },
+  "type=top,variant=stone,waterlogged=false": {
+   "model": "srparasites:block/slabstone_top"
+  },
+  "type=top,variant=stonedebris,waterlogged=true": {
+   "model": "srparasites:block/slabstonedebris_top"
+  },
+  "type=top,variant=stonedebris,waterlogged=false": {
+   "model": "srparasites:block/slabstonedebris_top"
+  },
+  "type=top,variant=wood,waterlogged=true": {
+   "model": "srparasites:block/slabwood_top"
+  },
+  "type=top,variant=wood,waterlogged=false": {
+   "model": "srparasites:block/slabwood_top"
+  },
+  "type=top,variant=bricks,waterlogged=true": {
+   "model": "srparasites:block/slabbricks_top"
+  },
+  "type=top,variant=bricks,waterlogged=false": {
+   "model": "srparasites:block/slabbricks_top"
+  },
+  "type=top,variant=metal,waterlogged=true": {
+   "model": "srparasites:block/slabmetal_top"
+  },
+  "type=top,variant=metal,waterlogged=false": {
+   "model": "srparasites:block/slabmetal_top"
+  },
+  "type=top,variant=obsidian,waterlogged=true": {
+   "model": "srparasites:block/slabobsidian_top"
+  },
+  "type=top,variant=obsidian,waterlogged=false": {
+   "model": "srparasites:block/slabobsidian_top"
+  },
+  "type=bottom,variant=flesh,waterlogged=true": {
+   "model": "srparasites:block/slabflesh_bottom"
+  },
+  "type=bottom,variant=flesh,waterlogged=false": {
+   "model": "srparasites:block/slabflesh_bottom"
+  },
+  "type=bottom,variant=bone,waterlogged=true": {
+   "model": "srparasites:block/slabbone_bottom"
+  },
+  "type=bottom,variant=bone,waterlogged=false": {
+   "model": "srparasites:block/slabbone_bottom"
+  },
+  "type=bottom,variant=stone,waterlogged=true": {
+   "model": "srparasites:block/slabstone_bottom"
+  },
+  "type=bottom,variant=stone,waterlogged=false": {
+   "model": "srparasites:block/slabstone_bottom"
+  },
+  "type=bottom,variant=stonedebris,waterlogged=true": {
+   "model": "srparasites:block/slabstonedebris_bottom"
+  },
+  "type=bottom,variant=stonedebris,waterlogged=false": {
+   "model": "srparasites:block/slabstonedebris_bottom"
+  },
+  "type=bottom,variant=wood,waterlogged=true": {
+   "model": "srparasites:block/slabwood_bottom"
+  },
+  "type=bottom,variant=wood,waterlogged=false": {
+   "model": "srparasites:block/slabwood_bottom"
+  },
+  "type=bottom,variant=bricks,waterlogged=true": {
+   "model": "srparasites:block/slabbricks_bottom"
+  },
+  "type=bottom,variant=bricks,waterlogged=false": {
+   "model": "srparasites:block/slabbricks_bottom"
+  },
+  "type=bottom,variant=metal,waterlogged=true": {
+   "model": "srparasites:block/slabmetal_bottom"
+  },
+  "type=bottom,variant=metal,waterlogged=false": {
+   "model": "srparasites:block/slabmetal_bottom"
+  },
+  "type=bottom,variant=obsidian,waterlogged=true": {
+   "model": "srparasites:block/slabobsidian_bottom"
+  },
+  "type=bottom,variant=obsidian,waterlogged=false": {
+   "model": "srparasites:block/slabobsidian_bottom"
+  },
+  "type=double,variant=flesh,waterlogged=true": {
+   "model": "srparasites:block/slabflesh_double"
+  },
+  "type=double,variant=flesh,waterlogged=false": {
+   "model": "srparasites:block/slabflesh_double"
+  },
+  "type=double,variant=bone,waterlogged=true": {
+   "model": "srparasites:block/slabbone_double"
+  },
+  "type=double,variant=bone,waterlogged=false": {
+   "model": "srparasites:block/slabbone_double"
+  },
+  "type=double,variant=stone,waterlogged=true": {
+   "model": "srparasites:block/slabstone_double"
+  },
+  "type=double,variant=stone,waterlogged=false": {
+   "model": "srparasites:block/slabstone_double"
+  },
+  "type=double,variant=stonedebris,waterlogged=true": {
+   "model": "srparasites:block/slabstonedebris_double"
+  },
+  "type=double,variant=stonedebris,waterlogged=false": {
+   "model": "srparasites:block/slabstonedebris_double"
+  },
+  "type=double,variant=wood,waterlogged=true": {
+   "model": "srparasites:block/slabwood_double"
+  },
+  "type=double,variant=wood,waterlogged=false": {
+   "model": "srparasites:block/slabwood_double"
+  },
+  "type=double,variant=bricks,waterlogged=true": {
+   "model": "srparasites:block/slabbricks_double"
+  },
+  "type=double,variant=bricks,waterlogged=false": {
+   "model": "srparasites:block/slabbricks_double"
+  },
+  "type=double,variant=metal,waterlogged=true": {
+   "model": "srparasites:block/slabmetal_double"
+  },
+  "type=double,variant=metal,waterlogged=false": {
+   "model": "srparasites:block/slabmetal_double"
+  },
+  "type=double,variant=obsidian,waterlogged=true": {
+   "model": "srparasites:block/slabobsidian_double"
+  },
+  "type=double,variant=obsidian,waterlogged=false": {
+   "model": "srparasites:block/slabobsidian_double"
+  }
+ }
+}

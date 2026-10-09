@@ -1,0 +1,130 @@
+{
+ "variants": {
+  "type=top,variant=dirt,waterlogged=true": {
+   "model": "srparasites:block/slabdirt_top"
+  },
+  "type=top,variant=dirt,waterlogged=false": {
+   "model": "srparasites:block/slabdirt_top"
+  },
+  "type=top,variant=mud,waterlogged=true": {
+   "model": "srparasites:block/slabmud_top"
+  },
+  "type=top,variant=mud,waterlogged=false": {
+   "model": "srparasites:block/slabmud_top"
+  },
+  "type=top,variant=sflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsflesh_top"
+  },
+  "type=top,variant=sflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsflesh_top"
+  },
+  "type=top,variant=feeler,waterlogged=true": {
+   "model": "srparasites:block/slabfeeler_top"
+  },
+  "type=top,variant=feeler,waterlogged=false": {
+   "model": "srparasites:block/slabfeeler_top"
+  },
+  "type=top,variant=spore,waterlogged=true": {
+   "model": "srparasites:block/slabspore_top"
+  },
+  "type=top,variant=spore,waterlogged=false": {
+   "model": "srparasites:block/slabspore_top"
+  },
+  "type=top,variant=red,waterlogged=true": {
+   "model": "srparasites:block/slabred_top"
+  },
+  "type=top,variant=red,waterlogged=false": {
+   "model": "srparasites:block/slabred_top"
+  },
+  "type=top,variant=sackflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsackflesh_top"
+  },
+  "type=top,variant=sackflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsackflesh_top"
+  },
+  "type=bottom,variant=dirt,waterlogged=true": {
+   "model": "srparasites:block/slabdirt_bottom"
+  },
+  "type=bottom,variant=dirt,waterlogged=false": {
+   "model": "srparasites:block/slabdirt_bottom"
+  },
+  "type=bottom,variant=mud,waterlogged=true": {
+   "model": "srparasites:block/slabmud_bottom"
+  },
+  "type=bottom,variant=mud,waterlogged=false": {
+   "model": "srparasites:block/slabmud_bottom"
+  },
+  "type=bottom,variant=sflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsflesh_bottom"
+  },
+  "type=bottom,variant=sflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsflesh_bottom"
+  },
+  "type=bottom,variant=feeler,waterlogged=true": {
+   "model": "srparasites:block/slabfeeler_bottom"
+  },
+  "type=bottom,variant=feeler,waterlogged=false": {
+   "model": "srparasites:block/slabfeeler_bottom"
+  },
+  "type=bottom,variant=spore,waterlogged=true": {
+   "model": "srparasites:block/slabspore_bottom"
+  },
+  "type=bottom,variant=spore,waterlogged=false": {
+   "model": "srparasites:block/slabspore_bottom"
+  },
+  "type=bottom,variant=red,waterlogged=true": {
+   "model": "srparasites:block/slabred_bottom"
+  },
+  "type=bottom,variant=red,waterlogged=false": {
+   "model": "srparasites:block/slabred_bottom"
+  },
+  "type=bottom,variant=sackflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsackflesh_bottom"
+  },
+  "type=bottom,variant=sackflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsackflesh_bottom"
+  },
+  "type=double,variant=dirt,waterlogged=true": {
+   "model": "srparasites:block/slabdirt_double"
+  },
+  "type=double,variant=dirt,waterlogged=false": {
+   "model": "srparasites:block/slabdirt_double"
+  },
+  "type=double,variant=mud,waterlogged=true": {
+   "model": "srparasites:block/slabmud_double"
+  },
+  "type=double,variant=mud,waterlogged=false": {
+   "model": "srparasites:block/slabmud_double"
+  },
+  "type=double,variant=sflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsflesh_double"
+  },
+  "type=double,variant=sflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsflesh_double"
+  },
+  "type=double,variant=feeler,waterlogged=true": {
+   "model": "srparasites:block/slabfeeler_double"
+  },
+  "type=double,variant=feeler,waterlogged=false": {
+   "model": "srparasites:block/slabfeeler_double"
+  },
+  "type=double,variant=spore,waterlogged=true": {
+   "model": "srparasites:block/slabspore_double"
+  },
+  "type=double,variant=spore,waterlogged=false": {
+   "model": "srparasites:block/slabspore_double"
+  },
+  "type=double,variant=red,waterlogged=true": {
+   "model": "srparasites:block/slabred_double"
+  },
+  "type=double,variant=red,waterlogged=false": {
+   "model": "srparasites:block/slabred_double"
+  },
+  "type=double,variant=sackflesh,waterlogged=true": {
+   "model": "srparasites:block/slabsackflesh_double"
+  },
+  "type=double,variant=sackflesh,waterlogged=false": {
+   "model": "srparasites:block/slabsackflesh_double"
+  }
+ }
+}

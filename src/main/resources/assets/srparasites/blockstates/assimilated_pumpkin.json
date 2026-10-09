@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "srparasites:block/assimilated_pumpkin"
+  },
+  "facing=south": {
+   "model": "srparasites:block/assimilated_pumpkin",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "srparasites:block/assimilated_pumpkin",
+   "y": 270
+  },
+  "facing=east": {
+   "model": "srparasites:block/assimilated_pumpkin",
+   "y": 90
+  }
+ }
+}

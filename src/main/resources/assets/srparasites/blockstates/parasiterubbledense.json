@@ -1,0 +1,55 @@
+{
+ "variants": {
+  "variant=wall": [
+   {
+    "model": "srparasites:block/parasiterubbledense_wall"
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_wall",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_wall",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_wall",
+    "y": 270
+   }
+  ],
+  "variant=biome": [
+   {
+    "model": "srparasites:block/parasiterubbledense_biome"
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_biome",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_biome",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_biome",
+    "y": 270
+   }
+  ],
+  "variant=colony": [
+   {
+    "model": "srparasites:block/parasiterubbledense_colony"
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_colony",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_colony",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubbledense_colony",
+    "y": 270
+   }
+  ]
+ }
+}

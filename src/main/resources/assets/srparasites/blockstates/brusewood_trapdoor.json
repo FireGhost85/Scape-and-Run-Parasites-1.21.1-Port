@@ -1,0 +1,292 @@
+{
+ "variants": {
+  "facing=north,half=top,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=top,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=north,half=bottom,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 270,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=top,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=south,half=bottom,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 90,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=top,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=west,half=bottom,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs",
+   "y": 180,
+   "uvlock": true
+  },
+  "facing=east,half=top,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=top,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=true,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=true,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=true,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=true,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=false,powered=true,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=false,powered=true,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=false,powered=false,waterlogged=true": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  },
+  "facing=east,half=bottom,open=false,powered=false,waterlogged=false": {
+   "model": "srparasites:block/consumed_planks_stairs"
+  }
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "axis=x": {
+   "model": "srparasites:block/infested_column",
+   "x": 90,
+   "y": 90
+  },
+  "axis=y": {
+   "model": "srparasites:block/infested_column"
+  },
+  "axis=z": {
+   "model": "srparasites:block/infested_column",
+   "x": 90
+  }
+ }
+}

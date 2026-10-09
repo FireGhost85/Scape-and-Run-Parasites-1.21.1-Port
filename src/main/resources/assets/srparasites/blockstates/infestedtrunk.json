@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "axis=x": {
+   "model": "srparasites:block/infestedtrunk",
+   "x": 90,
+   "y": 90
+  },
+  "axis=y": {
+   "model": "srparasites:block/infestedtrunk"
+  },
+  "axis=z": {
+   "model": "srparasites:block/infestedtrunk",
+   "x": 90
+  }
+ }
+}

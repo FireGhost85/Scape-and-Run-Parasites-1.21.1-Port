@@ -1,0 +1,20 @@
+{
+ "multipart": [
+  {
+   "apply": {
+    "model": "srparasites:block/tresses_hair_bottom"
+   },
+   "when": {
+    "half": "lower"
+   }
+  },
+  {
+   "apply": {
+    "model": "srparasites:block/tresses_hair_top"
+   },
+   "when": {
+    "half": "upper"
+   }
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "variants": {
+  "axis=x,variant=ball": {
+   "model": "srparasites:block/parasitetrunk_ball",
+   "x": 90,
+   "y": 90
+  },
+  "axis=x,variant=tree": {
+   "model": "srparasites:block/parasitetrunk_tree",
+   "x": 90,
+   "y": 90
+  },
+  "axis=x,variant=plant": {
+   "model": "srparasites:block/parasitetrunk_plant",
+   "x": 90,
+   "y": 90
+  },
+  "axis=x,variant=circle": {
+   "model": "srparasites:block/parasitetrunk_circle",
+   "x": 90,
+   "y": 90
+  },
+  "axis=x,variant=deadhead": [
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead",
+    "x": 90,
+    "y": 90,
+    "weight": 19
+   },
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead_rare",
+    "x": 90,
+    "y": 90,
+    "weight": 1
+   }
+  ],
+  "axis=y,variant=ball": {
+   "model": "srparasites:block/parasitetrunk_ball"
+  },
+  "axis=y,variant=tree": {
+   "model": "srparasites:block/parasitetrunk_tree"
+  },
+  "axis=y,variant=plant": {
+   "model": "srparasites:block/parasitetrunk_plant"
+  },
+  "axis=y,variant=circle": {
+   "model": "srparasites:block/parasitetrunk_circle"
+  },
+  "axis=y,variant=deadhead": [
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead",
+    "weight": 19
+   },
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead_rare",
+    "weight": 1
+   }
+  ],
+  "axis=z,variant=ball": {
+   "model": "srparasites:block/parasitetrunk_ball",
+   "x": 90
+  },
+  "axis=z,variant=tree": {
+   "model": "srparasites:block/parasitetrunk_tree",
+   "x": 90
+  },
+  "axis=z,variant=plant": {
+   "model": "srparasites:block/parasitetrunk_plant",
+   "x": 90
+  },
+  "axis=z,variant=circle": {
+   "model": "srparasites:block/parasitetrunk_circle",
+   "x": 90
+  },
+  "axis=z,variant=deadhead": [
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead",
+    "x": 90,
+    "weight": 19
+   },
+   {
+    "model": "srparasites:block/parasitetrunk_deadhead_rare",
+    "x": 90,
+    "weight": 1
+   }
+  ]
+ }
+}

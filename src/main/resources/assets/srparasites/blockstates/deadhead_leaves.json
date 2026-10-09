@@ -1,0 +1,28 @@
+{
+ "variants": {
+  "check_decay=true,decayable=true,snowy=true": {
+   "model": "srparasites:block/deadhead_leaves_snow"
+  },
+  "check_decay=true,decayable=true,snowy=false": {
+   "model": "srparasites:block/deadhead_leaves"
+  },
+  "check_decay=true,decayable=false,snowy=true": {
+   "model": "srparasites:block/deadhead_leaves_snow"
+  },
+  "check_decay=true,decayable=false,snowy=false": {
+   "model": "srparasites:block/deadhead_leaves"
+  },
+  "check_decay=false,decayable=true,snowy=true": {
+   "model": "srparasites:block/deadhead_leaves_snow"
+  },
+  "check_decay=false,decayable=true,snowy=false": {
+   "model": "srparasites:block/deadhead_leaves"
+  },
+  "check_decay=false,decayable=false,snowy=true": {
+   "model": "srparasites:block/deadhead_leaves_snow"
+  },
+  "check_decay=false,decayable=false,snowy=false": {
+   "model": "srparasites:block/deadhead_leaves"
+  }
+ }
+}

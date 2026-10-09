@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "active=0": {
+   "model": "srparasites:block/biomeheart"
+  },
+  "active=1": {
+   "model": "srparasites:block/biomeheart"
+  },
+  "active=2": {
+   "model": "srparasites:block/biomeheart"
+  },
+  "active=3": {
+   "model": "srparasites:block/biomeheart"
+  }
+ }
+}

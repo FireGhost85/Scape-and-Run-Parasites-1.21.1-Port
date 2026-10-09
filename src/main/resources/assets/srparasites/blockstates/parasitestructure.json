@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "active=0": {
+   "model": "srparasites:block/parasitestain_dirt"
+  },
+  "active=1": {
+   "model": "srparasites:block/parasitestain_dirt"
+  },
+  "active=2": {
+   "model": "srparasites:block/parasitestain_dirt"
+  },
+  "active=3": {
+   "model": "srparasites:block/parasitestain_dirt"
+  }
+ }
+}

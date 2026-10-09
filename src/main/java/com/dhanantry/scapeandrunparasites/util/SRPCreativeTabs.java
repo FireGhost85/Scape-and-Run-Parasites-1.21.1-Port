@@ -21,6 +21,9 @@ public final class SRPCreativeTabs {
             .icon(() -> new ItemStack(SRPItems.itembase.get()))
             .displayItems((parameters, output) -> {
                 for (Item item : BuiltInRegistries.ITEM) {
+                    if (item instanceof net.neoforged.neoforge.common.DeferredSpawnEggItem && !com.dhanantry.scapeandrunparasites.config.SRPConfig.vanillaEggs) {
+                        continue;
+                    }
                     if (ScapeAndRunParasites.MODID.equals(BuiltInRegistries.ITEM.getKey(item).getNamespace())) {
                         output.accept(item);
                     }

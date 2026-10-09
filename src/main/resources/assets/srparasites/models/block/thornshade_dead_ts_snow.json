@@ -1,0 +1,6 @@
+{
+ "parent": "minecraft:block/cross",
+ "textures": {
+  "cross": "srparasites:block/dead_ts_snow"
+ }
+}

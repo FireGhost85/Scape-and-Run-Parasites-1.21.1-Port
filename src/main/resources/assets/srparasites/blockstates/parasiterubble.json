@@ -1,0 +1,418 @@
+{
+ "variants": {
+  "snowy=true,variant=flesh": [
+   {
+    "model": "srparasites:block/parasiterubble_flesh"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=bone": [
+   {
+    "model": "srparasites:block/parasiterubble_bone"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=stone": [
+   {
+    "model": "srparasites:block/parasiterubble_stone"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=stonedebris": [
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=wood": [
+   {
+    "model": "srparasites:block/parasiterubble_wood"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=bricks": [
+   {
+    "model": "srparasites:block/parasiterubble_bricks"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=metal": [
+   {
+    "model": "srparasites:block/parasiterubble_metal"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=obsidian": [
+   {
+    "model": "srparasites:block/parasiterubble_obsidian"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=fungus": [
+   {
+    "model": "srparasites:block/parasiterubble_fungus"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=weathb": [
+   {
+    "model": "srparasites:block/parasiterubble_weathb"
+   }
+  ],
+  "snowy=true,variant=weathbs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbs"
+   }
+  ],
+  "snowy=true,variant=weathbc": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbc"
+   }
+  ],
+  "snowy=true,variant=weathbcs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbcs"
+   }
+  ],
+  "snowy=true,variant=weathfs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathfs"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 270
+   }
+  ],
+  "snowy=true,variant=weathfss": [
+   {
+    "model": "srparasites:block/parasiterubble_weathfss"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=flesh": [
+   {
+    "model": "srparasites:block/parasiterubble_flesh"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_flesh",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=bone": [
+   {
+    "model": "srparasites:block/parasiterubble_bone"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bone",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=stone": [
+   {
+    "model": "srparasites:block/parasiterubble_stone"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stone",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=stonedebris": [
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_stonedebris",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=wood": [
+   {
+    "model": "srparasites:block/parasiterubble_wood"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_wood",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=bricks": [
+   {
+    "model": "srparasites:block/parasiterubble_bricks"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_bricks",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=metal": [
+   {
+    "model": "srparasites:block/parasiterubble_metal"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_metal",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=obsidian": [
+   {
+    "model": "srparasites:block/parasiterubble_obsidian"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_obsidian",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=fungus": [
+   {
+    "model": "srparasites:block/parasiterubble_fungus"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_fungus",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=weathb": [
+   {
+    "model": "srparasites:block/parasiterubble_weathb"
+   }
+  ],
+  "snowy=false,variant=weathbs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbs"
+   }
+  ],
+  "snowy=false,variant=weathbc": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbc"
+   }
+  ],
+  "snowy=false,variant=weathbcs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathbcs"
+   }
+  ],
+  "snowy=false,variant=weathfs": [
+   {
+    "model": "srparasites:block/parasiterubble_weathfs"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfs",
+    "y": 270
+   }
+  ],
+  "snowy=false,variant=weathfss": [
+   {
+    "model": "srparasites:block/parasiterubble_weathfss"
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasiterubble_weathfss",
+    "y": 270
+   }
+  ]
+ }
+}

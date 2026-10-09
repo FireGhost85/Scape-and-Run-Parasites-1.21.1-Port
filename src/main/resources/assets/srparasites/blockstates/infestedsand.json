@@ -1,0 +1,208 @@
+{
+ "variants": {
+  "snowy=true,stage=0": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=true,stage=1": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=true,stage=2": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=true,stage=3": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=true,stage=4": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=true,stage=5": [
+   {
+    "model": "srparasites:block/infestedsand_snow"
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand_snow",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=0": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=1": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=2": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=3": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=4": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ],
+  "snowy=false,stage=5": [
+   {
+    "model": "srparasites:block/infestedsand"
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/infestedsand",
+    "y": 270
+   }
+  ]
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "variants": {
+  "variant=co": [
+   {
+    "model": "srparasites:block/infestedore_co"
+   },
+   {
+    "model": "srparasites:block/infestedore_co"
+   },
+   {
+    "model": "srparasites:block/infestedore_co"
+   },
+   {
+    "model": "srparasites:block/infestedore_co"
+   }
+  ],
+  "variant=dia": [
+   {
+    "model": "srparasites:block/infestedore_dia"
+   },
+   {
+    "model": "srparasites:block/infestedore_dia"
+   },
+   {
+    "model": "srparasites:block/infestedore_dia"
+   },
+   {
+    "model": "srparasites:block/infestedore_dia"
+   }
+  ],
+  "variant=eme": [
+   {
+    "model": "srparasites:block/infestedore_eme"
+   },
+   {
+    "model": "srparasites:block/infestedore_eme"
+   },
+   {
+    "model": "srparasites:block/infestedore_eme"
+   },
+   {
+    "model": "srparasites:block/infestedore_eme"
+   }
+  ],
+  "variant=gol": [
+   {
+    "model": "srparasites:block/infestedore_gol"
+   },
+   {
+    "model": "srparasites:block/infestedore_gol"
+   },
+   {
+    "model": "srparasites:block/infestedore_gol"
+   },
+   {
+    "model": "srparasites:block/infestedore_gol"
+   }
+  ],
+  "variant=iro": [
+   {
+    "model": "srparasites:block/infestedore_iro"
+   },
+   {
+    "model": "srparasites:block/infestedore_iro"
+   },
+   {
+    "model": "srparasites:block/infestedore_iro"
+   },
+   {
+    "model": "srparasites:block/infestedore_iro"
+   }
+  ],
+  "variant=lap": [
+   {
+    "model": "srparasites:block/infestedore_lap"
+   },
+   {
+    "model": "srparasites:block/infestedore_lap"
+   },
+   {
+    "model": "srparasites:block/infestedore_lap"
+   },
+   {
+    "model": "srparasites:block/infestedore_lap"
+   }
+  ],
+  "variant=red": [
+   {
+    "model": "srparasites:block/infestedore_red"
+   },
+   {
+    "model": "srparasites:block/infestedore_red"
+   },
+   {
+    "model": "srparasites:block/infestedore_red"
+   },
+   {
+    "model": "srparasites:block/infestedore_red"
+   }
+  ],
+  "variant=un": [
+   {
+    "model": "srparasites:block/infestedore_un"
+   },
+   {
+    "model": "srparasites:block/infestedore_un"
+   },
+   {
+    "model": "srparasites:block/infestedore_un"
+   },
+   {
+    "model": "srparasites:block/infestedore_un"
+   }
+  ]
+ }
+}

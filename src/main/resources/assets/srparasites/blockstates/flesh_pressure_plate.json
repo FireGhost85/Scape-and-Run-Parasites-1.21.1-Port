@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "powered=true": {
+   "model": "srparasites:block/flesh_pressure_plate_down"
+  },
+  "powered=false": {
+   "model": "srparasites:block/flesh_pressure_plate_up"
+  }
+ }
+}

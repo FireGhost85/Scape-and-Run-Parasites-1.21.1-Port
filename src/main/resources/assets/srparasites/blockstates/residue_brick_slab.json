@@ -1,0 +1,22 @@
+{
+ "variants": {
+  "type=top,waterlogged=true": {
+   "model": "srparasites:block/residue_brick_slab_top"
+  },
+  "type=top,waterlogged=false": {
+   "model": "srparasites:block/residue_brick_slab_top"
+  },
+  "type=bottom,waterlogged=true": {
+   "model": "srparasites:block/residue_brick_slab"
+  },
+  "type=bottom,waterlogged=false": {
+   "model": "srparasites:block/residue_brick_slab"
+  },
+  "type=double,waterlogged=true": {
+   "model": "srparasites:block/residue_brick_slab_double"
+  },
+  "type=double,waterlogged=false": {
+   "model": "srparasites:block/residue_brick_slab_double"
+  }
+ }
+}

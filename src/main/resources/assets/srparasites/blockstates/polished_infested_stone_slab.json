@@ -1,0 +1,22 @@
+{
+ "variants": {
+  "type=top,waterlogged=true": {
+   "model": "srparasites:block/polished_infested_stone_slab_top"
+  },
+  "type=top,waterlogged=false": {
+   "model": "srparasites:block/polished_infested_stone_slab_top"
+  },
+  "type=bottom,waterlogged=true": {
+   "model": "srparasites:block/polished_infested_stone_slab"
+  },
+  "type=bottom,waterlogged=false": {
+   "model": "srparasites:block/polished_infested_stone_slab"
+  },
+  "type=double,waterlogged=true": {
+   "model": "srparasites:block/polished_infested_stone_slab_double"
+  },
+  "type=double,waterlogged=false": {
+   "model": "srparasites:block/polished_infested_stone_slab_double"
+  }
+ }
+}

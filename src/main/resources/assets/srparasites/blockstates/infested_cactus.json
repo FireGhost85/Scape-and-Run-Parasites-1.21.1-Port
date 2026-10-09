@@ -1,0 +1,164 @@
+{
+ "variants": {
+  "age=0": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=1": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=2": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=3": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=4": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=5": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=6": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=7": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=8": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=9": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=10": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=11": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=12": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=13": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=14": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ],
+  "age=15": [
+   {
+    "model": "srparasites:block/infested_cactus",
+    "weight": 95
+   },
+   {
+    "model": "srparasites:block/infested_cactus_maw",
+    "weight": 5
+   }
+  ]
+ }
+}

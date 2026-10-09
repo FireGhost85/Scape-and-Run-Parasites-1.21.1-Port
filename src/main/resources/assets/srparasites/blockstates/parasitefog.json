@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "air=0": [
+   {
+    "model": "srparasites:block/parasite_fog"
+   }
+  ],
+  "air=1": [
+   {
+    "model": "srparasites:block/parasite_fog"
+   }
+  ],
+  "air=2": [
+   {
+    "model": "srparasites:block/parasite_fog"
+   }
+  ]
+ }
+}

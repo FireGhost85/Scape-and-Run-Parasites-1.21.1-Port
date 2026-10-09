@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "srparasites:block/relaycontroller"
+  },
+  "facing=south": {
+   "model": "srparasites:block/relaycontroller"
+  },
+  "facing=west": {
+   "model": "srparasites:block/relaycontroller"
+  },
+  "facing=east": {
+   "model": "srparasites:block/relaycontroller"
+  }
+ }
+}

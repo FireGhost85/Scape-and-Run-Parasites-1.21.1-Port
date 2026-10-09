@@ -1,0 +1,344 @@
+{
+ "variants": {
+  "end=true,node=true,variant=tendril": [
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=bine": [
+   {
+    "model": "srparasites:block/parasitebush_bine_end"
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=pop": [
+   {
+    "model": "srparasites:block/parasitebush_pop"
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=eye": [
+   {
+    "model": "srparasites:block/parasitebush_eye"
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 270
+   }
+  ],
+  "end=true,node=true,variant=tooh": [
+   {
+    "model": "srparasites:block/parasitebush_tooh"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=tendril": [
+   {
+    "model": "srparasites:block/parasitebush_tendril_end"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_end",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_end",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_end",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=bine": [
+   {
+    "model": "srparasites:block/parasitebush_bine_end"
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_end",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=pop": [
+   {
+    "model": "srparasites:block/parasitebush_pop"
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=eye": [
+   {
+    "model": "srparasites:block/parasitebush_eye"
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 270
+   }
+  ],
+  "end=true,node=false,variant=tooh": [
+   {
+    "model": "srparasites:block/parasitebush_tooh"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=tendril": [
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril_bottom",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=bine": [
+   {
+    "model": "srparasites:block/parasitebush_bine_top"
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_top",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_top",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine_top",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=pop": [
+   {
+    "model": "srparasites:block/parasitebush_pop"
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=eye": [
+   {
+    "model": "srparasites:block/parasitebush_eye"
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 270
+   }
+  ],
+  "end=false,node=true,variant=tooh": [
+   {
+    "model": "srparasites:block/parasitebush_tooh_node"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh_node",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh_node",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh_node",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=tendril": [
+   {
+    "model": "srparasites:block/parasitebush_tendril"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tendril",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=bine": [
+   {
+    "model": "srparasites:block/parasitebush_bine"
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_bine",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=pop": [
+   {
+    "model": "srparasites:block/parasitebush_pop"
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_pop",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=eye": [
+   {
+    "model": "srparasites:block/parasitebush_eye"
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_eye",
+    "y": 270
+   }
+  ],
+  "end=false,node=false,variant=tooh": [
+   {
+    "model": "srparasites:block/parasitebush_tooh"
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitebush_tooh",
+    "y": 270
+   }
+  ]
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "variants": {
+  "variant=sac": [
+   {
+    "model": "srparasites:block/parasitecanister_sac"
+   },
+   {
+    "model": "srparasites:block/parasitecanister_sac",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitecanister_sac",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitecanister_sac",
+    "y": 270
+   }
+  ],
+  "variant=cyst": [
+   {
+    "model": "srparasites:block/parasitecanister_cyst"
+   },
+   {
+    "model": "srparasites:block/parasitecanister_cyst",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitecanister_cyst",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitecanister_cyst",
+    "y": 270
+   }
+  ],
+  "variant=lump": [
+   {
+    "model": "srparasites:block/parasitecanister_lump"
+   },
+   {
+    "model": "srparasites:block/parasitecanister_lump",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitecanister_lump",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitecanister_lump",
+    "y": 270
+   }
+  ],
+  "variant=bag": [
+   {
+    "model": "srparasites:block/parasitecanister_bag"
+   },
+   {
+    "model": "srparasites:block/parasitecanister_bag",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitecanister_bag",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitecanister_bag",
+    "y": 270
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "srparasites:block/dermoid_cyst_north"
+  },
+  "facing=south": {
+   "model": "srparasites:block/dermoid_cyst_south"
+  },
+  "facing=west": {
+   "model": "srparasites:block/dermoid_cyst_west"
+  },
+  "facing=east": {
+   "model": "srparasites:block/dermoid_cyst_east"
+  }
+ }
+}

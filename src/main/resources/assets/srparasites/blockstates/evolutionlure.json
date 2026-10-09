@@ -1,0 +1,34 @@
+{
+ "variants": {
+  "variant=one": {
+   "model": "srparasites:block/evolutionlure_one"
+  },
+  "variant=two": {
+   "model": "srparasites:block/evolutionlure_two"
+  },
+  "variant=three": {
+   "model": "srparasites:block/evolutionlure_three"
+  },
+  "variant=four": {
+   "model": "srparasites:block/evolutionlure_four"
+  },
+  "variant=five": {
+   "model": "srparasites:block/evolutionlure_five"
+  },
+  "variant=six": {
+   "model": "srparasites:block/evolutionlure_six"
+  },
+  "variant=seven": {
+   "model": "srparasites:block/evolutionlure_seven"
+  },
+  "variant=eight": {
+   "model": "srparasites:block/evolutionlure_eight"
+  },
+  "variant=nine": {
+   "model": "srparasites:block/evolutionlure_nine"
+  },
+  "variant=ten": {
+   "model": "srparasites:block/evolutionlure_ten"
+  }
+ }
+}

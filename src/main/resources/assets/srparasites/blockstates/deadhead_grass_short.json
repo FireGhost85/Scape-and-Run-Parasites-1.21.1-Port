@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "srparasites:block/deadhead_grass_short1"
+   },
+   {
+    "model": "srparasites:block/deadhead_grass_short2"
+   },
+   {
+    "model": "srparasites:block/deadhead_grass_short3"
+   },
+   {
+    "model": "srparasites:block/deadhead_grass_short4"
+   },
+   {
+    "model": "srparasites:block/deadhead_grass_short5"
+   }
+  ]
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "variants": {
+  "variant=dirt": [
+   {
+    "model": "srparasites:block/parasitestain_dirt"
+   },
+   {
+    "model": "srparasites:block/parasitestain_dirt",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_dirt",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_dirt",
+    "y": 270
+   }
+  ],
+  "variant=mud": [
+   {
+    "model": "srparasites:block/parasitestain_mud"
+   },
+   {
+    "model": "srparasites:block/parasitestain_mud",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_mud",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_mud",
+    "y": 270
+   }
+  ],
+  "variant=flesh": [
+   {
+    "model": "srparasites:block/parasitestain_flesh"
+   },
+   {
+    "model": "srparasites:block/parasitestain_flesh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_flesh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_flesh",
+    "y": 270
+   }
+  ],
+  "variant=feeler": [
+   {
+    "model": "srparasites:block/parasitestain_feeler"
+   },
+   {
+    "model": "srparasites:block/parasitestain_feeler",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_feeler",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_feeler",
+    "y": 270
+   }
+  ],
+  "variant=spore": [
+   {
+    "model": "srparasites:block/parasitestain_spore"
+   },
+   {
+    "model": "srparasites:block/parasitestain_spore",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_spore",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_spore",
+    "y": 270
+   }
+  ],
+  "variant=red": [
+   {
+    "model": "srparasites:block/parasitestain_red"
+   },
+   {
+    "model": "srparasites:block/parasitestain_red",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_red",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_red",
+    "y": 270
+   }
+  ],
+  "variant=sackflesh": [
+   {
+    "model": "srparasites:block/parasitestain_sackflesh"
+   },
+   {
+    "model": "srparasites:block/parasitestain_sackflesh",
+    "y": 90
+   },
+   {
+    "model": "srparasites:block/parasitestain_sackflesh",
+    "y": 180
+   },
+   {
+    "model": "srparasites:block/parasitestain_sackflesh",
+    "y": 270
+   }
+  ]
+ }
+}
