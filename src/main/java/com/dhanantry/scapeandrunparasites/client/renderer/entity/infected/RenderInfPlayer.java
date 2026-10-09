@@ -14,6 +14,7 @@ extends RenderSRP<EntityInfPlayer> {
 
     public RenderInfPlayer(RenderManager manager) {
         super(manager, new ModelInfPlayer(), 0.5f);
+        this.addLayer(new com.dhanantry.scapeandrunparasites.client.renderer.SRPLayerBipedArmor<EntityInfPlayer>(this));
     }
 
     protected void preRenderCallback(EntityInfPlayer entitylivingbaseIn, float partialTickTime) {
