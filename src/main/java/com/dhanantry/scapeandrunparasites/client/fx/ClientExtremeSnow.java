@@ -114,9 +114,9 @@ public final class ClientExtremeSnow {
             BlockPos ground = w.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, (int) p.getY(), z = (int) (p.getZ() + w.random.nextGaussian() * radius)));
             if (!w.canSeeSky(ground) || !forceAnywhere && !w.getBiome(ground).value().shouldSnow(w, ground)) continue;
             double spawnY = Math.max((double) (ground.getY() + 16 + w.random.nextInt(8)), p.getY() + 16.0 + (double) w.random.nextInt(8));
-            // the flakes drift downwind while they fall (about 5 ticks of wind by the time they pass the player): start them upwind so the snowfall is centred on the player
-            double sx = (double) x + 0.5 + (w.random.nextDouble() - 0.5) - windX * 5.0;
-            double sz = (double) z + 0.5 + (w.random.nextDouble() - 0.5) - windZ * 5.0;
+            // the flakes drift downwind while they fall (tuned in game: 10 ticks of wind): start them upwind so the snowfall is centred on the player
+            double sx = (double) x + 0.5 + (w.random.nextDouble() - 0.5) - windX * 10.0;
+            double sz = (double) z + 0.5 + (w.random.nextDouble() - 0.5) - windZ * 10.0;
             double jitter = 0.03;
             double vx = windX + (w.random.nextDouble() - 0.5) * jitter;
             double vz = windZ + (w.random.nextDouble() - 0.5) * jitter;
