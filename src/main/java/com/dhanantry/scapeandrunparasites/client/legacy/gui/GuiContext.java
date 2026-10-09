@@ -61,6 +61,10 @@ public final class GuiContext {
     public static void renderEntity(net.minecraft.world.entity.LivingEntity entity, float cx, float cy, float scale, float pitchDeg) {
         Minecraft mc = Minecraft.getInstance();
         com.mojang.blaze3d.vertex.PoseStack pose = g.pose();
+        // 1.12 cleared the depth buffer before drawing the entity (glClear(256)): without it the parts of a big model that reach behind the
+        // plane of the panel (z 0) are cut by the depth of the panel background
+        g.flush();
+        RenderSystem.clear(256, Minecraft.ON_OSX);
         pose.pushPose();
         pose.translate(cx, cy, 150.0);
         pose.scale(scale, scale, -scale);
@@ -72,6 +76,8 @@ public final class GuiContext {
         dispatcher.setRenderShadow(false);
         RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0, 0.0, 0.0, 0.0f, 1.0f, pose, g.bufferSource(), 15728880));
         g.flush();
+        // the model must not hide the 2D elements that are drawn after it
+        RenderSystem.clear(256, Minecraft.ON_OSX);
         dispatcher.setRenderShadow(true);
         pose.popPose();
         com.mojang.blaze3d.platform.Lighting.setupFor3DItems();
