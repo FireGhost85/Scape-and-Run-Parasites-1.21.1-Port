@@ -307,7 +307,7 @@ public class WeaponMeleeMaul extends WeaponToolMeleeBase {
         double closestDist = start.distanceToSqr(end);
         AABB box = player.getBoundingBox().expandTowards(end.x - start.x, end.y - start.y, end.z - start.z).inflate(1.0);
         for (Entity e : world.getEntities(player, box)) {
-            if (!e.canBeCollidedWith()) continue;
+            if (!e.isPickable()) continue;
             AABB eb = e.getBoundingBox().inflate(0.3);
             java.util.Optional<Vec3> r = eb.clip(start, end);
             if (r.isEmpty()) continue;

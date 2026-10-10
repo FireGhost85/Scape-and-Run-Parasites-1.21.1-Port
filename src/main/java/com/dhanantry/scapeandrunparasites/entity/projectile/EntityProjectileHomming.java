@@ -160,7 +160,7 @@ extends Mob {
         }
     }
 
-    public boolean canBeCollidedWith() {
+    public boolean isPickable() {
         return true;
     }
 

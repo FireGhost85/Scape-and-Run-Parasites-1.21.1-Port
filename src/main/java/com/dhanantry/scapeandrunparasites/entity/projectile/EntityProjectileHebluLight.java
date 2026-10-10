@@ -270,7 +270,7 @@ extends Entity {
         AABB box = this.getBoundingBox().inflate(0.45);
         List<? extends Entity> list = this.level().getEntities((Entity)this, box);
         for (Entity entity : list) {
-            if (entity == this.owner && !this.parried || entity instanceof EntityProjectileHebluLight || !entity.canBeCollidedWith()) continue;
+            if (entity == this.owner && !this.parried || entity instanceof EntityProjectileHebluLight || !entity.isPickable()) continue;
             if (entity instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity)entity;
                 if (!this.parried && living == this.owner) continue;
@@ -463,7 +463,7 @@ extends Entity {
         compound.putDouble("StopHomingDistance", this.stopHomingDistance);
     }
 
-    public boolean canBeCollidedWith() {
+    public boolean isPickable() {
         return true;
     }
 

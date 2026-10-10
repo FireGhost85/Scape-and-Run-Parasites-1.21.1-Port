@@ -140,10 +140,6 @@ extends PartEntity<EntityParasiteBase> {
         return !this.isRemoved();
     }
 
-    @Override
-    public boolean canBeCollidedWith() {
-        return !this.isRemoved();
-    }
 
     @Nullable
     @Override

@@ -336,7 +336,7 @@ extends EntityPMalleable {
         this.SkillBGflag = true;
     }
 
-    public boolean canBeCollidedWith() {
+    public boolean isPickable() {
         return true;
     }
 }

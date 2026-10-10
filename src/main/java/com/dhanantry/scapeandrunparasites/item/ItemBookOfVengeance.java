@@ -149,7 +149,7 @@ public class ItemBookOfVengeance extends Item {
         LivingEntity best = null;
         double bestDist = Double.MAX_VALUE;
         for (Entity e : world.getEntities(player, searchBox)) {
-            if (!(e instanceof LivingEntity living) || !e.canBeCollidedWith() || living == player || living.isRemoved()) continue;
+            if (!(e instanceof LivingEntity living) || !e.isPickable() || living == player || living.isRemoved()) continue;
             java.util.Optional<Vec3> hit = living.getBoundingBox().inflate(0.3).clip(eye, end);
             if (hit.isEmpty()) continue;
             double dist = eye.distanceTo(hit.get());

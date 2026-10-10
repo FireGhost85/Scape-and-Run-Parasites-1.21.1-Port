@@ -97,7 +97,9 @@ extends Entity {
         return this.getBbHeight();
     }
 
-    public boolean canBeCollidedWith() {
+    /** canBeCollidedWith of 1.12 (the target of clicks and rays); in 1.21 that is isPickable, while canBeCollidedWith makes the entity solid to stand on. */
+    @Override
+    public boolean isPickable() {
         return true;
     }
 

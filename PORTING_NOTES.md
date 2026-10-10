@@ -199,3 +199,5 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] Pearl held glow/glitch copies are drawn at full strength (white, alpha 1, additive): 1.12 item quads have their own vertex colour so the original glColor tint/alpha never applied; the whole pearl vibrates/glitches as in 1.12. Reconstructed from the described 1.12 look, not verified side by side.
 
 - [CHG] EntityBody / EntityHitbox keep their previous position (setOldPosAndRot) so the F3+B boxes of parts no longer jitter (the render interpolates from xOld, which was never set).
+
+- [CHG] The 1.12 canBeCollidedWith overrides (click/ray target) are isPickable in 1.21; as canBeCollidedWith they made remain, stationary parasites, bomb, hitboxes, body parts and two projectiles solid to stand on. Fixed; the three callers (Heblu light, book of vengeance, maul) use isPickable.

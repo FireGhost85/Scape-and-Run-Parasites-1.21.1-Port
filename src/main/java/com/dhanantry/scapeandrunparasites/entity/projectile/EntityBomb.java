@@ -82,7 +82,7 @@ extends Entity {
         return false;
     }
 
-    public boolean canBeCollidedWith() {
+    public boolean isPickable() {
         return !this.isRemoved();
     }
 

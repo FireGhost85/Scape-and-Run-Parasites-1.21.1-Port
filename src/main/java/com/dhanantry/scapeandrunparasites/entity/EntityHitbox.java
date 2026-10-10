@@ -78,13 +78,9 @@ extends PartEntity<Mob> {
 
     @Override
     public boolean isPickable() {
-        return true;
-    }
-
-    @Override
-    public boolean canBeCollidedWith() {
         return this.getParent().isAlive();
     }
+
 
     @Nullable
     @Override
