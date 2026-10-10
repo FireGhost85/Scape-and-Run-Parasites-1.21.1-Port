@@ -201,3 +201,5 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] EntityBody / EntityHitbox keep their previous position (setOldPosAndRot) so the F3+B boxes of parts no longer jitter (the render interpolates from xOld, which was never set).
 
 - [CHG] The 1.12 canBeCollidedWith overrides (click/ray target) are isPickable in 1.21; as canBeCollidedWith they made remain, stationary parasites, bomb, hitboxes, body parts and two projectiles solid to stand on. Fixed; the three callers (Heblu light, book of vengeance, maul) use isPickable.
+
+- [CHG] Fear applied by adapted/feral/infected/primitive parasite hits has no swirl particles (the original passed showParticles=true; requested by the user). Potion-applied fear still shows them.

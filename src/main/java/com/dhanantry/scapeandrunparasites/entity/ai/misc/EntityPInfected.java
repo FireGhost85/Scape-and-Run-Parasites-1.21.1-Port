@@ -162,7 +162,7 @@ implements EntityCanSpawn {
         int duration = 300 + 40 * (level - 1);
         duration = Mth.clamp((int)duration, (int)200, (int)500);
         int amplifier = level - 1;
-        player.addEffect(new MobEffectInstance(SRPPotions.FEAR_E, duration, amplifier, false, true));
+        player.addEffect(new MobEffectInstance(SRPPotions.FEAR_E, duration, amplifier, false, false));
     }
 
     private void transform() {
