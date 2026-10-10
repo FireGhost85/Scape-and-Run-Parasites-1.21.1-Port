@@ -19,14 +19,19 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public enum LegacyMaterial {
     air, grass, ground, wood, rock, iron, anvil, water, lava, leaves, plants, vine, sponge, cloth, fire, sand, circuits, carpet, glass,
-    redstoneLight, tnt, coral, ice, packedIce, snow, craftedSnow, cactus, clay, gourd, dragonEgg, portal, cake, web, piston, barrier, structureVoid;
+    redstoneLight, tnt, coral, ice, packedIce, snow, craftedSnow, cactus, clay, gourd, dragonEgg, portal, cake, web, piston, barrier, structureVoid,
+    /** The own MaterialLiquid of the dead blood block: a liquid that is neither water nor lava. */
+    deadBlood;
 
     public static LegacyMaterial of(BlockState s) {
         if (s.isAir()) {
             return air;
         }
         if (s.getBlock() instanceof LiquidBlock) {
-            return s.getFluidState().is(FluidTags.LAVA) ? lava : water;
+            if (s.getFluidState().is(FluidTags.LAVA)) {
+                return lava;
+            }
+            return s.getBlock() instanceof com.dhanantry.scapeandrunparasites.block.BlockFluid ? deadBlood : water;
         }
         if (s.is(BlockTags.LEAVES)) return leaves;
         if (s.is(BlockTags.LOGS) || s.is(BlockTags.PLANKS) || s.is(BlockTags.WOODEN_STAIRS) || s.is(BlockTags.WOODEN_SLABS) || s.is(BlockTags.WOODEN_FENCES) || s.is(BlockTags.WOODEN_DOORS)) return wood;
@@ -61,12 +66,12 @@ public enum LegacyMaterial {
     /** 1.12 LegacyMaterial.isSolid: everything that is not air, liquid, a plant-like or a non-colliding material. */
     public boolean isSolid() {
         return switch (this) {
-            case air, water, lava, plants, vine, fire, circuits, carpet, snow, portal, web, structureVoid -> false;
+            case air, water, lava, deadBlood, plants, vine, fire, circuits, carpet, snow, portal, web, structureVoid -> false;
             default -> true;
         };
     }
 
     public boolean isLiquid() {
-        return this == water || this == lava;
+        return this == water || this == lava || this == deadBlood;
     }
 }

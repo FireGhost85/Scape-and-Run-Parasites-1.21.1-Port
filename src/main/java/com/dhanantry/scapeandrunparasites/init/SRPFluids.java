@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 /**
  * Dead blood. The 1.12 {@code DeadBloodFluid}: density 3000, viscosity max(1500, 500), temperature 310, luminosity 0, not gaseous.
  * The Forge {@code BlockFluidClassic} derived the tick rate from the viscosity (1500 / 200) and could not create sources.
- * The original never enabled the universal bucket, so there is no bucket item.
+ * The original registered the universal bucket for it (FluidRegistry.addBucketForFluid): {@link SRPItems#DEADBLOOD_BUCKET}.
  */
 public final class SRPFluids {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, ScapeAndRunParasites.MODID);
@@ -33,7 +33,7 @@ public final class SRPFluids {
 
     private static BaseFlowingFluid.Properties properties() {
         return new BaseFlowingFluid.Properties(DEADBLOOD_TYPE, DEADBLOOD_FLUID, DEADBLOOD_FLOWING)
-                .block(SRPBlocks.DeadBlood).tickRate(7).slopeFindDistance(4).levelDecreasePerBlock(1).explosionResistance(100.0f);
+                .block(SRPBlocks.DeadBlood).bucket(SRPItems.DEADBLOOD_BUCKET).tickRate(7).slopeFindDistance(4).levelDecreasePerBlock(1).explosionResistance(100.0f);
     }
 
     public static void register(IEventBus bus) {

@@ -109,6 +109,9 @@ public final class SRPItems {
     public static final DeferredItem<ItemAdvancementIcon> ROOTS_ICON = ITEMS.register("roots_icon", () -> new ItemAdvancementIcon("roots_icon"));
     public static final DeferredItem<ItemAlveolarFluid> ALVEOLAR_FLUID = ITEMS.register("alveolar_fluid", () -> new ItemAlveolarFluid("alveolar_fluid"));
     public static final DeferredItem<ItemDeadBlood> DEADBLOOD_FLUID = ITEMS.register("deadblood_fluid", () -> new ItemDeadBlood("deadblood_fluid"));
+    /** The universal bucket of the original (FluidRegistry.addBucketForFluid): a bucket of dead blood, picked up from and placed as a source block. */
+    public static final DeferredItem<net.minecraft.world.item.BucketItem> DEADBLOOD_BUCKET = ITEMS.register("deadblood_bucket",
+            () -> new net.minecraft.world.item.BucketItem(SRPFluids.DEADBLOOD_FLUID.get(), new net.minecraft.world.item.Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET).stacksTo(1)));
     public static final DeferredItem<ItemFogBottle> FOG_BOTTLE = ITEMS.register("fog_bottle", () -> new ItemFogBottle());
     public static final DeferredItem<ItemSRPFieldGuide> SRP_FIELD_GUIDE = ITEMS.register("srp_field_guide", () -> new ItemSRPFieldGuide());
     public static final DeferredItem<ItemThornshadeDecanter> THORNSHADE_DECANTER = ITEMS.register("thornshade_decanter", () -> new ItemThornshadeDecanter());
