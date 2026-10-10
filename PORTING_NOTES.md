@@ -217,3 +217,5 @@ Details and file list in `porting/notes/blocks.md`.
 
 - [CHG] Dead blood is its own LegacyMaterial (deadBlood, a liquid that is neither water nor lava, like the original MaterialLiquid). It was mapped to water, so the dead-blood-meets-water rule (water -> visceral mud) turned dead blood itself into mud. Verified on the test server: dead blood alone no longer produces mud.
 - [CHG] Dead blood bucket added (srparasites:deadblood_bucket, fluid container model): the original called FluidRegistry.addBucketForFluid / enableUniversalBucket, so it could be picked up and placed with a bucket (my earlier note that it had no bucket was wrong). The fluid now has its bucket item, so pickup fills the bucket instead of just removing the source block.
+
+- [CHG] The 1.12 hurt status (broadcastEntityEvent 2, the hurt animation and the hurt sound) no longer exists in 1.21 (it is the damage event packet); dead blood damage, the parasite minimum damage (food steal) and the needler potion now send broadcastDamageEvent, so the hurt sound plays again. As in 1.12 it plays on every damage tick (dead blood: every tick inside it).

@@ -53,7 +53,7 @@ public class PotionNeedler extends SRPEffectBase {
             float damageE = entity.getMaxHealth() * SRPConfigSystems.needlerDamage;
             damageE = entity instanceof Player ? Math.min(damageE, SRPConfigSystems.needlerMaxDamPlayer) : Math.min(damageE, SRPConfigSystems.needlerMaxDamMonster);
             entity.setHealth(f1 - damageE);
-            entity.level().broadcastEntityEvent(entity, (byte) 2);
+            entity.level().broadcastDamageEvent(entity, entity.damageSources().generic());
             entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 0.0f, Level.ExplosionInteraction.NONE);
             if (entity.getHealth() <= 0.0f) {
                 ItemStack itemstack = null;

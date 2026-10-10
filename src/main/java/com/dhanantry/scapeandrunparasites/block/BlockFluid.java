@@ -141,7 +141,8 @@ public class BlockFluid extends LiquidBlock {
         } else {
             target.setHealth(f1 - damage);
         }
-        target.level().broadcastEntityEvent(target, (byte) 2);
+        // 1.12 status 2 (hurt animation and sound) is the damage event packet in 1.21
+        target.level().broadcastDamageEvent(target, source);
         if (target.getHealth() <= 0.0f) {
             ItemStack totem = null;
             for (InteractionHand hand : InteractionHand.values()) {

@@ -896,7 +896,7 @@ implements IHitboxedEntity, IDislodgmentTarget {
         } else {
             target.setHealth(f1 - damage);
         }
-        this.level().broadcastEntityEvent((Entity)target, (byte)2);
+        this.level().broadcastDamageEvent(target, s);
         if (target.getHealth() <= 0.0f) {
             ItemStack itemstack = null;
             for (InteractionHand enumhand : InteractionHand.values()) {
