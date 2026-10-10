@@ -96,6 +96,17 @@ extends PartEntity<EntityParasiteBase> {
         this.setPos(this.parent.getX() + (double)this.inverted * (double)(f19 * this.offx * f16), this.parent.getY() + (double)this.offy, this.parent.getZ() - (double)this.inverted * (double)(f4 * this.offx * f16));
     }
 
+    /**
+     * A cut off part is not ticked any more and stays in the part list of the parent, where the hitbox rendering (F3+B) keeps drawing it
+     * at its last position. 1.12 had no list of parts, so the box is collapsed to a point instead.
+     */
+    @Override
+    public void remove(Entity.RemovalReason reason) {
+        super.remove(reason);
+        this.size = EntityDimensions.fixed(0.0f, 0.0f);
+        this.setBoundingBox(new net.minecraft.world.phys.AABB(this.getX(), this.getY(), this.getZ(), this.getX(), this.getY(), this.getZ()));
+    }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (this.isRemoved() || this.level().isClientSide) {
