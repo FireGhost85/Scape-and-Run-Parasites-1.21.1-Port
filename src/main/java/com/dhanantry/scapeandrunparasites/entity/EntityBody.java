@@ -62,12 +62,22 @@ extends PartEntity<EntityParasiteBase> {
             this.discard();
             return;
         }
+        // the previous position drives the interpolation of the hitbox rendering (F3+B); without it the box slid in from the origin every frame
+        if (this.positioned) {
+            this.setOldPosAndRot();
+        }
         if (this.logicSide) {
             this.updatePositionWithParentSides();
         } else {
             this.updatePositionWithParentFront();
         }
+        if (!this.positioned) {
+            this.setOldPosAndRot();
+            this.positioned = true;
+        }
     }
+
+    private boolean positioned;
 
     private void updatePositionWithParentSides() {
         float f17 = this.parent.getYRot() * ((float)Math.PI / 180);

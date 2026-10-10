@@ -120,12 +120,25 @@ extends PartEntity<Mob> {
         return this.isInvulnerable() && !source.is(DamageTypes.FELL_OUT_OF_WORLD);
     }
 
+    private boolean positioned;
+
     /** Called by the parent every tick; parts are not ticked by the level. */
     @Override
     public void tick() {
         Mob parent = this.getParent();
         double yaw = (double)parent.yBodyRot * (Math.PI / 180) + (double)this.angle;
-        this.setPos(parent.getX() + (double)this.radius * Math.cos(yaw), parent.getY() + (double)this.yPos, parent.getZ() + (double)this.radius * Math.sin(yaw));
+        double nx = parent.getX() + (double)this.radius * Math.cos(yaw);
+        double ny = parent.getY() + (double)this.yPos;
+        double nz = parent.getZ() + (double)this.radius * Math.sin(yaw);
+        // the previous position drives the interpolation of the hitbox rendering (F3+B); without it the box slid in from the origin every frame
+        if (this.positioned) {
+            this.setOldPosAndRot();
+            this.setPos(nx, ny, nz);
+        } else {
+            this.setPos(nx, ny, nz);
+            this.setOldPosAndRot();
+            this.positioned = true;
+        }
         if (!this.level().isClientSide && this.size.width() >= parent.getBbWidth()) {
             this.collideWithNearbyEntities();
         }
