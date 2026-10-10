@@ -24,6 +24,19 @@ public class RenderRelayController implements BlockEntityRenderer<TileEntityRela
     private static final ModelResourceLocation OFF = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "block/arraytower_off"));
     private static final ModelResourceLocation ON = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(ScapeAndRunParasites.MODID, "block/arraytower_on"));
 
+    /**
+     * Cutout without back face culling: the gratings of the tower are single planes that 1.12 drew from both sides (it did not cull the
+     * back faces of this model); the vanilla cutout type would only draw the front.
+     */
+    private static final RenderType CUTOUT_NO_CULL = RenderType.create("srp_relay_cutout_no_cull", com.mojang.blaze3d.vertex.DefaultVertexFormat.BLOCK,
+            com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, 4194304, true, false,
+            RenderType.CompositeState.builder()
+                    .setLightmapState(net.minecraft.client.renderer.RenderStateShard.LIGHTMAP)
+                    .setShaderState(net.minecraft.client.renderer.RenderStateShard.RENDERTYPE_CUTOUT_SHADER)
+                    .setTextureState(net.minecraft.client.renderer.RenderStateShard.BLOCK_SHEET)
+                    .setCullState(net.minecraft.client.renderer.RenderStateShard.NO_CULL)
+                    .createCompositeState(true));
+
     public RenderRelayController(BlockEntityRendererProvider.Context context) {
     }
 
@@ -60,7 +73,7 @@ public class RenderRelayController implements BlockEntityRenderer<TileEntityRela
         float brightness = 0.35f + (float)level / 15.0f * 0.65f;
         poseStack.pushPose();
         poseStack.translate(0.5, 0.0, 0.5);
-        Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(poseStack.last(), buffer.getBuffer(RenderType.cutout()), te.getBlockState(), model, brightness, brightness, brightness, 15728880, packedOverlay);
+        Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(poseStack.last(), buffer.getBuffer(CUTOUT_NO_CULL), te.getBlockState(), model, brightness, brightness, brightness, 15728880, packedOverlay);
         poseStack.popPose();
     }
 }

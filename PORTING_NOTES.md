@@ -205,3 +205,6 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] Fear applied by adapted/feral/infected/primitive parasite hits has no swirl particles (the original passed showParticles=true; requested by the user). Potion-applied fear still shows them.
 
 - [CHG] A removed EntityBody (cut off tendril) collapses its bounding box to a point so the F3+B hitbox no longer floats at the last position.
+
+- [CHG] Snow short/tall grass has no collision (1.12 getCollisionBoundingBox returned NULL_AABB; the port had wrongly used the box as collision).
+- [CHG] The relay tower (controller TER) is drawn with a no-cull cutout render type so the single-plane gratings show both faces as in 1.12.

@@ -27,7 +27,7 @@ import net.neoforged.neoforge.common.property.Properties;
 
 /**
  * Snow-covered short and tall grass. Turns the grass block below into snow covered grass and back. The box (0.1..0.9, height 1 or
- * 2) is also the collision box like in 1.12, where only the base {@code Block} collision applied. Drops: a grass seed with
+ * 2) is the selection box only: the 1.12 collision box was {@code NULL_AABB}, so entities walk through the grass. Drops: a grass seed with
  * chance 1/8, the block itself when sheared or with silk touch (loot table).
  */
 public class BlockSnowGrass extends Block {
@@ -73,6 +73,11 @@ public class BlockSnowGrass extends Block {
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Shapes.empty();
     }
 
     @Override
