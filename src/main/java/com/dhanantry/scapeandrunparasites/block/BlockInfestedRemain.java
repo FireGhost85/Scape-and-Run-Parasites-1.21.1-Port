@@ -159,8 +159,16 @@ public class BlockInfestedRemain extends BushBlock {
                 || level.getBlockState(pos.above()).is(Blocks.FIRE) || level.getBlockState(pos.below()).is(Blocks.FIRE);
     }
 
+    private static boolean isOnNonFullBlock(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(SOURCE) == 1 && !isFullBlock(level, pos.below());
+    }
+
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (isOnNonFullBlock(state, level, pos)) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+            return;
+        }
         if (SRPConfigWorld.residueFlammableWave && fireAround(level, pos)) {
             level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
             SRPResidueFireManager.lightAndTrack(level, pos, 6);
@@ -298,6 +306,11 @@ public class BlockInfestedRemain extends BushBlock {
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
         if (level.isClientSide) {
+            return;
+        }
+        if (isOnNonFullBlock(state, level, pos)) {
+            // 1.12 canBlockStay: the remain of a parasite never stays on plants, it went away with the first block update
+            level.scheduleTick(pos, this, 1);
             return;
         }
         if (!SRPConfigWorld.residueFlammableWave) {

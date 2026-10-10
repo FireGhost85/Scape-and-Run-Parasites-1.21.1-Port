@@ -210,3 +210,5 @@ Details and file list in `porting/notes/blocks.md`.
 - [CHG] The relay tower (controller TER) is drawn with a no-cull cutout render type so the single-plane gratings show both faces as in 1.12.
 
 - [CHG] 606 stereo sound files of positional events (hostile mobs, blocks, tornado, relay/vengeance/orb) were converted to mono (ffmpeg, libvorbis q5). Stereo OGGs are not distance-attenuated by OpenAL, so with Sound Physics Remastered (it multiplies SoundEvent.getRange by sound_distance_allowance, default 4) they were heard at full volume 4x as far; mono files fade out like vanilla mob sounds. Music, record, phase/biome music, compendium unlock and the dark days / blizzard ambience stay stereo. The 1.12 originals were stereo too (no fade inside 16 blocks).
+
+- [CHG] Infested remain (source 1, the parasite residue) is removed one tick after it is placed on a block that is not a full block (grass, plants, slabs). 1.12 canBlockStay: it never stayed there (any neighbour update or random tick removed it); the port only removed it on random ticks, so it stayed on top of short/tall grass. Verified on the test server: remain on grass is gone after 2 s, on stone it stays.
